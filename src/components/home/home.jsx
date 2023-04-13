@@ -1,4 +1,12 @@
-// Esto es una prueba
+import React from "react";
+import Navbar from "../NavBar/Navbar";
 
-// Esto deberia ir a dev
-//Esto deberia ir a dev 2
+
+export default function Home(){
+    return(
+        <div>
+        <Navbar/>
+        <h1>Esto es un carrusel</h1>
+        </div>
+    );
+}

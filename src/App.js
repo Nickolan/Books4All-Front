@@ -1,28 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-//prueba
-// segunda pruba
+
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import Books from './components/Books/Books';
+import Events from './components/Events/Events' 
+import Cart from './components/Cart/Cart';
+import Profile from './components/Profile/Profile'
+
 function App() {
-  // prueba 2 nico
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          New comment to test pull request
-          test PR nico
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/books' element={<Books/>}/>
+      <Route path='/events' element={<Events/>}/>
+      <Route path='/cart' element={<Cart/>}/>
+      <Route path='/profile' element={<Profile/>}/>
+    </Routes>
   );
 }
 
