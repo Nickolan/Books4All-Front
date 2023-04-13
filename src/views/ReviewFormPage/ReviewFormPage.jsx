@@ -11,7 +11,7 @@ const Form = () =>{
 
 const dispatch = useDispatch();
 
-const history= useHistory();
+// const history= useHistory();
 
 const [form, setForm] = useState({
         book: '',
@@ -92,11 +92,12 @@ const submitHandler = (event) =>{
         });
 
         setTimeout(() => {
-        history.push('/home');
+        // history.push('/home');
         }, 2000)
     }
 
  return(
+<div className='container-xl bg-success'>
         <div>
               <form onSubmit={submitHandler}>
                 <div>
@@ -154,6 +155,7 @@ const submitHandler = (event) =>{
                 <button type='submit'>Create</button>
             </form>
         </div>
+</div>
  )
 };
 
