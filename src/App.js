@@ -8,6 +8,9 @@ import Events from "./views/Events/Events"
 import Cart from './views/Cart/Cart';
 import Profile from './views/Profile/Profile'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 function App() {
   return (
     <Routes>
