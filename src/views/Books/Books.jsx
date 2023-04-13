@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/NavBar/Navbar'
+import Cards from '../Cards/Cards'
+import libros from "./ejemplo";
 
 
 export default function Books(){
     const dispatch = useDispatch();
     const {books, allBooks} = useSelector(state => state)
     
-
-    let booksArray = books;
     const [currentPage, setCurrentPage ] = useState(1)
     const booksForPage = 9;
     const lastBook = currentPage * booksForPage;
@@ -30,15 +30,19 @@ export default function Books(){
             <Navbar/>
 
             <div>
-                <h2>A-Z</h2>
-                <h2>Rating</h2>
-                <h2>author A-Z</h2>
-                <h2>Genre</h2>
+                <button>A-Z</button>
+                <button>Rating</button>
+                <button>author A-Z</button>
+                <button>Genre</button>
             </div>
+            <hr />
+
+            {<Cards libros={libros}/>}
             <div>
                 {currentBooks}
             </div>
 
+            <hr />
             <div><h2>{currentPage}</h2></div>
             <nav>
                 {pageNumber.map((number, key) => <div onClick={() => paginado(number)} key={key}>{number}</div>)}
