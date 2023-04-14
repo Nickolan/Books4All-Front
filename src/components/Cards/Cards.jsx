@@ -1,5 +1,5 @@
 import React from "react";
-import Card from '../Card/Card'
+import Card from '../../components/Card/Card'
 
 function Cards({books}) {
     return (
@@ -10,7 +10,7 @@ function Cards({books}) {
                     key={index}
                     bookId={book.id}
                     name={book.title}
-                    author={book.author}
+                    author={book.authors}
                     image={book.image}
                     rating={book.rating}
                     />
