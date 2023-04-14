@@ -16,13 +16,13 @@ function Card({name, author, image, rating, bookId}) {
 
     return (
         <div class="border border-dark d-flex col bg-secondary">
-            {isFav ? (
+            {/* {isFav ? (
                 <button class="d-block w-1 justify-content-end align-items-start" onClick={handleFavorites}>❤️</button>
             ) : (
                 <button class="d-block w-1 align-items-start justify-content-end" onClick={handleFavorites}>🤍</button>
-            )}
+            )} */}
             <Link to={`/bookDetail/${bookId}`}>
-                <img class="w-25 p-3" src={image} alt="Max-width 40%" />
+                <img class="w-100 p-3" src={image} alt="Max-width 40%" />
             </Link>
                 <h2>Title: {name}</h2>
                 <h2>Author: {author}</h2>
