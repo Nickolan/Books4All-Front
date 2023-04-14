@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/NavBar/Navbar'
 import Cards from '../Cards/Cards'
 import { getBooks } from "../../Redux/actions";
-
+import Searchbar from "../../components/SearchBar/Searchbar";
 
 export default function Books(){
     const dispatch = useDispatch();
@@ -48,12 +48,14 @@ export default function Books(){
         <div className='bg-light text-black border border-dark'>
             <Navbar/>
 
+
             <div class='d-flex justify-content-center w-25 bg-dark'>
                 <button class='btn btn-transparent text-light'>A-Z</button>
                 <button class='btn btn-transparent text-light'>Rating</button>
                 <button class='btn btn-transparent text-light'>author A-Z</button>
                 <button class='btn btn-transparent text-light'>Genre</button>
             </div>
+            <Searchbar/>
             <section class='articulo justify-content-start'>
                 <h2>articulo</h2>
             </section>
