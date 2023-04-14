@@ -1,21 +1,28 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import styles from './Navbar.modules.css';
-
-
 
 export default function Navbar(){
     return(
-        <nav>
-        <img></img>
-        <ul className={styles.nav_menu}>
-            <Link to="/" className={styles.nav_item}><li>Home</li></Link>
-            <Link to="/about" className={styles.nav_item}><li>About</li></Link>
-            <Link to="/books" className={styles.nav_item}><li>Books</li></Link>
-            <Link to="/events" className={styles.nav_item}><li>Events</li></Link>
-            <Link to="/cart" className={styles.nav_item}><li>Cart</li></Link>
-            <Link to="/profile" className={styles.nav_item}><li>Profile</li></Link>
-        </ul>
-        </nav>
+        <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top'>
+        <div className="container-fluid">
+        <div className="px-4 ">
+        <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1096155683071721642/image.png" width="150" height="40" />
+        </div>
+        <button
+        type="button" data-toggle="collapse" data-target="#navbarNav" className="navbar-toggler">
+            <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNav">
+            <ul className="navbar-nav">
+            <li className="nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
+            <li className="nav-item"><Link to="/about" className="nav-link" >About</Link></li>
+            <li className="nav-item"><Link to="/books" className="nav-link">Books</Link></li>
+            <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
+            <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li>
+            <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li>
+            </ul>
+        </div>
+        </div>
+        </nav>  
     );
 }
