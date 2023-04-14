@@ -3,11 +3,12 @@ import Card from '../Card/Card'
 
 function Cards({libros}) {
     return (
-        <div>
+        <div class='grid col'>
             {
                 libros.length > 0 ? libros.map((book, index) => {
                     return <Card
                     key={index}
+                    bookId={book.bookId}
                     name={book.name}
                     author={book.author}
                     image={book.image}
