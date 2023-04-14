@@ -1,24 +1,24 @@
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-//import NavBar
-//import Footer
 import { getBookDetail } from "../../Redux/actions/index";
 import {useEffect} from 'react';
 
-const Detail = (props) =>{
+const BookDetail = (props) =>{
     const dispatch =  useDispatch();
-   
-    useEffect(() => {
-        dispatch(getBookDetail(props.match.params.bookId));
-    }, [props.match.params.bookId], [dispatch]);
+ 
+    const { bookId } = useParams();
+    console.log(bookId)
+     
+    const eachBook = useSelector((state) => state.bookDetail);
+    console.log(eachBook)
 
-    const eachBook = useSelector((state) => state.bookDetail)
+    useEffect(() => {
+        dispatch(getBookDetail(bookId));
+    }, []);
 
     return(
-<div className='container-xl bg-success'>
+        <div className='container-xl bg-success'>
         <div>
-            {/* NavBar
-            Footer */}
             <img alt='Not found' src={eachBook.image} width='350px' height='200px'></img>
             <h1>{eachBook.title}</h1>
             <h2>Author</h2>
@@ -41,4 +41,4 @@ const Detail = (props) =>{
     );
 }
 
-export default Detail;
+export default BookDetail;
