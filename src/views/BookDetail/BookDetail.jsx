@@ -15,6 +15,7 @@ const Detail = (props) =>{
     const eachBook = useSelector((state) => state.bookDetail)
 
     return(
+<div className='container-xl bg-success'>
         <div>
             {/* NavBar
             Footer */}
@@ -36,6 +37,7 @@ const Detail = (props) =>{
             <Link to='/home'><button>Back</button></Link>
         
         </div>
+</div>
     );
 }
 
