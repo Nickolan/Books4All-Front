@@ -5,12 +5,15 @@ import {useEffect} from 'react';
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
+
  
     const { bookId } = useParams();
     console.log(bookId)
      
     const eachBook = useSelector((state) => state.bookDetail);
     console.log(eachBook)
+
+
 
     useEffect(() => {
         dispatch(getBookDetail(bookId));

@@ -1,20 +1,29 @@
 import axios from 'axios';
-const GET_BOOK_DETAIL = "GET_BOOK_DETAIL";
-const POST_REVIEW = "POST_REVIEW";
+export const GET_BOOK_DETAIL = "GET_BOOK_DETAIL";
+export const POST_REVIEW = "POST_REVIEW";
+export const GET_BOOKS = "GET_BOOKS";
 
-const getBookDetail= (bookId) =>{
+// export const getBookDetail= (bookId) =>{
+//     return async function (dispatch){
+//         var info = await axios.get(`http://localhost:3001/books/${bookId}`);
+//         return dispatch({
+//             type: GET_BOOK_DETAIL,
+//             payload: info.data
+//         })
+//     }
+// }
+
+export const getBooks = () => {
     return async function (dispatch){
-        var info = await axios.get(`http://localhost:3001/books/${bookId}`);
-        return dispatch({
-            type: GET_BOOK_DETAIL,
-            payload: info.data
-        })
+        const apiData = await axios.get('http://localhost:3001/books');
+        console.log('action getBooks funcionando');
+        return dispatch({type: GET_BOOKS, payload: apiData.data})
     }
-}
+};
 
 
 
-const postReview = (payload) =>{
+export const postReview = (payload) =>{
     return async function (dispatch){
         try{var info = await axios.post(`http://localhost:3001/reviews`, payload);
         return info;
@@ -23,4 +32,16 @@ const postReview = (payload) =>{
         };
     }};
 
-export {getBookDetail, postReview, GET_BOOK_DETAIL, POST_REVIEW}
+    export function getNameBooks(name){
+        try {
+            return async function(dispatch){
+                var json = await axios.get("http://localhost:3001/books/?queryBook="+ name);
+                return dispatch({
+                    type: "GET_NAME_BOOKS",
+                    payload: json.data
+                })
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    }
