@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/NavBar/Navbar'
 import Cards from '../Cards/Cards'
-import libros from "./ejemplo";
+import { getBooks } from "../../Redux/actions";
 
 
 export default function Books(){
     const dispatch = useDispatch();
-    const {books, allBooks} = useSelector(state => state)
+    const books = useSelector((state)=>state.books)
     
     const [currentPage, setCurrentPage ] = useState(1)
     const booksForPage = 9;
@@ -16,7 +16,7 @@ export default function Books(){
     const currentBooks = books.slice(firstBook, lastBook);
     const pageNumber = [];
 
-    for (let i = 1; i <= Math.ceil(libros.length / booksForPage) ; i++) {
+    for (let i = 1; i <= Math.ceil(books.length / booksForPage) ; i++) {
         pageNumber.push(i)
         
     }
@@ -40,7 +40,8 @@ export default function Books(){
     }
 
     useEffect(() => {
-        dispatch()
+        dispatch(getBooks())
+        console.log(books);
     }, [])
 
     return (
@@ -58,10 +59,7 @@ export default function Books(){
             </section>
             <hr />
             <div class="container">
-            {<Cards libros={libros}/>}
-            </div>
-            <div>
-                {currentBooks}
+            {<Cards books={currentBooks}/>}
             </div>
 
             <hr />

@@ -9,7 +9,7 @@ const Detail = (props) =>{
     const dispatch =  useDispatch();
    
     useEffect(() => {
-        dispatch(getBookDetail(props.match.params.bookId));
+        //dispatch(getBookDetail(props.match.params.bookId));
     }, [props.match.params.bookId], [dispatch]);
 
     const eachBook = useSelector((state) => state.bookDetail)

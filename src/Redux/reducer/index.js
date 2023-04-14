@@ -1,4 +1,4 @@
-// import { GET_BOOK_DETAIL, POST_REVIEW } from "./actions";
+import { GET_BOOKS } from "../actions/index";
 
 const initialState = {
     books: [],
@@ -9,6 +9,12 @@ const initialState = {
 
 const rootReducer = (state=initialState, action) =>{
     switch(action.type){
+        case GET_BOOKS:
+            return{
+                ...state,
+                books: action.payload,
+                allBooks: action.payload
+            }
     //     case GET_BOOK_DETAIL:
     //        return{
     //            ...state,
