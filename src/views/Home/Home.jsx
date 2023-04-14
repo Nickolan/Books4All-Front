@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../components/NavBar/Navbar";
+import CarruselNews from "../../components/Carrusels/CarruselNews/CarruselNews";
 
 
 export default function Home(){
@@ -48,6 +49,9 @@ export default function Home(){
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
+
+  <CarruselNews/>
+
     </div>
     );
 }
