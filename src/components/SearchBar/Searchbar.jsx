@@ -11,11 +11,13 @@ export default function Searchbar(){
     function handleInputChange(e){
         e.preventDefault()
         setName(e.target.value)
+
     }
 
     function handleSubmit(e){
         e.preventDefault()
         dispatch(getNameBooks(name))
+        setName('')
     }
     
     return(
@@ -23,7 +25,7 @@ export default function Searchbar(){
             <input id="inputSearch"
             type= 'text' 
             placeholder="Search your perfect book" 
-            onChange={(e) => handleInputChange(e)} />
+            onChange={(e) => handleInputChange(e)} value={name}/>
             <button type="submit" onClick={(e)=>handleSubmit(e)}>Search</button>
         </div>
     )
