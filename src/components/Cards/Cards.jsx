@@ -12,7 +12,7 @@ function Cards({books}) {
                     name={book.title}
                     author={book.authors}
                     image={book.image}
-                    rating={book.rating}
+                    categories={book.categories}
                     />
                 }) 
                 : null

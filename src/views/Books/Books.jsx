@@ -5,6 +5,7 @@ import Cards from '../../components/Cards/Cards'
 import { getBooks } from "../../Redux/actions";
 import Searchbar from "../../components/SearchBar/Searchbar";
 import Footer from "../../components/Footer/Footer";
+import Filters from "../../components/Filters/Filters";
 
 export default function Books(){
     const dispatch = useDispatch();
@@ -48,6 +49,8 @@ export default function Books(){
     return (
         <div className='bg-light text-black border border-dark'>
             <Navbar/>
+
+            <Filters />
 
             <div class='d-flex mt-1 justify-content-center w-25 bg-dark'>
                 <button class='btn btn-transparent text-light'>A-Z</button>
