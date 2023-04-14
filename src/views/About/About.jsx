@@ -6,6 +6,15 @@ export default function About(){
         <div className='container-xl bg-success'>
         <Navbar/>
             <h1>Esta es la ruta About</h1>
+            <h2>Integrante</h2>
+            <h2>Integrante</h2>
+            <h2>Integrante</h2>
+            <h2>Integrante</h2>
+            <h2>Integrante</h2>
+            <h2>Integrante</h2>
+            <h2>Integrante</h2>
+            
+
         </div>
     )
 }
