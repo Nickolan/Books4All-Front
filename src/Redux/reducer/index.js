@@ -15,6 +15,11 @@ const rootReducer = (state=initialState, action) =>{
                 books: action.payload,
                 allBooks: action.payload
             }
+            case 'GET_NAME_BOOKS':
+                return {
+                    ...state,
+                    recipes: action.payload
+                }
     //     case GET_BOOK_DETAIL:
     //        return{
     //            ...state,
