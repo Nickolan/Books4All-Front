@@ -7,7 +7,7 @@ import {useEffect} from 'react';
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
- console.log('chau');
+    console.log("Hola")
     const { bookId } = useParams();
     console.log(bookId)
    
