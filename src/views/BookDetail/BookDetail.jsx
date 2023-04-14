@@ -41,7 +41,7 @@ const BookDetail = (props) =>{
             <h2>Review</h2>
             <hr />
             <h3>{el.Reviews?.map(el=>el.name)}</h3>
-            <Link to='/home'><button>Back</button></Link>
+            <Link to='/books'><button>Back</button></Link>
                         </div>
                 )
 
