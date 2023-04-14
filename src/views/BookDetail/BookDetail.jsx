@@ -52,5 +52,5 @@ const BookDetail = (props) =>{
 </div>
     );
 }
-
 export {BookDetail};
+

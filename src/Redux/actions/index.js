@@ -31,3 +31,17 @@ export const postReview = (payload) =>{
            throw new Error({error: error.message}) 
         };
     }};
+
+    export function getNameBooks(name){
+        try {
+            return async function(dispatch){
+                var json = await axios.get("http://localhost:3001/books/?queryBook="+ name);
+                return dispatch({
+                    type: "GET_NAME_BOOKS",
+                    payload: json.data
+                })
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    }

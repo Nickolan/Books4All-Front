@@ -1,17 +1,29 @@
 import React from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import Carrusel1 from "../../components/Carrousel1/CarruselNews";
+import Carrusel2 from "../../components/Carrousel2/CarruselNews";
+import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 
 
 export default function Home(){
     return(
     <div>
     
-    <div className='container bg-success'>
+    <div className='container'>
     <Navbar/>
-     <img className='img-fluid max-height: 200px' src="https://pixabay.com/get/gbc883b9f0f1cb88f66daca4b79ea681d974dd08f527f50e576fd842f86f20a36c38ae198f8cb88337179934f8c18cf0b.jpg" alt="Hero"/>
+     <img className='img-fluid' src="https://cdn.discordapp.com/attachments/1091730813529374777/1096446376533033052/books-1281581_1920.jpg" alt="Hero"/>
+     <div className="p-3">
+     <Carrusel1/>
+     </div>
+     <div className="p-3">
+     <Carrusel2/>
+     </div>
+     <div className="p-3">
+     <Carrusel3/>
+     </div>
+     <Footer/>
     </div>
-    <Footer/>
     </div>
     );
 }
