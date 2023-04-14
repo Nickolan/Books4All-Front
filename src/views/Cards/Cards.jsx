@@ -1,15 +1,15 @@
 import React from "react";
 import Card from '../Card/Card'
 
-function Cards({libros}) {
+function Cards({books}) {
     return (
         <div class='grid col'>
             {
-                libros.length > 0 ? libros.map((book, index) => {
+                books.length > 0 ? books.map((book, index) => {
                     return <Card
                     key={index}
-                    bookId={book.bookId}
-                    name={book.name}
+                    bookId={book.id}
+                    name={book.title}
                     author={book.author}
                     image={book.image}
                     rating={book.rating}
