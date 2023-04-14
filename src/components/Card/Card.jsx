@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-function Card({name, author, image, rating, bookId}) {
+function Card({name, author, image, categories, bookId}) {
     const dispatch = useDispatch();
     const [isFav, setIsFav] = useState(false)
     // add useSelector in initialState with myFavorites
@@ -26,7 +26,8 @@ function Card({name, author, image, rating, bookId}) {
             </Link>
                 <h2>Title: {name}</h2>
                 <h2>Author: {author}</h2>
-                <h2>Rating: {rating}</h2>
+                <h2>Categories: {categories}</h2>
+                
         </div>
     )
 }
