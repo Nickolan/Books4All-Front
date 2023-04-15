@@ -6,6 +6,7 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
 export const ALPHABETICAL_ORDER = "ALPHABETICAL_ORDER";
 export const RESET_FILTERS = "RESET_FILTERS";
+export const GET_IMAGES = "GET_IMAGES";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -68,4 +69,18 @@ export const alphabeticalOrder = (order) => {
 
 export const resetFilters = () => {
   return { type: RESET_FILTERS };
+};
+
+export const getImages = () => {
+  try {
+    return async function (dispatch) {
+      var json = await axios.get("http://localhost:3001/books");
+      return dispatch({
+        type: GET_IMAGES,
+        payload: json.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

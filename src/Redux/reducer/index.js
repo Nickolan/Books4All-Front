@@ -5,6 +5,7 @@ import {
   GET_BOOK_DETAIL,
   ALPHABETICAL_ORDER,
   RESET_FILTERS,
+  GET_IMAGES,
 } from "../actions/index";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   allBooks: [],
   reviews: [],
   bookDetail: [],
+  images: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -63,6 +65,11 @@ const rootReducer = (state = initialState, action) => {
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
         ),
+      };
+    case GET_IMAGES:
+      return {
+        ...state,
+        images: action.payload,
       };
     case RESET_FILTERS:
       return {
