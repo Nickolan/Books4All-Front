@@ -1,7 +1,9 @@
 import React from "react";
-import { useState } from "react";
 import './Carrusel.css'
 import {FiChevronRight, FiChevronLeft} from 'react-icons/fi'
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const images = [
@@ -15,7 +17,9 @@ const images = [
 
 export default function Carrusel1(props){
 
-    const slides = [1,2,3,4,5,6,7,8];
+    const books = useSelector((state)=>state.books)
+
+    const slides = books.slice(15, 24);
 
     const slideLeft = () =>{
         var slider = document.getElementById("slider");
@@ -35,9 +39,12 @@ export default function Carrusel1(props){
                     slides.map((slide, index)=>{
                         return(
                             <div className="slider-card">
-                                <div className="slider-card-image"></div> 
-                                <p>Card Title</p>
-                                <p>Card Description</p>
+                                
+                                <Link to={`/bookDetail/${slide.id}`}>
+                                <div className="slider-card-image"><img className="slider-image-card" src={slide.image} alt={index} /></div> 
+                                </Link>
+                                <p>{slide.title}</p>
+                                <p>{slide.authors}</p>
                             </div>
                         )
                     })
