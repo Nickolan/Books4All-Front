@@ -1,30 +1,37 @@
 import { useState} from "react";
 import { Link } from "react-router-dom";
 // import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+//import NavBar
+// import { postReview } from "../../Redux/actions/index";
+// import {useDispatch} from "react-redux";
+//import Footer
+//import Button
 import style from "../Styles/Errors.module.css";
-import { createReview } from "../../Redux/actions";
 
 export const ReviewFormPage = () =>{
-const eachBook = useSelector((state) => state.bookDetail)
-console.log(eachBook)
 
-const dispatch = useDispatch();
+// const dispatch = useDispatch();
 
 // const history= useHistory();
 
 const [form, setForm] = useState({
-        body: '',
-        book_id: '',
+        book: '',
+        author: '',
+        bookId: '',
+        name: '',
+        email: '',
         rating: '',
-        user_name: '',
+        review: '',
 });
 
 const [errors, setErrors] = useState({
-        book_id: '',
+        book: '',
+        author: '',
+        bookId: '',
+        name: '',
+        email: '',
         rating: '',
-        body: '',
-        user_name:'',
+        review: '',
 });
 
 const changeHandler = (event) =>{
@@ -37,8 +44,20 @@ setForm({...form, [property]:value});
 const validate = (form) => {
   let errors = {};
   
-  if (!form.user_name) {
-    errors.user_name = 'Please include your name or username';
+  if (!form.book) {
+    errors.book = 'Book Title is required';
+  }
+
+  if (!form.author) {
+    errors.author = 'Book Author is required';
+  }
+  
+  if (!form.bookId || form.bookId.length === 0) {
+    errors.bookId = 'BookId is required';
+  }
+
+  if (!form.name) {
+    errors.name = 'Please include your name or username';
   }
 
   if (!form.email) {
@@ -49,44 +68,68 @@ const validate = (form) => {
     errors.rating = 'Rating must be between one and five stars';
   }
 
-  errors.body = "";
+  errors.review = "";
 
   setErrors(errors);
 };
 
 const submitHandler = (event) =>{
     
-        event.preventDefault();
-        dispatch(createReview(form));
-        let errorsArray = Object.keys(errors);
-        console.log(errorsArray)
-        errorsArray.length === 0? alert('Success! New Review created')
-        : alert('Error! Please verify data');
+        // event.preventDefault();
+        // dispatch(postReview(form));
+        // let errorsArray = Object.keys(errors);
+        // console.log(errorsArray)
+        // errorsArray.length === 0? alert('Success! New Review created')
+        // : alert('Error! Please verify data');
 
         setForm({
-        body: '',
-        book_id: '',
+        book: '',
+        author: '',
+        bookId: '',
+        name: '',
+        email: '',
         rating: '',
-        user_name: '',
+        review: '',
         });
 
         setTimeout(() => {
-        // history.push('/');
+        // history.push('/home');
         }, 2000)
     }
 
  return(
-          <div>
+<div className='container-xl bg-light'>
+        <div>
               <form onSubmit={submitHandler}>
-                <div class="card-header">
-                  <h1 class="card-title text-center">Create your own Review!</h1>
+                <div>
+                <h1 class="font-weight-bold">Create your own review!</h1>
                 </div>
                 <div className='container-sm .bg-light'>
-                <label htmlFor="user_name" class="font-weight-bold"> Your Name </label>
+                <label htmlFor="book" class="font-weight-bold"> Book Title </label>
                 <hr/>
-                <input className={errors.name && style.error} type='text' value={form.user_name} onChange={changeHandler} name='user_name' />
+                <input className={errors.book && style.error} type='text' value={form.book} onChange={changeHandler} name='book' />
                 <br />
-                <span>{errors.user_name? errors.user_name : ""}</span> 
+                <span>{errors.book? errors.book : ""}</span> 
+                </div>
+                <div className='container-sm .bg-light'>
+                <label htmlFor="author" class="font-weight-bold"> Author </label>
+                <hr/>
+                <input className={errors.author && style.error} type='text' value={form.author} onChange={changeHandler} name='author' />
+                <br />
+                <span>{errors.author? errors.author : ""}</span> 
+                <div className='container-sm .bg-light'>
+                <label htmlFor="bookId" class="font-weight-bold"> Book ID </label>
+                <hr/>
+                <input className={errors.bookId && style.error} type='text' value={form.bookId} onChange={changeHandler} name='bookId' />
+                <br />
+                <span>{errors.bookId? errors.bookId : ""}</span> 
+                </div>
+                <div className='container-sm .bg-light'>
+                <label htmlFor="name" class="font-weight-bold"> Your Name </label>
+                <hr/>
+                <input className={errors.name && style.error} type='text' value={form.name} onChange={changeHandler} name='name' />
+                <br />
+                <span>{errors.name? errors.name : ""}</span> 
                 </div>
                 <div className='container-sm .bg-light'> 
                 <label htmlFor="email" class="font-weight-bold"> Your email address </label>
@@ -105,16 +148,24 @@ const submitHandler = (event) =>{
                 <hr/>
                 <br />
                 <div className='container-sm .bg-light'>
-                <label htmlFor="body" class="font-weight-bold"> Your Review </label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text">Your Review</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
+                {/* <label htmlFor="review" class="font-weight-bold"> Your Review </label>
                 <hr/>
-                <textarea className={errors.body && style.error} type='text' value={form.body} onChange={changeHandler} name='body' />
+                <input className={errors.review && style.error} type='text' value={form.review} onChange={changeHandler} name='review' /> */}
                 <br />
-                <span>{errors.body? errors.body : ""}</span> 
+                <span>{errors.review? errors.review : ""}</span> 
+                </div>
                 </div>
                 <br />
                 <button type='submit' class="btn btn-lg btn-outline-dark">Create</button>
                 <Link to='/books'><button class="btn btn-lg btn-outline-dark">Back</button></Link>
             </form>
-          </div>
-          )
-        };
+        </div>
+</div>
+ )
+};
