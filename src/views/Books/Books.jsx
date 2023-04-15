@@ -6,6 +6,7 @@ import { getBooks, alphabeticalOrder, resetFilters, filterByCategory, filterByAu
 import Searchbar from "../../components/SearchBar/Searchbar";
 import Footer from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
+import style from "./Books.module.css"
 
 export default function Books() {
     const dispatch = useDispatch();
@@ -79,9 +80,9 @@ export default function Books() {
 
             <hr />
             <div class="d-flex justify-content-around">
-                <button onClick={handlePrev}>◄</button>
+                <button onClick={handlePrev} className="border-0 bg-light">◄</button>
                 <div><h2>{currentPage}</h2></div>
-                <button onClick={handleNext}>►</button>
+                <button onClick={handleNext} className="border-0 bg-light">►</button>
             </div>
 
             <Footer />

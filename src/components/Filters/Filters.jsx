@@ -27,12 +27,10 @@ const Filters = ({ setCurrentPage }) => {
 
     const handleOnChangeCategory = (event) => {
         dispatch(filterByCategory(event.target.value))
-        setCurrentPage(1)
     }
 
     const handleOnChangeAuthor = (event) => {
         dispatch(filterByAuthor(event.target.value))
-        setCurrentPage(1)
     }
 
     useEffect(() => {
