@@ -1,11 +1,4 @@
-import {
-  FILTER_BY_AUTHOR,
-  FILTER_BY_CATEGORY,
-  GET_BOOKS,
-  GET_BOOK_DETAIL,
-  ALPHABETICAL_ORDER,
-  RESET_FILTERS,
-} from "../actions/index";
+import { FILTER_BY_AUTHOR, FILTER_BY_CATEGORY, GET_BOOKS, GET_BOOK_DETAIL, CREATE_REVIEW, ALPHABETICAL_ORDER, RESET_FILTERS } from "../actions/index";
 
 const initialState = {
   books: [],
@@ -33,12 +26,13 @@ const rootReducer = (state = initialState, action) => {
         bookDetail: action.payload,
       };
 
-    //    case POST_REVIEW:
-    //        return{
-    //            ...state,
-    //        }
-    case FILTER_BY_CATEGORY:
-      let array = [];
+       case CREATE_REVIEW:
+           return{
+               ...state,
+           }
+        case FILTER_BY_CATEGORY:
+    
+        let array=[]
 
       state.allBooks.forEach((book) => {
         book.categories && array.push(book);
