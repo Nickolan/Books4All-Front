@@ -13,7 +13,6 @@ const ReviewCard = ({body, rating, user_name}) => {
             </div>
         </div>
     )
-
 }
 
 export default ReviewCard;
