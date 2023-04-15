@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getNameBooks } from '../../Redux/actions/index';
 
 
-export default function Searchbar(){
+export default function Searchbar({setCurrentPage}){
     const dispatch = useDispatch()
     const[name, setName] = useState("")
 
@@ -16,12 +16,13 @@ export default function Searchbar(){
 
     function handleSubmit(e){
         e.preventDefault()
+        setCurrentPage(1)
         dispatch(getNameBooks(name))
         setName('')
     }
     
     return(
-        <div>
+        <div className="d-flex justify-content-center">
             <input id="inputSearch"
             type= 'text' 
             placeholder="Search your perfect book" 

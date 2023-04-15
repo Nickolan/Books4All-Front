@@ -7,9 +7,7 @@ import Books from "./views/Books/Books";
 import Events from "./views/Events/Events"
 import Cart from './views/Cart/Cart';
 import Profile from './views/Profile/Profile';
-import BookDetail from './views/BookDetail/BookDetail';
-import ReviewFormPage from './views/ReviewFormPage/ReviewFormPage';
-
+import {BookDetail} from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -19,8 +17,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/books' element={<Books/>}/>
-      <Route path = '/:bookId' element={ <BookDetail/>} />
-      <Route path='/createReview' element={<ReviewFormPage/>}/>
+      <Route path='/bookDetail/:bookId' element={<BookDetail/>}/>
       <Route path='/events' element={<Events/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/profile' element={<Profile/>}/>
