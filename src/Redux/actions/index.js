@@ -2,6 +2,8 @@ import axios from 'axios';
 export const GET_BOOK_DETAIL = "GET_BOOK_DETAIL";
 export const POST_REVIEW = "POST_REVIEW";
 export const GET_BOOKS = "GET_BOOKS";
+export const FILTER_BY_CATEGORY = 'FILTER_BY_CATEGORY'
+export const FILTER_BY_AUTHOR = 'FILTER_BY_AUTHOR'
 
 export const getBookDetail= (bookId) =>{
     return async function (dispatch){
@@ -44,4 +46,14 @@ export const postReview = (payload) =>{
         } catch (error) {
             console.log(error);
         }
+    }
+
+    export const filterByCategory = (category) => {
+        return  function (dispatch) {
+            return dispatch({type: FILTER_BY_CATEGORY, payload: category})
+        }
+    }
+
+    export const filterByAuthor = (author) => {
+            return { type:FILTER_BY_AUTHOR, payload: author}
     }
