@@ -48,8 +48,10 @@ export default function Books(){
     }  
 
     useEffect(() => {
-        dispatch(getBooks())
-        console.log(books);
+        if (books.length < 1) {
+            dispatch(getBooks())
+            console.log(books);   
+        }
     }, [])
 
     return (

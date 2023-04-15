@@ -4,9 +4,19 @@ import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
+import { useEffect } from "react";
+import { getBooks} from "../../Redux/actions";
+import { useDispatch } from "react-redux";
 
 
 export default function Home(){
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getBooks())
+        console.log('Books Obtained');
+    }, [])
+
     return(
     <div>
     
