@@ -1,13 +1,14 @@
 import { useState} from "react";
+import { Link } from "react-router-dom";
 // import {useHistory} from "react-router-dom";
 //import NavBar
 // import { postReview } from "../../Redux/actions/index";
 // import {useDispatch} from "react-redux";
 //import Footer
 //import Button
-import style from "../../components/Styles/Errors.module.css"
+import style from "../Styles/Errors.module.css";
 
-const Form = () =>{
+export const ReviewFormPage = () =>{
 
 // const dispatch = useDispatch();
 
@@ -162,10 +163,9 @@ const submitHandler = (event) =>{
                 </div>
                 <br />
                 <button type='submit' class="btn btn-lg btn-outline-dark">Create</button>
+                <Link to='/books'><button class="btn btn-lg btn-outline-dark">Back</button></Link>
             </form>
         </div>
 </div>
  )
 };
-
-export default Form;
