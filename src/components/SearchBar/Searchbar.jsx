@@ -21,7 +21,7 @@ export default function Searchbar(){
     }
     
     return(
-        <div>
+        <div className="d-flex justify-content-center">
             <input id="inputSearch"
             type= 'text' 
             placeholder="Search your perfect book" 

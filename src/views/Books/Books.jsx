@@ -52,8 +52,9 @@ export default function Books(){
 
             <Filters />
 
-            <div class='d-flex mt-1 justify-content-center w-25 bg-dark'>
+            <div class='d-flex mt-1 justify-content-center w-100 bg-dark'>
                 <button class='btn btn-transparent text-light'>A-Z</button>
+                <button class='btn btn-transparent text-light'>Z-A</button>
                 <button class='btn btn-transparent text-light'>Rating</button>
                 <button class='btn btn-transparent text-light'>author A-Z</button>
                 <button class='btn btn-transparent text-light'>Genre</button>
