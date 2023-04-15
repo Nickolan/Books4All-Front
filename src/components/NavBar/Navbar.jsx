@@ -7,7 +7,9 @@ export default function Navbar(){
         <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top ' >
         <div className="container-fluid ">
         <div className="px-4 ">
+        <Link to='/'>
             <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1096155683071721642/image.png" width="150" height="40" />
+        </Link>
         </div>
         <button
         type="button" data-toggle="collapse" data-target="#navbarNav" className="navbar-toggler">
