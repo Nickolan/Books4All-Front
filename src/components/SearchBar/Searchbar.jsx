@@ -22,7 +22,7 @@ export default function Searchbar({setCurrentPage}){
     }
     
     return(
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center  h-25 mt-1">
             <input id="inputSearch"
             type= 'text' 
             placeholder="Search your perfect book" 

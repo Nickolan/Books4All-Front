@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import style from "./Card.module.css"
+
+
 function Card({name, author, image, categories, bookId}) {
     const dispatch = useDispatch();
     const [isFav, setIsFav] = useState(false)
@@ -15,7 +18,7 @@ function Card({name, author, image, categories, bookId}) {
     }
 
     return (
-        <div class="border border-dark d-flex col bg-secondary">
+        <div class="border  d-flex  bg-secondary">
             {/* {isFav ? (
                 <button class="d-block w-1 justify-content-end align-items-start" onClick={handleFavorites}>❤️</button>
             ) : (
@@ -24,9 +27,12 @@ function Card({name, author, image, categories, bookId}) {
             <Link to={`/bookDetail/${bookId}`}>
                 <img class="w-100 p-3" src={image} alt="Max-width 40%" />
             </Link>
-                <h2>Title: {name}</h2>
+            <div >
+                <h2>Title: {name}</h2> 
                 <h2>Author: {author}</h2>
                 <h2>Categories: {categories}</h2>
+            {/* los nombre title, author y categories tal vez se podrían omitir y que se infiera por el contenido? */}
+            </div>
                 
         </div>
     )

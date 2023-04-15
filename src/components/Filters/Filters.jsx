@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 
 
-const Filters = ({setCurrentPage}) => {
+const Filters = () => {
 
     const books = useSelector(state => state.allBooks);
     
@@ -26,12 +26,10 @@ const Filters = ({setCurrentPage}) => {
 
     const handleOnChangeCategory = (event) => {
         dispatch(filterByCategory(event.target.value))
-        setCurrentPage(1)
     }
 
     const handleOnChangeAuthor = (event) => {
         dispatch(filterByAuthor(event.target.value))
-        setCurrentPage(1)
     }
 
     useEffect(()=> {
@@ -40,15 +38,15 @@ const Filters = ({setCurrentPage}) => {
 
 
     return (
-        <div>
-            <select onChange={handleOnChangeCategory}>
+        <div className="d-flex justify-content-center bg-dark p-2 ">
+            <select onChange={handleOnChangeCategory} className="w-25">
                 {bookCategories?.map((category, index) => {
                     return(
                         <option value={category} key={index}>{category}</option>
                     )
                 })}
             </select>
-            <select onChange={handleOnChangeAuthor}>
+            <select onChange={handleOnChangeAuthor} className="w-25">
                 {
                     authors_.map((author, index) => {
                         return(

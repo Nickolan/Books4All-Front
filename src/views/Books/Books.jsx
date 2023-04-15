@@ -6,6 +6,7 @@ import { getBooks, alphabeticalOrder,resetFilters } from "../../Redux/actions";
 import Searchbar from "../../components/SearchBar/Searchbar";
 import Footer from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
+import style from "./Books.module.css"
 
 export default function Books(){
     const dispatch = useDispatch();
@@ -56,25 +57,26 @@ export default function Books(){
         <div className='bg-light text-black border border-dark'>
             <Navbar/>
 
+        <div >
             <Filters setCurrentPage={setCurrentPage}/>
-
-            <div class='d-flex mt-1 justify-content-center w-100 bg-dark'>
+        </div>
+            <div class='d-flex mt-1 justify-content-center w-100 bg-light p-1 mb-1' >
                 <button class='btn btn-transparent text-light' value="ascendente" onClick={handleClickAlph} >A-Z</button>
                 <button class='btn btn-transparent text-light' value="descendente" onClick={handleClickAlph} >Z-A</button>
                 {/* <button class='btn btn-transparent text-light'>Rating</button> */}
                 {/* <button class='btn btn-transparent text-light'>author A-Z</button> */}
-                <button onClick={handleReset}>🔄 </button>
-            </div>
             <Searchbar setCurrentPage={setCurrentPage}/>
+                <button onClick={handleReset} className={style.resetButton} >🔄 </button>
+            </div>
             <div class="container">
             {<Cards books={currentBooks}/>}
             </div>
 
             <hr />
             <div class="d-flex justify-content-around">
-                <button onClick={handlePrev}>◄</button>
+                <button onClick={handlePrev} className="border-0 bg-light">◄</button>
                 <div><h2>{currentPage}</h2></div>
-                <button onClick={handleNext}>►</button>
+                <button onClick={handleNext} className="border-0 bg-light">►</button>
             </div>
 
             <Footer/>

@@ -6,7 +6,7 @@ function Cards({books}) {
         <div class='grid col'>
             {
                 books.length > 0 ? books.map((book, index) => {
-                    return <Card
+                    return <Card 
                     key={index}
                     bookId={book.id}
                     name={book.title}
