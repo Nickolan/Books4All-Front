@@ -1,13 +1,15 @@
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterByAuthor, filterByCategory, getBooks } from "../../Redux/actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 
 const Filters = () => {
 
+
     const books = useSelector(state => state.allBooks);
-    
+    const filter = useSelector(state => state.filters)
+
     let bookCategories = books.map(book => book.categories ? book.categories[0] : 'Art');
 
     bookCategories = Array.from(new Set(bookCategories));
@@ -16,40 +18,44 @@ const Filters = () => {
 
     books.forEach(book => book.authors?.map(authors => authors_.push(authors)))
 
-    authors_ = Array.from(new Set (authors_))
+    authors_ = Array.from(new Set(authors_))
 
     console.log(authors_)
 
     const dispatch = useDispatch();
 
-     
+
 
     const handleOnChangeCategory = (event) => {
+
         dispatch(filterByCategory(event.target.value))
     }
 
     const handleOnChangeAuthor = (event) => {
+
         dispatch(filterByAuthor(event.target.value))
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(getBooks())
-    },[])
+    }, [])
 
 
     return (
         <div>
-            <select onChange={handleOnChangeCategory}>
+            <select value={filter.category} onChange={handleOnChangeCategory}>
+                <option value='all'>All</option>
                 {bookCategories?.map((category, index) => {
-                    return(
+                    return (
                         <option value={category} key={index}>{category}</option>
                     )
                 })}
             </select>
-            <select onChange={handleOnChangeAuthor}>
+            <select value={filter.author} onChange={handleOnChangeAuthor}>
+                <option value='all'>All</option>
                 {
                     authors_.map((author, index) => {
-                        return(
+                        return (
                             <option value={author} key={index}>{author}</option>
                         )
                     })
