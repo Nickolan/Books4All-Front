@@ -5,6 +5,7 @@ export const GET_BOOKS = "GET_BOOKS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
 export const ALPHABETICAL_ORDER = "ALPHABETICAL_ORDER";
+export const RESET_FILTERS = "RESET_FILTERS";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -63,4 +64,8 @@ export const filterByAuthor = (author) => {
 
 export const alphabeticalOrder = (order) => {
   return { type: ALPHABETICAL_ORDER, payload: order };
+};
+
+export const resetFilters = () => {
+  return { type: RESET_FILTERS };
 };

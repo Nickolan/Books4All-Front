@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/NavBar/Navbar'
 import Cards from '../../components/Cards/Cards'
-import { getBooks, alphabeticalOrder } from "../../Redux/actions";
+import { getBooks, alphabeticalOrder,resetFilters } from "../../Redux/actions";
 import Searchbar from "../../components/SearchBar/Searchbar";
 import Footer from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
@@ -45,6 +45,9 @@ export default function Books(){
         dispatch(alphabeticalOrder(event.target.value))
       }
 
+    const handleReset=()=>{
+        dispatch(resetFilters())
+    }  
 
     useEffect(() => {
         dispatch(getBooks())
@@ -63,6 +66,7 @@ export default function Books(){
                 <button class='btn btn-transparent text-light'>Rating</button>
                 <button class='btn btn-transparent text-light'>author A-Z</button>
                 <button class='btn btn-transparent text-light'>Genre</button>
+                <button onClick={handleReset}>🔄 </button>
             </div>
             <Searchbar/>
             <div class="container">

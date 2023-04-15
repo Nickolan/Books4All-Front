@@ -4,6 +4,7 @@ import {
   GET_BOOKS,
   GET_BOOK_DETAIL,
   ALPHABETICAL_ORDER,
+  RESET_FILTERS,
 } from "../actions/index";
 
 const initialState = {
@@ -62,6 +63,11 @@ const rootReducer = (state = initialState, action) => {
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
         ),
+      };
+    case RESET_FILTERS:
+      return {
+        ...state,
+        books: state.allBooks,
       };
 
     default:
