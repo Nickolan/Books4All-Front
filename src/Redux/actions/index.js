@@ -1,11 +1,12 @@
 import axios from "axios";
 export const GET_BOOK_DETAIL = "GET_BOOK_DETAIL";
-export const POST_REVIEW = "POST_REVIEW";
+export const CREATE_REVIEW = "CREATE_REVIEW";
 export const GET_BOOKS = "GET_BOOKS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
 export const ALPHABETICAL_ORDER = "ALPHABETICAL_ORDER";
 export const RESET_FILTERS = "RESET_FILTERS";
+export const GET_IMAGES = "GET_IMAGES";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -36,21 +37,19 @@ export const postReview = (payload) => {
   };
 };
 
-export function getNameBooks(name) {
-  try {
-    return async function (dispatch) {
-      var json = await axios.get(
-        "http://localhost:3001/books/?queryBook=" + name
-      );
-      return dispatch({
-        type: "GET_NAME_BOOKS",
-        payload: json.data,
-      });
-    };
-  } catch (error) {
-    console.log(error);
-  }
-}
+    export function getNameBooks(name){
+        try {
+            return async function(dispatch){
+                var json = await axios.get("http://localhost:3001/books/?queryBook="+ name);
+                return dispatch({
+                    type: "GET_NAME_BOOKS",
+                    payload: json.data
+                })
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 export const filterByCategory = (category) => {
   return function (dispatch) {
@@ -68,4 +67,18 @@ export const alphabeticalOrder = (order) => {
 
 export const resetFilters = () => {
   return { type: RESET_FILTERS };
+};
+
+export const getImages = () => {
+  try {
+    return async function (dispatch) {
+      var json = await axios.get("http://localhost:3001/books");
+      return dispatch({
+        type: GET_IMAGES,
+        payload: json.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
