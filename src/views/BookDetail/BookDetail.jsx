@@ -7,15 +7,12 @@ import {useEffect} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
-
+import ReviewCard from '../../components/ReviewCard/ReviewCard';
 
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
-    console.log("Hola")
     const { bookId } = useParams();
-    console.log(bookId)
-   
     useEffect(() => {
         dispatch(getBookDetail(bookId));
     }, []);
@@ -49,11 +46,15 @@ const BookDetail = (props) =>{
             <hr />
             <h2>Stock</h2>
             <hr />
-            <h3>${el.stock}</h3>
+            <h3>{el.stock}</h3>
             <hr />
             <h2>Reviews</h2>
             <hr />
-            <h3>{el.Reviews.length !==0 ? el.Reviews.map(el=>el) : "There arent any reviews, leave yours"}</h3>
+            <h3>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
+                return(
+                    <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
+                )
+            }) : "There arent any reviews, leave yours"}</h3>
             </div>
             </div>
                 )
