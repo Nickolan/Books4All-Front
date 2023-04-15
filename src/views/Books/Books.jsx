@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from '../../components/NavBar/Navbar'
 import Cards from '../../components/Cards/Cards'
-import { getBooks } from "../../Redux/actions";
+import { getBooks, alphabeticalOrder } from "../../Redux/actions";
 import Searchbar from "../../components/SearchBar/Searchbar";
 import Footer from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
@@ -41,6 +41,11 @@ export default function Books(){
         }
     }
 
+    const handleClickAlph= (event)=> {
+        dispatch(alphabeticalOrder(event.target.value))
+      }
+
+
     useEffect(() => {
         dispatch(getBooks())
         console.log(books);
@@ -53,8 +58,8 @@ export default function Books(){
             <Filters />
 
             <div class='d-flex mt-1 justify-content-center w-100 bg-dark'>
-                <button class='btn btn-transparent text-light'>A-Z</button>
-                <button class='btn btn-transparent text-light'>Z-A</button>
+                <button class='btn btn-transparent text-light' value="ascendente" onClick={handleClickAlph} >A-Z</button>
+                <button class='btn btn-transparent text-light' value="descendente" onClick={handleClickAlph} >Z-A</button>
                 <button class='btn btn-transparent text-light'>Rating</button>
                 <button class='btn btn-transparent text-light'>author A-Z</button>
                 <button class='btn btn-transparent text-light'>Genre</button>
