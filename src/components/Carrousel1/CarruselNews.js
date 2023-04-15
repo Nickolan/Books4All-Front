@@ -30,6 +30,7 @@ export default function Carrusel1(props) {
     dispatch(getImages());
     console.log(images);
   }, []);
+
   const images = books.map((book) => book.image).slice(10, 30); //me devuelve un array de las primeras 10 imágenes
   const bookTitle = books.map((book) => book.title).slice(10, 30);
 
@@ -43,30 +44,33 @@ export default function Carrusel1(props) {
   };
 
   return (
-    <div id="main-slider-container">
-      <FiChevronLeft
-        size={40}
-        className="slider-icon left"
-        onClick={slideLeft}
-      />
+    <>
+      <h4>Novedades</h4>
+      <div id="main-slider-container">
+        <FiChevronLeft
+          size={40}
+          className="slider-icon left"
+          onClick={slideLeft}
+        />
 
-      <div id="slider" className="h-100">
-        {slides.map((slide, index) => {
-          return (
-            <div className="slider-card ">
-              {images.map((img) => (
-                <img className="slider-card w-50" src={img} alt={bookTitle} />
-              ))}
-            </div>
-          );
-        })}
+        <div id="slider" className="h-100">
+          {slides.map((slide, index) => {
+            return (
+              <div className="slider-card ">
+                {images.map((img) => (
+                  <img className="slider-card w-50" src={img} alt={bookTitle} />
+                ))}
+              </div>
+            );
+          })}
+        </div>
+
+        <FiChevronRight
+          size={40}
+          className="slider-icon right"
+          onClick={slideRight}
+        />
       </div>
-
-      <FiChevronRight
-        size={40}
-        className="slider-icon right"
-        onClick={slideRight}
-      />
-    </div>
+    </>
   );
 }
