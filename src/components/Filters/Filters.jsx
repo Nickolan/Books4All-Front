@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 
 
-const Filters = () => {
+const Filters = ({setCurrentPage}) => {
 
     const books = useSelector(state => state.allBooks);
     
@@ -26,10 +26,12 @@ const Filters = () => {
 
     const handleOnChangeCategory = (event) => {
         dispatch(filterByCategory(event.target.value))
+        setCurrentPage(1)
     }
 
     const handleOnChangeAuthor = (event) => {
         dispatch(filterByAuthor(event.target.value))
+        setCurrentPage(1)
     }
 
     useEffect(()=> {
