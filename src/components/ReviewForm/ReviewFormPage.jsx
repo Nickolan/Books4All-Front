@@ -9,17 +9,15 @@ import { Link } from "react-router-dom";
 import style from "../Styles/Errors.module.css";
 
 export const ReviewFormPage = () =>{
+const eachBook = useSelector((state) => state.bookDetail)
 
 // const dispatch = useDispatch();
 
 // const history= useHistory();
 
 const [form, setForm] = useState({
-        book: '',
-        author: '',
-        bookId: '',
-        name: '',
-        email: '',
+        body: '',
+        book_id: eachBook.id,
         rating: '',
         review: '',
 });
@@ -75,22 +73,20 @@ const validate = (form) => {
 
 const submitHandler = (event) =>{
     
-        // event.preventDefault();
-        // dispatch(postReview(form));
-        // let errorsArray = Object.keys(errors);
-        // console.log(errorsArray)
-        // errorsArray.length === 0? alert('Success! New Review created')
-        // : alert('Error! Please verify data');
+        event.preventDefault();
+        dispatch(createReview(form));
+        let errorsArray = Object.keys(errors);
+        errorsArray.length === 0? alert('Success! New Review created')
+        : alert('Error! Please verify data');
 
-        setForm({
-        book: '',
-        author: '',
-        bookId: '',
-        name: '',
-        email: '',
-        rating: '',
-        review: '',
-        });
+        // setForm({
+        // body: '',
+        // book_id: '',
+        // rating: '',
+        // user_name: '',
+        // });
+
+        console.log(form)
 
         setTimeout(() => {
         // history.push('/home');
