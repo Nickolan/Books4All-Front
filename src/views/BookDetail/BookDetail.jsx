@@ -59,7 +59,7 @@ const BookDetail = (props) =>{
             </div>
                 )
             })}
-            <ReviewFormPage />
+            <ReviewFormPage id={bookId} />
             </div>
             <Footer />
         </div>
