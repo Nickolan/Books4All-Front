@@ -1,6 +1,6 @@
 import axios from "axios";
 export const GET_BOOK_DETAIL = "GET_BOOK_DETAIL";
-export const CREATE_REVIEW = "CREATE_REVIEW";
+export const POST_REVIEW = "POST_REVIEW";
 export const GET_BOOKS = "GET_BOOKS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
