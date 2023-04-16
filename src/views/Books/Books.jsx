@@ -81,7 +81,7 @@ export default function Books() {
             <hr />
             <div class="d-flex justify-content-around">
                 <button onClick={handlePrev} className="border-0 bg-light">◄</button>
-                <div><h2>{currentPage}</h2></div>
+                <div><h2>{currentPage} / {pageNumber.length}</h2></div>
                 <button onClick={handleNext} className="border-0 bg-light">►</button>
             </div>
 
