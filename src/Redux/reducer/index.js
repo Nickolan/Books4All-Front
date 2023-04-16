@@ -9,7 +9,7 @@ import {
   CREATE_REVIEW,
   ADD_USER,
   DELETE_USER,
-} from "../actions/index";
+
 
 const initialState = {
   books: [],
@@ -60,12 +60,8 @@ const rootReducer = (state = initialState, action) => {
         bookDetail: action.payload,
       };
 
-       case CREATE_REVIEW:
-           return{
-               ...state,
-           }
-        case FILTER_BY_CATEGORY:
-            return {
+    case FILTER_BY_CATEGORY:
+      return {
         ...state,
         books: filtrarLibros(
           state.allBooks,

@@ -7,7 +7,6 @@ import { createReview } from "../../Redux/actions";
 
 export const ReviewFormPage = () =>{
 const eachBook = useSelector((state) => state.bookDetail)
-console.log(eachBook)
 
 const dispatch = useDispatch();
 
@@ -15,7 +14,7 @@ const dispatch = useDispatch();
 
 const [form, setForm] = useState({
         body: '',
-        book_id: '',
+        book_id: eachBook.id,
         rating: '',
         user_name: '',
 });
@@ -59,7 +58,7 @@ const submitHandler = (event) =>{
         event.preventDefault();
         dispatch(createReview(form));
         let errorsArray = Object.keys(errors);
-        console.log(errorsArray)
+
         errorsArray.length === 0? alert('Success! New Review created')
         : alert('Error! Please verify data');
 
@@ -69,6 +68,7 @@ const submitHandler = (event) =>{
         rating: '',
         user_name: '',
         });
+        console.log(form)
 
         setTimeout(() => {
         // history.push('/');
