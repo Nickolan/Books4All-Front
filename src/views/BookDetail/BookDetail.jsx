@@ -8,7 +8,6 @@ import Footer from '../../components/Footer/Footer';
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
-
     const { bookId } = useParams();
     console.log(bookId)
    

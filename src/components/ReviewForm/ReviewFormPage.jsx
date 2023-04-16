@@ -58,16 +58,16 @@ const submitHandler = (event) =>{
         event.preventDefault();
         dispatch(createReview(form));
         let errorsArray = Object.keys(errors);
-
         errorsArray.length === 0? alert('Success! New Review created')
         : alert('Error! Please verify data');
 
-        setForm({
-        body: '',
-        book_id: '',
-        rating: '',
-        user_name: '',
-        });
+        // setForm({
+        // body: '',
+        // book_id: '',
+        // rating: '',
+        // user_name: '',
+        // });
+
         console.log(form)
 
         setTimeout(() => {
