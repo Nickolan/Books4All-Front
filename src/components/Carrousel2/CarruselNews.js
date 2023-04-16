@@ -4,6 +4,8 @@ import "./Carrusel.css";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getImages } from "../../Redux/actions/index";
+import img_default from "../Carrousel1/img/img_default.jpg";
+import { Link } from "react-router-dom";
 
 /* const images = [
   {
@@ -33,6 +35,7 @@ export default function Carrusel1(props) {
 
   const images = books.map((book) => book.image).slice(60, 70); //me devuelve un array de las primeras 10 imágenes
   const bookTitle = books.map((book) => book.title).slice(60, 70);
+  const bookId = books.map((book) => book.id).slice(60, 70);
 
   const slideLeft = () => {
     var slider3 = document.getElementById("slider2");
@@ -57,8 +60,15 @@ export default function Carrusel1(props) {
           {slides.map((slide, index) => {
             return (
               <div className="slider-card ">
-                {images.map((img) => (
-                  <img className="slider-card w-50" src={img} alt={bookTitle} />
+                {images.map((img, index) => (
+                  <Link to={`/bookDetail/${bookId[index]}`}>
+                    <img
+                      className="slider-card w-50"
+                      src={img || img_default}
+                      alt={bookTitle[index]}
+                      key={index}
+                    />
+                  </Link>
                 ))}
               </div>
             );
