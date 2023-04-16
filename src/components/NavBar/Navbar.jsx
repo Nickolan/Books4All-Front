@@ -7,7 +7,7 @@ export default function Navbar(){
         <div className="container-fluid ">
         <div className="px-4 ">
         <Link to='/'>
-            <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1096155683071721642/image.png" width="150" height="40" />
+            <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="150" height="40" />
         </Link>
         </div>
         <button
@@ -20,8 +20,8 @@ export default function Navbar(){
             <li className="nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
             <li className="nav-item"><Link to="/about" className="nav-link" >About</Link></li>
             <li className="nav-item"><Link to="/books" className="nav-link">Books</Link></li>
-            <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
-            <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li>
+{/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
+            <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
             <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li>
             </ul>
         </div>
