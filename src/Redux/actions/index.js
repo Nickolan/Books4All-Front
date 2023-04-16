@@ -26,12 +26,14 @@ export const getBooks = () => {
   };
 };
 
-export const postReview = (payload) => {
+export const createReview = (payload) => {
   return async function (dispatch) {
     try {
       var info = await axios.post(`http://localhost:3001/reviews`, payload);
+      console.log(info)
       return info;
     } catch (error) {
+        console.log("Error del Create", error.message)
       throw new Error({ error: error.message });
     }
   };

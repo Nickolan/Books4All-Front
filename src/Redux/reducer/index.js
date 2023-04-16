@@ -6,7 +6,6 @@ import {
   GET_BOOK_DETAIL,
   ALPHABETICAL_ORDER,
   RESET_FILTERS,
-  CREATE_REVIEW,
 } from "../actions/index";
 
 const initialState = {
@@ -57,10 +56,6 @@ const rootReducer = (state = initialState, action) => {
         bookDetail: action.payload,
       };
 
-       case CREATE_REVIEW:
-           return{
-               ...state,
-           }
         case FILTER_BY_CATEGORY:
             return {
         ...state,

@@ -8,7 +8,6 @@ import Footer from '../../components/Footer/Footer';
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
-    console.log("Hola")
     const { bookId } = useParams();
     console.log(bookId)
    
@@ -55,7 +54,7 @@ const BookDetail = (props) =>{
             <hr />
             <h2 class="card-title text-center">Reviews</h2>
             <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.Reviews?.map(el=>el.body)}</h4>
+            <h4 class="card-subtitle mb-2 text-muted text-center">{el.Reviews?.map(el=><p>{el.body}</p>)}</h4>
             </div>
             </div>
             </div>
