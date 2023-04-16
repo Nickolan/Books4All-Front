@@ -7,6 +7,8 @@ export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
 export const ALPHABETICAL_ORDER = "ALPHABETICAL_ORDER";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const GET_IMAGES = "GET_IMAGES";
+export const ADD_USER = "ADD_USER"
+export const DELETE_USER = "DELETE_USER"
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -84,3 +86,9 @@ export const getImages = () => {
     console.log(error);
   }
 };
+export const addUser = (user) => {
+  return {type: ADD_USER, payload: user}
+}
+export const deleteUser = () =>{
+  return {type: DELETE_USER}
+}

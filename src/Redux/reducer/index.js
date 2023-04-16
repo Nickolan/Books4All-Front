@@ -6,7 +6,10 @@ import {
   GET_BOOK_DETAIL,
   ALPHABETICAL_ORDER,
   RESET_FILTERS,
-} from "../actions/index";
+  CREATE_REVIEW,
+  ADD_USER,
+  DELETE_USER,
+
 
 const initialState = {
   books: [],
@@ -18,6 +21,7 @@ const initialState = {
     category: "all",
     author: "all",
   },
+  profile: {}
 };
 
 const filtrarLibros = (libros, genero, autor) => {
@@ -98,7 +102,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         books: state.allBooks,
       };
-
+    case ADD_USER:{
+      return{
+        ...state,
+        profile: action.payload
+      }
+    };
+    case DELETE_USER:{
+      return{
+        ...state,
+        profile: {}
+      }
+    }
     default:
       return {
         ...state,

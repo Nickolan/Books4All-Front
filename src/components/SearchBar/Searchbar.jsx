@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByAuthor, filterByCategory, getBooks, getNameBooks } from '../../Redux/actions/index';
 import { Link } from "react-router-dom";
+import './Searchbar.css';
+import { FiSearch } from 'react-icons/fi';
 
 export default function Searchbar({ setCurrentPage }) {
     const dispatch = useDispatch()
@@ -49,16 +51,16 @@ export default function Searchbar({ setCurrentPage }) {
     return (
         <div className="d-flex justify-content-center flex-column " style={{marginLeft:"330px", marginTop:"30px"}}>
 
-            <div>
-                <input id="inputSearch"
+            <div className="input_btn">
+                <input id="inputSearch" class="input_sb"
                     type='text'
                     placeholder="Search your perfect book"
                     onChange={(e) => handleInputChange(e)} value={name} />
-                <button type="submit" onClick={(e) => handleSubmit(e)}>Search</button>
+                <FiSearch type="submit"  class="btn_sb" onClick={(e) => handleSubmit(e)}/>
             </div>
             {searchStatement ?
                 <div class="d-flex flex-column mt-3">
-                    <span style={{ cursor: 'pointer', textDecoration: "underline" }} onClick={goBack}>volver</span>
+                    <span style={{ cursor: 'pointer', textDecoration: "underline" }} onClick={goBack}>Go back</span>
                     <span class= 'mt-4'>Tu búsqueda de:</span>
                     <span class= 'text-uppercase font-italic' style={{fontFamily: 'italic'}}>"{search}"</span>
 
