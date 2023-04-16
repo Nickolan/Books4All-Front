@@ -48,7 +48,7 @@ export default function Carrusel1(props) {
 
   return (
     <>
-      <h4>Recomendados</h4>
+      <h4>Must Read - Our Favorites</h4>
       <div id="main-slider-container">
         <FiChevronLeft
           size={40}
