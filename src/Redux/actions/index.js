@@ -26,7 +26,7 @@ export const getBooks = () => {
   };
 };
 
-export const postReview = (payload) => {
+export const createReview = (payload) => {
   return async function (dispatch) {
     try {
       var info = await axios.post(`http://localhost:3001/reviews`, payload);
@@ -37,19 +37,21 @@ export const postReview = (payload) => {
   };
 };
 
-    export function getNameBooks(name){
-        try {
-            return async function(dispatch){
-                var json = await axios.get("http://localhost:3001/books/?queryBook="+ name);
-                return dispatch({
-                    type: "GET_NAME_BOOKS",
-                    payload: json.data
-                })
-        }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+export function getNameBooks(name) {
+  try {
+    return async function (dispatch) {
+      var json = await axios.get(
+        "http://localhost:3001/books/?queryBook=" + name
+      );
+      return dispatch({
+        type: "GET_NAME_BOOKS",
+        payload: json.data,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const filterByCategory = (category) => {
   return function (dispatch) {
