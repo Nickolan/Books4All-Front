@@ -61,7 +61,7 @@ export default function Books() {
     }, [])
 
     return (
-        <div className='bg-light text-black border border-dark'>
+        <div className='container bg-light text-black border border-dark'>
             <Navbar />
 
             <Filters setCurrentPage={setCurrentPage} />
