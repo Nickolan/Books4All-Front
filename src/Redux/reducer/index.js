@@ -6,10 +6,12 @@ import {
   GET_BOOK_DETAIL,
   ALPHABETICAL_ORDER,
   RESET_FILTERS,
-  CREATE_REVIEW,
   ADD_USER,
   DELETE_USER,
-} from '../actions'
+}
+
+from '../actions'
+
 
 const initialState = {
   books: [],

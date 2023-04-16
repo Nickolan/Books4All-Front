@@ -33,7 +33,7 @@ export default function Carrusel1(props) {
 
   return (
     <>
-      <h4>Novedades</h4>
+      <h4>Latest News</h4>
       <div id="main-slider-container">
         <FiChevronLeft
           size={40}
