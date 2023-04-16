@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import style from "../Styles/Errors.module.css";
-import { postReview } from "../../Redux/actions";
+import { createReview } from "../../Redux/actions";
 
 export const ReviewFormPage = () =>{
 const eachBook = useSelector((state) => state.bookDetail)
@@ -56,7 +56,7 @@ const validate = (form) => {
 const submitHandler = (event) =>{
     
         event.preventDefault();
-        dispatch(postReview(form));
+        dispatch(createReview(form));
         let errorsArray = Object.keys(errors);
 
         errorsArray.length === 0? alert('Success! New Review created')
