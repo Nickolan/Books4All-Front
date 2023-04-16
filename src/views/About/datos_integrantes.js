@@ -10,7 +10,7 @@ import img_default from "./Images/img_default.webp";
 
 export const integrantes = [
   {
-    name: "Débora Navarro",
+    name: "Debora Navarro",
     img: img_DN,
     countryImage: flag_arg,
   },

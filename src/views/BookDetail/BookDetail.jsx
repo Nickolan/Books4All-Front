@@ -1,16 +1,18 @@
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+//import NavBar
+//import Footer
 import {getBookDetail} from '../../Redux/actions'
 import {useEffect} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import ReviewCard from '../../components/ReviewCard/ReviewCard';
+
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
     const { bookId } = useParams();
-    console.log(bookId)
-   
     useEffect(() => {
         dispatch(getBookDetail(bookId));
     }, []);
@@ -19,60 +21,49 @@ const BookDetail = (props) =>{
     console.log(eachBook)
 
     return(
-    <div className='container-xl bg-light text-center'>
+<div className='container-xl bg-light'>
         <div>
             <Navbar />
-            <div className='container-xl bg-light row'>
             {eachBook?.map((el)=> {
                 return (
-                    <div>
-                    <div class="col-sm-6">
                     <div class="card">
-                    <div class="card-body">
-                    <div class="card-header">
-                    <h1 class="card-title text-center">{el.title}</h1>
-                    </div>
                     <div>
-            <img class="img-fluid img-thumbnail rounded mx-auto d-block"  alt='Not found' src={el.image}></img>
-            <h2 class="card-title text-center">Genres</h2>
+            <img alt='Not found' src={el.image} width='350px' height='200px'></img>
+            <h1>{el.title}</h1>
+            <h2>Authors</h2>
+            <h3> {el.authors}</h3>
+            <h2>About</h2>
             <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.categories[0]}</h4>
-            <hr />            
-            <h2 class="card-title text-center">Authors</h2>
-            <h4 class="card-subtitle mb-2 text-muted text-center"> {el.authors}</h4>
-            <h2 class="card-title text-center">About</h2>
+            <h3>{el.description}</h3>
             <hr />
-            <h5 class="card-subtitle mb-2 text-muted text-justify">{el.description}</h5>
+            <h2>Genres</h2>
             <hr />
-            <h2 class="card-title text-center">Price</h2>
+            <h3>{el.categories[0]}</h3>
             <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">${el.price}</h4>
+            <h2>Price</h2>
             <hr />
-            <h2 class="card-title text-center">Stock</h2>
+            <h3>${el.price}</h3>
             <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.stock} Units available now</h4>
+            <h2>Stock</h2>
             <hr />
-            <h2 class="card-title text-center">Reviews</h2>
+            <h3>{el.stock}</h3>
             <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.Reviews?.map(el=><p>{el.body}</p>)}</h4>
-            </div>
-            </div>
-            </div>
+            <h2>Reviews</h2>
+            <hr />
+            <h3>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
+                return(
+                    <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
+                )
+            }) : "There arent any reviews, leave yours"}</h3>
             </div>
             </div>
                 )
             })}
-            <div class="col-sm-6">
-            <div class="card">
-            <div class="card-body">
             <ReviewFormPage />
-            </div>
-            </div>
-            </div>
             </div>
             <Footer />
         </div>
-    </div>
+
     );
 }
 export {BookDetail};
