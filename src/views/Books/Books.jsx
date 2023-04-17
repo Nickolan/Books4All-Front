@@ -41,7 +41,7 @@ export default function Books() {
     }, [])
 
     return (
-        <div class='container bg-light text-black border border-dark h-auto'>
+        <div class='container bg-white text-black h-auto'>
             <Navbar />
 
             <Searchbar setCurrentPage={setCurrentPage} />

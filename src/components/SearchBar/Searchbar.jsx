@@ -64,7 +64,7 @@ export default function Searchbar({ setCurrentPage }) {
             {searchStatement ?
                 <div class="d-flex align-self-center mt-auto" >
                     <div>
-                        <span class='mt-4' style={{ fontWeight: 'bold', fontFamily: 'Work Sans, sans-serif' }}>Tu búsqueda de: </span>
+                        <span class='mt-4' style={{ fontWeight: 'bold', fontFamily: 'Work Sans, sans-serif' }}>Your Search for</span>
                         <span class='text-uppercase' style={{ fontWeight: 'bold', fontFamily: 'Work Sans, sans-serif', fontSize: '30px' }}>"{name}"</span>
                     </div>
                 </div>
