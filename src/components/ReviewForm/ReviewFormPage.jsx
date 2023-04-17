@@ -10,8 +10,6 @@ const dispatch = useDispatch();
 
 const navigate= useNavigate();
 
-let reviews = eachBook[0].Reviews;
-
 const [form, setForm] = useState({
         user_name: '',
         body: '',
@@ -31,7 +29,7 @@ const property = event.target.name;
 const value = event.target.value;
 validate({...form, [property]:value});
 setForm({...form, [property]:value});
-console.log(reviews);
+
 }
 
 const validate = (form) => {
@@ -55,18 +53,14 @@ const validate = (form) => {
 const submitHandler = (event) =>{
     
         event.preventDefault();
-        let finded = reviews.filter((review) => review.user_name === form.user_name);
-        if (finded.length > 0) {
-          alert('This user has already submitted a review.');
-        } else {
+
           dispatch(createReview(form));
           let errorsArray = Object.keys(errors);
           console.log(errorsArray)
           errorsArray.length === 0? alert('Success! New Review created')
           : alert('Error! Please verify data');
           navigate("/");
-        }
-
+  
         // setForm({
         // body: '',
         // book_id: '',
