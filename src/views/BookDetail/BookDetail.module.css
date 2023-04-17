@@ -88,6 +88,15 @@
     transform: translateY(-5px);
     border: 1px solid black;
 }
+.backButton{
+    width: 20px;
+   height: 20px;
+   margin-top: 10px;
+   transition: .2s;
+}
+.backButton:hover{
+    cursor: pointer;
+}
 @keyframes slideDown {
   from {
     transform: translateY(-20%);
