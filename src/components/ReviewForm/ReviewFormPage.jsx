@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import { createReview } from "../../Redux/actions";
 import style from '../ReviewForm/ReviewFormPage.module.css'
 
-export const ReviewFormPage = ({id, handleShowReview}) =>{
+export const ReviewFormPage = ({id, handleShowReview, reviews}) =>{
 
 const dispatch = useDispatch();
 
@@ -12,18 +12,19 @@ const navigate= useNavigate();
 
 
 const [form, setForm] = useState({
-        user_name: '',
-        body: '',
-        book_id: id,
-        rating: '',
+  user_name: '',
+  body: '',
+  book_id: id,
+  rating: '',
 });
 
 const [errors, setErrors] = useState({
-        user_name: '',
-        body: '',
-        book_id: '',
-        rating: '',
+  user_name: '',
+  body: '',
+  book_id: '',
+  rating: '',
 });
+
 
 const changeHandler = (event) =>{
 const property = event.target.name;
@@ -53,14 +54,19 @@ const validate = (form) => {
 
 const submitHandler = (event) =>{
     
-        event.preventDefault();
-        
+        let repeated = reviews.filter(rev => rev.user_name === form.user_name)
+        if (repeated.length > 0) {
+          event.preventDefault()
+          alert('This user has already submitted a review.');
+        } else {
           dispatch(createReview(form));
           let errorsArray = Object.keys(errors);
           console.log(errorsArray)
           errorsArray.length === 0? alert('Success! New Review created')
           : alert('Error! Please verify data');
           navigate( `/bookDetail/${id}`);
+        }
+        
     
 
         // setForm({
