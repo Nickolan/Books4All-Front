@@ -72,7 +72,7 @@ const BookDetail = (props) =>{
             <div className={style.buttonContainer}>
                 <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
             </div>
-            {showReview && <ReviewFormPage id={bookId} handleShowReview={handleShowReview}/>}
+            {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} handleShowReview={handleShowReview}/>}
 
             </div>
             <Footer />
