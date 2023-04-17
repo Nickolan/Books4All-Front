@@ -7,7 +7,7 @@ export default function Navbar(){
         <div className="container-fluid ">
         <div className="px-4 ">
         <Link to='/'>
-            <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="150" height="40" />
+            <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="100" height="40" />
         </Link>
         </div>
         <button
