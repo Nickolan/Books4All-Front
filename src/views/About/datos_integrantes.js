@@ -25,7 +25,7 @@ export const integrantes = [
     countryImage: flag_mex,
   },
   {
-    name: "Nick Funes",
+    name: "Nicolas Navarrete",
     img: img_NF,
     countryImage: flag_arg,
   },
