@@ -12,7 +12,7 @@ import { BookDetail } from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Navbar from './components/NavBar/Navbar';
-axios.defaults.baseURL = "books4all-back-production.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   return (
