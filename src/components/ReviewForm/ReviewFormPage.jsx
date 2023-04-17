@@ -61,6 +61,8 @@ const submitHandler = (event) =>{
           errorsArray.length === 0? alert('Success! New Review created')
           : alert('Error! Please verify data');
           navigate( `/bookDetail/${id}`);
+
+          handleShowReview()
     
 
         // setForm({

@@ -14,14 +14,11 @@ import style from '../BookDetail/BookDetail.module.css'
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
     const { bookId } = useParams();
-    useEffect(() => {
-        dispatch(getBookDetail(bookId));
-    }, []);
-
+    
     const eachBook = useSelector((state) => state.bookDetail)
-
+    
     const [show, setShow] = useState(false);
-
+    
     const [showReview, setShowReview] = useState(false);
     
     const clickHandler = () => {
@@ -30,6 +27,9 @@ const BookDetail = (props) =>{
     const handleShowReview = () => {
         setShowReview(!showReview)
     }
+    useEffect(() => {
+        dispatch(getBookDetail(bookId));
+    }, [showReview]);
 
     return(
 <div className={style.mainContainer}>
