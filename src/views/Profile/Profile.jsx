@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, deleteUser } from "../../Redux/actions";
-import { Link, useNavigate } from "react-router-dom";
-import Footer from "../../components/Footer/Footer"
+import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
+// import style from '../ReviewForm/ReviewFormPage.module.css';
+
+
 export default function Profile(){
     const user = useSelector((state) => state.profile)
     const dispatch = useDispatch()
