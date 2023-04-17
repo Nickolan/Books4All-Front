@@ -30,20 +30,6 @@ export default function Books() {
 
     }
 
-    const handleNext = () => {
-        if (currentPage === pageNumber.length) {
-            setCurrentPage(currentPage + 0)
-        } else {
-            setCurrentPage(currentPage + 1)
-        }
-    }
-
-    const handlePrev = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
-        }
-    }
-
     useEffect(() => {
         dispatch(getBooks())
             .then(() => {
@@ -65,7 +51,9 @@ export default function Books() {
                 <Order setCurrentPage={setCurrentPage} />
             </div>
             <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
-                {<Cards books={currentBooks} />}
+                {currentBooks.length >0 ? <Cards books={currentBooks} />
+                 :
+                  <p style={{fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif', fontSize:'30px', margin:'50px auto'}}>Sorry, we could not find any books matching your criteria</p>}
             </div>
 
 
