@@ -7,15 +7,18 @@ import Searchbar from "../../components/SearchBar/Searchbar";
 import Footer from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
 import style from "./Books.module.css"
+import Order from "../../components/Order/Order";
+import Paginado from "../../components/Paginado/Paginado";
 
 export default function Books() {
     const dispatch = useDispatch();
     const books = useSelector((state) => state.books)
     const genreFilter = useSelector(state => state.filters.category);
     const authorFilter = useSelector(state => state.filters.author);
+    const orderType = useSelector(state => state.order);
 
     const [currentPage, setCurrentPage] = useState(1)
-    const booksForPage = 9;
+    const booksForPage = 12;
     const lastBook = currentPage * booksForPage;
     const firstBook = lastBook - booksForPage;
     const currentBooks = books.slice(firstBook, lastBook);
@@ -41,48 +44,40 @@ export default function Books() {
         }
     }
 
-    const handleClickAlph = (event) => {
-        setCurrentPage(1)
-        dispatch(alphabeticalOrder(event.target.value))
-    }
-
-    const handleReset = () => {
-        setCurrentPage(1)
-        dispatch(resetFilters())
-    }
-
     useEffect(() => {
         dispatch(getBooks())
             .then(() => {
                 dispatch(filterByCategory(genreFilter))
                 dispatch(filterByAuthor(authorFilter))
+                dispatch(alphabeticalOrder(orderType))
             })
         console.log(books);
     }, [])
 
     return (
-        <div className='container bg-light text-black border border-dark'>
+        <div class='container bg-light text-black border border-dark h-auto'>
             <Navbar />
 
-            <Filters setCurrentPage={setCurrentPage} />
-
-            <div class='d-flex mt-1 justify-content-center w-100 bg-dark'>
-                <button class='btn btn-transparent text-light' value="ascendente" onClick={handleClickAlph} >A-Z</button>
-                <button class='btn btn-transparent text-light' value="descendente" onClick={handleClickAlph} >Z-A</button>
-                {/* <button class='btn btn-transparent text-light'>Rating</button> */}
-                {/* <button class='btn btn-transparent text-light'>author A-Z</button> */}
-                <button onClick={handleReset}>🔄 </button>
-            </div>
             <Searchbar setCurrentPage={setCurrentPage} />
-            <div class="container">
+
+            <div class='d-flex mx-auto align-items-center justify-content-between' style={{ width: "80%", height: '50px', borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0", padding: '0 10px 0 7px' }}>
+                <Filters setCurrentPage={setCurrentPage} />
+                <Order setCurrentPage={setCurrentPage} />
+            </div>
+            <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
                 {<Cards books={currentBooks} />}
             </div>
 
-            <hr />
+
             <div class="d-flex justify-content-around">
-                <button onClick={handlePrev} className="border-0 bg-light">◄</button>
-                <div><h2>{currentPage} / {pageNumber.length}</h2></div>
-                <button onClick={handleNext} className="border-0 bg-light">►</button>
+               <Paginado
+                booksPerPage={booksForPage}
+                numberBooks={books.length}
+                setPage={setCurrentPage}
+                currentPage={currentPage}
+                currentBooks={currentBooks}
+                indexFirstBook={firstBook}
+               />
             </div>
 
             <Footer />
