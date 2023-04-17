@@ -53,21 +53,27 @@ const validate = (form) => {
 };
 
 const submitHandler = (event) =>{
-    
+
+
+
+
         let repeated = reviews.filter(rev => rev.user_name === form.user_name)
         if (repeated.length > 0) {
           event.preventDefault()
           alert('This user has already submitted a review.');
         } else {
+
           dispatch(createReview(form));
           let errorsArray = Object.keys(errors);
           console.log(errorsArray)
           errorsArray.length === 0? alert('Success! New Review created')
           : alert('Error! Please verify data');
+
           navigate( `/bookDetail/${id}`);
 
           handleShowReview()
     
+
 
         // setForm({
         // body: '',
