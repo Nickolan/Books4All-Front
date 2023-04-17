@@ -10,8 +10,9 @@ import Profile from './views/Profile/Profile';
 import Error from './views/Error/Error';
 import { BookDetail } from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import Navbar from './components/NavBar/Navbar';
-
+axios.defaults.baseURL = "books4all-back-production.up.railway.app/";
 
 function App() {
   return (
