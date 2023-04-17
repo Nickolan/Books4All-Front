@@ -20,6 +20,7 @@ const initialState = {
     category: "all",
     author: "all",
   },
+  order: "",
   profile: {},
 };
 
@@ -90,6 +91,7 @@ const rootReducer = (state = initialState, action) => {
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
         ),
+        order: action.payload
       };
     case GET_IMAGES:
       return {
@@ -100,6 +102,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         books: state.allBooks,
+        filters: { category: 'all', author: 'all' }
+
       };
     case ADD_USER: {
       return {
