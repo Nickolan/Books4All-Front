@@ -3,11 +3,12 @@ import {useDispatch, useSelector} from 'react-redux';
 //import NavBar
 //import Footer
 import {getBookDetail} from '../../Redux/actions'
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
+import style from '../BookDetail/BookDetail.module.css'
 
 
 const BookDetail = (props) =>{
@@ -18,48 +19,59 @@ const BookDetail = (props) =>{
     }, []);
 
     const eachBook = useSelector((state) => state.bookDetail)
-    console.log(eachBook)
+
+    const [show, setShow] = useState(false);
+
+    const [showReview, setShowReview] = useState(false);
+    
+    const clickHandler = () => {
+        setShow(!show)
+    }
+    const handleShowReview = () => {
+        setShowReview(!showReview)
+    }
 
     return(
-<div className='container-xl bg-light'>
+<div className={style.mainContainer}>
         <div>
             <Navbar />
             {eachBook?.map((el)=> {
+                console.log(el.image);
                 return (
-                    <div class="card">
                     <div>
-            <img alt='Not found' src={el.image} width='350px' height='200px'></img>
-            <h1>{el.title}</h1>
-            <h2>Authors</h2>
-            <h3> {el.authors}</h3>
-            <h2>About</h2>
-            <hr />
-            <h3>{el.description}</h3>
-            <hr />
-            <h2>Genres</h2>
-            <hr />
-            <h3>{el.categories[0]}</h3>
-            <hr />
-            <h2>Price</h2>
-            <hr />
-            <h3>${el.price}</h3>
-            <hr />
-            <h2>Stock</h2>
-            <hr />
-            <h3>{el.stock}</h3>
-            <hr />
-            <h2>Reviews</h2>
-            <hr />
-            <h3>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
+                    <div>
+                        <div className={style.allContentContainer}>
+                        <div className={style.imgContainer}>
+            <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
+                        </div>
+                        <div className={style.contentContainer}>
+            <h1 className={style.title}>{el.title}</h1>
+            <h2 className={style.subtitle}>Authors: {el.authors}</h2>
+            <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
+            <h3 className={style.price}>${el.price}</h3>
+                    </div>
+                        </div>
+                        <hr/>
+                        <div className={style.buttonContainer}>
+                        <img src='https://res.cloudinary.com/dvldakcin/image/upload/v1681705343/Countries/down-arrow_rlhmtn.png' className={style.description} onClick={clickHandler}/>
+                        </div>
+            { show && <p className={style.descriptionContent}>{el.description}</p>}
+            <hr/>   
+            <div >
+            <h3 className={style.subtitleReview}>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
                 return(
                     <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
                 )
-            }) : "There arent any reviews, leave yours"}</h3>
+            }) : ""}</h3>
+            </div>
             </div>
             </div>
                 )
             })}
-            <ReviewFormPage id={bookId} />
+            <div className={style.buttonContainer}>
+                <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
+            </div>
+            {showReview && <ReviewFormPage id={bookId} handleShowReview={handleShowReview}/>}
             </div>
             <Footer />
         </div>

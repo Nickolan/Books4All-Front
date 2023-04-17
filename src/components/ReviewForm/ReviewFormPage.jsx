@@ -1,11 +1,11 @@
 import { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import style from "../Styles/Errors.module.css";
 import { createReview } from "../../Redux/actions";
+import style from '../ReviewForm/ReviewFormPage.module.css'
 
 
-export const ReviewFormPage = ({id}) =>{
+export const ReviewFormPage = ({id, handleShowReview}) =>{
 
 
 const dispatch = useDispatch();
@@ -70,11 +70,11 @@ const submitHandler = (event) =>{
     }
 
  return(
-<div className='container-xl bg-light'>
-        <div>
+<div className={style.mainContainer}>
+        <div className={style.content}>
               <form onSubmit={submitHandler}>
-                <div>
-                <h1 class="font-weight-bold">Create your own review!</h1>
+                <div className={style.closeButtonContainer}>
+                <img src="https://res.cloudinary.com/dvldakcin/image/upload/v1681711512/Countries/close_2_snehxr.png" className={style.closeButton} onClick={handleShowReview}/>
                 </div>
                 <div className='container-sm .bg-light'>
                 <div className='container-sm .bg-light'>
@@ -95,25 +95,24 @@ const submitHandler = (event) =>{
                 <label htmlFor="rating" class="font-weight-bold"> Rating </label>
                 <hr/>
                 <input className={errors.rating && style.error} type='text' value={form.rating} onChange={changeHandler} name='rating' />
-                <br />
+                <br/>
                 <span>{errors.rating? errors.rating : ""}</span> 
                 </div>
-                <hr/>
-                <br />
                 <div className='container-sm .bg-light'>
                 {/* </div>
                 <textarea class="form-control" aria-label="With textarea"></textarea>
                 </div> */}
-                <label htmlFor="body" class="font-weight-bold"> Your Review </label>
+                <label htmlFor="body" class="font-weight-bold"> Review </label>
                 <hr/>
-                <input type='text' value={form.body} onChange={changeHandler} name='body' />
+                <textarea placeholder='Your review...' type='text' value={form.body} onChange={changeHandler} name='body' />
                 <br />
                 <span>{errors.body? errors.body : ""}</span> 
                 </div>
                 </div>
                 <br />
-                <button type='submit' class="btn btn-lg btn-outline-dark">Create</button>
-                <Link to='/books'><button class="btn btn-lg btn-outline-dark">Back</button></Link>
+                <div className={style.buttonContainer}>
+                <button type='submit' className={style.sendButtton}>Create</button>
+                </div>
             </form>
         </div>
 </div>
