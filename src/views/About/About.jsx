@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard"
+import Footer from "../../components/Footer/Footer";
+
 
 export default function About(){
 
@@ -26,6 +28,7 @@ export default function About(){
               })}
             </div>
           </div>
+          <Footer />
         </div>
       );
       
