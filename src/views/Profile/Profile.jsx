@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, deleteUser } from "../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
-// import style from '../ReviewForm/ReviewFormPage.module.css';
+import style from '../../components/ReviewForm/ReviewFormPage.module.css'
 
 
 export default function Profile(){
@@ -71,41 +71,51 @@ export default function Profile(){
         return(
             <div class='container'>
                 <Navbar />
-                <div  class='container-xl bg-light my-5 px-2 col-md-4'>
+                <div  class='container-xl bg-white my-5 px-2 col-md-4'>
                     <div>
                         <div>
                             <img height="50px" width='50px' src={user.image} alt="user image" />
-                            <h2>id: {user.id}</h2>
+                            <br/>
+                            <h4>id: {user.id}</h4>
                         </div>
-                    
-                    <h2>User Name: {user.userName}</h2>
-                    <h2>First Name: {user.name}</h2>
-                    <h2>Last Name: {user.lastName}</h2>
-                    <h2>Email: {user.email}</h2>
+                        <br/>                    
+                    <h3>User Name</h3> 
+                        <h4>{user.userName}</h4>
+                        <hr />
+                    <h3>First Name</h3>
+                        <h4> {user.name}</h4>
+                    <h3>Last Name</h3> 
+                        <h4>{user.lastName}</h4>
+                        <hr/>
+                    <h3>Email</h3>
+                        <h4>{user.email}</h4>
+                        <br/>
                     <button class="btn btn-dark btn-lg col-md-4 my-2" onClick={(e) => handleLogOut(e)} >Log Out</button>
+                    <br/>
                     </div>
                 </div>
-                <div class='container fixed-bottom'>
-
-                <Footer />
-                </div>
+                <br/>
+                <br/>           
+                <Footer />      
             </div>
         )
     }else{
         return(
             <div class='container' >
                 <Navbar />
-                <div className='container-xl bg-light my-5 px-2 col-md-4'>
-                    
+                    <div className={style.content}></div>
+                    <div class='container-sm' ></div>
+                    <div class="row justify-content-center">
+                    <div class="col-7">
                     <form onSubmit={handleSubmit}class="row justify-content-md-center  mx-5 px-4" >
-                        <h1>Create your Profile</h1>
-                        <div class='from-group'>
+                        <h2>Create your Profile</h2>
+                        <div class='form-group'>
                         <label>First name: </label>
                         <input class="form-control" type="text" name="name" value={input.name} onChange={handleChange} placeholder="First name" autoFocus />
                         <br />
                         <span>{errors.name? errors.name : ""}</span> 
                         </div>
-                        <div class='from-group'>
+                        <div class='form-group'>
                         <label>Last name: </label>
                         <input class="form-control" type="text" name="lastName" value={input.lastName} onChange={handleChange} placeholder="Last name" />
                         <br />
@@ -125,12 +135,12 @@ export default function Profile(){
                         </div>
                         <button class="btn btn-dark btn-lg col-md-4 my-2"  disabled={errors.name || errors.lastName || errors.email || !input.name} type="submit">Submit</button>
                     </form>
-                </div>
                 <div class='container fixed-bottom'>
-
+                </div>
+                </div>
+                </div>
                 <Footer />
                 </div>
-            </div>
         )
     }
 }
