@@ -3,11 +3,11 @@ import Card from '../../components/Card/Card'
 
 function Cards({books}) {
     return (
-        <div class='row mx-auto' style={{ width: "70%" }}>
+        <div class='row'>
         {
             books.length > 0 ? books.map((book, index) => {
                 return (
-                    <div className="col-md-3 mb-4 my-1" key={index}>
+                    <div className="col-md-3" key={index}>
                         <Card
                             key={index}
                             bookId={book.id}
