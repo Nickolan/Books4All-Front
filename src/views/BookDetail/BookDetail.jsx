@@ -1,79 +1,83 @@
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+//import NavBar
+//import Footer
 import {getBookDetail} from '../../Redux/actions'
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import ReviewCard from '../../components/ReviewCard/ReviewCard';
+import style from '../BookDetail/BookDetail.module.css'
+
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
-    console.log("Hola")
     const { bookId } = useParams();
-    console.log(bookId)
-   
     useEffect(() => {
         dispatch(getBookDetail(bookId));
     }, []);
 
     const eachBook = useSelector((state) => state.bookDetail)
-    console.log(eachBook)
+
+    const [show, setShow] = useState(false);
+
+    const [showReview, setShowReview] = useState(false);
+    
+    const clickHandler = () => {
+        setShow(!show)
+    }
+    const handleShowReview = () => {
+        setShowReview(!showReview)
+    }
 
     return(
-    <div className='container-xl bg-light text-center'>
+<div className={style.mainContainer}>
         <div>
             <Navbar />
-            <div className='container-xl bg-light row'>
             {eachBook?.map((el)=> {
+                console.log(el.image);
                 return (
                     <div>
-                    <div class="col-sm-6">
-                    <div class="card">
-                    <div class="card-body">
-                    <div class="card-header">
-                    <h1 class="card-title text-center">{el.title}</h1>
-                    </div>
                     <div>
-            <img class="img-fluid img-thumbnail rounded mx-auto d-block"  alt='Not found' src={el.image}></img>
-            <h2 class="card-title text-center">Genres</h2>
-            <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.categories[0]}</h4>
-            <hr />            
-            <h2 class="card-title text-center">Authors</h2>
-            <h4 class="card-subtitle mb-2 text-muted text-center"> {el.authors}</h4>
-            <h2 class="card-title text-center">About</h2>
-            <hr />
-            <h5 class="card-subtitle mb-2 text-muted text-justify">{el.description}</h5>
-            <hr />
-            <h2 class="card-title text-center">Price</h2>
-            <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">${el.price}</h4>
-            <hr />
-            <h2 class="card-title text-center">Stock</h2>
-            <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.stock} Units available now</h4>
-            <hr />
-            <h2 class="card-title text-center">Reviews</h2>
-            <hr />
-            <h4 class="card-subtitle mb-2 text-muted text-center">{el.Reviews?.map(el=>el.body)}</h4>
-            </div>
-            </div>
+                        <div className={style.allContentContainer}>
+                        <div className={style.imgContainer}>
+            <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
+                        </div>
+                        <div className={style.contentContainer}>
+            <h1 className={style.title}>{el.title}</h1>
+            <h2 className={style.subtitle}>Authors: {el.authors}</h2>
+            <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
+            <h3 className={style.price}>${el.price}</h3>
+                    </div>
+                        </div>
+                        <hr/>
+                        <div className={style.buttonContainer}>
+                        <img src='https://res.cloudinary.com/dvldakcin/image/upload/v1681705343/Countries/down-arrow_rlhmtn.png' className={style.description} onClick={clickHandler}/>
+                        </div>
+            { show && <p className={style.descriptionContent}>{el.description}</p>}
+            <hr/>   
+            <div >
+            <h3 className={style.subtitleReview}>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
+                return(
+                    <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
+                )
+            }) : ""}</h3>
             </div>
             </div>
             </div>
                 )
             })}
-            <div class="col-sm-6">
-            <div class="card">
-            <div class="card-body">
-            <ReviewFormPage />
+
+            <div className={style.buttonContainer}>
+                <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
             </div>
-            </div>
-            </div>
+            {showReview && <ReviewFormPage id={bookId} handleShowReview={handleShowReview}/>}
+
             </div>
             <Footer />
         </div>
-    </div>
+
     );
 }
 export {BookDetail};

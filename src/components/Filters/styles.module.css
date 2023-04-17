@@ -1,0 +1,11 @@
+.border{
+    margin-right: 20px;
+    padding: 8px;
+}
+
+.border:hover{
+    border: 1px solid black;
+    margin-right: 20px;
+    padding: 8px;
+}
+

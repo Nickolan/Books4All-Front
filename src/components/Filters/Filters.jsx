@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { filterByAuthor, filterByCategory, getBooks } from "../../Redux/actions";
 import { useEffect } from "react";
+import style from './styles.module.css'
 
 
 
@@ -12,12 +13,14 @@ const Filters = ({ setCurrentPage }) => {
     let bookCategories = books.map(book => book.categories ? book.categories[0] : 'Art');
 
     bookCategories = Array.from(new Set(bookCategories));
+    bookCategories = bookCategories.sort();
 
     let authors_ = [];
 
     books.forEach(book => book.authors?.map(authors => authors_.push(authors)))
 
     authors_ = Array.from(new Set(authors_))
+    authors_ = authors_.sort();
 
     console.log(authors_)
 
@@ -27,10 +30,12 @@ const Filters = ({ setCurrentPage }) => {
 
     const handleOnChangeCategory = (event) => {
         dispatch(filterByCategory(event.target.value))
+        setCurrentPage(1)
     }
 
     const handleOnChangeAuthor = (event) => {
         dispatch(filterByAuthor(event.target.value))
+        setCurrentPage(1)
     }
 
     useEffect(() => {
@@ -39,25 +44,30 @@ const Filters = ({ setCurrentPage }) => {
 
 
     return (
-        <div>
-            <select value={filter.category} onChange={handleOnChangeCategory}>
-                <option value='all'>All</option>
-                {bookCategories?.map((category, index) => {
-                    return (
-                        <option value={category} key={index}>{category}</option>
-                    )
-                })}
-            </select>
-            <select value={filter.author} onChange={handleOnChangeAuthor}>
-                <option value='all'>All</option>
-                {
-                    authors_.map((author, index) => {
+        <div class='d-flex align-items-center'  >
+            <span class='fw-bold' style={{ marginRight: '10px' }}>FILTER BY:</span>
+            <div className={style.border}>
+                <select class='border-0 bg-light' style={{ textTransform: 'uppercase', width: '120px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', }} value={filter.category} onChange={handleOnChangeCategory}>
+                    <option value='all'>All Genres</option>
+                    {bookCategories?.map((category, index) => {
                         return (
-                            <option value={author} key={index}>{author}</option>
+                            <option value={category} key={index}>{category}</option>
                         )
-                    })
-                }
-            </select>
+                    })}
+                </select>
+            </div>
+            <div className={style.border}>
+                <select class='border-0 bg-light' style={{ marginRight: '10px', textTransform: 'uppercase', width: '130px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} value={filter.author} onChange={handleOnChangeAuthor}>
+                    <option value='all' className={style.option}>All Authors</option>
+                    {
+                        authors_.map((author, index) => {
+                            return (
+                                <option value={author} key={index}>{author}</option>
+                            )
+                        })
+                    }
+                </select>
+            </div>
         </div>
     )
 

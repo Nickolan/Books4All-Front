@@ -1,30 +1,29 @@
 import { useState} from "react";
-import { Link } from "react-router-dom";
-// import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import style from "../Styles/Errors.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
 import { createReview } from "../../Redux/actions";
+import style from '../ReviewForm/ReviewFormPage.module.css'
 
-export const ReviewFormPage = () =>{
-const eachBook = useSelector((state) => state.bookDetail)
-console.log(eachBook)
+export const ReviewFormPage = ({id, handleShowReview}) =>{
 
 const dispatch = useDispatch();
 
-// const history= useHistory();
+const navigate= useNavigate();
+
+let reviews = eachBook[0].Reviews;
 
 const [form, setForm] = useState({
-        body: '',
-        book_id: '',
-        rating: '',
         user_name: '',
+        body: '',
+        book_id: id,
+        rating: '',
 });
 
 const [errors, setErrors] = useState({
+        user_name: '',
+        body: '',
         book_id: '',
         rating: '',
-        body: '',
-        user_name:'',
 });
 
 const changeHandler = (event) =>{
@@ -32,6 +31,7 @@ const property = event.target.name;
 const value = event.target.value;
 validate({...form, [property]:value});
 setForm({...form, [property]:value});
+console.log(reviews);
 }
 
 const validate = (form) => {
@@ -45,11 +45,9 @@ const validate = (form) => {
     errors.email = 'Please include your email';
   }
 
-  if (form.rating < 1.0 || form.rating > 5.0) {
+  if (form.rating < 1 || form.rating > 5) {
     errors.rating = 'Rating must be between one and five stars';
   }
-
-  errors.body = "";
 
   setErrors(errors);
 };
@@ -57,34 +55,38 @@ const validate = (form) => {
 const submitHandler = (event) =>{
     
         event.preventDefault();
-        dispatch(createReview(form));
-        let errorsArray = Object.keys(errors);
-        console.log(errorsArray)
-        errorsArray.length === 0? alert('Success! New Review created')
-        : alert('Error! Please verify data');
+        let finded = reviews.filter((review) => review.user_name === form.user_name);
+        if (finded.length > 0) {
+          alert('This user has already submitted a review.');
+        } else {
+          dispatch(createReview(form));
+          let errorsArray = Object.keys(errors);
+          console.log(errorsArray)
+          errorsArray.length === 0? alert('Success! New Review created')
+          : alert('Error! Please verify data');
+          navigate("/");
+        }
 
-        setForm({
-        body: '',
-        book_id: '',
-        rating: '',
-        user_name: '',
-        });
-
-        setTimeout(() => {
-        // history.push('/');
-        }, 2000)
+        // setForm({
+        // body: '',
+        // book_id: '',
+        // rating: '',
+        // user_name: '',
+        // });
     }
 
  return(
-          <div>
+<div className={style.mainContainer}>
+        <div className={style.content}>
               <form onSubmit={submitHandler}>
-                <div class="card-header">
-                  <h1 class="card-title text-center">Create your own Review!</h1>
+                <div className={style.closeButtonContainer}>
+                <img src="https://res.cloudinary.com/dvldakcin/image/upload/v1681711512/Countries/close_2_snehxr.png" className={style.closeButton} onClick={handleShowReview}/>
                 </div>
+                <div className='container-sm .bg-light'>
                 <div className='container-sm .bg-light'>
                 <label htmlFor="user_name" class="font-weight-bold"> Your Name </label>
                 <hr/>
-                <input className={errors.name && style.error} type='text' value={form.user_name} onChange={changeHandler} name='user_name' />
+                <input className={errors.user_name && style.error} type='text' value={form.user_name} onChange={changeHandler} name='user_name' />
                 <br />
                 <span>{errors.user_name? errors.user_name : ""}</span> 
                 </div>
@@ -99,22 +101,26 @@ const submitHandler = (event) =>{
                 <label htmlFor="rating" class="font-weight-bold"> Rating </label>
                 <hr/>
                 <input className={errors.rating && style.error} type='text' value={form.rating} onChange={changeHandler} name='rating' />
-                <br />
+                <br/>
                 <span>{errors.rating? errors.rating : ""}</span> 
                 </div>
-                <hr/>
-                <br />
                 <div className='container-sm .bg-light'>
-                <label htmlFor="body" class="font-weight-bold"> Your Review </label>
+                {/* </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div> */}
+                <label htmlFor="body" class="font-weight-bold"> Review </label>
                 <hr/>
-                <textarea className={errors.body && style.error} type='text' value={form.body} onChange={changeHandler} name='body' />
+                <textarea placeholder='Your review...' type='text' value={form.body} onChange={changeHandler} name='body' />
                 <br />
                 <span>{errors.body? errors.body : ""}</span> 
                 </div>
+                </div>
                 <br />
-                <button type='submit' class="btn btn-lg btn-outline-dark">Create</button>
-                <Link to='/books'><button class="btn btn-lg btn-outline-dark">Back</button></Link>
+                <div className={style.buttonContainer}>
+                <button type='submit' className={style.sendButtton}>Create</button>
+                </div>
             </form>
-          </div>
-          )
-        };
+        </div>
+</div>
+ )
+};

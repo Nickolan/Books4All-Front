@@ -6,8 +6,9 @@ import {
   GET_BOOK_DETAIL,
   ALPHABETICAL_ORDER,
   RESET_FILTERS,
-  CREATE_REVIEW,
-} from "../actions/index";
+  ADD_USER,
+  DELETE_USER,
+} from "../actions";
 
 const initialState = {
   books: [],
@@ -19,6 +20,8 @@ const initialState = {
     category: "all",
     author: "all",
   },
+  order: "",
+  profile: {},
 };
 
 const filtrarLibros = (libros, genero, autor) => {
@@ -57,12 +60,8 @@ const rootReducer = (state = initialState, action) => {
         bookDetail: action.payload,
       };
 
-       case CREATE_REVIEW:
-           return{
-               ...state,
-           }
-        case FILTER_BY_CATEGORY:
-            return {
+    case FILTER_BY_CATEGORY:
+      return {
         ...state,
         books: filtrarLibros(
           state.allBooks,
@@ -92,6 +91,7 @@ const rootReducer = (state = initialState, action) => {
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
         ),
+        order: action.payload
       };
     case GET_IMAGES:
       return {
@@ -102,8 +102,21 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         books: state.allBooks,
-      };
+        filters: { category: 'all', author: 'all' }
 
+      };
+    case ADD_USER: {
+      return {
+        ...state,
+        profile: action.payload,
+      };
+    }
+    case DELETE_USER: {
+      return {
+        ...state,
+        profile: {},
+      };
+    }
     default:
       return {
         ...state,
