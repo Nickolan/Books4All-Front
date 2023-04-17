@@ -9,6 +9,7 @@ import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
+import { useNavigate } from 'react-router-dom';
 
 
 const BookDetail = (props) =>{
@@ -20,6 +21,8 @@ const BookDetail = (props) =>{
     const [show, setShow] = useState(false);
     
     const [showReview, setShowReview] = useState(false);
+
+    const navigate = useNavigate()
     
     const clickHandler = () => {
         setShow(!show)
@@ -27,6 +30,12 @@ const BookDetail = (props) =>{
     const handleShowReview = () => {
         setShowReview(!showReview)
     }
+
+    const handleClick = () => {
+        navigate(-1);
+      }
+    
+
     useEffect(() => {
         dispatch(getBookDetail(bookId));
     }, [showReview]);
@@ -40,6 +49,7 @@ const BookDetail = (props) =>{
                 return (
                     <div>
                     <div>
+                    <img className={style.backButton} src="https://res.cloudinary.com/dvldakcin/image/upload/v1681620387/Countries/back_lblp4n.png" onClick={handleClick} />
                         <div className={style.allContentContainer}>
                         <div className={style.imgContainer}>
             <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>

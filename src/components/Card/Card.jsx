@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
+import style from '../Card/Card.module.css'
 
 function Card({ name, author, image, categories, bookId }) {
     const dispatch = useDispatch();
