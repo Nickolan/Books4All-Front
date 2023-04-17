@@ -1,27 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
-//prueba
-// segunda pruba
+
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Home from "./views/Home/Home";
+import About from "./views/About/About";
+import Books from "./views/Books/Books";
+import Events from "./views/Events/Events"
+import Cart from './views/Cart/Cart';
+import Profile from './views/Profile/Profile';
+import Error from './views/Error/Error';
+import { BookDetail } from './views/BookDetail/BookDetail';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/NavBar/Navbar';
+
+
 function App() {
-  // prueba 2 nico
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          New comment to test pull request
-          test PR nico
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/books' element={<Books />} />
+        <Route path='/bookDetail/:bookId' element={<BookDetail />} />
+        <Route path='/events' element={<Events />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/404' element={<Error />} />
+        <Route path='*' element={<Navigate to='/404' />} />
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,73 @@
+.mainContainer{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation-name: fadeIn;
+        animation-duration: 1s;
+        animation-delay: 0.2s;
+        animation-fill-mode: forwards;
+        opacity: 0;
+}
+.error{
+    border: 2px solid red;
+}
+.content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+.sendButtton{
+    background-color: white;
+    border: 0px;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: .1s;
+    color: black;
+    border-bottom: 1px solid black;
+}
+.sendButtton:hover{
+    transform: translateY(-5px);
+    border: 1px solid black;
+}
+.closeButton{
+    width: 25px;
+    height: 25px;
+    transition: .1s;
+    border-radius: 999999rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border-bottom: 1px solid black;
+
+}
+.closeButton:hover{
+    transform: translateY(-5px);
+    border: 1px solid black;
+}
+.closeButtonContainer{
+    display: flex;
+    justify-content: flex-end;
+}
