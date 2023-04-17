@@ -1,28 +1,30 @@
 import { useState} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { createReview } from "../../Redux/actions";
 import style from '../ReviewForm/ReviewFormPage.module.css'
 
-export const ReviewFormPage = ({id, handleShowReview}) =>{
+export const ReviewFormPage = ({id, handleShowReview, reviews}) =>{
 
 const dispatch = useDispatch();
 
 const navigate= useNavigate();
 
+
 const [form, setForm] = useState({
-        user_name: '',
-        body: '',
-        book_id: id,
-        rating: '',
+  user_name: '',
+  body: '',
+  book_id: id,
+  rating: '',
 });
 
 const [errors, setErrors] = useState({
-        user_name: '',
-        body: '',
-        book_id: '',
-        rating: '',
+  user_name: '',
+  body: '',
+  book_id: '',
+  rating: '',
 });
+
 
 const changeHandler = (event) =>{
 const property = event.target.name;
@@ -51,16 +53,28 @@ const validate = (form) => {
 };
 
 const submitHandler = (event) =>{
-    
-        event.preventDefault();
+
+
+
+
+        let repeated = reviews.filter(rev => rev.user_name === form.user_name)
+        if (repeated.length > 0) {
+          event.preventDefault()
+          alert('This user has already submitted a review.');
+        } else {
 
           dispatch(createReview(form));
           let errorsArray = Object.keys(errors);
           console.log(errorsArray)
           errorsArray.length === 0? alert('Success! New Review created')
           : alert('Error! Please verify data');
-          navigate("/");
-  
+
+          navigate( `/bookDetail/${id}`);
+
+          handleShowReview()
+    
+
+
         // setForm({
         // body: '',
         // book_id: '',
@@ -68,13 +82,14 @@ const submitHandler = (event) =>{
         // user_name: '',
         // });
     }
+  }
 
  return(
 <div className={style.mainContainer}>
         <div className={style.content}>
               <form onSubmit={submitHandler}>
                 <div className={style.closeButtonContainer}>
-                <img src="https://res.cloudinary.com/dvldakcin/image/upload/v1681711512/Countries/close_2_snehxr.png" className={style.closeButton} onClick={handleShowReview}/>
+                <img src="https://res.cloudinary.com/dvldakcin/image/upload/v1681711512/Countries/close_2_snehxr.png" alt='' className={style.closeButton} onClick={handleShowReview}/>
                 </div>
                 <div className='container-sm .bg-light'>
                 <div className='container-sm .bg-light'>
@@ -117,4 +132,5 @@ const submitHandler = (event) =>{
         </div>
 </div>
  )
-};
+}
+
