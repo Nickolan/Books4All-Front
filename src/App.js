@@ -1,5 +1,4 @@
 import './App.css';
-
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./views/Home/Home";
 import About from "./views/About/About";
@@ -10,8 +9,6 @@ import Profile from './views/Profile/Profile';
 import Error from './views/Error/Error';
 import { BookDetail } from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/NavBar/Navbar';
-
 
 function App() {
   return (
