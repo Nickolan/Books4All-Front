@@ -59,6 +59,7 @@ const BookDetail = (props) =>{
             <h2 className={style.subtitle}>Authors: {el.authors}</h2>
             <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
             <h3 className={style.price}>${el.price}</h3>
+            <button  type="button" class="btn btn-dark mt-1">Add to cart</button>
                     </div>
                         </div>
                         <hr/>
@@ -83,7 +84,7 @@ const BookDetail = (props) =>{
                 <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
             </div>
             {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} handleShowReview={handleShowReview}/>}
-
+         
             </div>
             <Footer />
         </div>
