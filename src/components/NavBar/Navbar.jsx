@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import CartWidget from  '../CartWidget/CartWidget'
+
 export default function Navbar(){
     return(
         
@@ -20,8 +22,8 @@ export default function Navbar(){
             <li className="nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
             <li className="nav-item"><Link to="/about" className="nav-link" >About</Link></li>
             <li className="nav-item"><Link to="/books" className="nav-link">Books</Link></li>
-{/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
-            <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
+{/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
+            <li className="nav-item "><Link to="/cart" className="nav-link"></Link><CartWidget/></li> 
             <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li>
             </ul>
         </div>
