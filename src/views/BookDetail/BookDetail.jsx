@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 //import NavBar
 //import Footer
-import {getBookDetail} from '../../Redux/actions'
+import {getBookDetail, addToCart} from '../../Redux/actions'
 import {useEffect, useState} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
@@ -17,10 +17,12 @@ const BookDetail = (props) =>{
     const { bookId } = useParams();
     
     const eachBook = useSelector((state) => state.bookDetail)
-    
+    const cart = useSelector((state) => state.cart)    
+   const stock=eachBook.map(book=>book.stock)
+
     const [show, setShow] = useState(false);
-    
     const [showReview, setShowReview] = useState(false);
+    let [counter, setCounter]= useState(0)
 
     const navigate = useNavigate()
     
@@ -34,7 +36,19 @@ const BookDetail = (props) =>{
     const handleClick = () => {
         navigate(-1);
       }
-    
+    const handleClickAddCart=()=>{
+        dispatch(addToCart(bookId))
+ 
+    }
+
+    const handleAdd=()=>{
+    setCounter(++counter)
+    }
+
+    const handleRest=()=>{
+        setCounter(--counter)
+    }
+
 
     useEffect(() => {
         dispatch(getBookDetail(bookId));
@@ -58,9 +72,32 @@ const BookDetail = (props) =>{
             <h1 className={style.title}>{el.title}</h1>
             <h2 className={style.subtitle}>Authors: {el.authors}</h2>
             <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
+            <div className='d-flex justify-content-start'>
+                <div className={style.container_price}>
             <h3 className={style.price}>${el.price}</h3>
-            <button  type="button" class="btn btn-dark mt-1">Add to cart</button>
-                    </div>
+
+                </div>
+            {counter > 0 &&  <button className="btn btn-secondary " onClick={handleRest}>-</button>    }    
+                    
+           {counter>0 && <input disabled className='input_add bg-light ms-1 border border-0' style={{width: '4%'}} value={counter} type='text'placeholder= {0} ></input>} 
+            {
+               counter < stock &&
+               <button className="btn btn-secondary" onClick={handleAdd}>+</button>
+
+           
+            }         
+         
+        
+           
+          {!stock? <p>"Lo sentimos no tenemos stock de este libro"</p>: 
+              <button  type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart}>Add to cart</button>
+          
+          }          
+
+          
+            </div>
+           
+                        </div>
                         </div>
                         <hr/>
                         <div className={style.buttonContainer}>
