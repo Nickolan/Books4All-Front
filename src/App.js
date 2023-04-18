@@ -11,7 +11,7 @@ import Error from './views/Error/Error';
 import { BookDetail } from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import Navbar from './components/NavBar/Navbar';
+import Auth from './views/Auth/Auth';
 axios.defaults.baseURL = "https://books4all-back-production-0533.up.railway.app/";
 
 function App() {
@@ -24,7 +24,8 @@ function App() {
         <Route path='/bookDetail/:bookId' element={<BookDetail />} />
         <Route path='/events' element={<Events />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<Auth />} />
+        <Route path='/auth' element={<Auth />}/>
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
       </Routes>
