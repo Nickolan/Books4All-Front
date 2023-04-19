@@ -9,6 +9,7 @@ import Filters from "../../components/Filters/Filters";
 import style from "./Books.module.css"
 import Order from "../../components/Order/Order";
 import Paginado from "../../components/Paginado/Paginado";
+import { Link } from "react-router-dom";
 
 export default function Books() {
     const dispatch = useDispatch();
@@ -41,23 +42,23 @@ export default function Books() {
     }, [])
 
     return (
-        <div class='container bg-white text-black h-auto'>
+        <div className='container bg-white text-black h-auto'>
             <Navbar />
 
             <Searchbar setCurrentPage={setCurrentPage} />
 
-            <div class='d-flex mx-auto align-items-center justify-content-between' style={{ width: "80%", height: '50px', borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0", padding: '0 10px 0 7px' }}>
+            <div className='d-flex mx-auto align-items-center justify-content-between' style={{ width: "80%", height: '50px', borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0", padding: '0 10px 0 7px' }}>
                 <Filters setCurrentPage={setCurrentPage} />
                 <Order setCurrentPage={setCurrentPage} />
             </div>
-            <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
+            <div className="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
                 {currentBooks.length >0 ? <Cards books={currentBooks} />
                  :
                   <p style={{fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif', fontSize:'30px', margin:'50px auto'}}>Sorry, we could not find any books matching your criteria</p>}
             </div>
 
 
-            <div class="d-flex justify-content-around">
+            <div className="d-flex justify-content-around">
                <Paginado
                 booksPerPage={booksForPage}
                 numberBooks={books.length}

@@ -1,13 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
-import style from '../Card/Card.module.css'
+import style from '../Card/Card.module.css';
+import { BsCartPlus } from 'react-icons/bs';
 
-function Card({ name, author, image, categories, bookId }) {
+import { addToCart } from "../../Redux/actions";
+
+
+
+function Card(props) {
     const dispatch = useDispatch();
     const [isFav, setIsFav] = useState(false)
     // add useSelector in initialState with myFavorites
+
+    // const {bookId} = useParams();
 
     function handleFavorites() {
         if (isFav) {
@@ -17,10 +24,14 @@ function Card({ name, author, image, categories, bookId }) {
         }
     }
 
+    const handleAddToCart = () =>{
+        dispatch(addToCart(props))
+    }
+
     return (
 
         <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "350px", padding: "10px" }}>
-            <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
+            <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${props.bookId}`}>
                 {/* {isFav ? (
             <button class="d-block w-1 justify-content-end align-items-start" onClick={handleFavorites}>❤️</button>
         ) : (
@@ -29,8 +40,8 @@ function Card({ name, author, image, categories, bookId }) {
                 <div class="d-flex flex-column">
 
                     <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto", backgroundColor: "black" }}>
-                        {image ? <img style={{ width: "140px", height: "200px" }} src={image} alt="book" />
-                            : <img style={{ width: "140px", height: "200px" }} src={noImage} alt="not found" />
+                        {props.image ? <img style={{ width: "140px", height: "200px" }} src={props.image} alt="book" />
+                            : <img style={{ width: "140px", height: "200px" }} src={props.noImage} alt="not found" />
                         }
                     </div>
 
@@ -44,7 +55,7 @@ function Card({ name, author, image, categories, bookId }) {
                         fontSize: "14px",
 
                     }}>
-                        {name}
+                        {props.name}
                     </h5>
                     <div style={{ display: "flex", flexDirection: "column", }}>
                         <p style={{
@@ -56,11 +67,12 @@ function Card({ name, author, image, categories, bookId }) {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
 
-                        }} class="text-xs ">{author}</p>
-                        <p style={{ fontSize: "13px", color: "#088000" }}><small>{categories}</small></p>
+                        }} class="text-xs ">{props.author}</p>
+                        <p style={{ fontSize: "13px", color: "#088000" }}><small>{props.categories}</small></p>
                     </div>
                 </div>
             </Link>
+            <button onClick={handleAddToCart} > <BsCartPlus /> </button>
         </div>
     )
 }

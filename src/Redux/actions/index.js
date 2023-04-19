@@ -7,8 +7,13 @@ export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
 export const ALPHABETICAL_ORDER = "ALPHABETICAL_ORDER";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const GET_IMAGES = "GET_IMAGES";
-export const ADD_USER = "ADD_USER"
-export const DELETE_USER = "DELETE_USER"
+export const ADD_USER = "ADD_USER";
+export const DELETE_USER = "DELETE_USER";
+
+export const ADD_TO_CART = "ADD_TO_CART";
+export const PRICE_OF_ALL_CART = "PRICE_OF_ALL_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -94,3 +99,22 @@ export const addUser = (user) => {
 export const deleteUser = () =>{
   return {type: DELETE_USER}
 }
+
+
+export const addToCart = (props) =>{
+  return{
+    type: ADD_TO_CART,
+    payload: props
+  }
+}
+// export const priceOfAllCart = () =>{
+//   return{
+//     type: PRICE_OF_ALL_CART
+//   }
+// }
+// export const removeFromCart = () =>{
+//   return{
+//     type: REMOVE_FROM_CART
+//   }
+// }
+

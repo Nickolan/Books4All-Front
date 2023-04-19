@@ -8,6 +8,7 @@ import {
   RESET_FILTERS,
   ADD_USER,
   DELETE_USER,
+  ADD_TO_CART
 } from "../actions";
 
 const initialState = {
@@ -22,6 +23,9 @@ const initialState = {
   },
   order: "",
   profile: {},
+
+  booksInCart:[],
+
 };
 
 const filtrarLibros = (libros, genero, autor) => {
@@ -117,6 +121,16 @@ const rootReducer = (state = initialState, action) => {
         profile: {},
       };
     }
+
+    case ADD_TO_CART:
+      return{
+        ...state,
+        // booksInCart: [...state.booksInCart, action.payload],
+        booksInCart: [...state.booksInCart,action.payload],
+      }
+
+
+
     default:
       return {
         ...state,

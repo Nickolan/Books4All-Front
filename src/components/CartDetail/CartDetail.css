@@ -1,0 +1,85 @@
+.titleCarrito {
+    font-family: 'Roboto', sans-serif; /* puedes utilizar otra fuente de tu preferencia */
+    font-size: 2.5rem; /* ajusta el tamaño de la letra según tus necesidades */
+    font-weight: bold; /* si deseas que el título tenga un peso de letra más fuerte */
+    text-align: center; /* centrar el texto */
+    color: #333; /* ajusta el color según tu preferencia */
+    text-transform: uppercase; /* si deseas que el título se muestre en mayúsculas */
+    letter-spacing: 1px; /* si deseas aumentar el espaciado entre letras */
+    margin-top: 20px; /* ajusta el margen superior según tu necesidad */
+    margin-bottom: 40px; /* ajusta el margen inferior según tu necesidad */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* si deseas agregar un sombreado al texto */
+  }
+
+
+  .books-container {
+    display: flex; /* establece un contenedor de tipo flex */
+    flex-wrap: wrap; /* permite que los elementos se ajusten automáticamente al ancho del contenedor */
+    justify-content: center; /* centra los elementos horizontalmente */
+    align-items: center;
+  }
+
+  .book-card {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row; /* cambia la dirección de los elementos a fila */
+    justify-content: space-between; /* distribuye el espacio sobrante entre los elementos */
+    align-items: center; /* centra verticalmente los elementos */
+    width: 90%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .book-card img {
+    align-self: flex-start;
+    margin: 15px;
+    width: 250px;
+    border: 1px solid black;
+    padding: 4px;
+    border-radius: 5px;
+  }
+  
+  .book-info {
+    display: flex; /* establece un contenedor de tipo flex para book-info */
+    flex-direction: column; /* establece la dirección de los elementos en columna */
+    align-items: flex-start; /* alinea los elementos a la izquierda */
+    margin-right: 15px; /* añade un margen a la derecha para separarlos de la imagen */
+  }
+  .cart-summary {
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cart-summary h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .cart-summary p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .cart-summary button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cart-summary button:hover {
+    background-color: #3e8e41;
+  }

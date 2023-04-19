@@ -9,6 +9,7 @@ import Profile from './views/Profile/Profile';
 import Error from './views/Error/Error';
 import { BookDetail } from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CartDetail from './components/CartDetail/CartDetail';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
+
+        <Route path='/cart' element={<CartDetail/>} />
+        
       </Routes>
     </div>
   );
