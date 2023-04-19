@@ -128,7 +128,17 @@ const rootReducer = (state = initialState, action) => {
         cart: [...state.cart,action.payload],
       }
 
-
+      case DELETE_ARTICLE: {
+        return {
+          ...state,
+          cart: state.cart.filter((product) => {
+            return product.bookId !== action.payload;
+          }),
+        };
+      }
+      case DELETE_CART: {
+        return { ...state, cart: [] };
+      }
 
     default:
       return {

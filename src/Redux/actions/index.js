@@ -14,6 +14,9 @@ export const ADD_CART = "ADD_CART";
 export const PRICE_OF_ALL_CART = "PRICE_OF_ALL_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
+export const DELETE_ARTICLE = "DELETE_ARTICLE";
+export const DELETE_CART = "DELETE_CART";
+
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -107,6 +110,13 @@ export const addToCart = (props) =>{
     payload: props
   }
 }
+export const deleteOneBook = (bookId) => {
+  return { type: DELETE_ARTICLE, payload: bookId };
+};
+
+export const deleteCart = () => {
+  return { type: DELETE_CART };
+};
 // export const priceOfAllCart = () =>{
 //   return{
 //     type: PRICE_OF_ALL_CART
