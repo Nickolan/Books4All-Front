@@ -20,7 +20,7 @@ function App() {
         <Route path='/books' element={<Books />} />
         <Route path='/bookDetail/:bookId' element={<BookDetail />} />
         <Route path='/events' element={<Events />} />
-        <Route path='/cart' element={<Cart />} />
+        {/* <Route path='/cart' element={<Cart />} /> */}
         <Route path='/profile' element={<Profile />} />
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
