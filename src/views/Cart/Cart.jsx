@@ -22,7 +22,7 @@ export default function Cart(){
     const id= cart.map((book)=>book.bookId)
     price.push(cartPrice)
 
-    const handleClose=()=>{
+    const handleClose=(id)=>{
         dispatch(deleteOneBook(id))
       }
 
@@ -52,7 +52,7 @@ export default function Cart(){
                {
                 name.map((name,index)=>
                   
-                <p key={index}>(1) {name} <button  type="button" class="btn btn-dark " onClick={()=>handleClose}>X</button></p>
+                <p key={index}>(1) {name} <button  type="button" class="btn btn-dark " onClick={()=>handleClose(id[index])}>X</button></p>
                 )
             } 
                          {/* <h5>{JSON.stringify(books)}</h5> */}
