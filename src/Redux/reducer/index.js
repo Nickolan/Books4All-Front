@@ -8,7 +8,7 @@ import {
   RESET_FILTERS,
   ADD_USER,
   DELETE_USER,
-  ADD_TO_CART
+  ADD_CART
 } from "../actions";
 
 const initialState = {
@@ -24,7 +24,7 @@ const initialState = {
   order: "",
   profile: {},
 
-  booksInCart:[],
+  cart:[],
 
 };
 
@@ -122,11 +122,10 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_TO_CART:
+    case ADD_CART:
       return{
         ...state,
-        // booksInCart: [...state.booksInCart, action.payload],
-        booksInCart: [...state.booksInCart,action.payload],
+        cart: [...state.cart,action.payload],
       }
 
 
