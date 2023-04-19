@@ -27,7 +27,7 @@ export default function Navbar(){
             {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
             <li>
             {!isAuthenticated ? <Link to="/profile" className="nav-link">Profile</Link> :
-                <Link to="/profile" className="nav-link">{user?.nickname}</Link>
+                <Link to="/profile" className="nav-link">{user?.name}</Link>
                 }
             </li>
             </ul>
