@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
 import style from '../Card/Card.module.css';
 import { BsCartPlus } from 'react-icons/bs';
 
-import { addToCart } from "../../Redux/actions";
+import { addToCart, getBookDetail } from "../../Redux/actions";
 
 
 
@@ -15,6 +15,14 @@ function Card(props) {
     // add useSelector in initialState with myFavorites
 
     // const {bookId} = useParams();
+
+    const book = useSelector(state => state.bookDetail)
+
+    console.log("props:",props)
+
+    // useEffect(()=>{
+    //     dispatch(getBookDetail(props.bookId))
+    // })
 
     function handleFavorites() {
         if (isFav) {
@@ -69,6 +77,7 @@ function Card(props) {
 
                         }} class="text-xs ">{props.author}</p>
                         <p style={{ fontSize: "13px", color: "#088000" }}><small>{props.categories}</small></p>
+                        <p style={{ fontSize: "13px", color: "#088000" }}><small>{props.price}</small></p>
                     </div>
                 </div>
             </Link>

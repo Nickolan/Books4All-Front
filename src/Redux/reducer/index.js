@@ -8,7 +8,9 @@ import {
   RESET_FILTERS,
   ADD_USER,
   DELETE_USER,
-  ADD_CART
+  ADD_CART,
+  DELETE_ARTICLE,
+  DELETE_CART
 } from "../actions";
 
 const initialState = {

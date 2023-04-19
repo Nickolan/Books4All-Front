@@ -8,14 +8,19 @@ export default function CartDetail(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-//   const handleRemoveBook = (bookId) => {
-//     dispatch(removeBookFromCart(bookId));
-//   };
-
   const totalAmount = cart.reduce(
-    (accumulator, book) => accumulator + book.price,
-    0
-  );
+    (accumulator, book1) => accumulator + Number(book1.price), 0 );
+
+  const array1 = [1, 2, 3, 4];
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue
+);
+
+console.log(sumWithInitial);
+// Expected output: 10
 
   return (
     <div className="cart-container">
@@ -28,7 +33,8 @@ export default function CartDetail(props) {
       ) : (
         <>
           <div className="books-container">
-            {cart.map((book) => (
+            {
+            cart.map((book) => (
               <div className="book-card" key={book.bookId}>
                 <img src={book.image} alt="no se encontró la imagen" />
                 <div className="book-info">
@@ -39,7 +45,7 @@ export default function CartDetail(props) {
                   <button>
                     Eliminar
                   </button>
-                  <p className="book-price">${book.price}</p>
+                  <p className="book-price">${book.price} USD</p>
                 </div>
                 {/* <p className="book-price">${book.price}</p> */}
               </div>
@@ -48,7 +54,7 @@ export default function CartDetail(props) {
           <div className="cart-summary">
             <h2>Resumen del carrito</h2>
             <p>Cantidad de libros: {cart.length}</p>
-            <p>Total a pagar: ${totalAmount}</p>
+            <p>Total a pagar: ${totalAmount} USD</p>
             <button>Comprar</button>
           </div>
         </>
