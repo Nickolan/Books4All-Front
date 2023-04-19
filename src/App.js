@@ -1,5 +1,4 @@
 import './App.css';
-
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./views/Home/Home";
 import About from "./views/About/About";
@@ -13,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Auth from './views/Auth/Auth';
 axios.defaults.baseURL = "https://books4all-back-production-0533.up.railway.app/";
+
 
 function App() {
   return (
