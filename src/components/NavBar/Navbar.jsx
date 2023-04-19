@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import CartWidget from  '../CartWidget/CartWidget'
 
+import { useAuth0 } from "@auth0/auth0-react";
 export default function Navbar(){
+    const { user, isAuthenticated } = useAuth0();
     return(
         
         <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top ' >
@@ -23,9 +25,16 @@ export default function Navbar(){
             <li className="nav-item"><Link to="/about" className="nav-link" >About</Link></li>
             <li className="nav-item"><Link to="/books" className="nav-link">Books</Link></li>
 {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
-            <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li>
          
           <li className="nav-item "><Link to="/cart" className="nav-link "></Link><CartWidget/></li>  
+{/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
+            <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
+            {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
+            <li>
+            {!isAuthenticated ? <Link to="/profile" className="nav-link">Profile</Link> :
+                <Link to="/profile" className="nav-link">{user?.name}</Link>
+                }
+            </li>
             </ul>
         </div>
         </div>
