@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 //import NavBar
 //import Footer
-import {getBookDetail} from '../../Redux/actions'
+import {getBookDetail, addToCart} from '../../Redux/actions'
 import {useEffect, useState} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
@@ -17,10 +17,14 @@ const BookDetail = (props) =>{
     const { bookId } = useParams();
     
     const eachBook = useSelector((state) => state.bookDetail)
-    
+    const[bookState, setBookState]= useState(false)
+    const bookName= eachBook.map((book)=>book.title)
+    const cart = useSelector((state) => state.cart)    
+    const stock=eachBook.map(book=>book.stock)
+
     const [show, setShow] = useState(false);
-    
     const [showReview, setShowReview] = useState(false);
+    let [counter, setCounter]= useState(0)
 
     const navigate = useNavigate()
     
@@ -34,18 +38,40 @@ const BookDetail = (props) =>{
     const handleClick = () => {
         navigate(-1);
       }
-    
 
+      let bookInCart={}
+
+    const handleClickAddCart=(event)=>{
+
+        bookInCart={
+            'bookId':bookId,
+            'bookName':bookName.map(n=>n),
+            'quantity':Number(bookId.length),
+            'price': (eachBook?.map(e=>e.price))
+            
+        }
+        dispatch(addToCart(bookInCart))
+ 
+    }
+
+    const handleRest=()=>{
+        setCounter(--counter)
+    }
+
+    
     useEffect(() => {
         dispatch(getBookDetail(bookId));
-    }, [showReview]);
-
+    }, [showReview,eachBook]);
+    /* el hecho de renderizar eachbook genera un loopeo, se agregó esta dependencia para que cuando se abre el sidebar se monte nuevamente
+    el componente de bookDetail */
+    
     return(
 <div className={style.mainContainer}>
         <div>
             <Navbar />
+            
             {eachBook?.map((el)=> {
-                console.log(el.image);
+       
                 return (
                     <div>
                     <div>
@@ -58,8 +84,25 @@ const BookDetail = (props) =>{
             <h1 className={style.title}>{el.title}</h1>
             <h2 className={style.subtitle}>Authors: {el.authors}</h2>
             <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
+            <div className='d-flex justify-content-start'>
+                <div className={style.container_price}>
             <h3 className={style.price}>${el.price}</h3>
-                    </div>
+                </div>
+            {counter > 0 &&  <button className="btn btn-secondary " onClick={handleRest}>-</button>    }    
+                    
+           {counter>0 && <input disabled className='input_add bg-light ms-1 border border-0' style={{width: '4%'}} value={counter} type='text'placeholder= {0} ></input>} 
+            {counter < stock && <button className="btn btn-secondary" onClick={handleClickAddCart}>+</button>    
+            }                
+        
+           
+          {!stock? <p>"Lo sentimos no tenemos stock de este libro"</p>: 
+              <button  type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart}>Add to cart</button>
+          
+          }          
+
+            </div>
+           
+                        </div>
                         </div>
                         <hr/>
                         <div className={style.buttonContainer}>
@@ -68,7 +111,7 @@ const BookDetail = (props) =>{
             { show && <p className={style.descriptionContent}>{el.description}</p>}
             <hr/>   
             <div >
-            <h3 className={style.subtitleReview}>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
+            <h3 className={style.subtitleReview}>{el?.Reviews?.length !==0 ? el?.Reviews.map(el=>{
                 return(
                     <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
                 )
@@ -83,7 +126,7 @@ const BookDetail = (props) =>{
                 <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
             </div>
             {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} handleShowReview={handleShowReview}/>}
-
+         
             </div>
             <Footer />
         </div>
