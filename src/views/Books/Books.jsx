@@ -44,9 +44,9 @@ export default function Books() {
     return (
         <div className='container bg-white text-black h-auto'>
             <Navbar />
-            <Link to='/cart'>
+            {/* <Link to='/cart'>
             <button>GO TO Cart</button>
-            </Link>
+            </Link> */}
             <Searchbar setCurrentPage={setCurrentPage} />
 
             <div className='d-flex mx-auto align-items-center justify-content-between' style={{ width: "80%", height: '50px', borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0", padding: '0 10px 0 7px' }}>
