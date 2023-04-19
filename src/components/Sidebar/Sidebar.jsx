@@ -40,15 +40,15 @@ export const Sidebar=({booksAdded, isOpen,onClose})=>{
                 <div class="offcanvas-body d-flex flex-column" className={style.sidebar}>
                   
                 <h2 class="offcanvas-title w-100" id="offcanvasDarkLabel">Cart <button className="btn btn-secondary rounded-3" onClick={onClose} >x</button></h2>
-                  {cart.length? <>
+                  {cart?.length? <>
                     {
-                      name.map((name,index)=>
+                      name?.map((name,index)=>
                       
                       <p key={index}>(1) {name}  <button  type="button" class="btn btn-dark "onClick={() => deleteThisBook(id[index])}>x</button> </p>  )
                     }
                
-                    <p>Products: {cart.length}</p>
-                    <h6>Total: U$S {price.length && price[0].reduce((a,b)=> Math.floor(Number(a)+Number(b)),0)}</h6>
+                    <p>Products: {cart?.length}</p>
+                    <h6>Total: U$S {price?.length && price[0]?.reduce((a,b)=> Math.floor(Number(a)+Number(b)),0)}</h6>
                     <Link to='/cart' className="btn btn-secondary">Comprar  </Link>
                     <button  type="button" class="btn btn-dark " onClick={handleClose}>vaciar carrito</button>
                   </> : <p>Empty cart</p>
