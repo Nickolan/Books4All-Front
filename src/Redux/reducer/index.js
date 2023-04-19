@@ -8,6 +8,9 @@ import {
   RESET_FILTERS,
   ADD_USER,
   DELETE_USER,
+  ADD_CART,
+  DELETE_ARTICLE,
+  DELETE_CART,
 } from "../actions";
 
 const initialState = {
@@ -16,6 +19,7 @@ const initialState = {
   reviews: [],
   images: [],
   bookDetail: [],
+  cart: [],
   filters: {
     category: "all",
     author: "all",
@@ -91,7 +95,7 @@ const rootReducer = (state = initialState, action) => {
             ? a.title.localeCompare(b.title)
             : b.title.localeCompare(a.title)
         ),
-        order: action.payload
+        order: action.payload,
       };
     case GET_IMAGES:
       return {
@@ -102,8 +106,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         books: state.allBooks,
-        filters: { category: 'all', author: 'all' }
-
+        filters: { category: "all", author: "all" },
       };
     case ADD_USER: {
       return {
@@ -117,6 +120,25 @@ const rootReducer = (state = initialState, action) => {
         profile: {},
       };
     }
+    case ADD_CART: {
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+    }
+
+    case DELETE_ARTICLE: {
+      return {
+        ...state,
+        cart: state.cart.filter((product) => {
+          return product.bookId !== action.payload;
+        }),
+      };
+    }
+    case DELETE_CART: {
+      return { ...state, cart: [] };
+    }
+
     default:
       return {
         ...state,

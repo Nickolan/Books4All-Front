@@ -1,5 +1,5 @@
-import './App.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./views/Home/Home";
 import About from "./views/About/About";
 import Books from "./views/Books/Books";
@@ -19,16 +19,16 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/books' element={<Books />} />
-        <Route path='/bookDetail/:bookId' element={<BookDetail />} />
-        <Route path='/events' element={<Events />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/profile' element={<Auth />} />
-        <Route path='/auth' element={<Auth />}/>
-        <Route path='/404' element={<Error />} />
-        <Route path='*' element={<Navigate to='/404' />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/bookDetail/:bookId" element={<BookDetail />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Auth />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/404" element={<Error />} />
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </div>
   );
