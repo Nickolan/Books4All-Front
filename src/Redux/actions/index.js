@@ -12,7 +12,7 @@ export const DELETE_USER = "DELETE_USER"
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
-    var info = await axios.get(`http://localhost:3001/books/${bookId}`);
+    var info = await axios.get(`/books/${bookId}`);
     return dispatch({
       type: GET_BOOK_DETAIL,
       payload: info.data,
@@ -22,7 +22,7 @@ export const getBookDetail = (bookId) => {
 
 export const getBooks = () => {
   return async function (dispatch) {
-    const apiData = await axios.get("http://localhost:3001/books");
+    const apiData = await axios.get("/books");
     console.log("action getBooks funcionando");
     return dispatch({ type: GET_BOOKS, payload: apiData.data });
   };
@@ -31,7 +31,7 @@ export const getBooks = () => {
 export const createReview = (payload) => {
   return async function (dispatch) {
     try {
-      var info = await axios.post(`http://localhost:3001/reviews`, payload);
+      var info = await axios.post(`/reviews`, payload);
       console.log(info)
       return info;
     } catch (error) {
@@ -45,7 +45,7 @@ export function getNameBooks(name) {
   try {
     return async function (dispatch) {
       var json = await axios.get(
-        "http://localhost:3001/books/?queryBook=" + name
+        "/books/?queryBook=" + name
       );
       return dispatch({
         type: "GET_NAME_BOOKS",
@@ -78,7 +78,7 @@ export const resetFilters = () => {
 export const getImages = () => {
   try {
     return async function (dispatch) {
-      var json = await axios.get("http://localhost:3001/books");
+      var json = await axios.get("/books");
       return dispatch({
         type: GET_IMAGES,
         payload: json.data,
