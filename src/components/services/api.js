@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const url = "http://localhost:3001/api";
+
+export const setHeaders = () => {
+  const headers = {
+    headers: {
+      "x-auth-token": localStorage.getItem("token"),
+    },
+  };
+
+  return headers;
+};
+
 // const apiKey= "AIzaSyDfSGq9pn2rOO_VgI9pMtW07f8LAv_kI28";
 
 // const instance = axios.create({

@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/NavBar/Navbar";
-import PaymentMethod from "../../components/PaymentMethod/PaymentMethod";
+
 
 
 
@@ -11,7 +11,6 @@ export default function Events(){
         <div className='container-xl bg-white'>
             <Navbar/>
             <h1>Esta es la ruta Events</h1>
-            <PaymentMethod />
            </div>
     )
 }

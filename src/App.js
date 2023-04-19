@@ -9,6 +9,8 @@ import Profile from './views/Profile/Profile';
 import Error from './views/Error/Error';
 import { BookDetail } from './views/BookDetail/BookDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CheckoutSuccess from './components/CheckoutSuccess/CheckoutSuccess';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path='/bookDetail/:bookId' element={<BookDetail />} />
         <Route path='/events' element={<Events />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout-success' element={<CheckoutSuccess />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
