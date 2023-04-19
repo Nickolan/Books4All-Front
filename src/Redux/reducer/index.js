@@ -9,6 +9,8 @@ import {
   ADD_USER,
   DELETE_USER,
   ADD_CART,
+  DELETE_ARTICLE,
+  DELETE_CART,
 } from "../actions";
 
 const initialState = {
@@ -124,6 +126,19 @@ const rootReducer = (state = initialState, action) => {
         cart: [...state.cart, action.payload],
       };
     }
+
+    case DELETE_ARTICLE: {
+      return {
+        ...state,
+        cart: state.cart.filter((product) => {
+          return product.bookId !== action.payload;
+        }),
+      };
+    }
+    case DELETE_CART: {
+      return { ...state, cart: [] };
+    }
+
     default:
       return {
         ...state,

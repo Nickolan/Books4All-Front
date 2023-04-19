@@ -10,6 +10,8 @@ export const GET_IMAGES = "GET_IMAGES";
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 export const ADD_CART = "ADD_CART";
+export const DELETE_ARTICLE = "DELETE_ARTICLE";
+export const DELETE_CART = "DELETE_CART";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -98,4 +100,12 @@ export const deleteUser = () => {
 
 export const addToCart = (bookId) => {
   return { type: ADD_CART, payload: bookId };
+};
+
+export const deleteOneBook = (bookId) => {
+  return { type: DELETE_ARTICLE, payload: bookId };
+};
+
+export const deleteCart = () => {
+  return { type: DELETE_CART };
 };

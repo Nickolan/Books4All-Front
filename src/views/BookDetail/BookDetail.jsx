@@ -17,8 +17,10 @@ const BookDetail = (props) =>{
     const { bookId } = useParams();
     
     const eachBook = useSelector((state) => state.bookDetail)
+    const[bookState, setBookState]= useState(false)
+    const bookName= eachBook.map((book)=>book.title)
     const cart = useSelector((state) => state.cart)    
-   const stock=eachBook.map(book=>book.stock)
+    const stock=eachBook.map(book=>book.stock)
 
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
@@ -36,30 +38,40 @@ const BookDetail = (props) =>{
     const handleClick = () => {
         navigate(-1);
       }
-    const handleClickAddCart=()=>{
-        dispatch(addToCart(bookId))
- 
-    }
 
-    const handleAdd=()=>{
-    setCounter(++counter)
+      let bookInCart={}
+
+    const handleClickAddCart=(event)=>{
+
+        bookInCart={
+            'bookId':bookId,
+            'bookName':bookName.map(n=>n),
+            'quantity':Number(bookId.length),
+            'price': (eachBook?.map(e=>e.price))
+            
+        }
+        dispatch(addToCart(bookInCart))
+ 
     }
 
     const handleRest=()=>{
         setCounter(--counter)
     }
 
-
+    
     useEffect(() => {
         dispatch(getBookDetail(bookId));
-    }, [showReview]);
-
+    }, [showReview,eachBook]);
+    /* el hecho de renderizar eachbook genera un loopeo, se agregó esta dependencia para que cuando se abre el sidebar se monte nuevamente
+    el componente de bookDetail */
+    
     return(
 <div className={style.mainContainer}>
         <div>
             <Navbar />
+            
             {eachBook?.map((el)=> {
-                console.log(el.image);
+       
                 return (
                     <div>
                     <div>
@@ -75,18 +87,12 @@ const BookDetail = (props) =>{
             <div className='d-flex justify-content-start'>
                 <div className={style.container_price}>
             <h3 className={style.price}>${el.price}</h3>
-
                 </div>
             {counter > 0 &&  <button className="btn btn-secondary " onClick={handleRest}>-</button>    }    
                     
            {counter>0 && <input disabled className='input_add bg-light ms-1 border border-0' style={{width: '4%'}} value={counter} type='text'placeholder= {0} ></input>} 
-            {
-               counter < stock &&
-               <button className="btn btn-secondary" onClick={handleAdd}>+</button>
-
-           
-            }         
-         
+            {counter < stock && <button className="btn btn-secondary" onClick={handleClickAddCart}>+</button>    
+            }                
         
            
           {!stock? <p>"Lo sentimos no tenemos stock de este libro"</p>: 
@@ -94,7 +100,6 @@ const BookDetail = (props) =>{
           
           }          
 
-          
             </div>
            
                         </div>
@@ -106,7 +111,7 @@ const BookDetail = (props) =>{
             { show && <p className={style.descriptionContent}>{el.description}</p>}
             <hr/>   
             <div >
-            <h3 className={style.subtitleReview}>{el.Reviews.length !==0 ? el.Reviews.map(el=>{
+            <h3 className={style.subtitleReview}>{el?.Reviews?.length !==0 ? el?.Reviews.map(el=>{
                 return(
                     <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
                 )
