@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Auth from './views/Auth/Auth';
 axios.defaults.baseURL = "https://books4all-back-production-0533.up.railway.app/";
+// axios.defaults.baseURL = "http://localhost:3001/";
 
 
 function App() {
