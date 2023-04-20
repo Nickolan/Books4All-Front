@@ -1,7 +1,5 @@
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-//import NavBar
-//import Footer
 import {getBookDetail, addToCart} from '../../Redux/actions'
 import {useEffect, useState} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
@@ -18,9 +16,12 @@ const BookDetail = (props) =>{
     
     const eachBook = useSelector((state) => state.bookDetail)
     const[bookState, setBookState]= useState(false)
-    const bookName= eachBook.map((book)=>book.title)
-    const cart = useSelector((state) => state.cart)    
-    const stock=eachBook.map(book=>book.stock)
+    console.log(eachBook)
+    console.log(bookState)
+    const bookName= eachBook?.map((book)=>book.title)
+    const cart = useSelector((state) => state.cart)
+    console.log(cart)    
+    const stock=eachBook?.map(book=>book.stock)
 
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
@@ -45,7 +46,8 @@ const BookDetail = (props) =>{
 
         bookInCart={
             'bookId':bookId,
-            'bookName':bookName.map(n=>n),
+            'image':(eachBook?.map(e=>e.image)),
+            'bookName':bookName?.map(n=>n),
             'quantity':Number(bookId.length),
             'price': (eachBook?.map(e=>e.price))
             
@@ -61,7 +63,7 @@ const BookDetail = (props) =>{
     
     useEffect(() => {
         dispatch(getBookDetail(bookId));
-    }, [showReview,eachBook]);
+    }, [showReview,bookId,dispatch]);
     /* el hecho de renderizar eachbook genera un loopeo, se agregó esta dependencia para que cuando se abre el sidebar se monte nuevamente
     el componente de bookDetail */
     
