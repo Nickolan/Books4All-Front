@@ -1,19 +1,11 @@
-
-// import { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/Navbar";
-// import { fetchData } from "../../components/services/api";
-import { ShoppingCartButton } from "../../components/ShoppingCartButton/ShoppingCartButton";
 import {useSelector, useDispatch}from 'react-redux'
 import { deleteOneBook } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 
 
 export default function Cart(){
-//   const [books, setBooks] = useState({})
-//   const fetchBooks = async ()=>{
-//     const booksArray = await fetchData();
-//     setBooks(booksArray);
-//   }
+
     const dispatch= useDispatch()
     const cart= useSelector(state=>state.cart)
     const name= cart.map((book)=>book.bookName)
@@ -26,15 +18,6 @@ export default function Cart(){
         dispatch(deleteOneBook(id))
       }
 
-//   useEffect(()=>
-//     {
-//       try{
-//       fetchBooks();
-//       }catch (error){
-//         console.log(error)
-//     }
-//     },[]
-//   );
     return(
         <>
         <div className='container-xl bg-white'>

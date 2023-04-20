@@ -20,10 +20,21 @@ function Card({ name, author, image, categories, bookId, price }) {
         }
     }
 
-    const handleAddToCart = () =>{
-        dispatch(addToCart({name, author, image, categories, bookId, price}))
+    const handleClickAddCart = (event) => {
+        function generarIdUnico() {
+            return Math.random().toString(36).substring(2) + Date.now().toString(36);
+        }
+
+        const bookInCart = {
+            id: generarIdUnico(),
+            bookId: bookId,
+            quantity: 1,
+        }
+        dispatch(addToCart(bookInCart))
+
     }
 
+    
     return (
 
         <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "350px", padding: "10px" }}>
@@ -68,7 +79,7 @@ function Card({ name, author, image, categories, bookId, price }) {
                     </div>
                 </div>
             </Link>
-            <button onClick={handleAddToCart} > <BsCartPlus /> </button>
+            <button onClick={handleClickAddCart} > <BsCartPlus /> </button>
         </div>
     )
 }
