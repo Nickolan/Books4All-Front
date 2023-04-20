@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
 import style from '../Card/Card.module.css'
 
-function Card({ name, author, image, categories, bookId }) {
+import { BsCartPlus } from 'react-icons/bs';
+import { addToCart } from "../../Redux/actions";
+
+function Card({ name, author, image, categories, bookId, price }) {
     const dispatch = useDispatch();
     const [isFav, setIsFav] = useState(false)
     // add useSelector in initialState with myFavorites
@@ -15,6 +18,10 @@ function Card({ name, author, image, categories, bookId }) {
         } else {
             setIsFav(true);
         }
+    }
+
+    const handleAddToCart = () =>{
+        dispatch(addToCart({name, author, image, categories, bookId, price}))
     }
 
     return (
@@ -61,6 +68,7 @@ function Card({ name, author, image, categories, bookId }) {
                     </div>
                 </div>
             </Link>
+            <button onClick={handleAddToCart} > <BsCartPlus /> </button>
         </div>
     )
 }

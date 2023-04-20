@@ -15,6 +15,7 @@ function Cards({books}) {
                             author={book.authors}
                             image={book.image}
                             categories={book.categories}
+                            price={book.price}
                         />
                     </div>
                 )

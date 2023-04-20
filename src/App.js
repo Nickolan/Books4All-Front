@@ -11,7 +11,9 @@ import { BookDetail } from "./views/BookDetail/BookDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Auth from "./views/Auth/Auth";
-/* axios.defaults.baseURL = "https://books4all-back-production-0533.up.railway.app/"; */
+import CartDetail from "./components/CartDetail/CartDetail";
+axios.defaults.baseURL =
+  "https://books4all-back-production-0533.up.railway.app/";
 // axios.defaults.baseURL = "http://localhost:3001/";
 axios.defaults.baseURL = "http://localhost:3001/";
 
@@ -24,7 +26,7 @@ function App() {
         <Route path="/books" element={<Books />} />
         <Route path="/bookDetail/:bookId" element={<BookDetail />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<CartDetail />} />
         <Route path="/profile" element={<Auth />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/404" element={<Error />} />
