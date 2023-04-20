@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
-
+import { useAuth0} from "@auth0/auth0-react";
+import axios from "axios";
 
 export default function Home(){
+    const [post, setPost] = useState(false)
+    const {  user, isAuthenticated } = useAuth0();
+    if(isAuthenticated && !post ){
+        axios.post('http://localhost:3001/users', user)
+        setPost(true)
+    }
+    if(!isAuthenticated && post){
+        setPost(false)
+    }
     return(
     <div >
     

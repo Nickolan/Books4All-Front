@@ -10,11 +10,13 @@ import Footer from '../../components/Footer/Footer';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 const BookDetail = (props) =>{
     const dispatch =  useDispatch();
     const { bookId } = useParams();
+    const { loginWithRedirect, isAuthenticated } = useAuth0();
     
     const eachBook = useSelector((state) => state.bookDetail)
     const bookName= eachBook?.map((book)=>book.title) 
@@ -33,6 +35,10 @@ const BookDetail = (props) =>{
         setShow(!show)
     }
     const handleShowReview = () => {
+        
+        !isAuthenticated? loginWithRedirect({
+            redirectUri: window.location.origin
+        }):
         setShowReview(!showReview)
     }
 
@@ -62,7 +68,7 @@ const BookDetail = (props) =>{
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [bookId, dispatch]);
+},  [bookId, dispatch, eachBook]);
 
     
     return(

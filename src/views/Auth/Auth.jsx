@@ -7,8 +7,10 @@ import style from '../../components/ReviewForm/ReviewFormPage.module.css'
 import { useAuth0 } from "@auth0/auth0-react";
 
 
+
 export default function Auth(){
-    const { isLoading, error } = useAuth0();
+    const { isLoading, error, user, isAuthenticated } = useAuth0();
+   
 
 
         return(
