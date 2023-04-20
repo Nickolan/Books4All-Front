@@ -22,16 +22,17 @@ export const Sidebar=({booksAdded, isOpen,onClose})=>{
       dispatch(deleteCart())
     }
     const deleteThisBook=(id)=>{
-      dispatch(deleteOneBook(id))
+      if(id){
+        dispatch(deleteOneBook(id))
+      }
       
     }
-
-
-   
+/*    
+Este useEffect generaba un bug en la app que ocultaba el componente detail o hacía que se loopeara
     useEffect(()=>{
         dispatch(getBookDetail(cart))      
-    },[]) 
-
+    },[dispatch]) 
+ */
     return(     
        <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}  >
                 <div class="offcanvas-header">

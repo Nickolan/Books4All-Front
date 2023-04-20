@@ -18,13 +18,12 @@ const BookDetail = (props) =>{
     
     const eachBook = useSelector((state) => state.bookDetail)
     const bookName= eachBook?.map((book)=>book.title) 
-    const[bookState, setBookState]= useState(eachBook) 
     const cart = useSelector((state) => state.cart)   
     const stock=eachBook?.map(book=>book.stock)
-
-
+    
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
+    const [showBook, setShowBook] = useState(false);
   
     let [counter, setCounter]= useState(0)
 
@@ -54,26 +53,17 @@ const BookDetail = (props) =>{
         dispatch(addToCart(bookInCart))
     }
 
-    
-    const bookMemo= useMemo(() =>{
-        return eachBook
-    },[eachBook])
-
-
-
     const handleRest=()=>{
         setCounter(--counter)
     }
 
     
     useEffect(() => {
-        dispatch(getBookDetail(bookId));
-    }, [showReview,bookMemo]);
+        if (bookId) {
+            dispatch(getBookDetail(bookId));
+        }
+},  [bookId, dispatch]);
 
-
-
-
-    
     
     return(
 <div className={style.mainContainer}>

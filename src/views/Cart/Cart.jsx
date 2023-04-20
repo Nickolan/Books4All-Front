@@ -43,25 +43,13 @@ export default function Cart(){
         <Link to='/books' >
             <img class="BookDetail_backButton__i1i5t" src="https://res.cloudinary.com/dvldakcin/image/upload/v1681620387/Countries/back_lblp4n.png"/>
        </Link>
-
         </div>
             <div className="flex-row mt-5 border rounded p-4 w-50 align-content-center">
-          
-       
-              
-               {
-                name.map((name,index)=>
-                  
-                <p key={index}>(1) {name} <button  type="button" class="btn btn-dark " onClick={()=>handleClose(id[index])}>X</button></p>
-                )
-            } 
-                         {/* <h5>{JSON.stringify(books)}</h5> */}
-             <hr />
+            {name.map((name,index)=><p key={index}>(1) {name} <button  type="button" class="btn btn-dark " onClick={()=>handleClose(id[index])}>X</button></p>)} 
+           <hr />
              <h6 className="p-2 w-25 mt-2">Total: U$S {price.length && price[0].reduce((a,b)=> Math.floor(Number(a)+Number(b)),0)}</h6>
-         
-            </div>
+          </div>
         </div>
-        
         </>
     )
 }
