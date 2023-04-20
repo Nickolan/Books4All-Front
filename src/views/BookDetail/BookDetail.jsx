@@ -1,7 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-//import NavBar
-//import Footer
 import { getBookDetail, addToCart } from '../../Redux/actions'
 import { useEffect, useState, useMemo } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';

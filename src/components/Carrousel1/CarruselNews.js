@@ -46,6 +46,7 @@ export default function Carrusel1(props) {
             return (
               <div className="slider-card ">
                 {images.map((img, index) => (
+
                   <Link to={`/bookDetail/${bookId[index]}`}>
                     <img
                       className="slider-card w-50"

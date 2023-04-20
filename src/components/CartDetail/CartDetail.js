@@ -4,11 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../NavBar/Navbar";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
+import Footer from "../Footer/Footer";
+import { PayButton } from "../PayButton/PayButton";
+
 // import { removeBookFromCart } from "../actions/cartActions";
+
 
 export default function CartDetail(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  console.log(cart)
 
   let totalAmount = cart.reduce(
     (accumulator, book1) => accumulator + Number(book1.subtotal), 0);
@@ -35,13 +40,14 @@ export default function CartDetail(props) {
 
 
   return (
+    <div className='container-xl bg-white'>
     <div className="cart-container">
 
       <Navbar />
 
-      <h1 className='titleCarrito'>Carrito de compras</h1>
+      <h1 className='titleCarrito'>Cart</h1>
       {cart.length === 0 ? (
-        <p>No hay libros en el carrito</p>
+        <p>There are no books in your shopping cart</p>
       ) : (
         <>
           <div className="books-container">
@@ -76,14 +82,16 @@ export default function CartDetail(props) {
               ))}
           </div>
           <div className="cart-summary">
-            <h2>Resumen del carrito</h2>
-            <p>Cantidad de libros: {cart.length}</p>
-            <p>Total de copias: {totalCopy}</p>
-            <p>Total a pagar: ${totalAmount} USD</p>
-            <button>Comprar</button>
+            <h2>Cart Detail</h2>
+            <p>Titles Total Amount: {cart.length}</p>
+            <p>Books Total Amount: {totalCopy}</p>
+            <p>Total Due: ${totalAmount} USD</p>
+            <PayButton cart={cart}>Checkout</PayButton>
           </div>
         </>
       )}
+    </div>
+    <Footer />
     </div>
   );
 }
