@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
@@ -15,7 +14,6 @@ export default function Home(){
     const dispatch= useDispatch()
     const cart=useSelector(state=>state.cart)
    
-    
     const [post, setPost] = useState(false)
     const {  user, isAuthenticated } = useAuth0();
     if(isAuthenticated && !post ){
