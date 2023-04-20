@@ -4,7 +4,6 @@
     font-weight: bold; /* si deseas que el título tenga un peso de letra más fuerte */
     text-align: center; /* centrar el texto */
     color: #333; /* ajusta el color según tu preferencia */
-    text-transform: uppercase; /* si deseas que el título se muestre en mayúsculas */
     letter-spacing: 1px; /* si deseas aumentar el espaciado entre letras */
     margin-top: 20px; /* ajusta el margen superior según tu necesidad */
     margin-bottom: 40px; /* ajusta el margen inferior según tu necesidad */
@@ -46,8 +45,8 @@
     margin-right: 15px; /* añade un margen a la derecha para separarlos de la imagen */
   }
   .cart-summary {
-    background-color: #f2f2f2;
-    border: 2px solid #ccc;
+    background-color: #fdfcfc;
+    border: 2px solid #817878;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
