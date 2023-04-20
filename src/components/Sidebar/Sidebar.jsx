@@ -49,9 +49,10 @@ export const Sidebar=({booksAdded, isOpen,onClose})=>{
                
                     <p>Products: {cart?.length}</p>
                     <h6>Total: U$S {price?.length && price[0]?.reduce((a,b)=> Math.floor(Number(a)+Number(b)),0)}</h6>
-                    <Link to='/cart' className="btn btn-secondary">Comprar  </Link>
-                    <button  type="button" class="btn btn-dark " onClick={handleClose}>vaciar carrito</button>
-                  </> : <p>Empty cart</p>
+                    <Link to='/books' className="btn btn-secondary">Add items</Link>
+                    <Link to='/cart' className="btn btn-secondary">Checkout</Link>
+                    <button  type="button" class="btn btn-dark " onClick={handleClose}>Clear ShopCart</button>
+                  </> : <p>Your cart is empty</p>
                   }
                   
                </div>                

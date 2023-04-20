@@ -3,6 +3,8 @@ import "./CartDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../NavBar/Navbar";
 import Footer from "../Footer/Footer";
+import { Link } from "react-router-dom";
+import { PayButton } from "../PayButton/PayButton";
 
 // import { removeBookFromCart } from "../actions/cartActions";
 
@@ -48,8 +50,9 @@ export default function CartDetail(props) {
           <div className="cart-summary">
             <h2>Order Summary</h2>
             <p>Books Quantity: {cart.length}</p>
-            <p>Total: ${totalAmount} USD</p>
-            <button>Checkout</button>
+            <p>Total due: ${totalAmount} USD</p>
+            <Link to='/books' className="btn btn-secondary">Add items</Link>
+            <PayButton cart={cart}/>
           </div>
         </>
       )}
