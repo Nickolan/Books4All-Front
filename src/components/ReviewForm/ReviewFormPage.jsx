@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { createReview } from "../../Redux/actions";
 import style from '../ReviewForm/ReviewFormPage.module.css'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const ReviewFormPage = ({id, handleShowReview, reviews}) =>{
 
 const dispatch = useDispatch();
 
 const navigate= useNavigate();
+const { user, isAuthenticated } = useAuth0();
 
 
 const [form, setForm] = useState({
-  user_name: '',
+  user_name: user.nickname,
   body: '',
   book_id: id,
   rating: '',
@@ -37,14 +39,6 @@ setForm({...form, [property]:value});
 const validate = (form) => {
   let errors = {};
   
-  if (!form.user_name) {
-    errors.user_name = 'Please include your name or username';
-  }
-
-  if (!form.email) {
-    errors.email = 'Please include your email';
-  }
-
   if (form.rating < 1 || form.rating > 5) {
     errors.rating = 'Rating must be between one and five stars';
   }
@@ -93,18 +87,9 @@ const submitHandler = (event) =>{
                 </div>
                 <div className='container-sm .bg-light'>
                 <div className='container-sm .bg-light'>
-                <label htmlFor="user_name" class="font-weight-bold"> Your Name </label>
-                <hr/>
-                <input className={errors.user_name && style.error} type='text' value={form.user_name} onChange={changeHandler} name='user_name' />
-                <br />
-                <span>{errors.user_name? errors.user_name : ""}</span> 
+               
                 </div>
                 <div className='container-sm .bg-light'> 
-                <label htmlFor="email" class="font-weight-bold"> Your email address </label>
-                <hr/>
-                <input className={errors.email && style.error} type='text' value={form.email} onChange={changeHandler} name='email' />
-                <br />
-                <span>{errors.email? errors.email : ""}</span> 
                 </div>
                 <div className='container-sm .bg-light'>
                 <label htmlFor="rating" class="font-weight-bold"> Rating </label>
