@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
+import { useDispatch } from "react-redux";
+import { getBooks } from "../../Redux/actions";
+
+
+
 
 
 export default function Home(){
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getBooks())})
     return(
     <div >
     

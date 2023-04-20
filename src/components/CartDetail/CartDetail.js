@@ -5,6 +5,8 @@ import Navbar from "../NavBar/Navbar";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
 import Footer from "../Footer/Footer";
+import { PayButton } from "../PayButton/PayButton";
+
 // import { removeBookFromCart } from "../actions/cartActions";
 
 
@@ -80,11 +82,11 @@ export default function CartDetail(props) {
               ))}
           </div>
           <div className="cart-summary">
-            <h2>Resumen del carrito</h2>
-            <p>Cantidad de libros: {cart.length}</p>
-            <p>Total de copias: {totalCopy}</p>
-            <p>Total a pagar: ${totalAmount} USD</p>
-            <button>Comprar</button>
+            <h2>Cart Detail</h2>
+            <p>Titles Total Amount: {cart.length}</p>
+            <p>Books Total Amount: {totalCopy}</p>
+            <p>Total Due: ${totalAmount} USD</p>
+            <PayButton cart={cart}>Checkout</PayButton>
           </div>
         </>
       )}
