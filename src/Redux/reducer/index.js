@@ -11,6 +11,8 @@ import {
   ADD_CART,
   DELETE_ARTICLE,
   DELETE_CART,
+  ADD_ONE_COPY,
+  DELETE_ONE_COPY,
 } from "../actions";
 
 const initialState = {
@@ -121,23 +123,75 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case ADD_CART: {
+      const isItem = state.cart.find(item => item.bookId === action.payload.bookId);
+      const bookById = state.allBooks.find(book => book.id === action.payload.bookId)
+      let addItem = {}
+      if (!isItem) {
+
+        const newItem = {
+          id: action.payload.id,
+          bookId: action.payload.bookId,
+          title: bookById.title,
+          categories:bookById.categories,
+          author: bookById.authors,
+          image: bookById.image,
+          price: bookById.price,
+          subtotal: (bookById.price * action.payload.quantity).toFixed(2),
+          quantity: action.payload.quantity
+        }
+        addItem = newItem
+      } else {
+        const updatedItem = {
+          ...isItem,
+          quantity: isItem.quantity + action.payload.quantity,
+          subtotal: ((isItem.quantity + action.payload.quantity) * bookById.price).toFixed(2)
+        }
+        addItem = updatedItem
+      }
+
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: [...state.cart.filter(item => item.bookId !== action.payload.bookId), addItem], // Filtramos el elemento antiguo y agregamos el nuevo
       };
     }
 
+   
     case DELETE_ARTICLE: {
       return {
         ...state,
         cart: state.cart.filter((product) => {
-          return product.bookId !== action.payload;
+          return product.id !== action.payload;
         }),
       };
     }
     case DELETE_CART: {
       return { ...state, cart: [] };
     }
+
+    case ADD_ONE_COPY:
+      const item = state.cart.find(item => item.bookId === action.payload)
+      const updatedItem = {
+        ...item,
+        quantity: item.quantity + 1,
+        subtotal: ((item.quantity + 1) * item.price).toFixed(2)
+      }
+      let uptateItem = updatedItem
+      return {
+        ...state,
+        cart: [...state.cart.filter(item => item.bookId !== action.payload), uptateItem]
+      }
+    case DELETE_ONE_COPY:
+      const item2 = state.cart.find(item => item.bookId === action.payload)
+      const updatedItem2 = {
+        ...item2,
+        quantity: item2.quantity - 1,
+        subtotal: ((item2.quantity - 1) * item2.price).toFixed(2)
+      }
+      let uptateItem2 = updatedItem2
+      return {
+        ...state,
+        cart: [...state.cart.filter(item => item.bookId !== action.payload), uptateItem2]
+      }
 
     default:
       return {

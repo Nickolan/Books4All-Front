@@ -1,20 +1,18 @@
-
-.sidebar{
+.sidebar {
     position: fixed;
-    top:10px;   
+    top: 10px;
     left: -15vw;
-
+    right: 0;
     height: 100vh !important;
     width: 20vw;
     background-color: gray;
     padding: 2rem;
     z-index: 1;
-    height: 100vh; 
-    background-color:rgba(20, 20, 20, 0.950);
+    height: 100vh;
+    background-color: rgba(20, 20, 20, 0.950);
     font-family: 'Quicksand', sans-serif;
     text-align: center;
-    color: white;
+    color: black;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.836);
-    
- }
 
+}
