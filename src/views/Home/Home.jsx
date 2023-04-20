@@ -25,9 +25,8 @@ export default function Home(){
     }
 
     useEffect(()=>{
-        setCart('cart', cart)
         dispatch(getBooks())
-    },[])
+    },[dispatch])
 
     return(
     <div >

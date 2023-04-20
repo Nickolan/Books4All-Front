@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetail, addToCart } from '../../Redux/actions'
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
@@ -9,7 +9,7 @@ import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { setCart,getCart } from '../../Redux/actions/localStorage';
+import { setCart } from '../../Redux/actions/localStorage';
 
 
 const BookDetail = (props) => {
