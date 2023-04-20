@@ -10,10 +10,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckoutSuccess from './components/CheckoutSuccess/CheckoutSuccess';
 import axios from 'axios';
 import Auth from './views/Auth/Auth';
+import "bootstrap/dist/css/bootstrap.min.css";
 import CartDetail from "./components/CartDetail/CartDetail";
-axios.defaults.baseURL = "https://books4all-back-production-0533.up.railway.app/";
+// axios.defaults.baseURL =
+//   "https://books4all-back-production-0533.up.railway.app/";
 // axios.defaults.baseURL = "http://localhost:3001/";
-
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   return (

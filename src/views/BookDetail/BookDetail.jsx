@@ -1,7 +1,7 @@
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getBookDetail, addToCart} from '../../Redux/actions'
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useMemo} from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
@@ -15,16 +15,14 @@ const BookDetail = (props) =>{
     const { bookId } = useParams();
     
     const eachBook = useSelector((state) => state.bookDetail)
-    const[bookState, setBookState]= useState(false)
-    console.log(eachBook)
-    console.log(bookState)
-    const bookName= eachBook?.map((book)=>book.title)
-    const cart = useSelector((state) => state.cart)
-    console.log(cart)    
+    const bookName= eachBook?.map((book)=>book.title) 
+    const cart = useSelector((state) => state.cart)   
     const stock=eachBook?.map(book=>book.stock)
-
+    
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
+    const [showBook, setShowBook] = useState(false);
+  
     let [counter, setCounter]= useState(0)
 
     const navigate = useNavigate()
@@ -43,17 +41,14 @@ const BookDetail = (props) =>{
       let bookInCart={}
 
     const handleClickAddCart=(event)=>{
-
         bookInCart={
             'bookId':bookId,
-            'image':(eachBook?.map(e=>e.image)),
-            'bookName':bookName?.map(n=>n),
-            'quantity':Number(bookId.length),
+            'bookName':bookName?.map(n=>n) ,
+            'quantity':Number(bookId.length) , 
             'price': (eachBook?.map(e=>e.price))
             
         }
         dispatch(addToCart(bookInCart))
- 
     }
 
     const handleRest=()=>{
@@ -62,10 +57,11 @@ const BookDetail = (props) =>{
 
     
     useEffect(() => {
-        dispatch(getBookDetail(bookId));
-    }, [showReview,bookId,dispatch]);
-    /* el hecho de renderizar eachbook genera un loopeo, se agregó esta dependencia para que cuando se abre el sidebar se monte nuevamente
-    el componente de bookDetail */
+        if (bookId) {
+            dispatch(getBookDetail(bookId));
+        }
+},  [bookId, dispatch]);
+
     
     return(
 <div className={style.mainContainer}>
@@ -113,7 +109,7 @@ const BookDetail = (props) =>{
             { show && <p className={style.descriptionContent}>{el.description}</p>}
             <hr/>   
             <div >
-            <h3 className={style.subtitleReview}>{el?.Reviews?.length !==0 ? el?.Reviews.map(el=>{
+            <h3 className={style.subtitleReview}>{el?.Reviews?.length !==0 ? el?.Reviews?.map(el=>{
                 return(
                     <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating}/>
                 )
