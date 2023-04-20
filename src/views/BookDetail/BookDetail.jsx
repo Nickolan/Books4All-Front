@@ -69,7 +69,7 @@ const BookDetail = (props) => {
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [bookId, dispatch, eachBook]);
+},  [bookId, dispatch]);
 
 
     return (
