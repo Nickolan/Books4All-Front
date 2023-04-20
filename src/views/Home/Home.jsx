@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
@@ -6,17 +6,15 @@ import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0} from "@auth0/auth0-react";
 import axios from "axios";
-import { getBooks } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
+import { getBooks } from "../../Redux/actions";
+
 
 
 export default function Home(){
-
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
     useEffect(() => {
-    dispatch(getBooks())},[])
-
+    dispatch(getBooks())},[dispatch])
     const [post, setPost] = useState(false)
     const {  user, isAuthenticated } = useAuth0();
     if(isAuthenticated && !post ){
