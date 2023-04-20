@@ -9,7 +9,7 @@ import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { setCart } from '../../Redux/actions/localStorage';
+import { setCart,getCart } from '../../Redux/actions/localStorage';
 
 
 const BookDetail = (props) => {
@@ -18,8 +18,10 @@ const BookDetail = (props) => {
     const { loginWithRedirect, isAuthenticated } = useAuth0();
     
     const eachBook = useSelector((state) => state.bookDetail)
+
     const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
+    setCart('cart', cart)
     const stock = eachBook?.map(book => book.stock)
 
     const [show, setShow] = useState(false);
@@ -58,9 +60,8 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-            setCart('cart', cart)
-        
-    
+                
+       
 
     }
 
@@ -70,7 +71,7 @@ const BookDetail = (props) => {
 
 
     useEffect(() => {
-        setCart('cart', cart)
+         
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }

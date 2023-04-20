@@ -22,7 +22,7 @@ const initialState = {
   reviews: [],
   images: [],
   bookDetail: [],
-  cart: [] || getCart("cart"),
+  cart: getCart("cart") || [],
   filters: {
     category: "all",
     author: "all",

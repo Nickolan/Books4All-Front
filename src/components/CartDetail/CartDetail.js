@@ -6,13 +6,14 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
 import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
+import { setCart } from "../../Redux/actions/localStorage";
 
 // import { removeBookFromCart } from "../actions/cartActions";
 
 export default function CartDetail(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
+  setCart("cart", cart);
 
   let totalAmount = cart.reduce(
     (accumulator, book1) => accumulator + Number(book1.subtotal),
