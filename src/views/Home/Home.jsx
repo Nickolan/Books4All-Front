@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
@@ -7,8 +7,15 @@ import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0} from "@auth0/auth0-react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooks } from "../../Redux/actions";
+import { setCart } from "../../Redux/actions/localStorage";
 
 export default function Home(){
+    const dispatch= useDispatch()
+    const cart=useSelector(state=>state.cart)
+   
+    
     const [post, setPost] = useState(false)
     const {  user, isAuthenticated } = useAuth0();
     if(isAuthenticated && !post ){
@@ -18,6 +25,12 @@ export default function Home(){
     if(!isAuthenticated && post){
         setPost(false)
     }
+
+    useEffect(()=>{
+        setCart('cart', cart)
+        dispatch(getBooks())
+    },[])
+
     return(
     <div >
     

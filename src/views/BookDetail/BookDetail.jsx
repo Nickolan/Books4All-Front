@@ -9,6 +9,7 @@ import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { setCart } from '../../Redux/actions/localStorage';
 
 
 const BookDetail = (props) => {
@@ -57,6 +58,9 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
+            setCart('cart', cart)
+        
+    
 
     }
 
@@ -66,10 +70,11 @@ const BookDetail = (props) => {
 
 
     useEffect(() => {
+        setCart('cart', cart)
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [bookId, dispatch, eachBook]);
+},  [bookId, dispatch]);
 
 
     return (
