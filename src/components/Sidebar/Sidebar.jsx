@@ -1,62 +1,90 @@
 
-
-import {useEffect, useState } from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import {getBookDetail,deleteOneBook, deleteCart } from "../../Redux/actions"
-import { Link } from "react-router-dom"
-import { countRepes } from "./countEqualsProducts"
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy } from "../../Redux/actions"
+import { useNavigate } from "react-router-dom"
 import style from '../Sidebar/Sidebar.module.css'
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { BsTrash } from 'react-icons/bs';
 
-export const Sidebar=({booksAdded, isOpen,onClose})=>{
-    const cart= useSelector(state=>state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
+export const Sidebar = ({ onClose, isOpen }) => {
+  const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
+  console.log(cart);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-    const dispatch= useDispatch()
-    const name= cart.map((book)=>book.bookName)
-    const id= cart.map((book)=>book.bookId)
-    const noRepeatName= [...new Set(...name)]
-    const price= []
-    const cartPrice= cart.map((book)=>((book.price)))
-    price.push(cartPrice)
+  // función para vaciar por completo el cart
+  const handleClose = () => {
+    dispatch(deleteCart())
+  }
 
-    const handleClose=()=>{
-      dispatch(deleteCart())
-    }
-    const deleteThisBook=(id)=>{
-      if(id){
-        dispatch(deleteOneBook(id))
-      }
-      
-    }
-/*    
-Este useEffect generaba un bug en la app que ocultaba el componente detail o hacía que se loopeara
-    useEffect(()=>{
-        dispatch(getBookDetail(cart))      
-    },[dispatch]) 
- */
-    return(     
-       <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}  >
-                <div class="offcanvas-header">
-                
+  //Elimina un elemento del carrito con todas sus copias
+  const deleteThisBook = (id) => {
+    dispatch(deleteOneBook(id))
+  }
+
+  //agrega una copia de un elemento agregado
+
+  const addCopy = (id) => {
+    dispatch(addOneCopy(id))
+    console.log(id);
+  }
+
+  //Elimina una copia de un elemento del carrito 
+  const deleteCopy = (id) => {
+    dispatch(deleteOneCopy(id))
+  }
+
+  const goToBuy = () => {
+    navigate('/cart')
+  }
+
+  return (
+    <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}>
+      <div className={style.sidebar}>
+        <button type="button" class="btn-close" aria-label="Close" onClick={onClose}>
+          x
+        </button>
+        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', }}>Tus productos agregados</h2>
+        <div class='d-flex flex-column border ' style={{ overflow: 'auto', height: '370px', backgroundColor: '#f3f3f3' }}  >
+          {cart?.map((item, index) => {
+            return (
+              <div key={index} class='d-flex ' style={{ margin: "5px 5px 5px 5px", height: '80px', backgroundColor: '#f9f9f9', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' }}>
+                <img src={item.image} alt='not found' style={{ width: '50px', height: '75px' }} />
+                <div class='w-100' style={{ marginLeft: '10px' }}>
+                  <div class='d-flex' >
+                    <h4 class='w-100' style={{ fontSize: '13px', marginLeft: '50px' }} >{item.title}</h4>
+                  </div>
+                  <div class='d-flex' >
+                    <div class=''>
+                      <h5 style={{ fontSize: '15px' }}>Subtotal: ${item.subtotal}</h5>
+                      <div class='d-flex'>
+                        <h6 class='mx-2'>Cantidad: {item.quantity}</h6>
+                        <div class=''>
+                          <AiOutlineMinus
+                            onClick={() => { deleteCopy(item.bookId) }}
+                            class='mx-3'
+                            style={{ marginBottom: '5px', cursor: 'pointer' }}
+                          />
+                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
+                        </div>
+                      </div>
+                    </div>
+                    <BsTrash style={{ marginLeft: '85px', marginTop: '15px', cursor: 'pointer' }} onClick={() => { deleteThisBook(item.id) }} />
+                  </div>
                 </div>
-                <div class="offcanvas-body d-flex flex-column" className={style.sidebar}>
-                  
-                <h2 class="offcanvas-title w-100" id="offcanvasDarkLabel">Cart <button className="btn btn-secondary rounded-3" onClick={onClose} >x</button></h2>
-                  {cart?.length? <>
-                    {
-                      name?.map((name,index)=>
-                      
-                      <p key={index}>(1) {name}  <button  type="button" class="btn btn-dark "onClick={() => deleteThisBook(id[index])}>x</button> </p>  )
-                    }
-               
-                    <p>Products: {cart?.length}</p>
-                    <h6>Total: U$S {price?.length && price[0]?.reduce((a,b)=> Math.floor(Number(a)+Number(b)),0)}</h6>
-                    <Link to='/cart' className="btn btn-secondary">Comprar  </Link>
-                    <button  type="button" class="btn btn-dark " onClick={handleClose}>vaciar carrito</button>
-                  </> : <p>Empty cart</p>
-                  }
-                  
-               </div>                
-       </div>
-
-    )
+              </div>
+            )
+          })}
+        </div>
+        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+          Go to cart
+        </button>
+        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+          Clear cart
+        </button>
+      </div>
+    </div>
+  )
 }
+
+
