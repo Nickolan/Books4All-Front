@@ -9,6 +9,7 @@ import { BsTrash } from 'react-icons/bs';
 export const Sidebar = ({ onClose, isOpen }) => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
   console.log(cart);
+  console.log(localStorage);
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -39,16 +40,16 @@ export const Sidebar = ({ onClose, isOpen }) => {
   }
 
   return (
-    <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}>
+    <div style={{ transform: isOpen ? 'translateX(0)' : 'translateX(100%)' }}>
       <div className={style.sidebar}>
         <button type="button" class="btn-close" aria-label="Close" onClick={onClose}>
           x
         </button>
         <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', }}>Tus productos agregados</h2>
         <div class='d-flex flex-column border ' style={{ overflow: 'auto', height: '370px', backgroundColor: '#f3f3f3' }}  >
-          {cart?.map((item, index) => {
+          {cart?.map((item) => {
             return (
-              <div key={index} class='d-flex ' style={{ margin: "5px 5px 5px 5px", height: '80px', backgroundColor: '#f9f9f9', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' }}>
+              <div key={item.id} class='d-flex ' style={{ margin: "5px 5px 5px 5px", height: '80px', backgroundColor: '#f9f9f9', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' }}>
                 <img src={item.image} alt='not found' style={{ width: '50px', height: '75px' }} />
                 <div class='w-100' style={{ marginLeft: '10px' }}>
                   <div class='d-flex' >
@@ -60,12 +61,21 @@ export const Sidebar = ({ onClose, isOpen }) => {
                       <div class='d-flex'>
                         <h6 class='mx-2'>Cantidad: {item.quantity}</h6>
                         <div class=''>
-                          <AiOutlineMinus
-                            onClick={() => { deleteCopy(item.bookId) }}
-                            class='mx-3'
-                            style={{ marginBottom: '5px', cursor: 'pointer' }}
-                          />
-                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
+                          {item.quantity > 1 ? (
+                            
+                              <AiOutlineMinus
+                                onClick={() => { deleteCopy(item.bookId) }}
+                                class='mx-3'
+                                style={{ marginBottom: '5px', cursor: 'pointer', fontSize:'24px' }}
+                              />
+                          
+                          ) :
+                            <AiOutlineMinus
+                              class='mx-3'
+                              style={{ marginBottom: '5px', color:'gray', fontSize:'20px' }}
+                            />
+                          }
+                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer', fontSize:'24px' }} />
                         </div>
                       </div>
                     </div>
@@ -76,10 +86,10 @@ export const Sidebar = ({ onClose, isOpen }) => {
             )
           })}
         </div>
-        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
           Go to cart
         </button>
-        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
           Clear cart
         </button>
       </div>

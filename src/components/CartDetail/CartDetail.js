@@ -41,57 +41,68 @@ export default function CartDetail(props) {
 
   return (
     <div className='container-xl bg-white'>
-    <div className="cart-container">
+      <div className="cart-container">
 
-      <Navbar />
+        <Navbar />
 
-      <h1 className='titleCarrito'>Cart</h1>
-      {cart.length === 0 ? (
-        <p>There are no books in your shopping cart</p>
-      ) : (
-        <>
-          <div className="books-container">
-            {
-              cart.map((book) => (
-                <div className="book-card" key={book.bookId}>
-                  <img src={book.image} alt="no se encontró la imagen" />
-                  <div className="book-info">
-                    <h2>{book.title}</h2>
-                    <h3>{book.author}</h3>
+        <h1 className='titleCarrito'>Cart</h1>
+        {cart.length === 0 ? (
+          <p>There are no books in your shopping cart</p>
+        ) : (
+          <>
+            <div className="books-container">
+              {
+                cart.map((book) => (
+                  <div className="book-card" key={book.bookId}>
+                    <img src={book.image} alt="no se encontró la imagen" />
+                    <div className="book-info">
+                      <h2>{book.title}</h2>
+                      <h3>{book.author}</h3>
 
-                    <p>{book.categories}</p>
-                    <div class='d-flex'>
-                      <p class='mx-3'>Cantidad: {book.quantity}</p>
-                      <p className="book-price">subtotal: ${book.subtotal} USD</p>
-                      <AiOutlineMinus
-                        onClick={() => { deleteCopy(book.bookId) }}
-                        class='mx-3'
-                        style={{ marginBottom: '5px', cursor: 'pointer' }}
-                      />
-                      <AiOutlinePlus class='mx-3' onClick={() => { addCopy(book.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer' }} />
+                      <p>{book.categories}</p>
+                      <div class='d-flex'>
+                        <p class='mx-3'>Cantidad: {book.quantity}</p>
+                        <p className="book-price">subtotal: ${book.subtotal} USD</p>
+                        <div>
+                          {book.quantity > 1 ? (
+
+                            <AiOutlineMinus
+                              onClick={() => { deleteCopy(book.bookId) }}
+                              class='mx-3'
+                              style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
+                            />
+
+                          ) :
+                            <AiOutlineMinus
+                              class='mx-3'
+                              style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
+                            />
+                          }
+                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(book.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }} />
+                        </div>
+                      </div>
+
+
+                      <button onClick={() => { deleteThisBook(book.id) }}>
+                        Eliminar
+                      </button>
+
                     </div>
-                    {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
-
-                    <button onClick={()=>{deleteThisBook(book.id)}}>
-                      Eliminar
-                    </button>
 
                   </div>
-                  {/* <p className="book-price">${book.price}</p> */}
-                </div>
-              ))}
-          </div>
-          <div className="cart-summary">
-            <h2>Cart Detail</h2>
-            <p>Titles Total Amount: {cart.length}</p>
-            <p>Books Total Amount: {totalCopy}</p>
-            <p>Total Due: ${totalAmount} USD</p>
-            <PayButton cart={cart}>Checkout</PayButton>
-          </div>
-        </>
-      )}
-    </div>
-    <Footer />
+                ))}
+            </div>
+            <div className="cart-summary">
+              <h2>Cart Detail</h2>
+              <p>Titles Total Amount: {cart.length}</p>
+              <p>Books Total Amount: {totalCopy}</p>
+              <p>Total Due: ${totalAmount} USD</p>
+              <PayButton cart={cart}>Checkout</PayButton>
+            </div>
+          </>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 }

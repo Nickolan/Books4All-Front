@@ -2,9 +2,9 @@
     position: fixed;
     top: 10px;
     left: -15vw;
-    right: 0;
+    right: 10%;
     height: 100vh !important;
-    width: 20vw;
+    width: 30vw;
     background-color: gray;
     padding: 2rem;
     z-index: 1;
@@ -14,5 +14,6 @@
     text-align: center;
     color: black;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.836);
+    transition: left 0.5s ease-out;
 
 }

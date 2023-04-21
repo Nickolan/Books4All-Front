@@ -2,6 +2,8 @@ import React from "react";
 import Card from '../../components/Card/Card'
 
 function Cards({books}) {
+
+    
     return (
         <div class='row'>
         {
