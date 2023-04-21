@@ -41,7 +41,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
   }
 
   return (
-    <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}>
+    <div style={{ transform: isOpen ? 'translateX(0)' : 'translateX(100%)' }}>
       <div className={style.sidebar}>
         <div className='d-flex justify-content-center' style={{marginBottom:'10px'}}>
         <button type="button" class="btn-close" style={{ color:'white', borderRadius:'50%',fontSize: '30px'}} aria-label="Close" onClick={onClose}>
@@ -59,17 +59,30 @@ export const Sidebar = ({ onClose, isOpen }) => {
                     <h4 class='w-100' style={{ fontSize: '13px',marginTop:'5px', marginRight:'60px'}} ><strong>{item.title}</strong></h4>
                         <h6 style={{ marginRight:'10px',fontSize: '16px'}} >Quantity: {item.quantity}</h6>
                       <h5 style={{ fontSize: '15px' }}>Subtotal: ${item.subtotal}</h5>
+
                 </div>
                </div>
                <div>
 <div >
 </div>
                     <div class='d-flex justify-content-center 'style={{marginLeft:'40px'}}>
-                          <AiOutlineMinus
-                            onClick={() => { deleteCopy(item.bookId) }}
-                            class='mx-3'
-                            style={{ marginBottom: '5px', cursor: 'pointer' }}
-                          />
+                    
+                    {item.quantity > 1 ? (
+
+                            <AiOutlineMinus
+                              onClick={() => { deleteCopy(item.bookId) }}
+                              class='mx-3'
+                              style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
+                            />
+
+                          ) :
+                            <AiOutlineMinus
+                              class='mx-3'
+                              style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
+                            />
+                          }
+                    
+                          
                      <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
                     <BsTrash style={{ marginBottom:'5px', marginLeft:'3px', cursor: 'pointer' }} onClick={() => { deleteThisBook(item.id) }} />
                         </div>
@@ -78,10 +91,10 @@ export const Sidebar = ({ onClose, isOpen }) => {
             )
           })}
         </div>
-        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
           Go to cart
         </button>
-        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
           Clear cart
         </button>
       </div>
