@@ -35,6 +35,7 @@ export default function Navbar(){
                 <Link to="/profile" className="nav-link">{"perfil"}</Link>
                 }
             </li>
+            <CartWidget/>
             </ul>
         </div>
         </div>
