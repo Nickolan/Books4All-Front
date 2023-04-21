@@ -1,5 +1,4 @@
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-
 import { Sidebar } from '../Sidebar/Sidebar';
 import {useState} from 'react'
 import { useSelector} from 'react-redux';
