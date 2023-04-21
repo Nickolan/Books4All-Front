@@ -52,7 +52,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
         <div class='d-flex flex-column border p-0' style={{ overflow: 'auto', height: '500px', marginBottom:'5px', backgroundColor: '#ffffffcb' }}  >
           {cart?.map((item, index) => {
             return (
-              <div key={index} style={{ margin: "5px 5px 5px 5px", height: '150px', backgroundColor: '#ffffff', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' , padding:'15px'}}>
+              <div key={index} style={{ margin: "5px 5px 5px 5px", height: '200px', backgroundColor: '#ffffff', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' , padding:'15px'}}>
                 <div className='d-flex flex-start '>
                 <img src={item.image} alt='not found' style={{ width: '60px' }} />
                 <div className='d-flex justify-content-lg-start flex-column'>
