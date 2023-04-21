@@ -37,7 +37,7 @@ function Card({ name, author, image, categories, bookId, price }) {
     
     return (
 
-        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "38git 0px", padding: "14px" }}>
+        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "380px", padding: "14px" }}>
             <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus /> </button>
             <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
                 {/* {isFav ? (
