@@ -10,12 +10,15 @@ import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
+import { PostUser } from '../../components/PostUser/PostUser';
 
 
 const BookDetail = (props) => {
     const dispatch = useDispatch();
     const { bookId } = useParams();
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { loginWithPopup, isAuthenticated, user } = useAuth0();
+
+    PostUser(user, isAuthenticated)
     
     const eachBook = useSelector((state) => state.bookDetail)
 
@@ -37,9 +40,8 @@ const BookDetail = (props) => {
     }
     const handleShowReview = () => {
         
-        !isAuthenticated? loginWithRedirect({
-            redirectUri: window.location.origin
-        }):
+        !isAuthenticated? loginWithPopup()
+        :
         setShowReview(!showReview)
     }
 
