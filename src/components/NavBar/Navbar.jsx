@@ -7,7 +7,7 @@ export default function Navbar(){
     const { user, isAuthenticated } = useAuth0();
     return(
         
-        <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top ' >
+        <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top d-flex align-content-center' >
         <div className="container-fluid ">
         <div className="px-4 ">
         <Link to='/'>
@@ -26,7 +26,7 @@ export default function Navbar(){
             <li className="nav-item"><Link to="/books" className="nav-link">Books</Link></li>
 {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
          
-          <li className="nav-item "><Link to="/cart" className="nav-link "></Link><CartWidget/></li>  
+          <li className="nav-item "><Link to="/cart" className="nav-link"></Link><CartWidget/></li>  
 {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
             <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
             {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
