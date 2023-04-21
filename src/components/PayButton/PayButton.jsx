@@ -1,6 +1,6 @@
 import axios from "axios";
 // import { useSelector } from "react-redux";
-import { url } from "../services/api";
+import { instance, url } from "../services/api";
 
 
 export const PayButton = ({cart}) =>{

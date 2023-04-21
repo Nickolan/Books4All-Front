@@ -73,7 +73,7 @@ export default function CartDetail(props) {
                     {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
 
                     <button onClick={()=>{deleteThisBook(book.id)}}>
-                      Eliminar
+                      Remove
                     </button>
 
                   </div>
