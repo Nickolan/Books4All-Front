@@ -48,7 +48,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
           x
         </button>
         </div>
-        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', color:'white'}}>Tus productos agregados</h2>
+        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', color:'white'}}>Shopping Cart</h2>
         <div class='d-flex flex-column border p-0' style={{ overflow: 'auto', height: '500px', marginBottom:'5px', backgroundColor: '#ffffffcb' }}  >
           {cart?.map((item, index) => {
             return (
@@ -57,7 +57,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
                 <img src={item.image} alt='not found' style={{ width: '60px' }} />
                 <div className='d-flex justify-content-lg-start flex-column'>
                     <h4 class='w-100' style={{ fontSize: '13px',marginTop:'5px', marginRight:'60px'}} ><strong>{item.title}</strong></h4>
-                        <h6 style={{ marginRight:'5px'}} >Cantidad: {item.quantity}</h6>
+                        <h6 style={{ marginRight:'10px',fontSize: '16px'}} >Quantity: {item.quantity}</h6>
                       <h5 style={{ fontSize: '15px' }}>Subtotal: ${item.subtotal}</h5>
                 </div>
                </div>
