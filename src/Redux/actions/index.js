@@ -38,7 +38,7 @@ export const createReview = (payload) => {
   return async function (dispatch) {
     try {
       var info = await instance.post(`/reviews`, payload);
-      console.log(info);
+      console.log("info :" +info);
       return info;
     } catch (error) {
       console.log("Error del Create", error.message);
