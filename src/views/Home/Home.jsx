@@ -8,6 +8,7 @@ import { useAuth0} from "@auth0/auth0-react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooks } from "../../Redux/actions";
+import { instance } from "../../components/services/api";
 import { setCart } from "../../Redux/actions/localStorage";
 
 export default function Home(){

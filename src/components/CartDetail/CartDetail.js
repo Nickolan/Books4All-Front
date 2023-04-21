@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CartDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../NavBar/Navbar";
@@ -7,7 +7,6 @@ import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
 import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
 import { setCart } from "../../Redux/actions/localStorage";
-
 // import { removeBookFromCart } from "../actions/cartActions";
 
 export default function CartDetail(props) {
@@ -26,14 +25,11 @@ export default function CartDetail(props) {
     0
   );
 
-  //agrega una copia de un elemento agregado
-
   const addCopy = (id) => {
     dispatch(addOneCopy(id));
     console.log(id);
   };
 
-  //Elimina una copia de un elemento del carrito
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id));
   };
@@ -55,16 +51,15 @@ export default function CartDetail(props) {
             <div className="books-container">
               {cart.map((book) => (
                 <div className="book-card" key={book.bookId}>
-                  <img src={book.image} alt="no se encontró la imagen" />
+                  <img src={book.image} alt="Not Found" />
                   <div className="book-info">
                     <h2>{book.title}</h2>
                     <h3>{book.author}</h3>
-
                     <p>{book.categories}</p>
                     <div class="d-flex">
-                      <p class="mx-3">Cantidad: {book.quantity}</p>
+                      <p class="mx-3">Quantity: {book.quantity}</p>
                       <p className="book-price">
-                        subtotal: ${book.subtotal} USD
+                        Subtotal: ${book.subtotal} USD
                       </p>
                       <AiOutlineMinus
                         onClick={() => {
@@ -81,17 +76,13 @@ export default function CartDetail(props) {
                         style={{ marginBottom: "5px", cursor: "pointer" }}
                       />
                     </div>
+                    <button onClick={() => deleteThisBook(book.id)}>
+                      Remove
+
                     {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
 
-                    <button
-                      onClick={() => {
-                        deleteThisBook(book.id);
-                      }}
-                    >
-                      Eliminar
                     </button>
                   </div>
-                  {/* <p className="book-price">${book.price}</p> */}
                 </div>
               ))}
             </div>

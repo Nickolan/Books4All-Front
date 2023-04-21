@@ -46,7 +46,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
         <button type="button" class="btn-close" aria-label="Close" onClick={onClose}>
           x
         </button>
-        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', }}>Tus productos agregados</h2>
+        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', }}>Your ShopCart</h2>
         <div class='d-flex flex-column border ' style={{ overflow: 'auto', height: '370px', backgroundColor: '#f3f3f3' }}  >
           {cart?.map((item, index) => {
             return (
@@ -60,7 +60,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
                     <div class=''>
                       <h5 style={{ fontSize: '15px' }}>Subtotal: ${item.subtotal}</h5>
                       <div class='d-flex'>
-                        <h6 class='mx-2'>Cantidad: {item.quantity}</h6>
+                        <h6 class='mx-2'>: {item.quantity}</h6>
                         <div class=''>
                           <AiOutlineMinus
                             onClick={() => { deleteCopy(item.bookId) }}
