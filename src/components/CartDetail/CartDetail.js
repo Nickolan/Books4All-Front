@@ -1,0 +1,105 @@
+import React, { useEffect } from "react";
+import "./CartDetail.css";
+import { useSelector, useDispatch } from "react-redux";
+import Navbar from "../NavBar/Navbar";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
+import Footer from "../Footer/Footer";
+import { PayButton } from "../PayButton/PayButton";
+import { setCart } from "../../Redux/actions/localStorage";
+// import { removeBookFromCart } from "../actions/cartActions";
+
+export default function CartDetail(props) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  setCart("cart", cart);
+
+  let totalAmount = cart.reduce(
+    (accumulator, book1) => accumulator + Number(book1.subtotal),
+    0
+  );
+  totalAmount = totalAmount.toFixed(2);
+
+  let totalCopy = cart.reduce(
+    (accumulator, book1) => accumulator + Number(book1.quantity),
+    0
+  );
+
+  const addCopy = (id) => {
+    dispatch(addOneCopy(id));
+    console.log(id);
+  };
+
+  const deleteCopy = (id) => {
+    dispatch(deleteOneCopy(id));
+  };
+
+  const deleteThisBook = (id) => {
+    dispatch(deleteOneBook(id));
+  };
+
+  return (
+    <div className="container-xl bg-white">
+      <div className="cart-container">
+        <Navbar />
+
+        <h1 className="titleCarrito">Cart</h1>
+        {cart.length === 0 ? (
+          <p>There are no books in your shopping cart</p>
+        ) : (
+          <>
+            <div className="books-container">
+              {cart.map((book) => (
+                <div className="book-card" key={book.bookId}>
+                  <img src={book.image} alt="Not Found" />
+                  <div className="book-info">
+                    <h2>{book.title}</h2>
+                    <h3>{book.author}</h3>
+                    <p>{book.categories}</p>
+                    <div class="d-flex">
+                      <p class="mx-3">Quantity: {book.quantity}</p>
+                      <p className="book-price">
+                        Subtotal: ${book.subtotal} USD
+                      </p>
+                      <div>
+                        {book.quantity > 1 ? (
+
+                          <AiOutlineMinus
+                            onClick={() => { deleteCopy(book.bookId) }}
+                            class='mx-3'
+                            style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
+                          />
+
+                        ) :
+                          <AiOutlineMinus
+                            class='mx-3'
+                            style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
+                          />
+                        }
+                        <AiOutlinePlus class='mx-3' onClick={() => { addCopy(book.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }} />
+                      </div>
+                    </div>
+                    <button onClick={() => deleteThisBook(book.id)}>
+                      Remove
+
+                      {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
+
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="cart-summary">
+              <h2>Cart Detail</h2>
+              <p>Titles Total Amount: {cart.length}</p>
+              <p>Books Total Amount: {totalCopy}</p>
+              <p>Total Due: ${totalAmount} USD</p>
+              <PayButton cart={cart}>Checkout</PayButton>
+            </div>
+          </>
+        )}
+      </div>
+      <Footer />
+    </div>
+  );
+}
