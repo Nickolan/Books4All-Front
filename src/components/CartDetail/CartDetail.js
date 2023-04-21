@@ -61,25 +61,28 @@ export default function CartDetail(props) {
                       <p className="book-price">
                         Subtotal: ${book.subtotal} USD
                       </p>
-                      <AiOutlineMinus
-                        onClick={() => {
-                          deleteCopy(book.bookId);
-                        }}
-                        class="mx-3"
-                        style={{ marginBottom: "5px", cursor: "pointer" }}
-                      />
-                      <AiOutlinePlus
-                        class="mx-3"
-                        onClick={() => {
-                          addCopy(book.bookId);
-                        }}
-                        style={{ marginBottom: "5px", cursor: "pointer" }}
-                      />
+                      <div>
+                        {book.quantity > 1 ? (
+
+                          <AiOutlineMinus
+                            onClick={() => { deleteCopy(book.bookId) }}
+                            class='mx-3'
+                            style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
+                          />
+
+                        ) :
+                          <AiOutlineMinus
+                            class='mx-3'
+                            style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
+                          />
+                        }
+                        <AiOutlinePlus class='mx-3' onClick={() => { addCopy(book.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }} />
+                      </div>
                     </div>
                     <button onClick={() => deleteThisBook(book.id)}>
                       Remove
 
-                    {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
+                      {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
 
                     </button>
                   </div>

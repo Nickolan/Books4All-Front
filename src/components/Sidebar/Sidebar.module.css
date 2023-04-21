@@ -2,9 +2,9 @@
     position: fixed;
     top: 10px;
     left: -15vw;
-    right: 0;
+    right: 10%;
     height: 100vh !important;
-    width: 20vw;
+    width: 30vw;
     background-color: gray;
     padding: 2rem;
     z-index: 1;

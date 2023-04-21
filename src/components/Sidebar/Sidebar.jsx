@@ -41,7 +41,7 @@ export const Sidebar = ({ onClose, isOpen }) => {
   }
 
   return (
-    <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}>
+    <div style={{ transform: isOpen ? 'translateX(0)' : 'translateX(100%)' }}>
       <div className={style.sidebar}>
         <button type="button" class="btn-close" aria-label="Close" onClick={onClose}>
           x
@@ -62,12 +62,21 @@ export const Sidebar = ({ onClose, isOpen }) => {
                       <div class='d-flex'>
                         <h6 class='mx-2'>: {item.quantity}</h6>
                         <div class=''>
-                          <AiOutlineMinus
-                            onClick={() => { deleteCopy(item.bookId) }}
-                            class='mx-3'
-                            style={{ marginBottom: '5px', cursor: 'pointer' }}
-                          />
-                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
+                          {item.quantity > 1 ? (
+
+                            <AiOutlineMinus
+                              onClick={() => { deleteCopy(item.bookId) }}
+                              class='mx-3'
+                              style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
+                            />
+
+                          ) :
+                            <AiOutlineMinus
+                              class='mx-3'
+                              style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
+                            />
+                          }
+                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer' }} />
                         </div>
                       </div>
                     </div>
@@ -78,10 +87,10 @@ export const Sidebar = ({ onClose, isOpen }) => {
             )
           })}
         </div>
-        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
           Go to cart
         </button>
-        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{margin:'20px 0 0 150px'}}>
+        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
           Clear cart
         </button>
       </div>
