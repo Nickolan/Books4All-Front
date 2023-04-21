@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 import style from '../Sidebar/Sidebar.module.css'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs';
+import { useEffect } from 'react';
+
 
 export const Sidebar = ({ onClose, isOpen }) => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
