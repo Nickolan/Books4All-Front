@@ -13,6 +13,7 @@ import {
   DELETE_CART,
   ADD_ONE_COPY,
   DELETE_ONE_COPY,
+  CURRENT_USER
 } from "../actions";
 import { getCart } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
@@ -30,6 +31,7 @@ const initialState = {
   },
   order: "",
   profile: {},
+  dbUser:{},
 };
 
 
@@ -109,6 +111,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profile: {},
       };
+    }
+
+    case CURRENT_USER: {
+      return {
+        ...state,
+        dbUser: action.payload,
+      }
     }
     case ADD_CART: {
       const isItem = state.cart.find(item => item.bookId === action.payload.bookId);
