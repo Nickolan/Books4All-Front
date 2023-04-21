@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetail, addToCart } from '../../Redux/actions'
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
@@ -9,6 +9,7 @@ import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { setCart } from '../../Redux/actions/localStorage';
 
 
 const BookDetail = (props) => {
@@ -17,8 +18,10 @@ const BookDetail = (props) => {
     const { loginWithRedirect, isAuthenticated } = useAuth0();
     
     const eachBook = useSelector((state) => state.bookDetail)
+
     const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
+    setCart('cart', cart)
     const stock = eachBook?.map(book => book.stock)
 
     const [show, setShow] = useState(false);
@@ -57,6 +60,8 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
+                
+       
 
     }
 
@@ -66,6 +71,7 @@ const BookDetail = (props) => {
 
 
     useEffect(() => {
+         
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }

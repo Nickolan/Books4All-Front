@@ -9,6 +9,8 @@ import Filters from "../../components/Filters/Filters";
 import style from "./Books.module.css"
 import Order from "../../components/Order/Order";
 import Paginado from "../../components/Paginado/Paginado";
+import { setCart } from "../../Redux/actions/localStorage";
+
 
 export default function Books() {
     const dispatch = useDispatch();
@@ -16,6 +18,8 @@ export default function Books() {
     const genreFilter = useSelector(state => state.filters.category);
     const authorFilter = useSelector(state => state.filters.author);
     const orderType = useSelector(state => state.order);
+    const cart= useSelector(state=> state.cart)
+    setCart('cart', cart)
 
     const [currentPage, setCurrentPage] = useState(1)
     const booksForPage = 12;
@@ -23,8 +27,7 @@ export default function Books() {
     const firstBook = lastBook - booksForPage;
     const currentBooks = books.slice(firstBook, lastBook);
     const pageNumber = [];
-    console.log(currentPage);
-
+ 
     for (let i = 1; i <= Math.ceil(books.length / booksForPage); i++) {
         pageNumber.push(i)
 
@@ -32,12 +35,12 @@ export default function Books() {
 
     useEffect(() => {
         dispatch(getBooks())
-            .then(() => {
+               .then(() => {
                 dispatch(filterByCategory(genreFilter))
                 dispatch(filterByAuthor(authorFilter))
                 dispatch(alphabeticalOrder(orderType))
+            
             })
-        console.log(books);
     }, [])
 
     return (

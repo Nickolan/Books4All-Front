@@ -2,7 +2,7 @@ import Navbar from "../../components/NavBar/Navbar";
 import {useSelector, useDispatch}from 'react-redux'
 import { deleteOneBook } from "../../Redux/actions";
 import { Link } from "react-router-dom";
-
+import { setCart } from "../../Redux/actions/localStorage";
 
 export default function Cart(){
 
@@ -16,6 +16,7 @@ export default function Cart(){
 
     const handleClose=(id)=>{
         dispatch(deleteOneBook(id))
+        
       }
 
     return(

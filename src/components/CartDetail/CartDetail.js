@@ -6,17 +6,17 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
 import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
+import { setCart } from "../../Redux/actions/localStorage";
+// import { removeBookFromCart } from "../actions/cartActions";
 
 export default function CartDetail(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  setCart("cart", cart);
 
   let totalAmount = cart.reduce(
-    (accumulator, book1) => accumulator + Number(book1.subtotal), 0
+    (accumulator, book1) => accumulator + Number(book1.subtotal),
+    0
   );
   totalAmount = totalAmount.toFixed(2);
 
@@ -42,6 +42,7 @@ export default function CartDetail(props) {
     <div className="container-xl bg-white">
       <div className="cart-container">
         <Navbar />
+
         <h1 className="titleCarrito">Cart</h1>
         {cart.length === 0 ? (
           <p>There are no books in your shopping cart</p>
@@ -77,6 +78,9 @@ export default function CartDetail(props) {
                     </div>
                     <button onClick={() => deleteThisBook(book.id)}>
                       Remove
+
+                    {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
+
                     </button>
                   </div>
                 </div>
