@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import CartWidget from  '../CartWidget/CartWidget'
 
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../LoginButton/LoginButton";
 export default function Navbar(){
     const { user, isAuthenticated } = useAuth0();
     return(
@@ -31,7 +32,7 @@ export default function Navbar(){
             <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
             {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
             <li>
-            {!isAuthenticated ? <Link to="/profile" className="nav-link">Profile</Link> :
+            {!isAuthenticated ? <LoginButton /> :
                 <Link to="/profile" className="nav-link">{"perfil"}</Link>
                 }
             </li>

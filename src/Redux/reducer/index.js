@@ -13,6 +13,7 @@ import {
   DELETE_CART,
   ADD_ONE_COPY,
   DELETE_ONE_COPY,
+  CURRENT_USER
 } from "../actions";
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   },
   order: "",
   profile: {},
+  dbUser:{},
 };
 
 const filtrarLibros = (libros, genero, autor) => {
@@ -121,6 +123,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         profile: {},
       };
+    }
+
+    case CURRENT_USER: {
+      return {
+        ...state,
+        dbUser: action.payload,
+      }
     }
     case ADD_CART: {
       const isItem = state.cart.find(item => item.bookId === action.payload.bookId);
