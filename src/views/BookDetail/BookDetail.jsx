@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetail, addToCart } from '../../Redux/actions'
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
 import Footer from '../../components/Footer/Footer';
@@ -9,16 +9,22 @@ import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { setCart } from '../../Redux/actions/localStorage';
+import { PostUser } from '../../components/PostUser/PostUser';
 
 
 const BookDetail = (props) => {
     const dispatch = useDispatch();
     const { bookId } = useParams();
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { loginWithPopup, isAuthenticated, user } = useAuth0();
+
+    PostUser(user, isAuthenticated)
     
     const eachBook = useSelector((state) => state.bookDetail)
+
     const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
+    setCart('cart', cart)
     const stock = eachBook?.map(book => book.stock)
 
     const [show, setShow] = useState(false);
@@ -34,9 +40,8 @@ const BookDetail = (props) => {
     }
     const handleShowReview = () => {
         
-        !isAuthenticated? loginWithRedirect({
-            redirectUri: window.location.origin
-        }):
+        !isAuthenticated? loginWithPopup()
+        :
         setShowReview(!showReview)
     }
 
@@ -57,6 +62,8 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
+                
+       
 
     }
 
@@ -66,10 +73,11 @@ const BookDetail = (props) => {
 
 
     useEffect(() => {
+         
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [bookId, dispatch, eachBook]);
+},  [bookId, dispatch]);
 
 
     return (

@@ -6,17 +6,23 @@ import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0} from "@auth0/auth0-react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooks } from "../../Redux/actions";
+import { instance } from "../../components/services/api";
+import { setCart } from "../../Redux/actions/localStorage";
+import { PostUser } from "../../components/PostUser/PostUser";
 
 export default function Home(){
-    const [post, setPost] = useState(false)
+    const dispatch= useDispatch()
+    const cart=useSelector(state=>state.cart)
     const {  user, isAuthenticated } = useAuth0();
-    if(isAuthenticated && !post ){
-        axios.post('http://localhost:3001/users', user)
-        setPost(true)
-    }
-    if(!isAuthenticated && post){
-        setPost(false)
-    }
+   
+    PostUser(user, isAuthenticated)
+
+    useEffect(()=>{
+        dispatch(getBooks())
+    },[dispatch])
+
     return(
     <div >
     

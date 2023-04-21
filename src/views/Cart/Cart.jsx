@@ -2,13 +2,13 @@ import Navbar from "../../components/NavBar/Navbar";
 import {useSelector, useDispatch}from 'react-redux'
 import { deleteOneBook } from "../../Redux/actions";
 import { Link } from "react-router-dom";
-
+import { setCart } from "../../Redux/actions/localStorage";
 
 export default function Cart(){
 
     const dispatch= useDispatch()
     const cart= useSelector(state=>state.cart)
-    const name= cart.map((book)=>book.bookName)
+    const title= cart.map((book)=>book.title)
     const price= []
     const cartPrice= cart.map((book)=>((book.price)))
     const id= cart.map((book)=>book.bookId)
@@ -16,6 +16,7 @@ export default function Cart(){
 
     const handleClose=(id)=>{
         dispatch(deleteOneBook(id))
+        
       }
 
     return(
@@ -28,7 +29,7 @@ export default function Cart(){
        </Link>
         </div>
             <div className="flex-row mt-5 border rounded p-4 w-50 align-content-center">
-            {name.map((name,index)=><p key={index}>(1) {name} <button  type="button" class="btn btn-dark " onClick={()=>handleClose(id[index])}>X</button></p>)} 
+            {title.map((title,index)=><p key={index}>(1) {title} <button  type="button" class="btn btn-dark " onClick={()=>handleClose(id[index])}>X</button></p>)} 
            <hr />
              <h6 className="p-2 w-25 mt-2">Total: U$S {price.length && price[0].reduce((a,b)=> Math.floor(Number(a)+Number(b)),0)}</h6>
           </div>

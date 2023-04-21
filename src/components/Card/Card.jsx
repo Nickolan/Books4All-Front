@@ -37,7 +37,8 @@ function Card({ name, author, image, categories, bookId, price }) {
     
     return (
 
-        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "350px", padding: "10px" }}>
+        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "380px", padding: "14px" }}>
+            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus /> </button>
             <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
                 {/* {isFav ? (
             <button class="d-block w-1 justify-content-end align-items-start" onClick={handleFavorites}>❤️</button>
@@ -52,8 +53,10 @@ function Card({ name, author, image, categories, bookId, price }) {
                         }
                     </div>
 
+                    <div style={{ display: "flex", flexDirection: "column"}}>
                     <h5 style={{
                         marginTop: "10px",
+                        marginLeft:'3px',
                         display: "-webkit-box",
                         WebkitBoxOrient: "vertical",
                         WebkitLineClamp: 2,
@@ -64,22 +67,21 @@ function Card({ name, author, image, categories, bookId, price }) {
                     }}>
                         {name}
                     </h5>
-                    <div style={{ display: "flex", flexDirection: "column", }}>
                         <p style={{
-                            fontSize: "13px",
-                            marginTop: "10px",
+                            fontSize: "13px",    
                             display: "-webkit-box",
                             WebkitBoxOrient: "vertical",
                             WebkitLineClamp: 2,
                             overflow: "hidden",
                             textOverflow: "ellipsis",
+                            marginLeft:'3px',
 
                         }} class="text-xs ">{author}</p>
-                        <p style={{ fontSize: "13px", color: "#088000" }}><small>{categories}</small></p>
+                        <p style={{ fontSize: "13px", color: "#088000",  marginLeft:'3px', marginTop:'0' }}><small>{categories}</small></p>
                     </div>
                 </div>
             </Link>
-            <button onClick={handleClickAddCart} > <BsCartPlus /> </button>
+            
         </div>
     )
 }

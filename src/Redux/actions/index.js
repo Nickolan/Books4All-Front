@@ -1,4 +1,5 @@
 import axios from "axios";
+import { instance } from "../../components/services/api";
 export const GET_BOOK_DETAIL = "GET_BOOK_DETAIL";
 export const POST_REVIEW = "POST_REVIEW";
 export const GET_BOOKS = "GET_BOOKS";
@@ -36,8 +37,7 @@ export const getBooks = () => {
 export const createReview = (payload) => {
   return async function (dispatch) {
     try {
-      var info = await axios.post(`/reviews`, payload);
-      console.log(info);
+      var info = await instance.post(`/reviews`, payload);
       return info;
     } catch (error) {
       console.log("Error del Create", error.message);

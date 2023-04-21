@@ -12,10 +12,12 @@ import axios from 'axios';
 import Auth from './views/Auth/Auth';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CartDetail from "./components/CartDetail/CartDetail";
+import { instance } from "./components/services/api";
 /* axios.defaults.baseURL =
   "https://books4all-back-production-0533.up.railway.app/"; */
 // axios.defaults.baseURL = "http://localhost:3001/";
 axios.defaults.baseURL = "http://localhost:3001/";
+
 
 function App() {
   return (

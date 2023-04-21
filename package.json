@@ -2,7 +2,7 @@
   "name": "books4all",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+    "dependencies": { 
     "@auth0/auth0-react": "^2.0.1",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.10.0",

@@ -15,6 +15,8 @@ import {
   DELETE_ONE_COPY,
   CURRENT_USER
 } from "../actions";
+import { getCart } from "../actions/localStorage";
+import combinatedFilters from "./combinatedFilters";
 
 const initialState = {
   books: [],
@@ -22,7 +24,7 @@ const initialState = {
   reviews: [],
   images: [],
   bookDetail: [],
-  cart: [],
+  cart: getCart("cart") || [],
   filters: {
     category: "all",
     author: "all",
@@ -32,21 +34,7 @@ const initialState = {
   dbUser:{},
 };
 
-const filtrarLibros = (libros, genero, autor) => {
-  return libros.filter((libro) => {
-    if (genero === "all" && autor === "all") {
-      return true;
-    } else if (genero === "all" && autor !== "all") {
-      return libro.authors?.includes(autor);
-    } else if (genero !== "all" && autor === "all") {
-      return libro.categories?.includes(genero);
-    } else {
-      return (
-        libro.categories?.includes(genero) && libro.authors?.includes(autor)
-      );
-    }
-  });
-};
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -71,7 +59,7 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_CATEGORY:
       return {
         ...state,
-        books: filtrarLibros(
+        books: combinatedFilters(
           state.allBooks,
           action.payload,
           state.filters.author
@@ -82,7 +70,7 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_AUTHOR:
       return {
         ...state,
-        books: filtrarLibros(
+        books: combinatedFilters(
           state.allBooks,
           state.filters.category,
           action.payload
@@ -133,38 +121,41 @@ const rootReducer = (state = initialState, action) => {
     }
     case ADD_CART: {
       const isItem = state.cart.find(item => item.bookId === action.payload.bookId);
+      const index1 = state.cart.indexOf(isItem);
       const bookById = state.allBooks.find(book => book.id === action.payload.bookId)
-      let addItem = {}
+      let newCart1 = {}
       if (!isItem) {
-
         const newItem = {
           id: action.payload.id,
           bookId: action.payload.bookId,
           title: bookById.title,
-          categories:bookById.categories,
+          categories: bookById.categories,
           author: bookById.authors,
           image: bookById.image,
           price: bookById.price,
           subtotal: (bookById.price * action.payload.quantity).toFixed(2),
           quantity: action.payload.quantity
         }
-        addItem = newItem
+
+        newCart1 = [...state.cart, newItem];
+
       } else {
         const updatedItem = {
           ...isItem,
           quantity: isItem.quantity + action.payload.quantity,
           subtotal: ((isItem.quantity + action.payload.quantity) * bookById.price).toFixed(2)
         }
-        addItem = updatedItem
+        newCart1 = [...state.cart];
+        newCart1[index1] = updatedItem
       }
 
       return {
         ...state,
-        cart: [...state.cart.filter(item => item.bookId !== action.payload.bookId), addItem], // Filtramos el elemento antiguo y agregamos el nuevo
+        cart: newCart1, // Filtramos el elemento antiguo y agregamos el nuevo
       };
     }
 
-   
+
     case DELETE_ARTICLE: {
       return {
         ...state,
@@ -178,28 +169,32 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ADD_ONE_COPY:
-      const item = state.cart.find(item => item.bookId === action.payload)
+      const item = state.cart.find(item => item.bookId === action.payload);
+      const index = state.cart.indexOf(item);
       const updatedItem = {
         ...item,
         quantity: item.quantity + 1,
         subtotal: ((item.quantity + 1) * item.price).toFixed(2)
       }
-      let uptateItem = updatedItem
+      const newCart = [...state.cart];
+      newCart[index] = updatedItem
       return {
         ...state,
-        cart: [...state.cart.filter(item => item.bookId !== action.payload), uptateItem]
+        cart: newCart
       }
     case DELETE_ONE_COPY:
       const item2 = state.cart.find(item => item.bookId === action.payload)
+      const index2 = state.cart.indexOf(item2);
       const updatedItem2 = {
         ...item2,
         quantity: item2.quantity - 1,
         subtotal: ((item2.quantity - 1) * item2.price).toFixed(2)
       }
-      let uptateItem2 = updatedItem2
+      const newCart2 = [...state.cart];
+      newCart2[index2] = updatedItem2
       return {
         ...state,
-        cart: [...state.cart.filter(item => item.bookId !== action.payload), uptateItem2]
+        cart: newCart2
       }
 
     default:
