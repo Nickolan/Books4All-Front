@@ -14,7 +14,7 @@ const CartWidget=()=>{
 
     return(
  <div className=" pb-1">
- { <AiOutlineShoppingCart className='text-white' onClick={handleClick}/>}
+ { <AiOutlineShoppingCart className='text-white' style={{marginBottom:'15px'}}  onClick={handleClick} />}
   {isOpen && <Sidebar booksAdded={cart} onClose={handleClick} />}
  {!isOpen && cart.length && <span className='text-white w-100 mb-4 '>{cart.length}</span> } 
  
