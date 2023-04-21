@@ -1,9 +1,17 @@
 import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { deleteCart } from "../../Redux/actions";
 
 
 const CheckoutSuccess = ()=>{
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(deleteCart())
+    }, [])
+
     return(
         <div className='container-xl bg-white'>
         <Navbar/>

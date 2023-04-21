@@ -25,7 +25,7 @@ export const PayButton = ({cart}) =>{
                 // userId: user_id,
             }).then((res)=>{
                 if(res.data.url){
-                    dispatch(deleteCart())
+                   // dispatch(deleteCart())
                     window.location.href = res.data.url
                 }
             }).catch((err)=> console.log(err.message))
