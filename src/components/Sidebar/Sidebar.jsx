@@ -43,38 +43,38 @@ export const Sidebar = ({ onClose, isOpen }) => {
   return (
     <div style={{transform:isOpen? 'translateX(0)':'translateX(100%)'}}>
       <div className={style.sidebar}>
-        <button type="button" class="btn-close" aria-label="Close" onClick={onClose}>
+        <div className='d-flex justify-content-center' style={{marginBottom:'10px'}}>
+        <button type="button" class="btn-close" style={{ color:'white', borderRadius:'50%',fontSize: '30px'}} aria-label="Close" onClick={onClose}>
           x
         </button>
-        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', }}>Your ShopCart</h2>
-        <div class='d-flex flex-column border ' style={{ overflow: 'auto', height: '370px', backgroundColor: '#f3f3f3' }}  >
+        </div>
+        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', color:'white'}}>Tus productos agregados</h2>
+        <div class='d-flex flex-column border p-0' style={{ overflow: 'auto', height: '500px', marginBottom:'5px', backgroundColor: '#ffffffcb' }}  >
           {cart?.map((item, index) => {
             return (
-              <div key={index} class='d-flex ' style={{ margin: "5px 5px 5px 5px", height: '80px', backgroundColor: '#f9f9f9', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' }}>
-                <img src={item.image} alt='not found' style={{ width: '50px', height: '75px' }} />
-                <div class='w-100' style={{ marginLeft: '10px' }}>
-                  <div class='d-flex' >
-                    <h4 class='w-100' style={{ fontSize: '13px', marginLeft: '50px' }} >{item.title}</h4>
-                  </div>
-                  <div class='d-flex' >
-                    <div class=''>
+              <div key={index} style={{ margin: "5px 5px 5px 5px", height: '150px', backgroundColor: '#ffffff', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' , padding:'15px'}}>
+                <div className='d-flex flex-start '>
+                <img src={item.image} alt='not found' style={{ width: '60px' }} />
+                <div className='d-flex justify-content-lg-start flex-column'>
+                    <h4 class='w-100' style={{ fontSize: '13px',marginTop:'5px', marginRight:'60px'}} ><strong>{item.title}</strong></h4>
+                        <h6 style={{ marginRight:'5px'}} >Cantidad: {item.quantity}</h6>
                       <h5 style={{ fontSize: '15px' }}>Subtotal: ${item.subtotal}</h5>
-                      <div class='d-flex'>
-                        <h6 class='mx-2'>: {item.quantity}</h6>
-                        <div class=''>
+                </div>
+               </div>
+               <div>
+<div >
+</div>
+                    <div class='d-flex justify-content-center 'style={{marginLeft:'40px'}}>
                           <AiOutlineMinus
                             onClick={() => { deleteCopy(item.bookId) }}
                             class='mx-3'
                             style={{ marginBottom: '5px', cursor: 'pointer' }}
                           />
-                          <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
+                     <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
+                    <BsTrash style={{ marginBottom:'5px', marginLeft:'3px', cursor: 'pointer' }} onClick={() => { deleteThisBook(item.id) }} />
                         </div>
                       </div>
-                    </div>
-                    <BsTrash style={{ marginLeft: '85px', marginTop: '15px', cursor: 'pointer' }} onClick={() => { deleteThisBook(item.id) }} />
-                  </div>
-                </div>
-              </div>
+               </div>
             )
           })}
         </div>
