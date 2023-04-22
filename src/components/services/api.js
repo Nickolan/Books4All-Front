@@ -35,8 +35,8 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-    (response)=> {
-        console.log('response interceptor', response)
+    async (response)=> {
+         console.log(' hresponse interceptor',  response)
         return response;
     },
     (error) => {
