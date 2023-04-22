@@ -32,6 +32,7 @@ const initialState = {
   order: "",
   profile: {},
   dbUser:{},
+  role: {}
 };
 
 
@@ -117,6 +118,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         dbUser: action.payload,
+        role: action.payload.Roles.at(-1)
       }
     }
     case ADD_CART: {

@@ -15,11 +15,8 @@ import CartDetail from "./components/CartDetail/CartDetail";
 import { instance } from "./components/services/api";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-/* axios.defaults.baseURL =
-  "https://books4all-back-production-0533.up.railway.app/"; */
-// axios.defaults.baseURL = "http://localhost:3001/";
-axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/"; 
-//axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/"; 
+axios.defaults.baseURL = "http://localhost:3001/";
 
 
 
