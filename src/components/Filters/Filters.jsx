@@ -7,23 +7,20 @@ import style from './styles.module.css'
 
 const Filters = ({ setCurrentPage }) => {
 
-    const books = useSelector(state => state.allBooks);
+    const books = useSelector(state => state.books);
     const filter = useSelector(state => state.filters)
 
-    let bookCategories = books.map(book => book.categories ? book.categories[0] : 'Art');
-
-    bookCategories = Array.from(new Set(bookCategories));
-    bookCategories = bookCategories.sort();
+    let categories_ = [];
+    books.forEach(book => book.categories?.map(categorie => categories_.push(categorie)));
+    categories_ = Array.from(new Set(categories_));
+    categories_ = categories_.sort()
 
     let authors_ = [];
-
     books.forEach(book => book.authors?.map(authors => authors_.push(authors)))
-
     authors_ = Array.from(new Set(authors_))
     authors_ = authors_.sort();
 
-    console.log(authors_)
-
+   
     const dispatch = useDispatch();
 
 
@@ -49,7 +46,7 @@ const Filters = ({ setCurrentPage }) => {
             <div className={style.border}>
                 <select class='border-0 bg-light' style={{ textTransform: 'uppercase', width: '120px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', }} value={filter.category} onChange={handleOnChangeCategory}>
                     <option value='all'>All Genres</option>
-                    {bookCategories?.map((category, index) => {
+                    {categories_?.map((category, index) => {
                         return (
                             <option value={category} key={index}>{category}</option>
                         )

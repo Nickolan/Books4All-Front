@@ -1,22 +1,31 @@
 
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy } from "../../Redux/actions"
+import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar } from "../../Redux/actions"
 import { useNavigate } from "react-router-dom"
 import style from '../Sidebar/Sidebar.module.css'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs';
-import { useEffect } from 'react';
 
 
-export const Sidebar = ({ onClose, isOpen }) => {
+export const Sidebar = () => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
+  const isOpen = useSelector(state => state.sidebarState);
   console.log(cart);
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  let totalAmount = cart.reduce(
+    (accumulator, book1) => accumulator + Number(book1.subtotal),
+    0
+  );
+  totalAmount = totalAmount.toFixed(2);
+
   // función para vaciar por completo el cart
   const handleClose = () => {
     dispatch(deleteCart())
+  }
+  const closeSidebar = () => {
+    dispatch(sideBar())
   }
 
   //Elimina un elemento del carrito con todas sus copias
@@ -38,65 +47,63 @@ export const Sidebar = ({ onClose, isOpen }) => {
 
   const goToBuy = () => {
     navigate('/cart')
+    closeSidebar();
   }
 
   return (
-    <div style={{ transform: isOpen ? 'translateX(0)' : 'translateX(100%)' }}>
-      <div className={style.sidebar}>
-        <div className='d-flex justify-content-center' style={{marginBottom:'10px'}}>
-        <button type="button" class="btn-close" style={{ color:'white', borderRadius:'50%',fontSize: '30px'}} aria-label="Close" onClick={onClose}>
-          x
-        </button>
-        </div>
-        <h2 id="offcanvasDarkLabel" style={{ fontSize: '20px', color:'white'}}>Shopping Cart</h2>
-        <div class='d-flex flex-column border p-0' style={{ overflow: 'auto', height: '500px', marginBottom:'5px', backgroundColor: '#ffffffcb' }}  >
-          {cart?.map((item, index) => {
-            return (
-              <div key={index} style={{ margin: "5px 5px 5px 5px", height: '200px', backgroundColor: '#ffffff', boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.3)' , padding:'15px'}}>
-                <div className='d-flex flex-start '>
-                <img src={item.image} alt='not found' style={{ width: '60px' }} />
-                <div className='d-flex justify-content-lg-start flex-column'>
-                    <h4 class='w-100' style={{ fontSize: '13px',marginTop:'5px', marginRight:'60px'}} ><strong>{item.title}</strong></h4>
-                        <h6 style={{ marginRight:'10px',fontSize: '16px'}} >Quantity: {item.quantity}</h6>
-                      <h5 style={{ fontSize: '15px' }}>Subtotal: ${item.subtotal}</h5>
-
-                </div>
-               </div>
-               <div>
-<div >
-</div>
-                    <div class='d-flex justify-content-center 'style={{marginLeft:'40px'}}>
-                    
-                    {item.quantity > 1 ? (
-
-                            <AiOutlineMinus
-                              onClick={() => { deleteCopy(item.bookId) }}
-                              class='mx-3'
-                              style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
-                            />
-
-                          ) :
-                            <AiOutlineMinus
-                              class='mx-3'
-                              style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
-                            />
-                          }
-                    
-                          
-                     <AiOutlinePlus class='mx-3' onClick={() => { addCopy(item.bookId) }}  style={{ marginBottom: '5px', cursor: 'pointer' }} />
-                    <BsTrash style={{ marginBottom:'5px', marginLeft:'3px', cursor: 'pointer' }} onClick={() => { deleteThisBook(item.id) }} />
+    <div className={!isOpen ? style.sidebarBack : style.sidebarBackOpen}>
+      <div className={style.barContainer}>
+        <div className={style.sideBar}>
+          <div className={style.barContent}>
+            <div className={style.modalColumn1}>
+              <div className={style.barHeader}>
+                <h4 >My Shopping Cart</h4>
+                <button className={style.sideHide} onClick={closeSidebar}>
+                  &times;
+                </button>
+              </div>
+              {cart?.map((item, index) => {
+                return (
+                  <div key={index} className={style.card}>
+                    <img src={item.image} alt='not found' />
+                    <div className={style.cardDetails}>
+                      <div class='d-flex' className={style.title}>
+                        <h4><strong>{item.title}</strong></h4>
+                        <div className={style.deleteButton}>
+                          <BsTrash onClick={() => { deleteThisBook(item.id) }} />
                         </div>
                       </div>
-               </div>
-            )
-          })}
+                      <div className={style.priceContainer}>
+                        <div className={style.quantity}>
+                          {item.quantity > 1 ? <AiOutlineMinus onClick={() => { deleteCopy(item.bookId) }} className={style.down} />
+                            :
+                            <AiOutlineMinus className={style.inactiveDown} />
+                          }
+                          <span>{item.quantity}</span>
+                          <AiOutlinePlus onClick={() => { addCopy(item.bookId) }} className={style.up} />
+                        </div>
+                        <div >
+                          <h5>${item.subtotal}</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className={style.barFooter}>
+            <div className={style.total}>
+              <span>Total:  </span>
+              <span>${totalAmount}</span>
+            </div>
+            <div className={style.cartButtons}>
+              <button onClick={goToBuy} type="button" class="btn btn-dark">Go to cart</button>
+              <button onClick={handleClose} type="button" class="btn btn-secondary">Clear cart</button>
+            </div>
+            <p>You will see the promotions and shipping cost applied at checkout</p>
+          </div>
         </div>
-        <button type="button" onClick={goToBuy} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
-          Go to cart
-        </button>
-        <button type="button" onClick={handleClose} class="btn btn-outline-success" style={{ margin: '20px 0 0 150px' }}>
-          Clear cart
-        </button>
       </div>
     </div>
   )
