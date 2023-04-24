@@ -48,10 +48,14 @@ export default function CartDetail(props) {
           <p>There are no books in your shopping cart</p>
         ) : (
           <>
-            <div className="books-container">
+            <div className="books-container d-flex flex-row ">
               {cart.map((book) => (
-                <div className="book-card" key={book.bookId}>
-                  <img src={book.image} alt="Not Found" />
+                <div className="book-card  border border-0" key={book.bookId}>
+                  <img
+                    src={book.image}
+                    class="border border-0"
+                    alt="Not Found"
+                  />
                   <div className="book-info">
                     <h2>{book.title}</h2>
                     <h3>{book.author}</h3>
@@ -63,41 +67,57 @@ export default function CartDetail(props) {
                       </p>
                       <div>
                         {book.quantity > 1 ? (
-
                           <AiOutlineMinus
-                            onClick={() => { deleteCopy(book.bookId) }}
-                            class='mx-3'
-                            style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }}
+                            onClick={() => {
+                              deleteCopy(book.bookId);
+                            }}
+                            class="mx-3"
+                            style={{
+                              marginBottom: "5px",
+                              cursor: "pointer",
+                              fontSize: "24px",
+                            }}
                           />
-
-                        ) :
+                        ) : (
                           <AiOutlineMinus
-                            class='mx-3'
-                            style={{ marginBottom: '5px', color: 'gray', fontSize: '20px' }}
+                            class="mx-3"
+                            style={{
+                              marginBottom: "5px",
+                              color: "gray",
+                              fontSize: "20px",
+                            }}
                           />
-                        }
-                        <AiOutlinePlus class='mx-3' onClick={() => { addCopy(book.bookId) }} style={{ marginBottom: '5px', cursor: 'pointer', fontSize: '24px' }} />
+                        )}
+                        <AiOutlinePlus
+                          class="mx-3"
+                          onClick={() => {
+                            addCopy(book.bookId);
+                          }}
+                          style={{
+                            marginBottom: "5px",
+                            cursor: "pointer",
+                            fontSize: "24px",
+                          }}
+                        />
                       </div>
                     </div>
                     <button onClick={() => deleteThisBook(book.id)}>
                       Remove
-
                       {/* <button onClick={() => handleRemoveBook(book.bookId)}> */}
-
                     </button>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="cart-summary">
-              <h2>Cart Detail</h2>
-              <p>Titles Total Amount: {cart.length}</p>
-              <p>Books Total Amount: {totalCopy}</p>
-              <p>Total Due: ${totalAmount} USD</p>
-              <PayButton cart={cart}>Checkout</PayButton>
-            </div>
           </>
         )}
+      </div>
+      <div className="cart-summary">
+        <h2>Cart Detail</h2>
+        <p>Titles Total Amount: {cart.length}</p>
+        <p>Books Total Amount: {totalCopy}</p>
+        <p>Total Due: ${totalAmount} USD</p>
+        <PayButton cart={cart}>Checkout</PayButton>
       </div>
       <Footer />
     </div>
