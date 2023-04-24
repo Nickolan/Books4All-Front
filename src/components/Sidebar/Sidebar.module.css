@@ -1,8 +1,7 @@
 .sidebar {
     position: fixed;
-    top: 10px;
-
-    left: -16vw;
+    top: 17px;
+    left: -19.3vw;
     right: 0;
     height: 100vh !important;
     width: 20.3vw;
@@ -18,5 +17,6 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 25px !important;
+
 
 }
