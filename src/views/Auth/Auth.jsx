@@ -13,7 +13,7 @@ import { getUserFromDb } from "../../Redux/actions";
 export default function Auth(){
 
     const { isLoading, error, user, isAuthenticated } = useAuth0();
-
+    
     const dispatch = useDispatch();
 
     const dbUser = useSelector(state=>state.dbUser);
