@@ -18,8 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {  useSelector } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Dashboard } from "./views/Dashboard/Dashboard";
-axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
-//axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
 
