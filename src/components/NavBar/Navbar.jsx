@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../LoginButton/LoginButton";
-export default function Navbar(){
+export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
     const role= useSelector(state=> state.role)
 
@@ -34,6 +34,7 @@ export default function Navbar(){
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
 
             <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
+
             {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
             <li>
             {!isAuthenticated ? <LoginButton /> :
@@ -45,5 +46,6 @@ export default function Navbar(){
         </div>
         </div>
         </nav>  
+
     );
 }
