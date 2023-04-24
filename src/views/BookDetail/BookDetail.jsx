@@ -13,7 +13,10 @@ import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
 
 
+
+
 const BookDetail = (props) => {
+
     const dispatch = useDispatch();
     const { bookId } = useParams();
     const { loginWithPopup, isAuthenticated, user } = useAuth0();
@@ -21,7 +24,6 @@ const BookDetail = (props) => {
     PostUser(user, isAuthenticated)
     
     const eachBook = useSelector((state) => state.bookDetail)
-
     const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
     setCart('cart', cart)
@@ -40,7 +42,7 @@ const BookDetail = (props) => {
     }
     const handleShowReview = () => {
         
-        !isAuthenticated? loginWithPopup()
+        !isAuthenticated ? loginWithPopup()
         :
         setShowReview(!showReview)
     }
@@ -70,14 +72,16 @@ const BookDetail = (props) => {
     const handleRest = () => {
         setCounter(--counter)
     }
-
+    
 
     useEffect(() => {
-         
+        console.log('render')
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [bookId, dispatch]);
+},  [showReview]);
+
+
 
 
     return (
@@ -125,13 +129,11 @@ const BookDetail = (props) => {
                                 </div>
                                 {show && <p className={style.descriptionContent}>{el.description}</p>}
                                 <hr />
-                                <div >
-                                    <h3 className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
+                                    <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
                                         return (
                                             <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating} />
                                         )
-                                    }) : ""}</h3>
-                                </div>
+                                    }) : ""}</div>
                             </div>
                         </div>
                     )
@@ -140,7 +142,7 @@ const BookDetail = (props) => {
                 <div className={style.buttonContainer}>
                     <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
                 </div>
-                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} handleShowReview={handleShowReview} />}
+                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview}/>}
 
             </div>
             <Footer />

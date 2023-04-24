@@ -13,8 +13,12 @@ import Auth from './views/Auth/Auth';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CartDetail from "./components/CartDetail/CartDetail";
 import { instance } from "./components/services/api";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/"; 
 axios.defaults.baseURL = "http://localhost:3001/";
+
+
 
 
 function App() {
@@ -33,6 +37,10 @@ function App() {
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
       </Routes>
+      <ToastContainer
+      position="top-center"
+      limit={2}
+      />
     </div>
   );
 }
