@@ -48,6 +48,7 @@ export default function CartDetail(props) {
         {cart.length === 0 ? (
           <p>There are no books in your shopping cart</p>
         ) : (
+
           <div className="allContainer">
             <div className="books-container">
               <div className="cardHeader">
@@ -89,6 +90,7 @@ export default function CartDetail(props) {
                         <BsTrash onClick={() => { deleteThisBook(book.id) }} />
                       </div>
                     </div>
+
                   </div>
                 </div>
               ))}
@@ -115,7 +117,17 @@ export default function CartDetail(props) {
 
             </div>
           </div>
+
+          </>
+
         )}
+      </div>
+      <div className="cart-summary">
+        <h2>Cart Detail</h2>
+        <p>Titles Total Amount: {cart.length}</p>
+        <p>Books Total Amount: {totalCopy}</p>
+        <p>Total Due: ${totalAmount} USD</p>
+        <PayButton cart={cart}>Checkout</PayButton>
       </div>
       <Footer />
     </div>

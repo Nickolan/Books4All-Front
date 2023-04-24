@@ -1,5 +1,6 @@
 .sidebarBack {
     position: fixed;
+
     top: 0;
     left: 0;
     width: 100%;
@@ -204,6 +205,7 @@
 }
 
 .barFooter {
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -237,5 +239,6 @@
     width: 350px;
     font-weight: bold;
     font-size: 24px;
+
 
 }
