@@ -34,16 +34,18 @@ export default function Navbar() {
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
 
             <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
-                        {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
-                        <li>
-                            {!isAuthenticated ? <LoginButton /> :
-                                <Link to="/profile" className="nav-link">{"perfil"}</Link>
-                            }
-                        </li>
-                        <CartWidget />
-                    </ul>
-                </div>
-            </div>
-        </nav>
+
+            {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
+            <li>
+            {!isAuthenticated ? <LoginButton /> :
+                <Link to="/profile" className="nav-link">{"myProfile"}</Link>
+                }
+            </li>
+            <CartWidget/>
+            </ul>
+        </div>
+        </div>
+        </nav>  
+
     );
 }
