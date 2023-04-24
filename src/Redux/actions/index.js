@@ -16,6 +16,9 @@ export const DELETE_CART = "DELETE_CART";
 export const ADD_ONE_COPY = 'ADD_ONE_COPY';
 export const DELETE_ONE_COPY = 'DELETE_ONE_COPY';
 export const CURRENT_USER = 'CURRENT_USER';
+export const SIDE_BAR = 'SIDE_BAR';
+export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
+
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -111,16 +114,27 @@ export const deleteCart = () => {
 };
 
 export const addOneCopy = (itemID) => {
-  return { type: ADD_ONE_COPY, payload: itemID }
+  return { type: ADD_ONE_COPY, payload: itemID };
 };
 
 export const deleteOneCopy = (itemID) => {
-  return { type: DELETE_ONE_COPY, payload: itemID }
+  return { type: DELETE_ONE_COPY, payload: itemID };
 };
 
 export const getUserFromDb = (name) => {
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:3001/users/${name}`);
-    return dispatch ({type: CURRENT_USER, payload: response.data});
+
+    const response = await axios.get(`/users/${name}`);
+
+
+    return dispatch({ type: CURRENT_USER, payload: response.data });
   }
+};
+
+export const sideBar = () => {
+  return { type: SIDE_BAR }
 }
+export const sideBarClose = () => {
+  return { type: CLOSE_SIDEBAR }
+}
+

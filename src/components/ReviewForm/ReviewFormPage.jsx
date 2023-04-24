@@ -1,29 +1,32 @@
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import { createReview } from "../../Redux/actions";
-import style from '../ReviewForm/ReviewFormPage.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import { createReview, getUserFromDb } from "../../Redux/actions";
+import style from '../ReviewForm/ReviewFormPage.module.css';
 import { useAuth0 } from "@auth0/auth0-react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export const ReviewFormPage = ({id, handleShowReview, reviews}) =>{
+export const ReviewFormPage = ({id, setShowReview, showReview, reviews}) =>{
 
 const dispatch = useDispatch();
 
 const navigate= useNavigate();
+
 const { user, isAuthenticated } = useAuth0();
+
+const dbUser = useSelector(state=>state.dbUser);
 
 
 const [form, setForm] = useState({
-  user_name: user.nickname,
+  user_name: dbUser?.name,
   body: '',
   book_id: id,
   rating: '',
 });
 
 const [errors, setErrors] = useState({
-  user_name: '',
   body: '',
-  book_id: '',
   rating: '',
 });
 
@@ -54,36 +57,29 @@ const submitHandler = (event) =>{
         let repeated = reviews.filter(rev => rev.user_name === form.user_name)
         if (repeated.length > 0) {
           event.preventDefault()
-          alert('This user has already submitted a review.');
-        } else {
-
-          dispatch(createReview(form));
-          let errorsArray = Object.keys(errors);
-          console.log(errorsArray)
-          errorsArray.length === 0? alert('Success! New Review created')
-          : alert('Error! Please verify data');
-
-          navigate( `/bookDetail/${id}`);
-
-          handleShowReview()
-    
-
-
-        // setForm({
-        // body: '',
-        // book_id: '',
-        // rating: '',
-        // user_name: '',
-        // });
+          setShowReview(!showReview)
+          toast.error('This user already sent a review')
+        }
+        else if (Object.keys(errors).length) {
+          event.preventDefault()
+          toast.warning('fill in the missing fields to continue')
+        }
+         else {
+          event.preventDefault();
+          dispatch( createReview(form)).then( result => setShowReview(!showReview)).then(result => toast.success('Review succesfully posted'));
     }
   }
+
+  useEffect (()=> {
+    isAuthenticated && dispatch(getUserFromDb(user?.nickname))
+  })
 
  return(
 <div className={style.mainContainer}>
         <div className={style.content}>
               <form onSubmit={submitHandler}>
                 <div className={style.closeButtonContainer}>
-                <img src="https://res.cloudinary.com/dvldakcin/image/upload/v1681711512/Countries/close_2_snehxr.png" alt='' className={style.closeButton} onClick={handleShowReview}/>
+                <img src="https://res.cloudinary.com/dvldakcin/image/upload/v1681711512/Countries/close_2_snehxr.png" alt='' className={style.closeButton} onClick={()=>setShowReview(!showReview)}/>
                 </div>
                 <div className='container-sm .bg-light'>
                 <div className='container-sm .bg-light'>
