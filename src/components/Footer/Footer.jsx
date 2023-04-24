@@ -10,7 +10,7 @@ export default function Footer(){
                     <Link to="/about" className="text-light text-decoration-none">About us</Link>
                     </div>
                     <div className="col-sm d-flex flex-row-reverse">
-                     <span className="text-light alig-items-end">©Book4all</span>
+                     <span className="text-light alig-items-end">©Books4all</span>
                     </div>
                 </div>
             </div>

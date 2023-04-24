@@ -118,8 +118,6 @@ export default function CartDetail(props) {
             </div>
           </div>
 
-          </>
-
         )}
       </div>
       <div className="cart-summary">
