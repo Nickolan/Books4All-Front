@@ -13,7 +13,10 @@ import {
   DELETE_CART,
   ADD_ONE_COPY,
   DELETE_ONE_COPY,
-  CURRENT_USER
+  CURRENT_USER,
+  SIDE_BAR,
+  sideBar,
+  CLOSE_SIDEBAR
 } from "../actions";
 import { getCart } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
@@ -31,8 +34,9 @@ const initialState = {
   },
   order: "",
   profile: {},
-  dbUser:{},
-  role: {}
+  dbUser: {},
+  role: {},
+  sidebarState: false
 };
 
 
@@ -198,6 +202,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: newCart2
       }
+
+      case SIDE_BAR: 
+      return {
+        ...state,
+        sidebarState: !state.sidebarState
+      }
+      case CLOSE_SIDEBAR:
+        return {
+          ...state,
+          sidebarState: false
+        }
 
     default:
       return {

@@ -15,6 +15,8 @@ import CartDetail from "./components/CartDetail/CartDetail";
 import { instance } from "./components/services/api";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {  useSelector } from "react-redux";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 // axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/"; 
 axios.defaults.baseURL = "http://localhost:3001/";
 
@@ -22,8 +24,15 @@ axios.defaults.baseURL = "http://localhost:3001/";
 
 
 function App() {
+
+  const isOpen = useSelector(state => state.sidebarState);
+  const cart = useSelector(state => state.cart)
+
   return (
-    <div>
+
+
+    <div style={isOpen ?{position:'fixed'}:{}}>
+      {isOpen && <Sidebar booksAdded={cart} />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
@@ -33,7 +42,7 @@ function App() {
         <Route path='/cart' element={<CartDetail />} />
         <Route path='/checkout-success' element={<CheckoutSuccess />} />
         <Route path='/profile' element={<Auth />} />
-        <Route path='/auth' element={<Auth />}/>
+        <Route path='/auth' element={<Auth />} />
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
       </Routes>

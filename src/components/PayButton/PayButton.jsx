@@ -37,8 +37,8 @@ export const PayButton = ({cart}) =>{
 
     return(
         user?
-        <button type = "button" className = "btn btn-primary" onClick={handleCheckout}>Checkout</button>
+        <button type = "button" className = "btn btn-dark" onClick={handleCheckout}>Checkout</button>
         :
-        <button type = "button" className = "btn btn-primary " onClick={handleUnauthorizedUser}>Please Sign In to Buy</button>
+        <button type = "button" className = "btn btn-dark " onClick={handleUnauthorizedUser}>Please Sign In to Buy</button>
     )
 }
