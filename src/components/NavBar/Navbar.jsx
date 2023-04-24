@@ -32,7 +32,7 @@ export default function Navbar(){
             {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
             <li>
             {!isAuthenticated ? <LoginButton /> :
-                <Link to="/profile" className="nav-link">{"perfil"}</Link>
+                <Link to="/profile" className="nav-link">{"myProfile"}</Link>
                 }
             </li>
             <CartWidget/>

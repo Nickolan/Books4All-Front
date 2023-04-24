@@ -120,7 +120,7 @@ export const deleteOneCopy = (itemID) => {
 
 export const getUserFromDb = (name) => {
   return async function (dispatch) {
-    const response = await axios.get(`http://localhost:3001/users/${name}`);
+    const response = await axios.get(`/users/${name}`);
     return dispatch ({type: CURRENT_USER, payload: response.data});
   }
 }
