@@ -2,14 +2,15 @@ import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { deleteCart } from "../../Redux/actions";
+import { deleteCart, getEventType } from "../../Redux/actions";
 
 
 const CheckoutSuccess = ()=>{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(deleteCart())
+        // dispatch(deleteCart())
+        dispatch(getEventType())
     }, [])
 
     return(

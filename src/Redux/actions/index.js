@@ -18,6 +18,7 @@ export const DELETE_ONE_COPY = 'DELETE_ONE_COPY';
 export const CURRENT_USER = 'CURRENT_USER';
 export const SIDE_BAR = 'SIDE_BAR';
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
+export const GET_EVENT_TYPE = 'GET_EVENT_TYPE';
 
 
 export const getBookDetail = (bookId) => {
@@ -137,4 +138,13 @@ export const sideBar = () => {
 export const sideBarClose = () => {
   return { type: CLOSE_SIDEBAR }
 }
-
+export const getEventType = () => {
+  try {
+    return async function (dispatch) {
+    const response = await axios.get(`/stripe/webhook`);
+      return dispatch({type: GET_EVENT_TYPE, payload: response.data
+      });
+      };
+    }catch(error){
+        console.log(error)
+      }}
