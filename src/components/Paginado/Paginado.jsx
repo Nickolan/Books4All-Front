@@ -7,7 +7,6 @@ const Paginado = ({ booksPerPage, numberBooks, setPage, currentPage, indexFirstB
     const MaxPageNumbers = 5;
     const pageNumber = [];
     const totalPages = Math.ceil(numberBooks / booksPerPage);
-    console.log(totalPages);
     let startPage = 1;
     if (totalPages > MaxPageNumbers) {
         if (currentPage > MaxPageNumbers - 2) {
@@ -21,7 +20,6 @@ const Paginado = ({ booksPerPage, numberBooks, setPage, currentPage, indexFirstB
         pageNumber.push(i);
     }
 
-    console.log(pageNumber);
 
     const renderPageNumbers = () => {
         let pageButtons = [];

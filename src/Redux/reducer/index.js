@@ -16,13 +16,15 @@ import {
   CURRENT_USER,
   SIDE_BAR,
   sideBar,
-  CLOSE_SIDEBAR
+  CLOSE_SIDEBAR,
+  GET_USERS
 } from "../actions";
 import { getCart } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
 
 const initialState = {
   books: [],
+  allUsers: [],
   allBooks: [],
   reviews: [],
   images: [],
@@ -212,6 +214,11 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           sidebarState: false
+        }
+      case GET_USERS:
+        return {
+          ...state,
+          allUsers: action.payload
         }
 
     default:

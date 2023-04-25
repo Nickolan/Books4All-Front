@@ -1,7 +1,9 @@
 import Navbar from "../../components/NavBar/Navbar";
 import {useSelector, useDispatch}from 'react-redux'
-import { deleteOneBook } from "../../Redux/actions";
+import { deleteOneBook, getUserFromDb } from "../../Redux/actions";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 import { setCart } from "../../Redux/actions/localStorage";
 
 export default function Cart(){
@@ -12,12 +14,16 @@ export default function Cart(){
     const price= []
     const cartPrice= cart.map((book)=>((book.price)))
     const id= cart.map((book)=>book.bookId)
+    const { user } = useAuth0();
     price.push(cartPrice)
 
     const handleClose=(id)=>{
         dispatch(deleteOneBook(id))
-        
-      }
+    }
+    useEffect(() => {
+      dispatch(getUserFromDb(user?.nickname))
+    }, [])
+
 
     return(
         <>

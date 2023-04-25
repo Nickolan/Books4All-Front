@@ -15,7 +15,6 @@ export default function Carrusel1(props) {
 
   useEffect(() => {
     dispatch(getImages());
-    console.log(images);
   }, []);
 
   const images = books.map((book) => book.image).slice(10, 30); //me devuelve un array de las primeras 10 imágenes

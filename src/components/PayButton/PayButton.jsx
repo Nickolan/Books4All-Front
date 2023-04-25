@@ -19,7 +19,6 @@ export const PayButton = ({cart}) =>{
 
     const handleCheckout = () =>{
 
-        console.log(cart);
             instance.post(`${url}/create-checkout-session`,{
                 cart,
                 // userId: user_id,

@@ -18,6 +18,7 @@ export const DELETE_ONE_COPY = 'DELETE_ONE_COPY';
 export const CURRENT_USER = 'CURRENT_USER';
 export const SIDE_BAR = 'SIDE_BAR';
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
+export const GET_USERS = 'GET_USERS';
 
 
 export const getBookDetail = (bookId) => {
@@ -43,7 +44,6 @@ export const createReview = (payload) => {
       var info = await instance.post(`/reviews`, payload);
       return info;
     } catch (error) {
-      console.log("Error del Create", error.message);
       throw new Error({ error: error.message });
     }
   };
@@ -138,3 +138,9 @@ export const sideBarClose = () => {
   return { type: CLOSE_SIDEBAR }
 }
 
+export const getUsers = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get("/users");
+    return dispatch({ type: GET_USERS, payload: apiData.data });
+  };
+};

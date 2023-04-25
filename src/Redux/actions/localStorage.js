@@ -2,7 +2,6 @@ export const getCart = (key) => {
   if (localStorage.getItem(key)) {
     return JSON.parse(localStorage.getItem(key));
   }
-  console.log("localStorage empty");
 };
 
 export const setCart = (key, data) => {
