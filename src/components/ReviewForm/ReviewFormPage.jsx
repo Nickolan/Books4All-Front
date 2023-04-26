@@ -6,6 +6,9 @@ import style from '../ReviewForm/ReviewFormPage.module.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import StarsRating from '../StarsRating/StarsRating'
+
+
 
 export const ReviewFormPage = ({id, setShowReview, showReview, reviews}) =>{
 
@@ -51,9 +54,6 @@ const validate = (form) => {
 
 const submitHandler = (event) =>{
 
-
-
-
         let repeated = reviews.filter(rev => rev.user_name === form.user_name)
         if (repeated.length > 0) {
           event.preventDefault()
@@ -72,7 +72,7 @@ const submitHandler = (event) =>{
 
   useEffect (()=> {
     isAuthenticated && dispatch(getUserFromDb(user?.nickname))
-  })
+  },[]) 
 
  return(
 <div className={style.mainContainer}>
@@ -90,7 +90,8 @@ const submitHandler = (event) =>{
                 <div className='container-sm .bg-light'>
                 <label htmlFor="rating" class="font-weight-bold"> Rating </label>
                 <hr/>
-                <input className={errors.rating && style.error} type='text' value={form.rating} onChange={changeHandler} name='rating' />
+                {/* <input className={errors.rating && style.error} type='text' value={form.rating} onChange={changeHandler} name='rating' /> */}
+                <StarsRating value={form.rating} className={errors.rating && style.error} onChange={changeHandler} name='rating' /> 
                 <br/>
                 <span>{errors.rating? errors.rating : ""}</span> 
                 </div>
