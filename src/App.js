@@ -18,7 +18,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { getBooks, getUserFromDb, getUsers } from "./Redux/actions";
+import { getBooks, getUserFromDb, getUsers, getDeletedBooks } from "./Redux/actions";
 import { PostUser } from "./components/PostUser/PostUser";
 import { useAuth0 } from "@auth0/auth0-react";
 // axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
@@ -42,12 +42,11 @@ function App() {
     logout()
   }
   useEffect(() => {
-    dispatch(getUsers())
-    if (user) {
-      dispatch(getUserFromDb(user?.nickname))
-    }
     dispatch(getBooks())
-  }, [dispatch, user])
+    dispatch(getUsers())
+    dispatch(getDeletedBooks())
+  }, [])
+
 
   return (
 
