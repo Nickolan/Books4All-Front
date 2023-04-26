@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const url = "https://books4all-back-production-0533.up.railway.app/api/stripe";
+export const url = "https://books4all-back-production-bd65.up.railway.app/api/stripe";
+
 
 export const setHeaders = () => {
   const headers = {
@@ -13,7 +14,8 @@ export const setHeaders = () => {
 };
 
 
-const BASE_URL = "https://books4all-back-production-0533.up.railway.app";
+const BASE_URL = "https://books4all-back-production-bd65.up.railway.app";
+
 
 export const instance = axios.create({
     baseURL: BASE_URL,
