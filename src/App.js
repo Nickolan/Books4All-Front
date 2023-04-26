@@ -1,35 +1,57 @@
 import "./App.css";
+import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./views/Home/Home";
 import About from "./views/About/About";
 import Books from "./views/Books/Books";
-import Events from "./views/Events/Events";
-import Error from "./views/Error/Error";
 import { BookDetail } from "./views/BookDetail/BookDetail";
-import "bootstrap/dist/css/bootstrap.min.css";
-import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
-import axios from "axios";
-import Auth from "./views/Auth/Auth";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Events from "./views/Events/Events";
 import CartDetail from "./components/CartDetail/CartDetail";
+import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
+import Auth from "./views/Auth/Auth";
+import Error from "./views/Error/Error";
+import Dashboard from "./views/Dashboard/Dashboard";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 import { instance } from "./components/services/api";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {  useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { Dashboard } from "./views/Dashboard/Dashboard";
-axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
+import { getBooks, getUserFromDb, getUsers, getDeletedBooks } from "./Redux/actions";
+import { PostUser } from "./components/PostUser/PostUser";
+import { useAuth0 } from "@auth0/auth0-react";
+axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
 //axios.defaults.baseURL = "http://localhost:3001/";
 
-function App() {
 
+function App() {
+  const dispatch = useDispatch();
   const isOpen = useSelector(state => state.sidebarState);
   const cart = useSelector(state => state.cart)
+
+  const dbUser = useSelector((state) => state.dbUser);
+  const { user, logout, isAuthenticated, } = useAuth0();
+
+  console.log(useAuth0());
+
+  PostUser(user, isAuthenticated)
+
+
+  if (dbUser.active === false) {
+    logout()
+  }
+  useEffect(() => {
+    dispatch(getBooks())
+    dispatch(getUsers())
+    dispatch(getDeletedBooks())
+  }, [])
+
 
   return (
 
 
-    <div style={isOpen ?{position:'fixed'}:{}}>
+    <div style={isOpen ? { position: 'fixed' } : {}}>
       {isOpen && <Sidebar booksAdded={cart} />}
       <Routes>
 

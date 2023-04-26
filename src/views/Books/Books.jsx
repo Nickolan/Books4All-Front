@@ -34,13 +34,9 @@ export default function Books() {
     }
 
     useEffect(() => {
-        dispatch(getBooks())
-               .then(() => {
-                dispatch(filterByCategory(genreFilter))
-                dispatch(filterByAuthor(authorFilter))
-                dispatch(alphabeticalOrder(orderType))
-            
-            })
+            dispatch(filterByCategory(genreFilter))
+            dispatch(filterByAuthor(authorFilter))
+            dispatch(alphabeticalOrder(orderType))
     }, [])
 
     return (

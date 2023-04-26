@@ -16,10 +16,10 @@ const CartWidget = () => {
     }
 
     return (
-        <div className=" pb-1">
+        <div className="position-relative pb-1">
             {<AiOutlineShoppingCart class='nav-item fs-5' className={style.cart} onClick={handleClick} />}
 
-            {cart.length && <span className='text-white w-100 mb-4 '>{cart.length}</span>}
+            {cart.length ? <span className='position-absolute text-white w-100 mb-4 '>{cart.length}</span> : <span className='position-absolute text-white w-100 mb-4 '></span>}
 
         </div>
 
