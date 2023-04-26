@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 export const PayButton = () => {
     const cart = useSelector((state) => state.cart);
     const user = useSelector((state) => state.dbUser);
-    const { loginWithPopup } = useAuth0();
+    const { loginWithPopup, isAuthenticated } = useAuth0();
 
     const handleCheckout = () => {
         const bodyCart = {
@@ -26,7 +26,7 @@ export const PayButton = () => {
     }
 
     return (
-        user ?
+        isAuthenticated ?
             <button type="button" className="btn btn-dark" onClick={handleCheckout}>Checkout</button>
             :
             <button type="button" className="btn btn-dark " onClick={handleUnauthorizedUser}>Please Sign In to Buy</button>
