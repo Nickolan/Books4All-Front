@@ -17,7 +17,7 @@ import {
   SIDE_BAR,
   sideBar,
   CLOSE_SIDEBAR,
-  GET_USERS
+  GET_USERS,
   GET_EVENT_TYPE
 } from "../actions";
 import { getCart } from "../actions/localStorage";
