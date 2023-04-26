@@ -18,7 +18,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {  useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { getBooks } from "./Redux/actions";
+import { getBooks, getUsers, getDeletedBooks } from "./Redux/actions";
 // axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
 axios.defaults.baseURL = "http://localhost:3001/";
 
@@ -29,6 +29,8 @@ function App() {
 
   useEffect(() => {
     dispatch(getBooks())
+    dispatch(getUsers())
+    dispatch(getDeletedBooks())
   }, [])
 
   return (

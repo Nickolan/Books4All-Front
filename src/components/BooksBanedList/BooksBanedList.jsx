@@ -1,32 +1,32 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { getBooks, getDeletedBooks } from "../../Redux/actions";
-function BooksList({books}) {
+import { getDeletedBooks, getUsers, getBooks } from "../../Redux/actions";
+function BooksBanedList({banBooks}) {
     const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState(1)
     const booksForPage = 12;
     const lastBook = currentPage * booksForPage;
     const firstBook = lastBook - booksForPage;
-    const currentBooks = books.slice(firstBook, lastBook);
+    const currentBooks = banBooks.slice(firstBook, lastBook);
     const pageNumber = [];
  
-    for (let i = 1; i <= Math.ceil(books.length / booksForPage); i++) {
+    for (let i = 1; i <= Math.ceil(banBooks.length / booksForPage); i++) {
         pageNumber.push(i)
     }
 
     const handleStateChange = (event) => {
         let title = event.target.value
         axios.put(`/admin/booksState/${title}`)
-        .then(() => dispatch(getBooks()))
         .then(() => dispatch(getDeletedBooks()))
+        .then(() => dispatch(getBooks()))
     }
 
     return (
         <div>
             <div class='d-flex justify-content-around'>
                 <div>
-                    <h1>BOOKS</h1>
+                    <h1>BLOCKED BOOKS</h1>
                 </div>
                 <div class='border border-3 d-flex'>
                     <div>
@@ -109,4 +109,4 @@ function BooksList({books}) {
     )
 }
 
-export default BooksList;
+export default BooksBanedList;

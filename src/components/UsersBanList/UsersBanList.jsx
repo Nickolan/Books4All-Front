@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { getUsers } from "../../Redux/actions"
-function UsersList({users}) {
+function UsersBanList({inactiveUsers}) {
     const dispatch = useDispatch();
 
     const handleStateChange = (event) => {
@@ -13,7 +13,7 @@ function UsersList({users}) {
 
     return (
         <div>
-            <h1>USERS</h1>
+            <h1>USERS BlOCKED</h1>
             <div class="border border-2 border-dark d-flex flex-row justify-content-around">
                 <div>
                     <h3>Name</h3>
@@ -35,7 +35,7 @@ function UsersList({users}) {
                 </div>
             </div>
             <div>
-                {users?.map((user) => {
+                {inactiveUsers?.map((user) => {
                     return(
                         <div className="border border-2 border-dark d-flex flex-row justify-content-around">
                             <div>
@@ -66,4 +66,4 @@ function UsersList({users}) {
     )
 }
 
-export default UsersList
+export default UsersBanList

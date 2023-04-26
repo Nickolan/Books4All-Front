@@ -17,8 +17,9 @@ import {
   SIDE_BAR,
   sideBar,
   CLOSE_SIDEBAR,
-  GET_USERS
-  GET_EVENT_TYPE
+  GET_USERS,
+  GET_EVENT_TYPE,
+  GET_DELETED_BOOKS
 } from "../actions";
 import { getCart } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
@@ -27,6 +28,7 @@ const initialState = {
   books: [],
   allUsers: [],
   allBooks: [],
+  banBooks: [],
   reviews: [],
   images: [],
   bookDetail: [],
@@ -227,6 +229,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         event: action.payload,
       };
+      case GET_DELETED_BOOKS:
+        return {
+          ...state,
+          banBooks: action.payload
+        }
 
     default:
       return {
