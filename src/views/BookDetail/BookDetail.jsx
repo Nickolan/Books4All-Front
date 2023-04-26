@@ -75,7 +75,6 @@ const BookDetail = (props) => {
     
 
     useEffect(() => {
-        console.log('render')
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }

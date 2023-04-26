@@ -24,27 +24,20 @@ export default function Navbar() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNav">
-                    <ul className="navbar-nav" style={{ width: '350px', alignItems: 'center', justifyContent: 'space-around', fontFamily: 'Montserrat, sans-serif' }}>
-
-                        <li className="nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
-                        <li className="nav-item"><Link to="/about" className="nav-link" >About</Link></li>
-                        <li className="nav-item"><Link to="/books" className="nav-link">Books</Link></li>
-                    {isAuthenticated && role.name==='admin' ?   <li className="nav-item"><Link to="/dashboard" className="nav-link">dashboard</Link></li>: null}
+                    <ul className="navbar-nav me-5" style={{ width: '350px', alignItems: 'center', justifyContent: 'space-around', fontFamily: 'Montserrat, sans-serif' }}>
+                        <li className="position-relative nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
+                        <li className="position-relative nav-item"><Link to="/about" className="nav-link" >About</Link></li>
+                        <li className="position-relative nav-item"><Link to="/books" className="nav-link">Books</Link></li>
+                        {isAuthenticated && role.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
-
-            <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
-
-            {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
-            <li>
-            {!isAuthenticated ? <LoginButton /> :
-                <Link to="/profile" className="nav-link">{"myProfile"}</Link>
-                }
-            </li>
-            <CartWidget/>
-            </ul>
-        </div>
-        </div>
+                        <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
+                        {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
+                        <li className="position-relative">{!isAuthenticated ? <LoginButton /> : <Link to="/profile" className="nav-link">{"myProfile"}</Link>}</li>
+                        <CartWidget/>
+                    </ul>
+                </div>
+            </div>
         </nav>  
 
     );

@@ -12,7 +12,6 @@ const setup = (store) => {
         config.headers["x-access-token"] = token; // for Node.js Express back-end
       }
       setHeaders();
-      console.log(token);
       return config;
     },
     (error) => {
