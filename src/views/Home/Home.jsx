@@ -25,7 +25,6 @@ export default function Home(){
         logout()
     }
     useEffect(() =>{
-        dispatch(getBooks())
         dispatch(getUsers())
         if (user) {
             dispatch(getUserFromDb(user?.nickname))
