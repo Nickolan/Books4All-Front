@@ -16,11 +16,13 @@ import axios from "axios";
 import { instance } from "./components/services/api";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {  useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { getBooks } from "./Redux/actions";
-axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
-// axios.defaults.baseURL = "http://localhost:3001/";
+import { getBooks, getUserFromDb, getUsers } from "./Redux/actions";
+import { PostUser } from "./components/PostUser/PostUser";
+import { useAuth0 } from "@auth0/auth0-react";
+// axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 
 function App() {
@@ -28,14 +30,29 @@ function App() {
   const isOpen = useSelector(state => state.sidebarState);
   const cart = useSelector(state => state.cart)
 
+  const dbUser = useSelector((state) => state.dbUser);
+  const { user, logout, isAuthenticated, } = useAuth0();
+
+  console.log(useAuth0());
+
+  PostUser(user, isAuthenticated)
+
+
+  if (dbUser.active === false) {
+    logout()
+  }
   useEffect(() => {
+    dispatch(getUsers())
+    if (user) {
+      dispatch(getUserFromDb(user?.nickname))
+    }
     dispatch(getBooks())
-  }, [])
+  }, [dispatch, user])
 
   return (
 
 
-    <div style={isOpen ?{position:'fixed'}:{}}>
+    <div style={isOpen ? { position: 'fixed' } : {}}>
       {isOpen && <Sidebar booksAdded={cart} />}
       <Routes>
 
