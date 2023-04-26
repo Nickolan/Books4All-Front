@@ -20,6 +20,7 @@ export const SIDE_BAR = 'SIDE_BAR';
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
 export const GET_USERS = 'GET_USERS';
 export const GET_EVENT_TYPE = 'GET_EVENT_TYPE';
+export const GET_DELETED_BOOKS = 'GET_DELETED_BOOKS';
 
 
 export const getBookDetail = (bookId) => {
@@ -154,3 +155,14 @@ export const getEventType = () => {
     }catch(error){
         console.log(error)
       }}
+
+export const getDeletedBooks = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.get('/books/blocked');
+      return dispatch({type: GET_DELETED_BOOKS, payload: response.data})
+    }
+  } catch (error) {
+    
+  }
+}

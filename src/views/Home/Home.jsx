@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
@@ -7,7 +7,7 @@ import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooks, getUserFromDb, getUsers } from "../../Redux/actions";
+import { getUserFromDb } from "../../Redux/actions";
 import { instance } from "../../components/services/api";
 import { setCart } from "../../Redux/actions/localStorage";
 import { PostUser } from "../../components/PostUser/PostUser";
@@ -27,12 +27,10 @@ export default function Home() {
     if (dbUser.active === false) {
         logout()
     }
-    useEffect(() => {
-        dispatch(getUsers())
+    useEffect(() =>{
         if (user) {
             dispatch(getUserFromDb(user?.nickname))
         }
-        dispatch(getBooks())
     }, [dispatch, user])
 
     return (
