@@ -28,7 +28,6 @@ export default function CartDetail(props) {
 
   const addCopy = (id) => {
     dispatch(addOneCopy(id));
-    console.log(id);
   };
 
   const deleteCopy = (id) => {

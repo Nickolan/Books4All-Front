@@ -7,7 +7,7 @@ import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0} from "@auth0/auth0-react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooks, getUserFromDb } from "../../Redux/actions";
+import { getBooks, getUserFromDb, getUsers } from "../../Redux/actions";
 import { instance } from "../../components/services/api";
 import { setCart } from "../../Redux/actions/localStorage";
 import { PostUser } from "../../components/PostUser/PostUser";
@@ -15,12 +15,17 @@ import { PostUser } from "../../components/PostUser/PostUser";
 export default function Home(){
     const dispatch= useDispatch()
     const cart=useSelector(state=>state.cart)
-    const {  user, isAuthenticated } = useAuth0();
+    const dbUser = useSelector((state) => state.dbUser);
+    const {  user, logout, isAuthenticated, } = useAuth0();
    
     PostUser(user, isAuthenticated)
 
-    useEffect(()=>{
-        dispatch(getBooks())
+    
+    if (dbUser.active === false) {
+        logout()
+    }
+    useEffect(() =>{
+        dispatch(getUsers())
         if (user) {
             dispatch(getUserFromDb(user?.nickname))
         }

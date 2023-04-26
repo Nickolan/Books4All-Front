@@ -22,7 +22,6 @@ export default function Auth(){
 
 
     useEffect( ()=> {
-            console.log('render')
             dispatch(getUserFromDb(user?.nickname))
     },[url])
  
