@@ -9,7 +9,7 @@ const CheckoutSuccess = ()=>{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(deleteCart())
+         dispatch(deleteCart())
         dispatch(getEventType())
     }, [])
 
