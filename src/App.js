@@ -34,7 +34,7 @@ function App() {
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated, } = useAuth0();
 
-  console.log(useAuth0());
+ 
 
   PostUser(user, isAuthenticated)
 
