@@ -17,8 +17,7 @@ export default function Navbar() {
    
 
     const onHandlerClick=(event)=>{
-        dispatch( changeTheme(event.target.innerHTML))
-    
+        dispatch( changeTheme(event.target.innerHTML))   
     }
 
 
