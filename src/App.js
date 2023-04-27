@@ -36,6 +36,7 @@ function App() {
 
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated } = useAuth0();
+  const theme = useSelector((state) => state.theme);
 
   PostUser(user, isAuthenticated);
 
@@ -50,7 +51,8 @@ function App() {
       dispatch(getUserFromDb(user?.nickname));
     }
     dispatch(getDeletedBooks());
-  }, []);
+    document.body.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   return (
     <div style={isOpen ? { position: "fixed" } : {}}>

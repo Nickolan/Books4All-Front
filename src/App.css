@@ -37,4 +37,12 @@
   }
 }
 
+body.light {
+  background-color: #fff;
+  color: #333;
+}
 
+body.dark {
+  background-color: #1a1919;
+  color: #fff;
+}
