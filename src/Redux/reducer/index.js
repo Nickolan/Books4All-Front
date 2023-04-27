@@ -1,3 +1,4 @@
+import { theme } from "@cloudinary/url-gen/actions/effect";
 import {
   FILTER_BY_AUTHOR,
   FILTER_BY_CATEGORY,
@@ -22,7 +23,7 @@ import {
   GET_DELETED_BOOKS,
   CHANGE_THEME,
 } from "../actions";
-import { getCart } from "../actions/localStorage";
+import { getCart, getTheme } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
 
 const initialState = {
@@ -44,7 +45,7 @@ const initialState = {
   role: {},
   sidebarState: false,
   event: [],
-  theme: "",
+  theme: getTheme("theme") || "",
 };
 
 const rootReducer = (state = initialState, action) => {
