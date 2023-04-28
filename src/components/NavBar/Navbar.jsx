@@ -36,11 +36,12 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNav">
                     <ul className="navbar-nav me-5" style={{ width: '350px', alignItems: 'center', justifyContent: 'space-around', fontFamily: 'Montserrat, sans-serif' }}>
+                        {theme==='dark'&&  <li className="position-relative nav-item"> <button className='btn btn-light' onClick={onHandlerClick} value={'light'}>light</button></li>}
+                  {theme==='light' &&    <li className="position-relative nav-item"> <button className='btn btn-dark' onClick={onHandlerClick} value={'dark'}>dark</button></li>}
                         <li className="position-relative nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
                         <li className="position-relative nav-item"><Link to="/about" className="nav-link" >About</Link></li>
                         <li className="position-relative nav-item"><Link to="/books" className="nav-link">Books</Link></li>
-                        {theme==='dark'&&  <li className="position-relative nav-item"> <button className='btn btn-light' onClick={onHandlerClick} value={'light'}>light</button></li>}
-                  {theme==='light' &&    <li className="position-relative nav-item"> <button className='btn btn-dark' onClick={onHandlerClick} value={'dark'}>dark</button></li>}
+                     
                         {isAuthenticated && role.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
