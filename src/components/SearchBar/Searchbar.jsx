@@ -61,13 +61,18 @@ export default function Searchbar({ setCurrentPage }) {
             <div class='d-flex align-self-end '> 
                 {name && <button class='bg-light mx-2 ' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
                 <div className="d-flex input_btn " style={{ height: '40px', width: '250px', padding: '5px', alignItems: 'center', justifyContent: 'center', }}>
-                 {theme==='light'?   <input id="inputSearch" class="input_sb  "
+                 {theme==='light'?  
+                    <div>
+                 <input id="inputSearch" class="input_sb  "
                         type='text'
                         autoComplete="off"
                         placeholder="Search your perfect book"
                         onChange={(e) => handleInputChange(e)} value={name}
                         style={{ fontFamily: 'Work Sans, sans-serif', fontWeight: 'bold', height: '30px', backgroundColor:'black', color:'white' }}
-                    />:
+                    />
+                    </div>
+                    :
+                    <div className="bg-light">
                     <input id="inputSearch" class="input_sb  "
                         type='text'
                         autoComplete="off"
@@ -75,10 +80,11 @@ export default function Searchbar({ setCurrentPage }) {
                         onChange={(e) => handleInputChange(e)} value={name}
                         style={{ fontFamily: 'Work Sans, sans-serif', fontWeight: 'bold', height: '30px', background:'white', color:'black' }}
                     />
+                         </div>
                     }
                  
-                  
                     <FiSearch type="submit" class="btn_sb" onClick={(e) => handleSubmit(e)} />
+                  
                 </div>
             </div>
             {searchStatement && name?
