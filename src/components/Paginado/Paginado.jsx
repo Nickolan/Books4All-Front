@@ -63,7 +63,7 @@ const Paginado = ({ booksPerPage, numberBooks, setPage, currentPage, indexFirstB
     };
 
     return (
-        <div class='mx-auto mt-1 d-flex flex-column align-items-center justify-content-center bg-light p-2 ' style={{ width: '900px', fontFamily:'Work Sans, sans-serif', color:'gray' }}>
+        <div class='mx-auto mt-1 d-flex flex-column align-items-center justify-content-center bg-light p-3 ' style={{ width: '900px', fontFamily:'Work Sans, sans-serif', color:'gray' }}>
             <div className={style.pagination} class=' bg-light'>{renderPageNumbers()}</div>
             <div class='d-flex mt-2 bg-light'>
                 {numberBooks && <span className={style.showing}>showing {indexFirstBook + 1} - {indexFirstBook + currentBooks.length} from {numberBooks} books</span>}
