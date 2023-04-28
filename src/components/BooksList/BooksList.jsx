@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getBooks, getDeletedBooks } from "../../Redux/actions";
 function BooksList({books}) {
@@ -20,6 +21,10 @@ function BooksList({books}) {
         axios.put(`/admin/booksState/${title}`)
         .then(() => dispatch(getBooks()))
         .then(() => dispatch(getDeletedBooks()))
+    }
+
+    const handleChangeBookDet = (event) => {
+        alert(event.target.value)
     }
 
     return (
@@ -74,7 +79,7 @@ function BooksList({books}) {
                         <h3>State</h3>
                     </div>
                 </div>
-                <div>
+                <div >
                     {currentBooks.map((book) => {
                         return(
                             <div className="border border-2 border-dark d-flex flex-row justify-content-around">
@@ -94,13 +99,17 @@ function BooksList({books}) {
                                     <h4>{book.stock}</h4>
                                 </div>
                                 <div>
-                                    <img src={book.image} onError='https://islandpress.org/sites/default/files/default_book_cover_2015.jpg' alt="" />
+                                    <img src={book.image} alt="" />
                                 </div>
                                 <div>
                                 {book.active === false ? <button class="btn btn-danger" onClick={handleStateChange} value={book.title} >Inactive</button> 
                                 : <button class="btn btn-success" onClick={handleStateChange} value={book.title} >Active</button>}
                                 </div>
-                                <div></div>
+                                <div>
+                                    <Link to={`/bookDetail/${book.id}`}>
+                                    <button class='btn btn-info'>Details</button>
+                                    </Link>
+                                </div>
                             </div>
                         )
                     })}
