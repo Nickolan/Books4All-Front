@@ -11,6 +11,7 @@ import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 import Auth from "./views/Auth/Auth";
 import Error from "./views/Error/Error";
 import Dashboard from "./views/Dashboard/Dashboard";
+import UpdateBookForm from "./components/UpdateBookForm/UpdateBookForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { instance } from "./components/services/api";
@@ -26,7 +27,7 @@ import {
 } from "./Redux/actions";
 import { PostUser } from "./components/PostUser/PostUser";
 import { useAuth0 } from "@auth0/auth0-react";
-// axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
+//axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -37,13 +38,12 @@ function App() {
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated } = useAuth0();
   const theme = useSelector((state) => state.theme);
-
-  PostUser(user, isAuthenticated);
+  const book = useSelector(state => state.bookDetail)
+  PostUser(user, isAuthenticated)
 
   if (dbUser.active === false) {
     logout();
   }
-
   useEffect(() => {
     dispatch(getBooks());
     dispatch(getUsers());
@@ -70,6 +70,7 @@ function App() {
         <Route path="/404" element={<Error />} />
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />
       </Routes>
       <ToastContainer position="top-center" limit={2} />
     </div>

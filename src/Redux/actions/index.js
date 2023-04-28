@@ -25,7 +25,7 @@ export const CHANGE_THEME = "CHANGE_THEME";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
-    var info = await axios.get(`/books/${bookId}`);
+    const info = await axios.get(`/books/${bookId}`);
     return dispatch({
       type: GET_BOOK_DETAIL,
       payload: info.data,
