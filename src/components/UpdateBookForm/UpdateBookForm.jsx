@@ -65,7 +65,7 @@ function UpdateBookForm({book}) {
         event.preventDefault();
         axios.put(`/admin/modify/${idBook}`, form)
         .catch((err) => console.log(err))
-        // navigate(-1)
+        navigate(-1)
 
     };
 
@@ -89,7 +89,7 @@ function UpdateBookForm({book}) {
             <div>
                 <input type="text" name="stock" value={form.stock} placeholder="Stock" onChange={handlerChange} />
             </div>
-            <div>
+            {/* <div>
                 {form.Reviews?.map((rev) => {
                     return(
                         <div class='d-flex justify-content-between'>
@@ -109,7 +109,7 @@ function UpdateBookForm({book}) {
                         
                     )
                 })}
-            </div>
+            </div> */}
             <div>
                 <textarea name="description" value={form.description} placeholder="Description" onChange={handlerChange} cols="30" rows="10"></textarea>
             </div>

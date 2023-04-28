@@ -20,7 +20,8 @@ export default function Home() {
 
 
     if (dbUser.active === false) {
-        logout()
+        window.alert("This user is blocked")
+        .then(() => logout())
     }
     useEffect(() => {
         dispatch(getUsers())
