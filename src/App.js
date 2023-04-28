@@ -21,8 +21,11 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 import { getBooks, getUserFromDb, getUsers, getDeletedBooks } from "./Redux/actions";
 import { PostUser } from "./components/PostUser/PostUser";
 import { useAuth0 } from "@auth0/auth0-react";
-axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
-//axios.defaults.baseURL = "http://localhost:3001/";
+import FormCreateBook from './components/FormCreateBook/FormCreateBook'
+
+
+// axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 
 
@@ -68,6 +71,7 @@ function App() {
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/formCreateBook" element={<FormCreateBook />} />
 
       </Routes>
       <ToastContainer position="top-center" limit={2} />
