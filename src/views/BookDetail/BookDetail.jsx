@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBookDetail, addToCart } from '../../Redux/actions'
+import { getBookDetail, addToCart, getUserFromDb } from '../../Redux/actions'
 import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
@@ -24,6 +24,8 @@ const BookDetail = (props) => {
     PostUser(user, isAuthenticated)
     
     const eachBook = useSelector((state) => state.bookDetail)
+    const role = useSelector((state) => state.role)
+
     const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
     setCart('cart', cart)
@@ -78,7 +80,8 @@ const BookDetail = (props) => {
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [showReview]);
+        dispatch(getUserFromDb(user?.nickname))
+},  [showReview, user]);
 
 
 
@@ -119,6 +122,12 @@ const BookDetail = (props) => {
                                             }
 
                                         </div>
+                                            <div>
+                                            {
+                                                role.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
+                                                
+                                            }
+                                            </div>
 
                                     </div>
                                 </div>
@@ -130,7 +139,7 @@ const BookDetail = (props) => {
                                 <hr />
                                     <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
                                         return (
-                                            <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating} />
+                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} />
                                         )
                                     }) : ""}</div>
                             </div>

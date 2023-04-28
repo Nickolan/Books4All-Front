@@ -1,24 +1,17 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
 import style from '../Card/Card.module.css'
 
 import { BsCartPlus } from 'react-icons/bs';
 import { addToCart } from "../../Redux/actions";
+import { FavButton } from "../FavButton/FavButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
-function Card({ name, author, image, categories, bookId, price }) {
+function Card({ name, author, image, categories, bookId, price, isFav }) {
     const dispatch = useDispatch();
-    const [isFav, setIsFav] = useState(false)
+    const { user,  isAuthenticated } = useAuth0();
     // add useSelector in initialState with myFavorites
-
-    function handleFavorites() {
-        if (isFav) {
-            setIsFav(false);
-        } else {
-            setIsFav(true);
-        }
-    }
 
     const handleClickAddCart = (event) => {
         function generarIdUnico() {
@@ -35,19 +28,22 @@ function Card({ name, author, image, categories, bookId, price }) {
     }
 
     
+
+    
     return (
 
-        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "380px", padding: "14px" }}>
-            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
-            <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
-                {/* {isFav ? (
-            <button class="d-block w-1 justify-content-end align-items-start" onClick={handleFavorites}>❤️</button>
-        ) : (
-            <button class="d-block w-1 align-items-start justify-content-end" onClick={handleFavorites}>🤍</button>
-        )} */}
-                <div class="d-flex flex-column">
+        <div class="m-3 d-inline-block bg-light " style={{ width: "180px", height: "380px", padding: "14px" }}>
+            
+                <div class="d-flex flex-row">
+                  <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
+                  {isAuthenticated && <FavButton name={name} book_id={bookId} isFav={isFav} />}
+                </div>
+            <Link style={{ textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
+                
+                <div class="d-flex flex-column bg-light">
 
-                    <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto", backgroundColor: "black" }}>
+
+                    <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto" }}>
                         {image ? <img style={{ width: "140px", height: "200px" }} src={image} alt="book" />
                             : <img style={{ width: "140px", height: "200px" }} src={noImage} alt="not found" />
                         }
@@ -63,6 +59,7 @@ function Card({ name, author, image, categories, bookId, price }) {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "14px",
+                        color:"black"
 
                     }}>
                         {name}
@@ -75,6 +72,7 @@ function Card({ name, author, image, categories, bookId, price }) {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             marginLeft:'3px',
+                            color:"black"
 
                         }} class="text-xs ">{author}</p>
                         <p style={{ fontSize: "13px", color: "#088000",  marginLeft:'3px', marginTop:'0' }}><small>{categories}</small></p>

@@ -16,6 +16,7 @@ export default function Searchbar({ setCurrentPage }) {
     function handleInputChange(e) {
         e.preventDefault()
         setName(e.target.value)
+        dispatch(getNameBooks(e.target.value))
 
 
     }
@@ -51,7 +52,7 @@ export default function Searchbar({ setCurrentPage }) {
             <div class='d-flex align-self-end'>
                 {searchStatement && <button class='bg-light mx-2' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
                 <div className="d-flex input_btn " style={{ height: '40px', width: '250px', padding: '5px', alignItems: 'center', justifyContent: 'center', }}>
-                    <input id="inputSearch" class="input_sb bg-none "
+                    <input id="inputSearch" class="input_sb  "
                         type='text'
                         autoComplete="off"
                         placeholder="Search your perfect book"

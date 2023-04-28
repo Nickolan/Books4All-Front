@@ -2,12 +2,23 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget'
 import {useSelector} from 'react-redux';
-
+import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../LoginButton/LoginButton";
+import { changeTheme } from "../../Redux/actions";
+import { setTheme } from "../../Redux/actions/localStorage";
+
 export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
     const role= useSelector(state=> state.role)
+    const theme = useSelector((state) => state.theme);
+    
+    const dispatch= useDispatch()
+   
+    setTheme('theme',theme)
+    const onHandlerClick=(event)=>{
+        dispatch( changeTheme(event.target.value))   
+    }
 
 
     return (
@@ -25,15 +36,19 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNav">
                     <ul className="navbar-nav me-5" style={{ width: '350px', alignItems: 'center', justifyContent: 'space-around', fontFamily: 'Montserrat, sans-serif' }}>
+                        {theme==='dark'&&  <li className="position-relative nav-item"> <button className='btn btn-light' onClick={onHandlerClick} value={'light'}>light</button></li>}
+                  {theme==='light' &&    <li className="position-relative nav-item"> <button className='btn btn-dark' onClick={onHandlerClick} value={'dark'}>dark</button></li>}
                         <li className="position-relative nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
                         <li className="position-relative nav-item"><Link to="/about" className="nav-link" >About</Link></li>
                         <li className="position-relative nav-item"><Link to="/books" className="nav-link">Books</Link></li>
+                     
                         {isAuthenticated && role.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
                         <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
                         {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
                         <li className="position-relative">{!isAuthenticated ? <LoginButton /> : <Link to="/profile" className="nav-link">{"myProfile"}</Link>}</li>
+                        
                         <CartWidget/>
                     </ul>
                 </div>
