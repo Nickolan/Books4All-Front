@@ -16,8 +16,8 @@ const CartWidget = () => {
     }
 
     return (
-        <div className="position-relative pb-1">
-            {<AiOutlineShoppingCart class='nav-item fs-5' className={style.cart} onClick={handleClick} />}
+        <div className="position-relative pb-1 text-white">
+            {<AiOutlineShoppingCart class='nav-item fs-5 text-white' className={style.cart} onClick={handleClick} />}
 
             {cart.length ? <span className='position-absolute text-white w-100 mb-4 '>{cart.length}</span> : <span className='position-absolute text-white w-100 mb-4 '></span>}
 

@@ -1,9 +1,9 @@
-.containerCart {
+/* .containerCart {
     color: white;
-}
+} */
 
 .cart {
-    color: rgb(173, 157, 157);
+/*     color: rgb(173, 157, 157); */
     font-size: 25px;
     transition: transform 0.5s;
     cursor: pointer;
@@ -11,7 +11,7 @@
 
 .cart:hover {
     transform: rotate(-12deg);
-    color: rgb(250, 250, 250);
+/*     color: rgb(250, 250, 250); */
     cursor: pointer;
 }
 
