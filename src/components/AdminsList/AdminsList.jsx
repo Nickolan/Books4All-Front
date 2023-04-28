@@ -37,7 +37,7 @@ function AdminsList({admins}) {
                                 <h4>{admin.Roles.at(-1).name}</h4>
                             </div>
                             <div class=''>
-                                <img src={admin.picture} onError='https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png' alt=""/>
+                                <img src={admin.picture}  alt=""/>
                             </div>
                         </div>
                     )

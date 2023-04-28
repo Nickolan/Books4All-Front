@@ -10,6 +10,11 @@ function UsersList({users}) {
         .then(() => dispatch(getUsers()))
         .catch((error) => alert(error));
     }
+    const makeAdmin = (event) => {
+        axios.put('users/admin', {name: event.target.value})
+        .then(() => alert('new admin'))
+        .catch((error) => alert(error));
+    }
 
     return (
         <div>
@@ -49,6 +54,7 @@ function UsersList({users}) {
                             </div>
                             <div>
                                 <h4>{user.Roles.at(-1).name}</h4>
+                                <button class='btn btn-info' value={user.name} onClick={makeAdmin}>Switch to admin</button>
                             </div>
                             <div>
                                 {user.active === false ? <button class="btn btn-danger" value={user.name} onClick={handleStateChange}>Inactive</button> 
@@ -56,7 +62,7 @@ function UsersList({users}) {
                                 
                             </div>
                             <div class=''>
-                                <img src={user.picture} onError='https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png' alt=""/>
+                                <img src={user.picture} alt=""/>
                             </div>
                         </div>
                     )

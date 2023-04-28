@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBookDetail, addToCart } from '../../Redux/actions'
+import { getBookDetail, addToCart, getUserFromDb } from '../../Redux/actions'
 import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import Navbar from '../../components/NavBar/Navbar';
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
+import { toast } from 'react-toastify';
 
 
 
@@ -22,8 +23,10 @@ const BookDetail = (props) => {
     const { loginWithPopup, isAuthenticated, user } = useAuth0();
 
     PostUser(user, isAuthenticated)
-    
+
     const eachBook = useSelector((state) => state.bookDetail)
+    const role = useSelector((state) => state.role)
+
     const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
     setCart('cart', cart)
@@ -37,14 +40,33 @@ const BookDetail = (props) => {
 
     const navigate = useNavigate()
 
+    const dbUser = useSelector(state => state.dbUser);
+
+    let bookIds = [];
+
+    dbUser.Boughts?.forEach(function (bought) {
+        bought.books.forEach(function (book) {
+            bookIds.push(book.bookId);
+        });
+    });
+
+
+
     const clickHandler = () => {
         setShow(!show)
     }
     const handleShowReview = () => {
-        
-        !isAuthenticated ? loginWithPopup()
-        :
-        setShowReview(!showReview)
+        if (!isAuthenticated) {
+            window.alert("please sign up for leave a review")
+            loginWithPopup()
+        } else {
+            let isBought = bookIds?.find(Id => Id === bookId)
+            if (isBought) {
+                setShowReview(!showReview)
+            } else {
+                toast.error('If you want to leave a review you must buy this book')
+            }
+        }
     }
 
     const handleClick = () => {
@@ -64,21 +86,22 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-                
-       
+
+
 
     }
 
     const handleRest = () => {
         setCounter(--counter)
     }
-    
+
 
     useEffect(() => {
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-},  [showReview]);
+        dispatch(getUserFromDb(user?.nickname))
+},  [showReview, user]);
 
 
 
@@ -119,6 +142,12 @@ const BookDetail = (props) => {
                                             }
 
                                         </div>
+                                            <div>
+                                            {
+                                                role.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
+                                                
+                                            }
+                                            </div>
 
                                     </div>
                                 </div>
@@ -130,7 +159,7 @@ const BookDetail = (props) => {
                                 <hr />
                                     <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
                                         return (
-                                            <ReviewCard body={el.body} user_name={el.user_name} rating={el.rating} />
+                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} />
                                         )
                                     }) : ""}</div>
                             </div>
@@ -141,7 +170,7 @@ const BookDetail = (props) => {
                 <div className={style.buttonContainer}>
                     <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
                 </div>
-                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview}/>}
+                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview} />}
 
             </div>
             <Footer />
@@ -150,4 +179,3 @@ const BookDetail = (props) => {
     );
 }
 export { BookDetail };
-

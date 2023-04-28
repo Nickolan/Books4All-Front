@@ -1,7 +1,7 @@
 import React from "react";
 import Card from '../../components/Card/Card'
 
-function Cards({books}) {
+function Cards({books, favorites}) {
     return (
         <div class='row'>
         {
@@ -16,6 +16,7 @@ function Cards({books}) {
                             image={book.image}
                             categories={book.categories}
                             price={book.price}
+                            isFav={favorites.includes(book.title)}
                         />
                     </div>
                 )
