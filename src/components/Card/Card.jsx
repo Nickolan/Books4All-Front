@@ -33,13 +33,12 @@ function Card({ name, author, image, categories, bookId, price, isFav }) {
     return (
 
         <div class="m-3 d-inline-block bg-light " style={{ width: "180px", height: "380px", padding: "14px" }}>
-            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none'}}> <BsCartPlus style={{fontSize:'1.1rem', color:'black',backgroundColor:'white'}} /> </button>
-            <Link style={{ textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
             
                 <div class="d-flex flex-row">
                   <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
                   {isAuthenticated && <FavButton name={name} book_id={bookId} isFav={isFav} />}
                 </div>
+            <Link style={{ textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
                 
                 <div class="d-flex flex-column bg-light">
 
