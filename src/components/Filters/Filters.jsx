@@ -41,7 +41,7 @@ const Filters = ({ setCurrentPage }) => {
 
 
     return (
-        <div class='d-flex align-items-center'  >
+        <div class='d-flex align-items-center '  >
             <span class='fw-bold' style={{ marginRight: '10px' }}>FILTER BY:</span>
             <div className={style.border}>
                 <select class='border-0 bg-light' style={{ textTransform: 'uppercase', width: '120px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', }} value={filter.category} onChange={handleOnChangeCategory}>
@@ -59,7 +59,7 @@ const Filters = ({ setCurrentPage }) => {
                     {
                         authors_.map((author, index) => {
                             return (
-                                <option value={author} key={index}>{author}</option>
+                                <option class= 'bg-light'value={author} key={index}>{author}</option>
                             )
                         })
                     }

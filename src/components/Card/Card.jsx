@@ -37,17 +37,17 @@ function Card({ name, author, image, categories, bookId, price }) {
     
     return (
 
-        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "380px", padding: "14px" }}>
-            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
-            <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
+        <div class="m-3 d-inline-block bg-light " style={{ width: "180px", height: "380px", padding: "14px" }}>
+            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
+            <Link style={{ textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
                 {/* {isFav ? (
             <button class="d-block w-1 justify-content-end align-items-start" onClick={handleFavorites}>❤️</button>
         ) : (
             <button class="d-block w-1 align-items-start justify-content-end" onClick={handleFavorites}>🤍</button>
         )} */}
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column bg-light">
 
-                    <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto", backgroundColor: "black" }}>
+                    <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto" }}>
                         {image ? <img style={{ width: "140px", height: "200px" }} src={image} alt="book" />
                             : <img style={{ width: "140px", height: "200px" }} src={noImage} alt="not found" />
                         }
