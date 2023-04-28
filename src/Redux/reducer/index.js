@@ -1,4 +1,3 @@
-import { theme } from "@cloudinary/url-gen/actions/effect";
 import {
   FILTER_BY_AUTHOR,
   FILTER_BY_CATEGORY,
@@ -45,7 +44,7 @@ const initialState = {
   role: {},
   sidebarState: false,
   event: [],
-  theme: getTheme("theme") || "",
+  theme: getTheme("theme") || "light",
 };
 
 const rootReducer = (state = initialState, action) => {

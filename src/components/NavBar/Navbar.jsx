@@ -12,12 +12,12 @@ export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
     const role= useSelector(state=> state.role)
     const theme = useSelector((state) => state.theme);
-    setTheme('theme',theme)
+    
     const dispatch= useDispatch()
    
-
+    setTheme('theme',theme)
     const onHandlerClick=(event)=>{
-        dispatch( changeTheme(event.target.innerHTML))   
+        dispatch( changeTheme(event.target.value))   
     }
 
 
@@ -39,8 +39,8 @@ export default function Navbar() {
                         <li className="position-relative nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
                         <li className="position-relative nav-item"><Link to="/about" className="nav-link" >About</Link></li>
                         <li className="position-relative nav-item"><Link to="/books" className="nav-link">Books</Link></li>
-                  {theme==='dark'&&   <li className="position-relative nav-item"> <button onClick={onHandlerClick} >light</button></li>}
-                  {theme==='light'&&    <li className="position-relative nav-item"> <button onClick={onHandlerClick}>dark</button></li>}
+                        {theme==='dark'&&  <li className="position-relative nav-item"> <button className='btn btn-light' onClick={onHandlerClick} value={'light'}>light</button></li>}
+                  {theme==='light' &&    <li className="position-relative nav-item"> <button className='btn btn-dark' onClick={onHandlerClick} value={'dark'}>dark</button></li>}
                         {isAuthenticated && role.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
