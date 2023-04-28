@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url = "http://localhost:3001/api/stripe";
+export const url = "https://books4all-back-production-bd65.up.railway.app/api/stripe";
 
 
 export const setHeaders = () => {
@@ -14,7 +14,7 @@ export const setHeaders = () => {
 };
 
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://books4all-back-production-bd65.up.railway.app";
 
 
 export const instance = axios.create({
