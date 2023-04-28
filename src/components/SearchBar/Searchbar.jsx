@@ -8,6 +8,7 @@ import { FiSearch } from 'react-icons/fi';
 
 export default function Searchbar({ setCurrentPage }) {
     const dispatch = useDispatch()
+    const theme= useSelector(state=>state.theme)
     const [name, setName] = useState("")
 
     const [searchStatement, setSearchStatement] = useState(false);
@@ -55,17 +56,28 @@ export default function Searchbar({ setCurrentPage }) {
 
 
     return (
-        <div className="d-flex flex-column  mx-auto align-content-between " style={{ width: "80%", height: '150px', margin: '20px 0 10px 0' }}>
-            <div class='d-flex align-self-end'>
-                {name && <button class='bg-light mx-2' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
+        <div className="d-flex flex-column  mx-auto align-content-between " style={{ width: "80%", height: '150px', margin: '20px 0 10px 0'  }}>
+           
+            <div class='d-flex align-self-end '> 
+                {name && <button class='bg-light mx-2 ' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
                 <div className="d-flex input_btn " style={{ height: '40px', width: '250px', padding: '5px', alignItems: 'center', justifyContent: 'center', }}>
+                 {theme==='light'?   <input id="inputSearch" class="input_sb  "
+                        type='text'
+                        autoComplete="off"
+                        placeholder="Search your perfect book"
+                        onChange={(e) => handleInputChange(e)} value={name}
+                        style={{ fontFamily: 'Work Sans, sans-serif', fontWeight: 'bold', height: '30px', backgroundColor:'black', color:'white' }}
+                    />:
                     <input id="inputSearch" class="input_sb  "
                         type='text'
                         autoComplete="off"
                         placeholder="Search your perfect book"
                         onChange={(e) => handleInputChange(e)} value={name}
-                        style={{ fontFamily: 'Work Sans, sans-serif', color: 'gray', fontWeight: 'bold', height: '30px' }}
+                        style={{ fontFamily: 'Work Sans, sans-serif', fontWeight: 'bold', height: '30px', background:'white', color:'black' }}
                     />
+                    }
+                 
+                  
                     <FiSearch type="submit" class="btn_sb" onClick={(e) => handleSubmit(e)} />
                 </div>
             </div>
