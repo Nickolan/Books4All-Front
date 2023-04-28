@@ -5,6 +5,7 @@ import Home from "./views/Home/Home";
 import About from "./views/About/About";
 import Books from "./views/Books/Books";
 import { BookDetail } from "./views/BookDetail/BookDetail";
+import UserBanView from "./views/UserBanView/UserBanView";
 import Events from "./views/Events/Events";
 import CartDetail from "./components/CartDetail/CartDetail";
 import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
@@ -19,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 import {
   getBooks,
   getUserFromDb,
@@ -34,23 +36,28 @@ function App() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.sidebarState);
   const cart = useSelector((state) => state.cart);
-
+  const navigate = useNavigate();
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated } = useAuth0();
   const theme = useSelector((state) => state.theme);
   const book = useSelector(state => state.bookDetail)
+  
   PostUser(user, isAuthenticated)
 
-  if (dbUser.active === false) {
-    logout();
+  const isBlocked = () => {
+    if (dbUser.active === false) {
+      navigate('/UserBlocked')
+    }
   }
+
   useEffect(() => {
     dispatch(getBooks());
     dispatch(getUsers());
     if (user) {
-      dispatch(getUserFromDb(user?.nickname));
+      dispatch(getUserFromDb(user?.nickname))
+      .then(() => isBlocked())
     }
-    dispatch(getDeletedBooks());
+    dispatch(getDeletedBooks())
     document.body.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
@@ -71,6 +78,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />
+        <Route path="/UserBlocked" element={<UserBanView/>} />
       </Routes>
       <ToastContainer position="top-center" limit={2} />
     </div>
