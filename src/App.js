@@ -11,6 +11,7 @@ import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 import Auth from "./views/Auth/Auth";
 import Error from "./views/Error/Error";
 import Dashboard from "./views/Dashboard/Dashboard";
+import UpdateBookForm from "./components/UpdateBookForm/UpdateBookForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { instance } from "./components/services/api";
@@ -30,7 +31,7 @@ function App() {
   const dispatch = useDispatch();
   const isOpen = useSelector(state => state.sidebarState);
   const cart = useSelector(state => state.cart)
-
+  const book = useSelector(state => state.bookDetail)
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated, } = useAuth0();
 
@@ -46,6 +47,7 @@ function App() {
     dispatch(getBooks())
     dispatch(getUsers())
     dispatch(getDeletedBooks())
+    dispatch(getUserFromDb(user?.nickname))
   }, [])
 
 
@@ -68,6 +70,7 @@ function App() {
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />
 
       </Routes>
       <ToastContainer position="top-center" limit={2} />
