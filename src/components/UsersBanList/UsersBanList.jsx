@@ -56,7 +56,7 @@ function UsersBanList({inactiveUsers}) {
                                 
                             </div>
                             <div class=''>
-                                <img src={user.picture} onError='https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png' alt=""/>
+                                <img src={user.picture} alt=""/>
                             </div>
                         </div>
                     )

@@ -75,7 +75,8 @@ function App() {
         <Route path="/404" element={<Error />} />
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />        <Route path="/formCreateBook" element={<FormCreateBook />} />
+        <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />  
+        <Route path="/formCreateBook" element={<FormCreateBook />} />
 
       </Routes>
       <ToastContainer position="top-center" limit={2} />

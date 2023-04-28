@@ -14,9 +14,9 @@ const CheckoutSuccess = ()=>{
     }, [])
 
     return(
-        <div className='container-xl bg-white'>
+        <div className='container-xl '>
         <Navbar/>
-        <div className='container-xl bg-white'>
+        <div className='container-xl '>
         <h2>Checkout Successful!</h2>
         <h5>Your order might take some time to process.</h5>
         <h5>Check your order status at your profile after about 10 minutes.</h5>
