@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { Row, Col, Container, Image } from 'react-bootstrap';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import BoghtCards from './boghtCards';
 
@@ -10,6 +8,7 @@ const ProfileBoughts = () => {
 
     return (
         <div>
+        <h3>My orders</h3>
             {
                 bought?.map((item, index) => {
                     return (
@@ -25,9 +24,7 @@ const ProfileBoughts = () => {
             }
 
         </div>
-
     )
-
 }
 
 export default ProfileBoughts;

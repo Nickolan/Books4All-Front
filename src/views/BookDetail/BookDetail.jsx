@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
+import { toast } from 'react-toastify';
 
 
 
@@ -22,7 +23,7 @@ const BookDetail = (props) => {
     const { loginWithPopup, isAuthenticated, user } = useAuth0();
 
     PostUser(user, isAuthenticated)
-    
+
     const eachBook = useSelector((state) => state.bookDetail)
     const role = useSelector((state) => state.role)
 
@@ -39,14 +40,33 @@ const BookDetail = (props) => {
 
     const navigate = useNavigate()
 
+    const dbUser = useSelector(state => state.dbUser);
+
+    let bookIds = [];
+
+    dbUser.Boughts?.forEach(function (bought) {
+        bought.books.forEach(function (book) {
+            bookIds.push(book.bookId);
+        });
+    });
+
+
+
     const clickHandler = () => {
         setShow(!show)
     }
     const handleShowReview = () => {
-        
-        !isAuthenticated ? loginWithPopup()
-        :
-        setShowReview(!showReview)
+        if (!isAuthenticated) {
+            window.alert("please sign up for leave a review")
+            loginWithPopup()
+        } else {
+            let isBought = bookIds?.find(Id => Id === bookId)
+            if (isBought) {
+                setShowReview(!showReview)
+            } else {
+                toast.error('If you want to leave a review you must buy this book')
+            }
+        }
     }
 
     const handleClick = () => {
@@ -66,15 +86,15 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-                
-       
+
+
 
     }
 
     const handleRest = () => {
         setCounter(--counter)
     }
-    
+
 
     useEffect(() => {
         if (bookId) {
@@ -150,7 +170,7 @@ const BookDetail = (props) => {
                 <div className={style.buttonContainer}>
                     <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
                 </div>
-                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview}/>}
+                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview} />}
 
             </div>
             <Footer />
@@ -159,4 +179,3 @@ const BookDetail = (props) => {
     );
 }
 export { BookDetail };
-

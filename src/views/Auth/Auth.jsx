@@ -43,7 +43,7 @@ export default function Auth() {
           </div>
         </div>
       </div>
-      <ProfileBoughts />
+      {dbUser && <ProfileBoughts />}
       <Footer />
     </div>
   )
