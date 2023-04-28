@@ -16,6 +16,7 @@ export default function Searchbar({ setCurrentPage }) {
     function handleInputChange(e) {
         e.preventDefault()
         setName(e.target.value)
+        dispatch(getNameBooks(e.target.value))
 
 
     }
