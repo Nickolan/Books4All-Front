@@ -19,9 +19,10 @@ import {
   CLOSE_SIDEBAR,
   GET_USERS,
   GET_EVENT_TYPE,
-  GET_DELETED_BOOKS
+  GET_DELETED_BOOKS,
+  CHANGE_THEME,
 } from "../actions";
-import { getCart } from "../actions/localStorage";
+import { getCart, getTheme } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
 
 const initialState = {
@@ -43,9 +44,8 @@ const initialState = {
   role: {},
   sidebarState: false,
   event: [],
+  theme: getTheme("theme") || "light",
 };
-
-
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -128,14 +128,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         dbUser: action.payload,
-        role: action.payload.Roles.at(-1)
-      }
+        role: action.payload.Roles.at(-1),
+      };
     }
     case ADD_CART: {
-      const isItem = state.cart.find(item => item.bookId === action.payload.bookId);
+      const isItem = state.cart.find(
+        (item) => item.bookId === action.payload.bookId
+      );
       const index1 = state.cart.indexOf(isItem);
-      const bookById = state.allBooks.find(book => book.id === action.payload.bookId)
-      let newCart1 = {}
+      const bookById = state.allBooks.find(
+        (book) => book.id === action.payload.bookId
+      );
+      let newCart1 = {};
       if (!isItem) {
         const newItem = {
           id: action.payload.id,
@@ -146,19 +150,21 @@ const rootReducer = (state = initialState, action) => {
           image: bookById.image,
           price: bookById.price,
           subtotal: (bookById.price * action.payload.quantity).toFixed(2),
-          quantity: action.payload.quantity
-        }
+          quantity: action.payload.quantity,
+        };
 
         newCart1 = [...state.cart, newItem];
-
       } else {
         const updatedItem = {
           ...isItem,
           quantity: isItem.quantity + action.payload.quantity,
-          subtotal: ((isItem.quantity + action.payload.quantity) * bookById.price).toFixed(2)
-        }
+          subtotal: (
+            (isItem.quantity + action.payload.quantity) *
+            bookById.price
+          ).toFixed(2),
+        };
         newCart1 = [...state.cart];
-        newCart1[index1] = updatedItem
+        newCart1[index1] = updatedItem;
       }
 
       return {
@@ -166,7 +172,6 @@ const rootReducer = (state = initialState, action) => {
         cart: newCart1, // Filtramos el elemento antiguo y agregamos el nuevo
       };
     }
-
 
     case DELETE_ARTICLE: {
       return {
@@ -181,59 +186,64 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ADD_ONE_COPY:
-      const item = state.cart.find(item => item.bookId === action.payload);
+      const item = state.cart.find((item) => item.bookId === action.payload);
       const index = state.cart.indexOf(item);
       const updatedItem = {
         ...item,
         quantity: item.quantity + 1,
-        subtotal: ((item.quantity + 1) * item.price).toFixed(2)
-      }
+        subtotal: ((item.quantity + 1) * item.price).toFixed(2),
+      };
       const newCart = [...state.cart];
-      newCart[index] = updatedItem
+      newCart[index] = updatedItem;
       return {
         ...state,
-        cart: newCart
-      }
+        cart: newCart,
+      };
     case DELETE_ONE_COPY:
-      const item2 = state.cart.find(item => item.bookId === action.payload)
+      const item2 = state.cart.find((item) => item.bookId === action.payload);
       const index2 = state.cart.indexOf(item2);
       const updatedItem2 = {
         ...item2,
         quantity: item2.quantity - 1,
-        subtotal: ((item2.quantity - 1) * item2.price).toFixed(2)
-      }
+        subtotal: ((item2.quantity - 1) * item2.price).toFixed(2),
+      };
       const newCart2 = [...state.cart];
-      newCart2[index2] = updatedItem2
+      newCart2[index2] = updatedItem2;
       return {
         ...state,
-        cart: newCart2
-      }
+        cart: newCart2,
+      };
 
-      case SIDE_BAR: 
+    case SIDE_BAR:
       return {
         ...state,
-        sidebarState: !state.sidebarState
-      }
-      case CLOSE_SIDEBAR:
-        return {
-          ...state,
-          sidebarState: false
-        }
-      case GET_USERS:
-        return {
-          ...state,
-          allUsers: action.payload
-        }
-      case GET_EVENT_TYPE:
+        sidebarState: !state.sidebarState,
+      };
+    case CLOSE_SIDEBAR:
+      return {
+        ...state,
+        sidebarState: false,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+    case GET_EVENT_TYPE:
       return {
         ...state,
         event: action.payload,
       };
-      case GET_DELETED_BOOKS:
-        return {
-          ...state,
-          banBooks: action.payload
-        }
+    case GET_DELETED_BOOKS:
+      return {
+        ...state,
+        banBooks: action.payload,
+      };
+    case CHANGE_THEME:
+      return {
+        ...state,
+        theme: action.payload,
+      };
 
     default:
       return {
