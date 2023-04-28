@@ -60,7 +60,7 @@
   border-top-left-radius: 1px;
   height: 100%;
   width: 200px;
-  background-color: #f0efef;
+/*   background-color: #f0efef; */
 }
 
 .infoPrincipal {
@@ -106,8 +106,8 @@
 .data2 {
   margin-top: 20px;
   text-align: start;
-  color: #888383;
-
+/*   color: #888383;
+ */
 }
 
 .quantity {

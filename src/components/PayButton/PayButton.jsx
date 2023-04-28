@@ -29,6 +29,6 @@ export const PayButton = () => {
         isAuthenticated ?
             <button type="button" className="btn btn-dark" onClick={handleCheckout}>Checkout</button>
             :
-            <button type="button" className="btn btn-dark " onClick={handleUnauthorizedUser}>Please Sign In to Buy</button>
+            <button type="button" className="btn btn-dark" onClick={handleUnauthorizedUser}>Please Sign In to Buy</button>
     )
 }
