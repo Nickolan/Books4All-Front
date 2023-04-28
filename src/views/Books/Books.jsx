@@ -49,7 +49,7 @@ export default function Books() {
     }, [])
 
     return (
-        <div class='container bg-white text-black h-auto'>
+        <div class='container  h-auto'>
             <Navbar />
 
             <Searchbar setCurrentPage={setCurrentPage} />

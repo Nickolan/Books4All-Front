@@ -32,15 +32,19 @@ function Card({ name, author, image, categories, bookId, price, isFav }) {
     
     return (
 
-        <div class="m-3 d-inline-block shadow-lg " style={{ width: "180px", height: "380px", padding: "14px" }}>
-           <div class="d-flex flex-row">
-            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
-              {isAuthenticated && <FavButton name={name} book_id={bookId} isFav={isFav} />}
-           </div>
-            <Link style={{ color: "black", textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
-                <div class="d-flex flex-column">
+        <div class="m-3 d-inline-block bg-light " style={{ width: "180px", height: "380px", padding: "14px" }}>
+            <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none'}}> <BsCartPlus style={{fontSize:'1.1rem', color:'black',backgroundColor:'white'}} /> </button>
+            <Link style={{ textDecoration: "none" }} to={`/bookDetail/${bookId}`}>
+            
+                <div class="d-flex flex-row">
+                  <button onClick={handleClickAddCart} style={{ marginBottom:'5px', marginRight:'2px', border:'none', backgroundColor:'transparent'}}> <BsCartPlus style={{fontSize:'1.1rem'}} /> </button>
+                  {isAuthenticated && <FavButton name={name} book_id={bookId} isFav={isFav} />}
+                </div>
+                
+                <div class="d-flex flex-column bg-light">
 
-                    <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto", backgroundColor: "black" }}>
+
+                    <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto" }}>
                         {image ? <img style={{ width: "140px", height: "200px" }} src={image} alt="book" />
                             : <img style={{ width: "140px", height: "200px" }} src={noImage} alt="not found" />
                         }
@@ -56,6 +60,7 @@ function Card({ name, author, image, categories, bookId, price, isFav }) {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "14px",
+                        color:"black"
 
                     }}>
                         {name}
@@ -68,6 +73,7 @@ function Card({ name, author, image, categories, bookId, price, isFav }) {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             marginLeft:'3px',
+                            color:"black"
 
                         }} class="text-xs ">{author}</p>
                         <p style={{ fontSize: "13px", color: "#088000",  marginLeft:'3px', marginTop:'0' }}><small>{categories}</small></p>
