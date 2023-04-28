@@ -1,15 +1,12 @@
 import React from "react";
-import Navbar from "../../components/NavBar/Navbar";
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard"
-import Footer from "../../components/Footer/Footer";
 
 
 export default function About(){
 
     return(
         <div className="container-xl bg-success bg-white">
-          <Navbar />
           <div className="d-flex justify-content-center">
             <h1>About Us</h1>
           </div>
@@ -28,7 +25,6 @@ export default function About(){
               })}
             </div>
           </div>
-          <Footer />
         </div>
       );
       

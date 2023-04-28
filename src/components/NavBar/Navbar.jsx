@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../LoginButton/LoginButton";
 export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
-    const role= useSelector(state=> state.role)
+    const role = useSelector(state=> state.role)
 
 
     return (

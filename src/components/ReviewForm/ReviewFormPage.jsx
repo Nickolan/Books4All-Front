@@ -72,7 +72,7 @@ const submitHandler = (event) =>{
 
   useEffect (()=> {
     isAuthenticated && dispatch(getUserFromDb(user?.nickname))
-  })
+  }, [])
 
  return(
 <div className={style.mainContainer}>

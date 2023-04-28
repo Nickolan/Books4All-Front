@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetail, addToCart } from '../../Redux/actions'
 import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
-import Navbar from '../../components/NavBar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
@@ -87,7 +85,6 @@ const BookDetail = (props) => {
     return (
         <div className={style.mainContainer}>
             <div>
-                <Navbar />
 
                 {eachBook?.map((el) => {
 
@@ -145,7 +142,6 @@ const BookDetail = (props) => {
                 {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview}/>}
 
             </div>
-            <Footer />
         </div>
 
     );

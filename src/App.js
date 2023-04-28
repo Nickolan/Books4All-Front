@@ -18,6 +18,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import {  useSelector } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Dashboard } from "./views/Dashboard/Dashboard";
+import Navbar from "./components/NavBar/Navbar";
+import Footer from "./components/Footer/Footer";
+import EditProfile from "./components/EditProfile/EditProfile";
 // axios.defaults.baseURL ="https://books4all-back-production-0533.up.railway.app/";
 axios.defaults.baseURL = "http://localhost:3001/";
 
@@ -31,6 +34,7 @@ function App() {
 
     <div style={isOpen ?{position:'fixed'}:{}}>
       {isOpen && <Sidebar booksAdded={cart} />}
+      <Navbar/>
       <Routes>
 
         <Route path='/' element={<Home />} />
@@ -45,8 +49,9 @@ function App() {
         <Route path='/404' element={<Error />} />
         <Route path='*' element={<Navigate to='/404' />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
+        <Route path="/editProfile" element={<EditProfile/>}/>
       </Routes>
+      <Footer/>
       <ToastContainer position="top-center" limit={2} />
     </div>
   );
