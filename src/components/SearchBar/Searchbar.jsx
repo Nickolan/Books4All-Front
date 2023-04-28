@@ -17,6 +17,13 @@ export default function Searchbar({ setCurrentPage }) {
         e.preventDefault()
         setName(e.target.value)
         dispatch(getNameBooks(e.target.value))
+            .then(() => {
+                setCurrentPage(1)
+            
+                setSearchStatement(true);
+                dispatch(filterByCategory('all'));
+                dispatch(filterByAuthor('all'));
+            })
 
 
     }
@@ -50,7 +57,7 @@ export default function Searchbar({ setCurrentPage }) {
     return (
         <div className="d-flex flex-column  mx-auto align-content-between " style={{ width: "80%", height: '150px', margin: '20px 0 10px 0' }}>
             <div class='d-flex align-self-end'>
-                {searchStatement && <button class='bg-light mx-2' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
+                {name && <button class='bg-light mx-2' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
                 <div className="d-flex input_btn " style={{ height: '40px', width: '250px', padding: '5px', alignItems: 'center', justifyContent: 'center', }}>
                     <input id="inputSearch" class="input_sb  "
                         type='text'
@@ -62,7 +69,7 @@ export default function Searchbar({ setCurrentPage }) {
                     <FiSearch type="submit" class="btn_sb" onClick={(e) => handleSubmit(e)} />
                 </div>
             </div>
-            {searchStatement ?
+            {searchStatement && name?
                 <div class="d-flex align-self-center mt-auto" >
                     <div>
                         <span class='mt-4' style={{ fontWeight: 'bold', fontFamily: 'Work Sans, sans-serif' }}>Your Search for</span>
