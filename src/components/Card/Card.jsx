@@ -63,6 +63,7 @@ function Card({ name, author, image, categories, bookId, price }) {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "14px",
+                        color:"black"
 
                     }}>
                         {name}
@@ -75,6 +76,7 @@ function Card({ name, author, image, categories, bookId, price }) {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             marginLeft:'3px',
+                            color:"black"
 
                         }} class="text-xs ">{author}</p>
                         <p style={{ fontSize: "13px", color: "#088000",  marginLeft:'3px', marginTop:'0' }}><small>{categories}</small></p>
