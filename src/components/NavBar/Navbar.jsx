@@ -23,7 +23,7 @@ export default function Navbar() {
 
     return (
 
-        <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top ' >
+        <nav className='navbar navbar-expand-sm navbar-dark bg-dark sticky-top ' >
             <div className="container-fluid ">
                 <div className="px-4 ">
                     <Link to='/'>
