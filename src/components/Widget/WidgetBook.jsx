@@ -4,15 +4,17 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import formStyle from '../UpdateBookForm/UpdateBookForm.module.css';
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 const WidgetBook = ({setUrl, url, bookImg, theme}) => {
 
     const { user, isAuthenticated } = useAuth0();
     const { bookDetail, role } = useSelector(state => state)
+    const navigate = useNavigate();
 
-    const postBookPicture = async ( book, pictureUrl ) => {
-        const response = await axios.put(`/books/updateBookPic/${book}`, {picture: pictureUrl})
+    const postBookPicture = async ( bookId, pictureUrl ) => {
+        const response = await axios.put(`/admin/updateBookPic/${bookId}`, { picture: pictureUrl })
         return 0;
     }
 
@@ -57,13 +59,14 @@ const WidgetBook = ({setUrl, url, bookImg, theme}) => {
                 toast.error('Something went wrong, try uploading a new image');
                 return 0;
             }
-            if (result.event === 'success' && isAuthenticated && role === 'admin') {
+            if (result.event === 'success' && role.name === 'admin') {
                 if(result.info.format !== "png" && result.info.format !== "jpg"){
                     toast.error('Invalid image format');
                     return 0;
                 }
                 
                 postBookPicture(bookDetail[0].id, result.info.secure_url).then(() => setUrl(result.info.secure_url)).then(() => toast.success('Book pic successfully updated'))
+                navigate(-1)
                 return 0;
             }
         })

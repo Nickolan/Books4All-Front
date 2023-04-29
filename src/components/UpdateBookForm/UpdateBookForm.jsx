@@ -76,7 +76,6 @@ function UpdateBookForm({book}) {
 
     return(
         <div class='container'>
-            <Navbar/>
             <form onSubmit={handleSubmit}>
             <div className={formStyle.container}>
             <div className={formStyle.cont}> 
@@ -116,7 +115,6 @@ function UpdateBookForm({book}) {
             </div>
             </div>
             </form>
-            <Footer/>
         </div>
     )
 }
