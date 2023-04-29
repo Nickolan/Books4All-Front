@@ -35,14 +35,19 @@ export default function Books() {
     const firstBook = lastBook - booksForPage;
     const currentBooks = books.slice(firstBook, lastBook);
     const pageNumber = [];
- 
+    const[loader, setLoader]= useState(false)
+
     for (let i = 1; i <= Math.ceil(books.length / booksForPage); i++) {
         pageNumber.push(i)
 
     }
 
     useEffect(() => {
-            dispatch(filterByCategory(genreFilter))
+             setLoader(true)      
+             setTimeout(() => {
+                setLoader(false);
+              }, 300);
+             dispatch(filterByCategory(genreFilter))
             dispatch(filterByAuthor(authorFilter))
             dispatch(alphabeticalOrder(orderType))
            
@@ -52,19 +57,28 @@ export default function Books() {
         <div class='container  h-auto'>
             <Navbar />
 
+      
+            {
+            loader ?
+            <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
+                <p>cargando</p>
+            </div>
+   
+            :
+            <>            
+           
             <Searchbar setCurrentPage={setCurrentPage} />
-
             <div class='d-flex mx-auto align-items-center justify-content-between' style={{ width: "80%", height: '50px', borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0", padding: '0 10px 0 7px' }}>
                 <Filters setCurrentPage={setCurrentPage} />
                 <Order setCurrentPage={setCurrentPage} />
             </div>
             <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
-                {currentBooks.length >0 ? <Cards books={currentBooks} favorites={arrayFavorites} />
-                 :
-                  <p style={{fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif', fontSize:'30px', margin:'50px auto'}}>Sorry, we could not find any books matching your criteria</p>}
+            {currentBooks.length >0  ? 
+             <Cards books={currentBooks} favorites={arrayFavorites} />
+             :
+             loader && <p style={{fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif', fontSize:'30px', margin:'50px auto'}}>Sorry, we could not find any books matching your criteria</p>
+            }
             </div>
-
-
             <div class="d-flex justify-content-around">
                <Paginado
                 booksPerPage={booksForPage}
@@ -73,8 +87,11 @@ export default function Books() {
                 currentPage={currentPage}
                 currentBooks={currentBooks}
                 indexFirstBook={firstBook}
-               />
+                />
             </div>
+                </>
+ }
+            
 
             <Footer />
 
