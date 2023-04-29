@@ -1,15 +1,32 @@
 import React from "react";
-import Navbar from "../../components/NavBar/Navbar";
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard"
-import Footer from "../../components/Footer/Footer";
+import React { useEffect,useState } from "react";
+import { integrantes } from "./datos_integrantes";
+import {AboutCard} from "../../components/AboutCard/AboutCard"
+import { Loader } from "../../components/Loader/Loader";
+
 
 
 export default function About(){
+  const[loader, setLoader]= useState(false)
+  const [datos, setDatos]= useState(integrantes)
 
-    return(
+  useEffect(()=>{
+     setLoader(true)     
+   if(integrantes.length){
+     setTimeout(()=>{
+      setLoader(false);
+
+    },60)
+   }
+  },[])
+
+
         <div className="container-xl  ">
-          <Navbar />
+          {loader ? <Loader/>
+          :
+          <>         
           <div className="d-flex justify-content-center ">
             <h1>About Us</h1>
           </div>
@@ -28,7 +45,8 @@ export default function About(){
               })}
             </div>
           </div>
-          <Footer />
+          </>
+          }
         </div>
       );
       

@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import Navbar from "../../components/NavBar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import React, { useState, useEffect } from "react";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
@@ -9,26 +7,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBooks, getUserFromDb, getUsers } from "../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 import { PostUser } from "../../components/PostUser/PostUser";
+import { Loader } from "../../components/Loader/Loader";
 
 export default function Home() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const dbUser = useSelector((state) => state.dbUser);
+    const books = useSelector((state) => state.books);
     const { user, logout, isAuthenticated, } = useAuth0();
+    const[loader, setLoader]= useState(false)
 
     useEffect(() => {
+    setLoader(true)    
         dispatch(getUsers())
         if (user) {
             dispatch(getUserFromDb(user?.nickname))
         }
         dispatch(getBooks())
-    }, [dispatch, user])
+         if(books){
+            setTimeout(()=>{
+                setLoader(false);
+            },100)
+        
+         }
+       }, [dispatch, user])
+
 
     return (
         <div >
             <div className='container'>
-                <Navbar />
-                <img className='img-fluid' src="https://cdn.discordapp.com/attachments/1091730813529374777/1096446376533033052/books-1281581_1920.jpg" alt="Hero" />
+                {
+                loader ? <Loader/>
+                  : 
+                <>
+   <img className='img-fluid' src="https://cdn.discordapp.com/attachments/1091730813529374777/1096446376533033052/books-1281581_1920.jpg" alt="Hero" />
                 <div className="p-3">
                     <Carrusel1 />
                 </div>
@@ -38,7 +50,10 @@ export default function Home() {
                 <div className="p-3">
                     <Carrusel3 />
                 </div>
-                <Footer />
+            
+            </>
+
+                }
             </div>
         </div>
     );
