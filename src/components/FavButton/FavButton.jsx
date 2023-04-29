@@ -40,16 +40,16 @@ export  const FavButton = ({name, book_id, isFav}) =>{
 
             dispatch(getUserFromDb(user.name))
         })
-        toast(`You have added ${name} to ❤️!`, {
+        toast( `💔 You removed  ${name} from favorites `, {
             position: "bottom-right",
             style: {
-                background:'linear-gradient(97deg, #410a1c 10%, #020211 5%)',
+                background:'linear-gradient(97deg, rgba(2,2,17,1) 74%, rgba(65,10,28,1) 93%)',
               color: "white",
             },
             progressBar: {
               backgroundColor: "red",
             },
-            autoClose: 1000,
+            autoClose: 800,
             closeOnClick: true,
           });
     }
