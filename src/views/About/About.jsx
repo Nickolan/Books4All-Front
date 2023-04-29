@@ -8,12 +8,16 @@ import { Loader } from "../../components/Loader/Loader";
 
 export default function About(){
   const[loader, setLoader]= useState(false)
+  const [datos, setDatos]= useState(integrantes)
 
   useEffect(()=>{
-/*     setLoader(true)       */
-    setTimeout(() => {
-       setLoader(false);
-     }, 300);
+     setLoader(true)     
+   if(integrantes.length){
+     setLoader(false);
+    setTimeout(()=>{
+
+    },60)
+   }
   },[])
 
     return(
