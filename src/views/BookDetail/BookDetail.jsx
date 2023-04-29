@@ -87,7 +87,18 @@ const[loader, setLoader]= useState(false)
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-
+        toast(`You have added ${bookName} to the cart !`, {
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 1000,
+            closeOnClick: true,
+          });
 
 
     }
