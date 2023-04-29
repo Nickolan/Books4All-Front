@@ -1,15 +1,17 @@
 
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar } from "../../Redux/actions"
+import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar,getBookDetail } from "../../Redux/actions"
 import { useNavigate } from "react-router-dom"
 import style from '../Sidebar/Sidebar.module.css'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs';
+import {toast} from 'react-toastify'
 
 
 export const Sidebar = () => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
   const isOpen = useSelector(state => state.sidebarState);
+  const bookTitle= useSelector(state=>state.bookDetail)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -30,6 +32,20 @@ export const Sidebar = () => {
   //Elimina un elemento del carrito con todas sus copias
   const deleteThisBook = (id) => {
     dispatch(deleteOneBook(id))
+    dispatch(getBookDetail(id))
+    toast(`You removed   ${bookTitle.map(b=>b.title)} from the cart !`, {
+      position: "bottom-right",
+      style: {
+          background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+        color: "white",
+      },
+      progressBar: {
+        backgroundColor: "red",
+      },
+      autoClose: 1500,
+      closeOnClick: true,
+    });
+
   }
 
   //agrega una copia de un elemento agregado
@@ -41,6 +57,7 @@ export const Sidebar = () => {
   //Elimina una copia de un elemento del carrito 
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id))
+    
   }
 
   const goToBuy = () => {

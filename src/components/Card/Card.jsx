@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
 import style from '../Card/Card.module.css'
-
+import {toast}from 'react-toastify'
 import { BsCartPlus } from 'react-icons/bs';
 import { addToCart } from "../../Redux/actions";
 import { FavButton } from "../FavButton/FavButton";
@@ -24,6 +24,19 @@ function Card({ name, author, image, categories, bookId, price, isFav }) {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
+        toast(`You have added ${name} to the cart !`, {
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 1000,
+            closeOnClick: true,
+          });
+
 
     }
 
