@@ -34,7 +34,6 @@ export default function Dashboard(){
     return(
         <div>
 
-            <Navbar/>
             <div>
             <ControlPanel setSection={setSection}/>
             {
@@ -62,7 +61,6 @@ export default function Dashboard(){
                 section === 'Inactive Books' ? <div><BooksBanedList banBooks={banBooks}/></div> : null
             }
             </div>
-            <Footer/>
         </div>
     )
 }

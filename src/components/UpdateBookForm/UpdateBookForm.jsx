@@ -8,6 +8,7 @@ import Navbar from "../NavBar/Navbar";
 import Footer from "../Footer/Footer";
 import axios from "axios";
 import formStyle from './UpdateBookForm.module.css'
+import WidgetBook from "../Widget/WidgetBook";
 import { toast } from 'react-toastify';
 
 function UpdateBookForm({book}) {
@@ -20,6 +21,7 @@ function UpdateBookForm({book}) {
     //PostUser(user, isAuthenticated)
 
     const [change, setChange] = useState(false)
+    const [url, setUrl] = useState('');
     const [form, setForm] = useState({
         id: book[0]?.id,
         title: book[0]?.title,
@@ -74,7 +76,6 @@ function UpdateBookForm({book}) {
 
     return(
         <div class='container'>
-            <Navbar/>
             <form onSubmit={handleSubmit}>
             <div className={formStyle.container}>
             <div className={formStyle.cont}> 
@@ -105,8 +106,8 @@ function UpdateBookForm({book}) {
             </div>
 
             <div className={formStyle.secondContainer}>
-                <div>
-                    <img className={theme === 'dark' ? formStyle.bookImg : formStyle.lightBookImg} src={form.image} alt="" />
+                <div >
+                    <WidgetBook className={formStyle.divImg} theme={theme} bookImg={form.image} setUrl={setUrl} url={url} />
                 </div>
                 <div>
                     <button disabled={!change} class={change ? 'btn btn-primary' : 'btn btn-secondary'} type="submit">Modify</button>
@@ -114,7 +115,6 @@ function UpdateBookForm({book}) {
             </div>
             </div>
             </form>
-            <Footer/>
         </div>
     )
 }
