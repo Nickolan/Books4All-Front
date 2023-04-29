@@ -32,7 +32,7 @@ export default function Home() {
           setLoader(true)      
           setTimeout(() => {
              setLoader(false);
-           }, 250);
+           },250);
     }, [dispatch, user])
 
     return (

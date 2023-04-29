@@ -47,7 +47,7 @@ export default function Books() {
              setLoader(true)      
              setTimeout(() => {
                 setLoader(false);
-              }, 250);
+              }, 400);
              dispatch(filterByCategory(genreFilter))
             dispatch(filterByAuthor(authorFilter))
             dispatch(alphabeticalOrder(orderType))

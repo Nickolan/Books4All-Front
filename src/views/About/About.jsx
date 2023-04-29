@@ -13,7 +13,7 @@ export default function About(){
     setLoader(true)      
     setTimeout(() => {
        setLoader(false);
-     }, 150);
+     }, 300);
   },[])
 
     return(
