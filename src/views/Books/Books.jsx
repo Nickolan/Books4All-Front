@@ -11,6 +11,7 @@ import Order from "../../components/Order/Order";
 import Paginado from "../../components/Paginado/Paginado";
 import { setCart } from "../../Redux/actions/localStorage";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Loader } from "../../components/Loader/Loader";
 
 
 export default function Books() {
@@ -46,7 +47,7 @@ export default function Books() {
              setLoader(true)      
              setTimeout(() => {
                 setLoader(false);
-              }, 300);
+              }, 500);
              dispatch(filterByCategory(genreFilter))
             dispatch(filterByAuthor(authorFilter))
             dispatch(alphabeticalOrder(orderType))
@@ -60,8 +61,8 @@ export default function Books() {
       
             {
             loader ?
-            <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
-                <p>cargando</p>
+            <div class="mx-auto d-flex justify-content-center" style={{ width: "80%", marginBottom: '40px',height:'600px', marginTop:'20%' }}>
+               <Loader/>
             </div>
    
             :
