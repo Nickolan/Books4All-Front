@@ -1,9 +1,18 @@
 import style from '../ReviewCard/ReviewCard.module.css'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
-const ReviewCard = ({body, rating, user_name}) => {
+const ReviewCard = ({role, body, rating, user_name, id}) => {
+    const dispatch = useDispatch();
+    const handleDeleteReview = () => {
+        axios.delete(`/admin/review/${id}`)
+        .then(() => toast.success('Review deleted successfully'))
+    }
 
     return (
         <div className={style.mainContainer}>
+            <div>
             <div className={style.userContainer}>
             <h1 className={style.user}>{user_name}</h1>
             <h2 className={style.rating}>Rating: {rating}/5</h2>
@@ -11,6 +20,10 @@ const ReviewCard = ({body, rating, user_name}) => {
             <div className={style.bodyContainer}>
             <p className={style.body}>{body}</p>
             </div>
+            </div>
+            {
+               role.name === 'admin' && <div><button onClick={handleDeleteReview} class='btn btn-danger'>Delete Review</button></div>
+            }
         </div>
     )
 }

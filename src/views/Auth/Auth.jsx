@@ -5,13 +5,14 @@ import { getUserFromDb } from "../../Redux/actions";
 import { Button, Container, Divider, Grid, Avatar, Tab, Tabs} from "@mui/material";
 import Grow from '@mui/material/Grow';
 import EditProfile from "../../components/EditProfile/EditProfile";
+import ProfileBoughts from "./profileBoughts";
+
+
 export default function Auth(){
 
     const { user} = useAuth0();
-    
-    const dispatch = useDispatch();
 
-    const dbUser = useSelector(state=>state.dbUser);
+  const dispatch = useDispatch();
 
     const [showEditForm, setShowEditForm] = useState(false);
     

@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const url = "http://localhost:3001/api/stripe";
 
+
 export const setHeaders = () => {
   const headers = {
     headers: {
@@ -14,6 +15,7 @@ export const setHeaders = () => {
 
 
 const BASE_URL = "http://localhost:3001";
+
 
 export const instance = axios.create({
     baseURL: BASE_URL,

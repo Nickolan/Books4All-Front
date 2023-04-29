@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import "./Carrusel.css";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { getImages } from "../../Redux/actions/index";
+import { useSelector } from "react-redux";
 import img_default from "../Carrousel1/img/img_default.jpg";
 import { Link } from "react-router-dom";
 
-export default function Carrusel1(props) {
+export default function Carrusel1() {
   const slides = [1];
-  const dispatch = useDispatch();
 
-  const books = useSelector((state) => state.images);
+  const books = useSelector((state) => state.allBooks);
 
-  useEffect(() => {
-    dispatch(getImages());
-    console.log(images);
-  }, []);
 
   const images = books.map((book) => book.image).slice(10, 30); //me devuelve un array de las primeras 10 imágenes
   const bookTitle = books.map((book) => book.title).slice(10, 30);

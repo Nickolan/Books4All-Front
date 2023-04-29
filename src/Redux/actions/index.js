@@ -13,17 +13,19 @@ export const DELETE_USER = "DELETE_USER";
 export const ADD_CART = "ADD_CART";
 export const DELETE_ARTICLE = "DELETE_ARTICLE";
 export const DELETE_CART = "DELETE_CART";
-export const ADD_ONE_COPY = 'ADD_ONE_COPY';
-export const DELETE_ONE_COPY = 'DELETE_ONE_COPY';
-export const CURRENT_USER = 'CURRENT_USER';
-export const SIDE_BAR = 'SIDE_BAR';
-export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
-export const GET_EVENT_TYPE = 'GET_EVENT_TYPE';
-
+export const ADD_ONE_COPY = "ADD_ONE_COPY";
+export const DELETE_ONE_COPY = "DELETE_ONE_COPY";
+export const CURRENT_USER = "CURRENT_USER";
+export const SIDE_BAR = "SIDE_BAR";
+export const CLOSE_SIDEBAR = "CLOSE_SIDEBAR";
+export const GET_USERS = "GET_USERS";
+export const GET_EVENT_TYPE = "GET_EVENT_TYPE";
+export const GET_DELETED_BOOKS = "GET_DELETED_BOOKS";
+export const CHANGE_THEME = "CHANGE_THEME";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
-    var info = await axios.get(`/books/${bookId}`);
+    const info = await axios.get(`/books/${bookId}`);
     return dispatch({
       type: GET_BOOK_DETAIL,
       payload: info.data,
@@ -44,7 +46,6 @@ export const createReview = (payload) => {
       var info = await instance.post(`/reviews`, payload);
       return info;
     } catch (error) {
-      console.log("Error del Create", error.message);
       throw new Error({ error: error.message });
     }
   };
@@ -124,27 +125,44 @@ export const deleteOneCopy = (itemID) => {
 
 export const getUserFromDb = (name) => {
   return async function (dispatch) {
-
     const response = await axios.get(`/users/${name}`);
 
-
     return dispatch({ type: CURRENT_USER, payload: response.data });
-  }
+  };
 };
 
 export const sideBar = () => {
-  return { type: SIDE_BAR }
-}
+  return { type: SIDE_BAR };
+};
 export const sideBarClose = () => {
-  return { type: CLOSE_SIDEBAR }
-}
+  return { type: CLOSE_SIDEBAR };
+};
+export const getUsers = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get("/users");
+    return dispatch({ type: GET_USERS, payload: apiData.data });
+  };
+};
 export const getEventType = () => {
   try {
     return async function (dispatch) {
-    const response = await axios.get(`/stripe/webhook`);
-      return dispatch({type: GET_EVENT_TYPE, payload: response.data
-      });
-      };
-    }catch(error){
-        console.log(error)
-      }}
+      const response = await axios.get(`/stripe/webhook`);
+      return dispatch({ type: GET_EVENT_TYPE, payload: response.data });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDeletedBooks = () => {
+  try {
+    return async function (dispatch) {
+      const response = await axios.get("/books/blocked");
+      return dispatch({ type: GET_DELETED_BOOKS, payload: response.data });
+    };
+  } catch (error) {}
+};
+
+export const changeTheme = (theme) => {
+  return { type: CHANGE_THEME, payload: theme };
+};

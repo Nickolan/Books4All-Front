@@ -10,7 +10,6 @@ import { BsTrash } from 'react-icons/bs';
 export const Sidebar = () => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
   const isOpen = useSelector(state => state.sidebarState);
-  console.log(cart);
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -37,7 +36,6 @@ export const Sidebar = () => {
 
   const addCopy = (id) => {
     dispatch(addOneCopy(id))
-    console.log(id);
   }
 
   //Elimina una copia de un elemento del carrito 
@@ -53,7 +51,7 @@ export const Sidebar = () => {
   return (
     <div className={!isOpen ? style.sidebarBack : style.sidebarBackOpen}>
       <div className={style.barContainer}>
-        <div className={style.sideBar}>
+        <div className={style.sideBar} >
           <div className={style.barContent}>
             <div className={style.modalColumn1}>
               <div className={style.barHeader}>

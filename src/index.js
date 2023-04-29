@@ -12,8 +12,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const domain = 'dev-vcimk1mq442q83wq.us.auth0.com';
+const clientId = 'Jb0tkNGAsOvygZViD8G1VGhcM5T8FRe3';
 
 
 const root = createRoot(document.getElementById("root"));
