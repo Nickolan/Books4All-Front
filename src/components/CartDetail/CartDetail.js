@@ -40,11 +40,10 @@ export default function CartDetail(props) {
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id));
   };
-
   const deleteThisBook = (id) => {
-    dispatch(deleteOneBook(id));
     dispatch(getBookDetail(id));
-    toast(`You removed   ${bookTitle.map((b) => b.title)} from the cart !`, {
+    dispatch(deleteOneBook(id));
+    toast(`You removed  ${bookTitle.map((b) => b.title)} from the cart !`, {
       position: "bottom-right",
       style: {
         background: "linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)",

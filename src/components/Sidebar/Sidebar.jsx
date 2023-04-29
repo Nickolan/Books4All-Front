@@ -11,9 +11,10 @@ import {toast} from 'react-toastify'
 export const Sidebar = () => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
   const isOpen = useSelector(state => state.sidebarState);
-  const bookTitle= useSelector(state=>state.bookDetail)
+  const bookTitle = useSelector((state) => state.bookDetail);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  console.log(bookTitle)
 
   let totalAmount = cart.reduce(
     (accumulator, book1) => accumulator + Number(book1.subtotal),
@@ -31,9 +32,9 @@ export const Sidebar = () => {
 
   //Elimina un elemento del carrito con todas sus copias
   const deleteThisBook = (id) => {
-    dispatch(deleteOneBook(id))
-    dispatch(getBookDetail(id))
-    toast(`You removed   ${bookTitle.map(b=>b.title)} from the cart !`, {
+    dispatch(getBookDetail(id));
+    dispatch(deleteOneBook(id));
+    toast(`You removed  ${bookTitle.map(b=>b.title)} from the cart !`, {
       position: "bottom-right",
       style: {
           background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
