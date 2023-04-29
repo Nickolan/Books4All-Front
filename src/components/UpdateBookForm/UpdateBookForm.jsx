@@ -7,6 +7,7 @@ import { PostUser } from "../PostUser/PostUser";
 import Navbar from "../NavBar/Navbar";
 import Footer from "../Footer/Footer";
 import axios from "axios";
+import formStyle from './UpdateBookForm.module.css'
 import { toast } from 'react-toastify';
 
 function UpdateBookForm({book}) {
@@ -15,6 +16,7 @@ function UpdateBookForm({book}) {
     const dispatch = useDispatch()
     const { idBook } = useParams()
     const navigate = useNavigate()
+    const theme = useSelector(state => state.theme)
     //PostUser(user, isAuthenticated)
 
     const [change, setChange] = useState(false)
@@ -74,50 +76,42 @@ function UpdateBookForm({book}) {
         <div class='container'>
             <Navbar/>
             <form onSubmit={handleSubmit}>
-            <div>
-                <input type="text" name='title' value={form.title} placeholder='Title' onChange={handlerChange}/>
+            <div className={formStyle.container}>
+            <div className={formStyle.cont}> 
+                <div className={theme === 'dark' ? formStyle.inputsCont : formStyle.lightInputsCont}>
+                    <label className={formStyle.labels}>Name: </label>
+                    <input className={theme === 'dark' ? formStyle.inputs : formStyle.lightIntputs} type="text" name='title' value={form.title} placeholder='Title' onChange={handlerChange}/>
+                </div>
+                <div className={theme === 'dark' ? formStyle.inputsCont : formStyle.lightInputsCont}>
+                    <label className={formStyle.labels}>Authors: </label>
+                    <input className={theme === 'dark' ? formStyle.inputs : formStyle.lightIntputs} type="text" name="authors" value={form.authors} placeholder='Author/s' onChange={handlerChange}/>
+                </div>
+                <div className={theme === 'dark' ? formStyle.inputsCont : formStyle.lightInputsCont}>
+                    <label className={formStyle.labels}>Categories: </label>
+                    <input className={theme === 'dark' ? formStyle.inputs : formStyle.lightIntputs} type="text" name="categories" value={form.categories} placeholder='Categories' onChange={handlerChange}/>
+                </div>
+                <div className={theme === 'dark' ? formStyle.inputsCont : formStyle.lightInputsCont}>
+                    <label className={formStyle.labels}>Price: </label>
+                    <input className={theme === 'dark' ? formStyle.inputs : formStyle.lightIntputs} type="number" name="price" value={form.price} placeholder="Price $$$" onChange={handlerChange} />
+                </div>
+                <div className={theme === 'dark' ? formStyle.inputsCont : formStyle.lightInputsCont}>
+                    <label className={formStyle.labels}>Stock: </label>
+                    <input className={theme === 'dark' ? formStyle.inputs : formStyle.lightIntputs} type="number" name="stock" value={form.stock} placeholder="Stock" onChange={handlerChange} />
+                </div>
+                <div className={theme === 'dark' ? formStyle.textAreaCont : formStyle.lightTextAreaCont}>
+                    <label className={formStyle.labels}>Description: </label>
+                    <textarea className={theme === 'dark' ? formStyle.textArea : formStyle.lightTextArea} name="description" value={form.description} placeholder="Description" onChange={handlerChange} cols="30" rows="10"></textarea>
+                </div>
             </div>
-            <div>
-                <input type="text" name="authors" value={form.authors} placeholder='Author/s' onChange={handlerChange}/>
+
+            <div className={formStyle.secondContainer}>
+                <div>
+                    <img className={theme === 'dark' ? formStyle.bookImg : formStyle.lightBookImg} src={form.image} alt="" />
+                </div>
+                <div>
+                    <button disabled={!change} class={change ? 'btn btn-primary' : 'btn btn-secondary'} type="submit">Modify</button>
+                </div>
             </div>
-            <div>
-                <input type="text" name="categories" value={form.categories} placeholder='Categories' onChange={handlerChange}/>
-            </div>
-            <div>
-                <input type="text" name="price" value={form.price} placeholder="Price $$$" onChange={handlerChange} />
-            </div>
-            <div>
-                <input type="text" name="stock" value={form.stock} placeholder="Stock" onChange={handlerChange} />
-            </div>
-            {/* <div>
-                {form.Reviews?.map((rev) => {
-                    return(
-                        <div class='d-flex justify-content-between'>
-                            <div>
-                                <span>{rev.user_name}</span>
-                            </div>
-                            <div>
-                                <span> {rev.body} </span>
-                            </div>
-                            <div>
-                                <span> {rev.rating} / 5 </span>
-                            </div>
-                            <div>
-                                <button onClick={() => alert('delete')} class='btn btn-danger'>Delete Review</button>
-                            </div>
-                        </div>
-                        
-                    )
-                })}
-            </div> */}
-            <div>
-                <textarea name="description" value={form.description} placeholder="Description" onChange={handlerChange} cols="30" rows="10"></textarea>
-            </div>
-            <div>
-                <img src={form.image} alt="" width='250px' height='350px'/>
-            </div>
-            <div>
-                <button disabled={!change} class={change ? 'btn btn-primary' : 'btn btn-secondary'} type="submit">Modify</button>
             </div>
             </form>
             <Footer/>

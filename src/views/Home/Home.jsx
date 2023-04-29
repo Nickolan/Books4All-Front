@@ -24,11 +24,6 @@ export default function Home() {
             dispatch(getUserFromDb(user?.nickname))
         }
         dispatch(getBooks())
-        .then(() => {
-            if (dbUser.active === false) {
-              navigate('/UserBlocked')
-            }
-          });
          if(books){
             setTimeout(()=>{
                 setLoader(false);
@@ -36,8 +31,7 @@ export default function Home() {
         
          }
        }, [dispatch, user])
-
-
+       
     return (
         <div >
             <div className='container'>
