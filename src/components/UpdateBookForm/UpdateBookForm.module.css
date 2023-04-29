@@ -1,0 +1,113 @@
+.container{
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around ;
+    margin-bottom: 3%;
+}
+.bookImg{
+    height: 350px;
+    width: 250px;
+    margin-top: 20%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 25%;
+    border: 5px solid rgb(205, 205, 205);
+    box-shadow: 0 5px 30px -10px rgb(88, 88, 88);
+}
+.labels{
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.lightBookImg{
+    height: 350px;
+    width: 250px;
+    margin-top: 20%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 25%;
+    border: 5px solid rgb(88, 88, 88);
+    box-shadow: 0 5px 30px -10px rgb(205, 205, 205);
+}
+
+.cont{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputs{
+    background-color: rgb(43, 42, 42);
+    color: white;
+    border: none;
+    text-align: center;
+}
+.lightIntputs{
+    background-color: rgb(221, 221, 221);
+    color: rgb(26, 25, 25);
+    border: none;
+    text-align: center;
+}
+.textArea{
+    background-color: rgb(43, 42, 42);
+    color: white;
+    width: 700px;
+    height: 200px;
+    border-radius: 5%;
+    text-align: center;
+}
+.lightTextArea{
+    background-color: rgb(221, 221, 221);
+    color: rgb(26, 25, 25);
+    width: 700px;
+    height: 200px;
+    border-radius: 5%;
+    text-align: center;
+}
+
+.inputsCont{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    align-items: center;
+    border-radius: 9%;
+}
+.lightInputsCont{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(26, 25, 25);
+    align-items: center;
+    border-radius: 9%;
+}
+.textAreaCont{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    margin-top: 10px;
+    padding: 10px;
+    align-items: center;
+    border-radius: 9%;
+}
+.lightTextAreaCont{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(26, 25, 25);
+    margin-top: 10px;
+    padding: 10px;
+    align-items: center;
+    border-radius: 9%;
+}
+
+.secondContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

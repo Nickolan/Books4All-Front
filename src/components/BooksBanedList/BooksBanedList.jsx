@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
 import { getDeletedBooks, getUsers, getBooks } from "../../Redux/actions";
+
 function BooksBanedList({banBooks}) {
     const dispatch = useDispatch()
+    const theme = useSelector(state => state.theme);
     const [currentPage, setCurrentPage] = useState(1)
     const booksForPage = 12;
     const lastBook = currentPage * booksForPage;
@@ -34,7 +36,7 @@ function BooksBanedList({banBooks}) {
                         key="previous"
                         disabled={currentPage === 1}
                         onClick={() => setCurrentPage(currentPage - 1)}
-                        class='btn btn-sm btn-outline-dark mx-1 fw-bold'
+                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
                         >
                         &lt;
                         </button>
@@ -44,7 +46,7 @@ function BooksBanedList({banBooks}) {
                         key="next"
                         disabled={currentPage === pageNumber.at(-1)}
                         onClick={() => setCurrentPage(currentPage + 1)}
-                        class='btn btn-sm btn-outline-dark mx-1 fw-bold'
+                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
                         >
                         &gt;
                         </button>
