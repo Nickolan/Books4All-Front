@@ -10,7 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
 import { toast } from 'react-toastify';
-
+import swal from 'sweetalert';
 
 
 
@@ -55,7 +55,10 @@ const[loader, setLoader]= useState(false)
     }
     const handleShowReview = () => {
         if (!isAuthenticated) {
-            window.alert("please sign up for leave a review")
+            swal("please sign up for leave a review!", {
+                buttons: false,
+                timer: 1400,
+              }); 
             loginWithPopup()
         } else {
             let isBought = bookIds?.find(Id => Id === bookId)
