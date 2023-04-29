@@ -32,7 +32,6 @@ export default function Home() {
          }
        }, [dispatch, user])
 
-
     return (
         <div >
             <div className='container'>
