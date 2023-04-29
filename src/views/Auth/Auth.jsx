@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserFromDb } from "../../Redux/actions";
 import ProfileBoughts from "./profileBoughts";
+import { Loader } from "../../components/Loader/Loader";
 
 
 export default function Auth() {
@@ -20,15 +21,21 @@ export default function Auth() {
   const dbUser = useSelector(state => state.dbUser);
 
   const [url, setUrl] = useState('');
-
+  const [loader,setLoader]= useState(false)
 
   useEffect(() => {
     dispatch(getUserFromDb(user?.nickname))
+/*     setLoader(true)       */
+    setTimeout(() => {
+       setLoader(false);
+     }, 150);
+  
   }, [url])
 
   return (
     <div class="container">
       <Navbar />
+      {loader ? <Loader/>:
       <div class="row mt-5">
         <div class="col-md-4 offset-md-4">
           <div class="text-center">
@@ -42,8 +49,9 @@ export default function Auth() {
             <LogoutButton />
           </div>
         </div>
+        {dbUser && <ProfileBoughts />}      
       </div>
-      {dbUser && <ProfileBoughts />}
+      }
       <Footer />
     </div>
   )
