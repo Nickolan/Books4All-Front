@@ -22,11 +22,6 @@ export default function Home() {
             dispatch(getUserFromDb(user?.nickname))
         }
         dispatch(getBooks())
-        .then(() => {
-            if (dbUser.active === false) {
-              navigate('/UserBlocked')
-            }
-          });
     }, [dispatch, user])
 
     return (

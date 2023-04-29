@@ -20,7 +20,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { useNavigate } from "react-router-dom";
 import {
   getBooks,
   getUserFromDb,
@@ -36,30 +35,25 @@ function App() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.sidebarState);
   const cart = useSelector((state) => state.cart);
-  const navigate = useNavigate();
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated } = useAuth0();
   const theme = useSelector((state) => state.theme);
   const book = useSelector(state => state.bookDetail)
   
-  PostUser(user, isAuthenticated)
+  PostUser(user, isAuthenticated, logout)
 
-  const isBlocked = () => {
-    if (dbUser.active === false) {
-      navigate('/UserBlocked')
-    }
+  if (dbUser.active === false) {
+    console.log('User blocked');
+    logout()
   }
 
   useEffect(() => {
-    dispatch(getBooks());
-    dispatch(getUsers());
-    if (user) {
-      dispatch(getUserFromDb(user?.nickname))
-      .then(() => isBlocked())
-    }
-    dispatch(getDeletedBooks())
+    dispatch(getBooks())
+    .then(() => dispatch(getUsers()))
+    .then(() => user && dispatch(getUserFromDb(user?.nickname)))
+    .then(() => dispatch(getDeletedBooks()))
     document.body.classList.toggle("dark", theme === "dark");
-  }, [theme]);
+  }, [theme, user]);
 
   return (
     <div style={isOpen ? { position: "fixed" } : {}}>
