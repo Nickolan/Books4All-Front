@@ -24,7 +24,7 @@ function Card({ name, author, image, categories, bookId, price, isFav }) {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-        toast(`You have added ${name} to the cart !`, {
+        toast(`You have added ${name} to the cart !`, { //toast desde la vista de books, libro agregado
             position: "bottom-right",
             style: {
                 background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',

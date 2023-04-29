@@ -11,10 +11,9 @@ import {toast} from 'react-toastify'
 export const Sidebar = () => {
   const cart = useSelector(state => state.cart) //[] array de objetos{'bookId','bookName':,'quantity',price}
   const isOpen = useSelector(state => state.sidebarState);
-  const bookTitle = useSelector((state) => state.bookDetail);
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log(bookTitle)
+ 
 
   let totalAmount = cart.reduce(
     (accumulator, book1) => accumulator + Number(book1.subtotal),
@@ -25,16 +24,8 @@ export const Sidebar = () => {
   // función para vaciar por completo el cart
   const handleClose = () => {
     dispatch(deleteCart())
-  }
-  const closeSidebar = () => {
-    dispatch(sideBar())
-  }
 
-  //Elimina un elemento del carrito con todas sus copias
-  const deleteThisBook = (id) => {
-    dispatch(getBookDetail(id));
-    dispatch(deleteOneBook(id));
-    toast(`You removed  ${bookTitle.map(b=>b.title)} from the cart !`, {
+   toast(`Empty cart !`, { //desde la sidebar
       position: "bottom-right",
       style: {
           background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
@@ -45,7 +36,30 @@ export const Sidebar = () => {
       },
       autoClose: 1500,
       closeOnClick: true,
-    });
+    }); 
+
+  }
+  const closeSidebar = () => {
+    dispatch(sideBar())
+  }
+
+
+  //Elimina un elemento del carrito con todas sus copias
+  const deleteThisBook = (id) => {
+    const deletedBook= cart.find((book)=>{return book.id===id})
+    dispatch(deleteOneBook(id));
+   toast(`You removed ${deletedBook.title} from the cart !`, {
+      position: "bottom-right",
+      style: {
+          background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+        color: "white",
+      },
+    
+    })
+  
+
+
+
 
   }
 
@@ -53,11 +67,13 @@ export const Sidebar = () => {
 
   const addCopy = (id) => {
     dispatch(addOneCopy(id))
+
   }
 
   //Elimina una copia de un elemento del carrito 
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id))
+
     
   }
 

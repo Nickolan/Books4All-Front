@@ -19,8 +19,9 @@ import { toast } from "react-toastify";
 export default function CartDetail(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const bookTitle = useSelector((state) => state.bookDetail);
   setCart("cart", cart);
+  const bookTitle = useSelector((state) => state.bookDetail);
+  console.log(bookTitle);
 
   let totalAmount = cart.reduce(
     (accumulator, book1) => accumulator + Number(book1.subtotal),
@@ -41,9 +42,10 @@ export default function CartDetail(props) {
     dispatch(deleteOneCopy(id));
   };
   const deleteThisBook = (id) => {
-    dispatch(getBookDetail(id));
     dispatch(deleteOneBook(id));
-    toast(`You removed  ${bookTitle.map((b) => b.title)} from the cart !`, {
+    dispatch(getBookDetail(id));
+
+    toast(`You removed ${bookTitle.map((b) => b.title)} from the cart !`, {
       position: "bottom-right",
       style: {
         background: "linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)",
@@ -52,7 +54,7 @@ export default function CartDetail(props) {
       progressBar: {
         backgroundColor: "red",
       },
-      autoClose: 1500,
+      autoClose: 2500,
       closeOnClick: true,
     });
   };
