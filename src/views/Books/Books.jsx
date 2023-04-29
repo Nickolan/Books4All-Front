@@ -45,26 +45,25 @@ export default function Books() {
 
     useEffect(() => {
              setLoader(true)      
-             setTimeout(() => {
-                setLoader(false);
-              },320);
              dispatch(filterByCategory(genreFilter))
-            dispatch(filterByAuthor(authorFilter))
-            dispatch(alphabeticalOrder(orderType))
-           
+             dispatch(filterByAuthor(authorFilter))
+             dispatch(alphabeticalOrder(orderType))
+             if(books){
+                 setTimeout(() => {
+                    setLoader(false);
+                  },320);
+                 
+             }
     }, [])
 
     return (
         <div class='container  h-auto'>
             <Navbar />
-
-      
             {
             loader ?
                <Loader/>
             :
-            <>            
-           
+            <>                  
             <Searchbar setCurrentPage={setCurrentPage} />
             <div class='d-flex mx-auto align-items-center justify-content-between' style={{ width: "80%", height: '50px', borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0", padding: '0 10px 0 7px' }}>
                 <Filters setCurrentPage={setCurrentPage} />

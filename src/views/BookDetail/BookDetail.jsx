@@ -35,7 +35,7 @@ const BookDetail = (props) => {
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
     const [showBook, setShowBook] = useState(false);
-
+const[loader, setLoader]= useState(false)
     let [counter, setCounter] = useState(0)
 
     const navigate = useNavigate()
@@ -97,6 +97,10 @@ const BookDetail = (props) => {
 
 
     useEffect(() => {
+        setLoader(true)      
+        setTimeout(() => {
+           setLoader(false);
+         }, 300);
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
@@ -110,6 +114,7 @@ const BookDetail = (props) => {
         <div className={style.mainContainer}>
             <div>
                 <Navbar />
+
 
                 {eachBook?.map((el) => {
 

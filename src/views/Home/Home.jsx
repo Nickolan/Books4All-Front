@@ -15,10 +15,12 @@ export default function Home() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const dbUser = useSelector((state) => state.dbUser);
+    const books = useSelector((state) => state.books);
     const { user, logout, isAuthenticated, } = useAuth0();
     const[loader, setLoader]= useState(false)
 
     useEffect(() => {
+        setLoader(true)      
         dispatch(getUsers())
         if (user) {
             dispatch(getUserFromDb(user?.nickname))
@@ -29,11 +31,13 @@ export default function Home() {
               navigate('/UserBlocked')
             }
           });
-          setLoader(true)      
-          setTimeout(() => {
-             setLoader(false);
-           },250);
-    }, [dispatch, user])
+         if(books){
+            setTimeout(()=>{
+                setLoader(false);
+            },250)
+
+         }
+       }, [dispatch, user])
 
     return (
         <div >
