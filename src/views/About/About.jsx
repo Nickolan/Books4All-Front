@@ -13,8 +13,8 @@ export default function About(){
   useEffect(()=>{
      setLoader(true)     
    if(integrantes.length){
-     setLoader(false);
-    setTimeout(()=>{
+     setTimeout(()=>{
+      setLoader(false);
 
     },60)
    }
