@@ -41,8 +41,6 @@ export default function CartDetail(props) {
   return (
     <div className="container-xl ">
       <div className="cart-container">
-        <Navbar />
-
         {cart.length === 0 ? (
           <p>There are no books in your shopping cart</p>
         ) : (
