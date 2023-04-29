@@ -51,7 +51,7 @@ export const Sidebar = () => {
   return (
     <div className={!isOpen ? style.sidebarBack : style.sidebarBackOpen}>
       <div className={style.barContainer}>
-        <div className={style.sideBar}>
+        <div className={style.sideBar} >
           <div className={style.barContent}>
             <div className={style.modalColumn1}>
               <div className={style.barHeader}>
