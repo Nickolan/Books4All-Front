@@ -1,4 +1,3 @@
-import React from "react";
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard";
 import { useEffect,useState } from "react";
