@@ -7,28 +7,26 @@ import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooks, getUserFromDb, getUsers } from "../../Redux/actions";
+import { useNavigate } from "react-router-dom";
 import { PostUser } from "../../components/PostUser/PostUser";
 
 export default function Home() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const dbUser = useSelector((state) => state.dbUser);
     const { user, logout, isAuthenticated, } = useAuth0();
 
-   
-
-    PostUser(user, isAuthenticated)
-
-
-    if (dbUser.active === false) {
-        window.alert("This user is blocked")
-        .then(() => logout())
-    }
     useEffect(() => {
         dispatch(getUsers())
         if (user) {
             dispatch(getUserFromDb(user?.nickname))
         }
         dispatch(getBooks())
+        .then(() => {
+            if (dbUser.active === false) {
+              navigate('/UserBlocked')
+            }
+          });
     }, [dispatch, user])
 
     return (
