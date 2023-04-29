@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../../components/NavBar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import React, { useState, useEffect } from "react";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
 import Carrusel3 from "../../components/Carrousel3/CarruselNews";
@@ -39,11 +37,10 @@ export default function Home() {
          }
        }, [dispatch, user])
 
+
     return (
         <div >
             <div className='container'>
-                <Navbar />
-
                 {
                 loader ? <Loader/>
                   : 
@@ -62,7 +59,6 @@ export default function Home() {
             </>
 
                 }
-                <Footer />
             </div>
         </div>
     );

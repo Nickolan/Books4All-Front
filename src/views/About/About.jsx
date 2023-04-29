@@ -1,9 +1,11 @@
-import React, { useEffect,useState } from "react";
-import Navbar from "../../components/NavBar/Navbar";
+import React from "react";
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard"
-import Footer from "../../components/Footer/Footer";
+import React { useEffect,useState } from "react";
+import { integrantes } from "./datos_integrantes";
+import {AboutCard} from "../../components/AboutCard/AboutCard"
 import { Loader } from "../../components/Loader/Loader";
+
 
 
 export default function About(){
@@ -20,9 +22,8 @@ export default function About(){
    }
   },[])
 
-    return(
+
         <div className="container-xl  ">
-          <Navbar />
           {loader ? <Loader/>
           :
           <>         
@@ -46,7 +47,6 @@ export default function About(){
           </div>
           </>
           }
-          <Footer />
         </div>
       );
       

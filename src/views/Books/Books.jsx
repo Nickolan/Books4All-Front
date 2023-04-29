@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from '../../components/NavBar/Navbar'
 import Cards from '../../components/Cards/Cards'
 import { getBooks, alphabeticalOrder, resetFilters, filterByCategory, filterByAuthor, } from "../../Redux/actions";
 import Searchbar from "../../components/SearchBar/Searchbar";
-import Footer from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
 import style from "./Books.module.css"
 import Order from "../../components/Order/Order";
@@ -58,7 +56,7 @@ export default function Books() {
 
     return (
         <div class='container  h-auto'>
-            <Navbar />
+
             {
             loader ?
                <Loader/>
@@ -90,7 +88,6 @@ export default function Books() {
  }
             
 
-            <Footer />
 
         </div>
     )

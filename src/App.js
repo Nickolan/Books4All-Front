@@ -20,6 +20,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
+import Navbar from "./components/NavBar/Navbar";
+import Footer from "./components/Footer/Footer";
+import EditProfile from "./components/EditProfile/EditProfile";
 import { useNavigate } from "react-router-dom";
 import {
   getBooks,
@@ -64,6 +67,7 @@ function App() {
   return (
     <div style={isOpen ? { position: "fixed" } : {}}>
       {isOpen && <Sidebar booksAdded={cart} />}
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -77,9 +81,11 @@ function App() {
         <Route path="/404" element={<Error />} />
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/editProfile" element={<EditProfile/>}/>
         <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />
         <Route path="/UserBlocked" element={<UserBanView/>} />
       </Routes>
+      <Footer/>
       <ToastContainer position="top-center" limit={2} />
     </div>
   );
