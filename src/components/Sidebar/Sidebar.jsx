@@ -6,6 +6,7 @@ import style from '../Sidebar/Sidebar.module.css'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs';
 import {toast} from 'react-toastify'
+import { getCart } from '../../Redux/actions/localStorage';
 
 
 export const Sidebar = () => {
@@ -48,6 +49,18 @@ export const Sidebar = () => {
   const deleteThisBook = (id) => {
     const deletedBook= cart.find((book)=>{return book.id===id})
     dispatch(deleteOneBook(id));
+    const cartLs= (getCart('cart'))
+    console.log(cartLs)
+    if(!cartLs[1] &&  dispatch(deleteOneBook(id))){ 
+      toast(`Empty cart!`, {
+        position: "bottom-right",
+        style: {
+            background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+          color: "white",
+        },
+      
+      })
+    }
    toast(`You removed ${deletedBook.title} from the cart !`, {
       position: "bottom-right",
       style: {
