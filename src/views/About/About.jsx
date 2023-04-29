@@ -10,7 +10,7 @@ export default function About(){
   const[loader, setLoader]= useState(false)
 
   useEffect(()=>{
-    setLoader(true)      
+/*     setLoader(true)       */
     setTimeout(() => {
        setLoader(false);
      }, 300);

@@ -20,7 +20,7 @@ export default function Home() {
     const[loader, setLoader]= useState(false)
 
     useEffect(() => {
-        setLoader(true)      
+/*         setLoader(true)    */   
         dispatch(getUsers())
         if (user) {
             dispatch(getUserFromDb(user?.nickname))

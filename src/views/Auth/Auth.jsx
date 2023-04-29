@@ -25,7 +25,7 @@ export default function Auth() {
 
   useEffect(() => {
     dispatch(getUserFromDb(user?.nickname))
-    setLoader(true)      
+/*     setLoader(true)       */
     setTimeout(() => {
        setLoader(false);
      }, 150);
