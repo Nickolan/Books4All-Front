@@ -20,7 +20,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { Dashboard } from "./views/Dashboard/Dashboard";
 import Navbar from "./components/NavBar/Navbar";
 import Footer from "./components/Footer/Footer";
 import EditProfile from "./components/EditProfile/EditProfile";

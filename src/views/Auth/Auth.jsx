@@ -18,6 +18,8 @@ export default function Auth(){
     
     const [tabValue, setTabValue] = useState(0);
 
+    const dbUser = useSelector(state => state.dbUser)
+
     useEffect( ()=> {
             dispatch(getUserFromDb(user?.nickname))
     },[])
@@ -61,7 +63,7 @@ export default function Auth(){
             <Tab label="Reviews" />
             </Tabs>
             <TabPanel value={tabValue} index={0}>
-              Aqui van las Purchases
+              <ProfileBoughts/>
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
               Aqui va la Wishlist
