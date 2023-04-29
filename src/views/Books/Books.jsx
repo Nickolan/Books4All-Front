@@ -29,6 +29,7 @@ export default function Books() {
     
     setCart('cart', cart)
     const {user} = useAuth0()
+    const[loader, setLoader]= useState(false)
 
     const [currentPage, setCurrentPage] = useState(1)
     const booksForPage = 12;
@@ -36,7 +37,6 @@ export default function Books() {
     const firstBook = lastBook - booksForPage;
     const currentBooks = books.slice(firstBook, lastBook);
     const pageNumber = [];
-    const[loader, setLoader]= useState(false)
 
     for (let i = 1; i <= Math.ceil(books.length / booksForPage); i++) {
         pageNumber.push(i)
@@ -47,7 +47,7 @@ export default function Books() {
              setLoader(true)      
              setTimeout(() => {
                 setLoader(false);
-              }, 500);
+              }, 250);
              dispatch(filterByCategory(genreFilter))
             dispatch(filterByAuthor(authorFilter))
             dispatch(alphabeticalOrder(orderType))
