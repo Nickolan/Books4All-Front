@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 // import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import styles from './FormCreateBook.module.css'; 
+import { formCreateBook } from "../../Redux/actions";
+import { toast } from "react-toastify";
+import Navbar from "../NavBar/Navbar";
 // import { useHis } from "react-router-dom";
 
 
@@ -15,24 +18,56 @@ export default function CreateActivity () {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
     const [buttonEnabled, setButtonEnabled] = useState(false);
+
+    function generarID() {
+        const aleatorio = Math.random().toString(36).substring(2);
+        const fecha = Date.now().toString(36);
+        return aleatorio + fecha;
+      }
     
     const [input, setInput] = useState({
+    id: generarID(),
     title:"",
     description:"", 
     stock:"", 
-    authors:"", 
-    categories:"",
+    authors:[], 
+    categories:[],
     price :"",
     image:"",
     });
 
-    // title
-    // description 
-    // stock 
-    // authors 
-    // categories
-    // price 
-    // image 
+
+    const handleOnSubmitCreate = (e) => {
+        e.preventDefault();
+
+        if (Object.entries(errors).length > 0 || !input.title || !input.description || !input.stock || !input.authors || !input.categories || !input.price || !input.image  ) {
+            toast.error('If you want to create a book complete all fields')
+        } else {
+            const newBook= {
+                ...input,
+                 authors: [input.authors],
+                 categories: [input.categories],
+                }
+    
+            dispatch(formCreateBook(newBook))
+            console.log(newBook)
+    
+    
+    
+            setInput({
+                id: generarID(),
+                title:"",
+                description:"", 
+                stock:"", 
+                authors:[], 
+                categories:[],
+                price :"",
+                image:"",
+                });
+        }
+    }
+
+
 
 
     function validate (input) {
@@ -79,16 +114,6 @@ export default function CreateActivity () {
         return errors
     }
 
-    function handleChange(e) {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-        setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.value
-        }))
-    }
 
     function handleChange(e) {
         setInput({
@@ -100,13 +125,13 @@ export default function CreateActivity () {
             [e.target.name]: e.target.value
         }))
     }
-
 
     return (
         <div className = {styles.createActivityGrid}>
             {/* <div className = {styles.navBarCreate}>    
                 <NavBar />
             </div> */}
+            <Navbar/>
             <div className = {styles.contentCreate}>            
                 <h1>Create your Book!</h1>
                 <br></br>
@@ -221,12 +246,18 @@ export default function CreateActivity () {
                     )}
                     </div>
                     <br></br>
-                    <button className = {styles.botonCreate} type ='submit' disabled = {!buttonEnabled}>Create</button>
+                    <button 
+                    className = {styles.botonCreate} 
+                    type ='submit' 
+                    onSubmit={handleOnSubmitCreate}
+                    onClick={handleOnSubmitCreate}
+
+                    >Create</button>
                 </form>
                 <br></br>
             </div>
             <br></br>
-                <NavLink to = '/countries' className={styles.botonback}>
+                <NavLink to = '/books' className={styles.botonback}>
                     <button>Back to Home</button>
                 </NavLink>            
         </div>
