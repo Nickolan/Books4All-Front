@@ -1,9 +1,6 @@
-import React from "react";
 import { integrantes } from "./datos_integrantes";
-import {AboutCard} from "../../components/AboutCard/AboutCard"
-import React { useEffect,useState } from "react";
-import { integrantes } from "./datos_integrantes";
-import {AboutCard} from "../../components/AboutCard/AboutCard"
+import {AboutCard} from "../../components/AboutCard/AboutCard";
+import React, { useEffect, useState } from "react";
 import { Loader } from "../../components/Loader/Loader";
 
 
@@ -22,7 +19,7 @@ export default function About(){
    }
   },[])
 
-
+  return(
         <div className="container-xl  ">
           {loader ? <Loader/>
           :

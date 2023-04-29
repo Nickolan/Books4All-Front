@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { postBookPicture } from "../services/postPicture";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import formStyle from '../UpdateBookForm/UpdateBookForm.module.css';
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const WidgetBook = ({setUrl, url, bookImg, theme}) => {
 
     const { user, isAuthenticated } = useAuth0();
     const { bookDetail, role } = useSelector(state => state)
+
+    const postBookPicture = async ( book, pictureUrl ) => {
+        const response = await axios.put(`/books/updateBookPic/${book}`, {picture: pictureUrl})
+        return 0;
+    }
 
     
     const cloudinaryRef = useRef();
@@ -57,6 +62,7 @@ const WidgetBook = ({setUrl, url, bookImg, theme}) => {
                     toast.error('Invalid image format');
                     return 0;
                 }
+                
                 postBookPicture(bookDetail[0].id, result.info.secure_url).then(() => setUrl(result.info.secure_url)).then(() => toast.success('Book pic successfully updated'))
                 return 0;
             }
