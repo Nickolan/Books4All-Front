@@ -6,6 +6,7 @@ import { Button, Container, Divider, Grid, Avatar, Tab, Tabs} from "@mui/materia
 import Grow from '@mui/material/Grow';
 import EditProfile from "../../components/EditProfile/EditProfile";
 import ProfileBoughts from "./profileBoughts";
+import LogoutButton from "../../components/LogoutButton/LogoutButton";
 
 
 export default function Auth(){
@@ -54,6 +55,7 @@ export default function Auth(){
            <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
              <h4>About</h4>
              <h6>{dbUser.about}</h6>
+             <LogoutButton/>
             </Grid>
             <Divider orientation="vertical" flexItem xs={1} style={{ backgroundColor: 'black' }}/>
             <Grid item xs={8} sx={{ pl: 1}}>
