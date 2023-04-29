@@ -41,13 +41,9 @@ export default function Home() {
                 <Navbar />
 
                 {
-                    loader ?
-                    <div class="mx-auto d-flex justify-content-center" style={{ width: "80%", marginBottom: '40px',height:'600px', marginTop:'20%' }}>
-               <Loader/>
-            </div>
-   
-   : 
-   <>
+                loader ? <Loader/>
+                  : 
+                <>
    <img className='img-fluid' src="https://cdn.discordapp.com/attachments/1091730813529374777/1096446376533033052/books-1281581_1920.jpg" alt="Hero" />
                 <div className="p-3">
                     <Carrusel1 />

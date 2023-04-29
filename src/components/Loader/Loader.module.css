@@ -1,6 +1,7 @@
 .loader{
     animation: spin 1s linear infinite;
-    font-size:48px
+    font-size:48px;
+    transition:ease;
   }
   
   @keyframes spin {

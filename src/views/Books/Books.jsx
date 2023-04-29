@@ -47,7 +47,7 @@ export default function Books() {
              setLoader(true)      
              setTimeout(() => {
                 setLoader(false);
-              }, 400);
+              },320);
              dispatch(filterByCategory(genreFilter))
             dispatch(filterByAuthor(authorFilter))
             dispatch(alphabeticalOrder(orderType))
@@ -61,10 +61,7 @@ export default function Books() {
       
             {
             loader ?
-            <div class="mx-auto d-flex justify-content-center" style={{ width: "80%", marginBottom: '40px',height:'600px', marginTop:'20%' }}>
                <Loader/>
-            </div>
-   
             :
             <>            
            

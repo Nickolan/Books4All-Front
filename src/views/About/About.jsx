@@ -19,10 +19,7 @@ export default function About(){
     return(
         <div className="container-xl  ">
           <Navbar />
-          {loader ?
-                 <div class="mx-auto d-flex justify-content-center" style={{ width: "80%", marginBottom: '40px',height:'600px', marginTop:'20%' }}>
-                 <Loader/>
-              </div>
+          {loader ? <Loader/>
           :
           <>         
           <div className="d-flex justify-content-center ">
