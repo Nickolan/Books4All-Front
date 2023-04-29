@@ -17,6 +17,18 @@ export  const FavButton = ({name, book_id, isFav}) =>{
         axios.post('/users/addfavorite', body).then(() => {
 
             dispatch(getUserFromDb(user.name))
+            toast(`❤️ You have added ${name}!`, {
+                position: "bottom-right",
+                style: {
+                    background:'linear-gradient(97deg, rgba(65,10,28,1) 4%, rgba(2,2,17,1) 32%)',
+                  color: "white",
+                },
+                progressBar: {
+                  backgroundColor: "red",
+                },
+                autoClose: 800,
+                closeOnClick: true,
+              });
         })
     }
     function handleremoveFavorites(e) {
