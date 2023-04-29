@@ -7,6 +7,8 @@ import Grow from '@mui/material/Grow';
 import EditProfile from "../../components/EditProfile/EditProfile";
 import ProfileBoughts from "./profileBoughts";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
+import { Loader } from "../../components/Loader/Loader";
+
 
 
 export default function Auth(){
@@ -14,6 +16,7 @@ export default function Auth(){
     const { user} = useAuth0();
 
   const dispatch = useDispatch();
+
 
     const [showEditForm, setShowEditForm] = useState(false);
     
@@ -32,7 +35,6 @@ export default function Auth(){
     const handleClose = () => {
       setShowEditForm(false);
     };
-
 
         return(
             <Container sx={{ display: 'flex', minHeight: '85.9vh'  }}>

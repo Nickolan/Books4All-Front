@@ -1,13 +1,33 @@
 import React from "react";
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard"
+import React { useEffect,useState } from "react";
+import { integrantes } from "./datos_integrantes";
+import {AboutCard} from "../../components/AboutCard/AboutCard"
+import { Loader } from "../../components/Loader/Loader";
+
 
 
 export default function About(){
+  const[loader, setLoader]= useState(false)
+  const [datos, setDatos]= useState(integrantes)
 
-    return(
-        <div className="container-xl bg-success bg-white">
-          <div className="d-flex justify-content-center">
+  useEffect(()=>{
+     setLoader(true)     
+   if(integrantes.length){
+     setTimeout(()=>{
+      setLoader(false);
+
+    },60)
+   }
+  },[])
+
+
+        <div className="container-xl  ">
+          {loader ? <Loader/>
+          :
+          <>         
+          <div className="d-flex justify-content-center ">
             <h1>About Us</h1>
           </div>
           <div className="container mt-2 ">
@@ -25,6 +45,8 @@ export default function About(){
               })}
             </div>
           </div>
+          </>
+          }
         </div>
       );
       
