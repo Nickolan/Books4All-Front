@@ -39,7 +39,7 @@ const BookDetail = (props) => {
     let [counter, setCounter] = useState(0)
 
     const navigate = useNavigate()
-
+    const theme= useSelector(state=>state.theme)
     const dbUser = useSelector(state => state.dbUser);
 
     let bookIds = [];
@@ -119,6 +119,7 @@ const BookDetail = (props) => {
                                 <img className={style.backButton} src="https://res.cloudinary.com/dvldakcin/image/upload/v1681620387/Countries/back_lblp4n.png" onClick={handleClick} />
                                 <div className={style.allContentContainer}>
                                     <div className={style.imgContainer}>
+                                        
                                         <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>

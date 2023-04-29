@@ -2,7 +2,7 @@ import React from 'react';
 
 const BoghtCards = ({ id, date, books, total }) => {
     return (
-        <div class="mt-4 mb-4 bg-light p-4">
+        <div class="mt-4 mb-4 p-4">
             <div>
                 <p>#Order: {id}</p>
                 <p>Date: {date.slice(0, 10)}</p>

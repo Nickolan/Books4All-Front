@@ -62,7 +62,7 @@ export default function Searchbar({ setCurrentPage }) {
                 {name && <button class='bg-light mx-2 ' style={{ cursor: 'pointer', textDecoration: "underline", fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif' }} onClick={goBack}>Delete search</button>}
                 <div className="d-flex input_btn " style={{ height: '40px', width: '250px', padding: '5px', alignItems: 'center', justifyContent: 'center', }}>
                  {theme==='light'?  
-                    <div>
+                    <div className="bg-dark">
                  <input id="inputSearch" class="input_sb  "
                         type='text'
                         autoComplete="off"
