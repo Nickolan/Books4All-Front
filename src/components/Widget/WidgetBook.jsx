@@ -1,13 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { updateProfile } from "../services/updateProfile";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button } from "@mui/material";
+import formStyle from '../UpdateBookForm/UpdateBookForm.module.css';
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
-const Widget = ({ updatedUser, setUpdatedUser}) => {
+const WidgetBook = ({setUrl, url, bookImg, theme}) => {
 
     const { user, isAuthenticated } = useAuth0();
+    const { bookDetail, role } = useSelector(state => state)
+    const navigate = useNavigate();
+
+    const postBookPicture = async ( bookId, pictureUrl ) => {
+        const response = await axios.put(`/admin/updateBookPic/${bookId}`, { picture: pictureUrl })
+        return 0;
+    }
+
     
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
@@ -49,27 +59,27 @@ const Widget = ({ updatedUser, setUpdatedUser}) => {
                 toast.error('Something went wrong, try uploading a new image');
                 return 0;
             }
-            if (result.event === 'success' && isAuthenticated) {
+            if (result.event === 'success' && role.name === 'admin') {
                 if(result.info.format !== "png" && result.info.format !== "jpg"){
                     toast.error('Invalid image format');
                     return 0;
                 }
-                setUpdatedUser({
-                    ...updatedUser,
-                    picture: result.info.secure_url,
-                })
+                
+                postBookPicture(bookDetail[0].id, result.info.secure_url).then(() => setUrl(result.info.secure_url)).then(() => toast.success('Book pic successfully updated'))
+                navigate(-1)
+                return 0;
             }
         })
     } , [])
 
     return (
-        
         <div>
-        <Button variant="outlined" size="small" color="primary" onClick={()=>widgetRef.current.open()}> Upload</Button>
+            <div>
+                <img onClick={()=>widgetRef.current.open()} className={theme === 'dark' ? formStyle.bookImg : formStyle.lightBookImg} src={bookImg} alt="" />
+            </div>
         </div>
-           
     )
 
 }
 
-export default Widget;
+export default WidgetBook;

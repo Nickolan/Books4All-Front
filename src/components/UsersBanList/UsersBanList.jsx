@@ -1,8 +1,21 @@
 import axios from "axios"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getUsers } from "../../Redux/actions"
+import { useState } from "react";
+
 function UsersBanList({inactiveUsers}) {
     const dispatch = useDispatch();
+    const theme = useSelector(state => state.theme);
+    const [currentPage, setCurrentPage] = useState(1)
+    const usersForPage = 5;
+    const lastUser = currentPage * usersForPage;
+    const firstUser = lastUser - usersForPage;
+    const currentUsers = inactiveUsers.slice(firstUser, lastUser);
+    const pageNumber = [];
+ 
+    for (let i = 1; i <= Math.ceil(inactiveUsers.length / usersForPage); i++) {
+        pageNumber.push(i)
+    }
 
     const handleStateChange = (event) => {
         let name = event.target.value
@@ -13,7 +26,33 @@ function UsersBanList({inactiveUsers}) {
 
     return (
         <div>
-            <h1>USERS BlOCKED</h1>
+            <div class='d-flex justify-content-around'>
+                <div>
+                    <h1>Blocked USERS</h1>
+                </div>
+                <div class='border border-3 d-flex'>
+                    <div>
+                        <button
+                        key="previous"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
+                        >
+                        &lt;
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                        key="next"
+                        disabled={currentPage === pageNumber.at(-1)}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
+                        >
+                        &gt;
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div class="border border-2 border-dark d-flex flex-row justify-content-around">
                 <div>
                     <h3>Name</h3>
@@ -35,7 +74,7 @@ function UsersBanList({inactiveUsers}) {
                 </div>
             </div>
             <div>
-                {inactiveUsers?.map((user) => {
+                {currentUsers?.map((user) => {
                     return(
                         <div className="border border-2 border-dark d-flex flex-row justify-content-around">
                             <div>

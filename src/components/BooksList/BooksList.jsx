@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
 import { getBooks, getDeletedBooks } from "../../Redux/actions";
 function BooksList({books}) {
     const dispatch = useDispatch()
+    const theme = useSelector(state => state.theme);
     const [currentPage, setCurrentPage] = useState(1)
-    const booksForPage = 12;
+    const booksForPage = 10;
     const lastBook = currentPage * booksForPage;
     const firstBook = lastBook - booksForPage;
     const currentBooks = books.slice(firstBook, lastBook);
@@ -39,7 +40,7 @@ function BooksList({books}) {
                         key="previous"
                         disabled={currentPage === 1}
                         onClick={() => setCurrentPage(currentPage - 1)}
-                        class='btn btn-sm btn-outline-dark mx-1 fw-bold'
+                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
                         >
                         &lt;
                         </button>
@@ -49,7 +50,7 @@ function BooksList({books}) {
                         key="next"
                         disabled={currentPage === pageNumber.at(-1)}
                         onClick={() => setCurrentPage(currentPage + 1)}
-                        class='btn btn-sm btn-outline-dark mx-1 fw-bold'
+                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
                         >
                         &gt;
                         </button>

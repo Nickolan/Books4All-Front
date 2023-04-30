@@ -3,17 +3,25 @@ import "./CartDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../NavBar/Navbar";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { addOneCopy, deleteOneBook, deleteOneCopy } from "../../Redux/actions";
+import {
+  addOneCopy,
+  deleteOneBook,
+  deleteOneCopy,
+  getBookDetail,
+} from "../../Redux/actions";
 import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
 import { setCart } from "../../Redux/actions/localStorage";
 import { BsTrash } from "react-icons/bs";
 // import { removeBookFromCart } from "../actions/cartActions";
+import { toast } from "react-toastify";
 
 export default function CartDetail(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   setCart("cart", cart);
+  const bookTitle = useSelector((state) => state.bookDetail);
+  console.log(bookTitle);
 
   let totalAmount = cart.reduce(
     (accumulator, book1) => accumulator + Number(book1.subtotal),
@@ -33,16 +41,27 @@ export default function CartDetail(props) {
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id));
   };
-
   const deleteThisBook = (id) => {
     dispatch(deleteOneBook(id));
+    dispatch(getBookDetail(id));
+
+    toast(`You removed ${bookTitle.map((b) => b.title)} from the cart !`, {
+      position: "bottom-right",
+      style: {
+        background: "linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)",
+        color: "white",
+      },
+      progressBar: {
+        backgroundColor: "red",
+      },
+      autoClose: 2500,
+      closeOnClick: true,
+    });
   };
 
   return (
     <div className="container-xl ">
       <div className="cart-container">
-        <Navbar />
-
         {cart.length === 0 ? (
           <p>There are no books in your shopping cart</p>
         ) : (

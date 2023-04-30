@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetail, addToCart, getUserFromDb } from '../../Redux/actions'
 import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
-import Navbar from '../../components/NavBar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
 import { toast } from 'react-toastify';
-
+import swal from 'sweetalert';
 
 
 
@@ -35,11 +33,11 @@ const BookDetail = (props) => {
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
     const [showBook, setShowBook] = useState(false);
-
+const[loader, setLoader]= useState(false)
     let [counter, setCounter] = useState(0)
 
     const navigate = useNavigate()
-
+    const theme= useSelector(state=>state.theme)
     const dbUser = useSelector(state => state.dbUser);
 
     let bookIds = [];
@@ -57,7 +55,10 @@ const BookDetail = (props) => {
     }
     const handleShowReview = () => {
         if (!isAuthenticated) {
-            window.alert("please sign up for leave a review")
+            swal("please sign up for leave a review!", {
+                buttons: false,
+                timer: 1400,
+              }); 
             loginWithPopup()
         } else {
             let isBought = bookIds?.find(Id => Id === bookId)
@@ -86,7 +87,18 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-
+        toast(`You have added ${bookName} to the cart !`, { //toastify desde la vista del detalle del libro
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 1000,
+            closeOnClick: true,
+          });
 
 
     }
@@ -97,6 +109,10 @@ const BookDetail = (props) => {
 
 
     useEffect(() => {
+        setLoader(true)      
+        setTimeout(() => {
+           setLoader(false);
+         }, 300);
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
@@ -109,7 +125,7 @@ const BookDetail = (props) => {
     return (
         <div className={style.mainContainer}>
             <div>
-                <Navbar />
+
 
                 {eachBook?.map((el) => {
 
@@ -119,6 +135,7 @@ const BookDetail = (props) => {
                                 <img className={style.backButton} src="https://res.cloudinary.com/dvldakcin/image/upload/v1681620387/Countries/back_lblp4n.png" onClick={handleClick} />
                                 <div className={style.allContentContainer}>
                                     <div className={style.imgContainer}>
+                                        
                                         <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>
@@ -173,7 +190,6 @@ const BookDetail = (props) => {
                 {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview} />}
 
             </div>
-            <Footer />
         </div>
 
     );
