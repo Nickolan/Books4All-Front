@@ -9,14 +9,9 @@ export default function Carrusel1() {
   const slides = [1];
 
   const books = useSelector((state) => state.allBooks);
-  /* 
-  order by price- ofertas
-  const booksByPrice = books.sort((a, b) => Number(a.price) - Number(b.price));
-  console.log(booksByPrice.slice(0, 60));
-   */
+
   let dateNotNull = books.filter((book) => book.date !== null);
   const latestNews = dateNotNull.sort((a, b) => b.date.localeCompare(a.date));
-  console.log(latestNews);
 
   const images = latestNews.map((book) => book.image).slice(6, 25);
   const bookTitle = latestNews.map((book) => book.title).slice(6, 25);
