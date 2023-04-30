@@ -7,6 +7,8 @@ import Grow from '@mui/material/Grow';
 import EditProfile from "../../components/EditProfile/EditProfile";
 import ProfileBoughts from "./profileBoughts";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
+import { Loader } from "../../components/Loader/Loader";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -27,6 +29,7 @@ export default function Auth(){
 
   const dispatch = useDispatch();
 
+
     const [showEditForm, setShowEditForm] = useState(false);
     
     const [tabValue, setTabValue] = useState(0);
@@ -44,7 +47,6 @@ export default function Auth(){
     const handleClose = () => {
       setShowEditForm(false);
     };
-
 
         return(
           <ThemeProvider theme={theme}>
