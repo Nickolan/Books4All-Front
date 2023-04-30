@@ -18,6 +18,7 @@ export default function Cart(){
 
     const handleClose=(id)=>{
         dispatch(deleteOneBook(id))
+        
     }
     useEffect(() => {
       dispatch(getUserFromDb(user?.nickname))

@@ -1,8 +1,7 @@
 import { integrantes } from "./datos_integrantes";
 import {AboutCard} from "../../components/AboutCard/AboutCard";
-import React, { useEffect, useState } from "react";
+import { useEffect,useState } from "react";
 import { Loader } from "../../components/Loader/Loader";
-
 
 
 export default function About(){
@@ -15,12 +14,12 @@ export default function About(){
      setTimeout(()=>{
       setLoader(false);
 
-    },60)
+    },100)
    }
   },[])
 
-  return(
-        <div className="container-xl  ">
+return(
+        <div className="container-xl">
           {loader ? <Loader/>
           :
           <>         
