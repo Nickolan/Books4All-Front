@@ -161,7 +161,7 @@ const[loader, setLoader]= useState(false)
                                         </div>
                                             <div>
                                             {
-                                                role.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
+                                                role?.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
                                                 
                                             }
                                             </div>
