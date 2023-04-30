@@ -40,7 +40,7 @@ export default function Carrusel1() {
         <div id="slider" className="h-100">
           {slides.map((slide, index) => {
             return (
-              <div className="slider-card w-25 ">
+              <div className="slider w-25 ">
                 {images.map((img, index) => (
                   <Link to={`/bookDetail/${bookId[index]}`}>
                     <img
