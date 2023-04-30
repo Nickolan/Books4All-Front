@@ -42,7 +42,7 @@ export default function Navbar() {
                         <li className="position-relative nav-item"><Link to="/about" className="nav-link" >About</Link></li>
                         <li className="position-relative nav-item"><Link to="/books" className="nav-link">Books</Link></li>
                      
-                        {isAuthenticated && role.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
+                        {isAuthenticated && role?.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
                         {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
                         <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
