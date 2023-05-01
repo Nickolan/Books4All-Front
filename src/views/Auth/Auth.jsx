@@ -54,7 +54,7 @@ export default function Auth(){
             <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
              <h4>{dbUser.alterName}</h4>
             <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
-             <h4>{dbUser.email}</h4>
+             <h4 style={{overflow: "hidden",textOverflow: "ellipsis"}}>{dbUser.email}</h4>
            <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
              <h4>About</h4>
              <h6>{dbUser.about}</h6>
