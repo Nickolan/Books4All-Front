@@ -139,12 +139,12 @@ const[loader, setLoader]= useState(false)
                                         <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>
-                                        <h1 className={style.title}>{el.title}</h1>
-                                        <h2 className={style.subtitle}>Authors: {el.authors}</h2>
-                                        <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
+                                        <h1 className={style.title}>{el?.title}</h1>
+                                        <h2 className={style.subtitle}>Authors: {el?.authors}</h2>
+                                        <h3 className={style.subtitleCategory}>{el?.categories}</h3>
                                         <div className='d-flex justify-content-start'>
                                             <div className={style.container_price}>
-                                                <h3 className={style.price}>${el.price}</h3>
+                                                <h3 className={style.price}>${el?.price}</h3>
                                             </div>
                                             {counter > 0 && <button className="btn btn-secondary " onClick={handleRest}>-</button>}
 
@@ -161,7 +161,7 @@ const[loader, setLoader]= useState(false)
                                         </div>
                                             <div>
                                             {
-                                                role.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
+                                                role?.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
                                                 
                                             }
                                             </div>

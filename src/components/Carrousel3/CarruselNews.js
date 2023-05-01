@@ -10,9 +10,10 @@ export default function Carrusel3() {
 
   const books = useSelector((state) => state.allBooks);
 
-  const images = books.map((book) => book.image).slice(140, 160); //me devuelve un array de las primeras 10 imágenes
-  const bookTitle = books.map((book) => book.title).slice(140, 160);
-  const bookId = books.map((book) => book.id).slice(140, 160);
+  const booksByPrice = books.sort((a, b) => Number(a.price) - Number(b.price));
+  const images = booksByPrice.map((book) => book.image).slice(1, 20); //me devuelve un array de las primeras 10 imágenes
+  const bookTitle = booksByPrice.map((book) => book.title).slice(1, 20);
+  const bookId = booksByPrice.map((book) => book.id).slice(1, 20);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider3");
@@ -36,11 +37,11 @@ export default function Carrusel3() {
         <div id="slider3" className="h-100">
           {slides.map((slide, index) => {
             return (
-              <div className="slider-card ">
+              <div className="slider w-25 ">
                 {images.map((img, index) => (
                   <Link to={`/bookDetail/${bookId[index]}`}>
                     <img
-                      className="slider-card w-50"
+                      className="slider-card w-50 "
                       src={img || img_default}
                       alt={bookTitle[index]}
                       key={index}
