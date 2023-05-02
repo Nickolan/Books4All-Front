@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { getBooks, getDeletedBooks, getBookDetail } from "../../Redux/actions";
+import { getBooks, getDeletedBooks } from "../../Redux/actions";
 
 
 function BooksList({books, setShowOffert, setBookDiscount}) {
@@ -26,12 +26,12 @@ function BooksList({books, setShowOffert, setBookDiscount}) {
         .then(() => dispatch(getDeletedBooks()))
     }
 
-    const showBookOfferts = (title, id) => {
-        dispatch(getBookDetail(id))
-        setShowOffert(true)
-        setBookDiscount(title)
-        console.log(title);
-    }
+    // const showBookOfferts = (title, id) => {
+    //     dispatch(getBookDetail(id))
+    //     setShowOffert(true)
+    //     setBookDiscount(title)
+    //     console.log(title);
+    // }
 
     return (
         <div>
@@ -117,9 +117,6 @@ function BooksList({books, setShowOffert, setBookDiscount}) {
                                         <Link to={`/bookDetail/${book.id}`}>
                                             <button class=' btn btn-info'>Details</button>
                                         </Link>
-                                    </div>
-                                    <div>
-                                        <button onClick={() => showBookOfferts(book.title, book.id)} class='btn btn-secondary'>Add Discount</button>
                                     </div>
                                 </div>
                             </div>

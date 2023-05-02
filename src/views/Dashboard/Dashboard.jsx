@@ -16,11 +16,11 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Dashboard(){
     const [section, setSection] = useState('Dashboard')
-
     const navitgate = useNavigate()
     const [showOffert, setShowOffert] = useState(false)
     const [bookDiscount, setBookDiscount] = useState('')
     const { role, allUsers, allBooks, banBooks, bookDetail } = useSelector((state) => state)
+    
     const activeUsers = allUsers.filter(user => user.active === true && user.Roles.at(-1).name === 'user')
     const inactiveUsers = allUsers.filter(user => user.active === false)
     const admins = allUsers.filter(user => user.Roles.at(-1).name === 'admin')

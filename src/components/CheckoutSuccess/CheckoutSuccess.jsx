@@ -7,7 +7,7 @@ import HouseIcon from '@mui/icons-material/House';
 import { CheckBox } from "@mui/icons-material";
 import { format } from 'date-fns';
 import { useNavigate } from "react-router-dom";
-import { deleteCart, getEventType } from "../../Redux/actions";
+import { deleteCart } from "../../Redux/actions";
 import Confetti from 'react-confetti';
 
 const CheckoutSuccess = () => {
