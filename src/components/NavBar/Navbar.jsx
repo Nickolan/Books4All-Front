@@ -64,6 +64,7 @@ export default function Navbar() {
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleClick}
                                 color="inherit"
+                                title="My Profile"
                                
                             >
                                 myProfile
@@ -77,6 +78,7 @@ export default function Navbar() {
                                 open={open}
                                 onClose={handleClose}
                                 TransitionComponent={Fade}
+                              
                                 
                                 
                             >

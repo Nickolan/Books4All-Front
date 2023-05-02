@@ -50,7 +50,7 @@ export default function Auth(){
     };
 
         return(
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme} title='login'>
             <Container sx={{ display: 'flex', minHeight: '87.9vh'  }}>
             <Grid container sx={{ pt: 2}}>
             <Grid item xs={true} style={{ textAlign: 'center'}}>
