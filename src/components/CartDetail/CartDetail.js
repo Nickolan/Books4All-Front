@@ -13,8 +13,9 @@ import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
 import { setCart } from "../../Redux/actions/localStorage";
 import { BsTrash } from "react-icons/bs";
-// import { removeBookFromCart } from "../actions/cartActions";
 import { toast } from "react-toastify";
+// import { removeBookFromCart } from "../actions/cartActions";
+
 
 export default function CartDetail(props) {
   const dispatch = useDispatch();
@@ -34,9 +35,14 @@ export default function CartDetail(props) {
     0
   );
 
-  const addCopy = (id) => {
-    dispatch(addOneCopy(id));
-  };
+  const addCopy = (id, stock, quantity) => {
+    if (stock > quantity) {
+      dispatch(addOneCopy(id))
+    }
+    else {
+      toast.info('You have reached the limit of available units')
+    }
+  }
 
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id));
@@ -106,7 +112,7 @@ export default function CartDetail(props) {
                         <span class="mx-3">{book.quantity}</span>
                         <AiOutlinePlus
                           onClick={() => {
-                            addCopy(book.bookId);
+                            addCopy(book.bookId, book.stock, book.quantity);
                           }}
                           className="up"
                         />
@@ -131,7 +137,7 @@ export default function CartDetail(props) {
             </div>
 
             <div class="d-flex flex-column" className="cart-summary">
-              <PayButton cart={cart}>Checkout</PayButton>
+
               <div className="orderSummary">
                 <p>Order summary</p>
                 <div className="priceSummary">
@@ -146,19 +152,12 @@ export default function CartDetail(props) {
                   <span>Total</span>
                   <span>${totalAmount}</span>
                 </div>
+                <PayButton cart={cart}>Checkout</PayButton>
               </div>
             </div>
           </div>
         )}
       </div>
-      <div className="cart-summary">
-        <h2>Cart Detail</h2>
-        <p>Titles Total Amount: {cart.length}</p>
-        <p>Books Total Amount: {totalCopy}</p>
-        <p>Total Due: ${totalAmount} USD</p>
-        <PayButton cart={cart}>Checkout</PayButton>
-      </div>
-      <Footer />
     </div>
   );
 }

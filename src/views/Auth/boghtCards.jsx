@@ -14,7 +14,7 @@ const BoghtCards = ({ id, date, books, total }) => {
             <div key={index} class="d-flex border-bottom mw-75 mt-2">
               <Link
                 style={{ textDecoration: "none" }}
-                to={`/bookDetail/${book.id}`}
+                to={`/bookDetail/${book.bookId}`}
               >
                 <div>
                   <img

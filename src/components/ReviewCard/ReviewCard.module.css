@@ -1,12 +1,12 @@
 .mainContainer{
-    border-bottom: 1px solid rgb(24, 24, 24);
-    width: 50%;
-    margin: 0 auto;
+   width: 500px;
+    margin: 10px 0 10px 0;
 }
 
 .bodyContainer{
     text-align: left;
     margin-top: 20px;
+   
 }
 
 .userContainer{
@@ -20,6 +20,7 @@
     font-weight: bold;
     display: inline-block;
     margin-right: 10px;
+  
 }
 
 .rating{

@@ -1,31 +1,38 @@
 import style from '../ReviewCard/ReviewCard.module.css'
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { AiFillStar } from 'react-icons/ai';
-import { Avatar } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Avatar, Box, Rating, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
-const ReviewCard = ({role, body, rating, user_name, id, picture}) => {
-
+const ReviewCard = ({ role, body, rating, user_name, id, avatar }) => {
+    const dispatch = useDispatch();
     const handleDeleteReview = () => {
         axios.delete(`/admin/review/${id}`)
-        .then(() => toast.success('Review deleted successfully'))
+            .then(() => toast.success('Review deleted successfully'))
     }
 
     return (
         <div className={style.mainContainer}>
             <div>
-            <div className={style.userContainer}>
-            <Link to={`/users/${user_name}`}><Avatar src={picture} style={{ margin: 'auto', width: 30, height: 30}} alt=""/></Link>
-            <h1 className={style.user}>{user_name}</h1>
-            <h2 className={style.rating}>Rating: {rating}<AiFillStar color='#ffc107' style={{ marginBottom: 3 }}/></h2>
-            </div>
-            <div className={style.bodyContainer}>
-            <p className={style.body}>{body}</p>
-            </div>
+                <div className={style.userContainer}>
+                    <Box sx={{ display: 'flex' }}>
+                        <Avatar
+                            alt={user_name}
+                            src={avatar}
+                            sx={{ width: 30, height: 30, marginRight: 1 }}
+                        />
+                        <h1 className={style.user}>{user_name}</h1>
+                        <Rating name="read-only" value={rating} readOnly />
+                    </Box>
+                </div>
+                <div className={style.bodyContainer}>
+                   {body && <p className={style.body}><Typography variant="body1" fontStyle="italic">
+                        "{body}"
+                    </Typography></p>}
+                </div>
             </div>
             {
-               role.name === 'admin' && <div><button onClick={handleDeleteReview} class='btn btn-danger'>Delete Review</button></div>
+                role.name === 'admin' && <div><button onClick={handleDeleteReview} class='btn btn-danger'>Delete Review</button></div>
             }
         </div>
     )

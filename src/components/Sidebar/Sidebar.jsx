@@ -78,9 +78,13 @@ export const Sidebar = () => {
 
   //agrega una copia de un elemento agregado
 
-  const addCopy = (id) => {
-    dispatch(addOneCopy(id))
-
+  const addCopy = (id, stock, quantity) => {
+    if (stock > quantity) {
+      dispatch(addOneCopy(id))
+    }
+    else {
+      toast.info('You have reached the limit of available units')
+    }
   }
 
   //Elimina una copia de un elemento del carrito 
@@ -125,7 +129,7 @@ export const Sidebar = () => {
                             <AiOutlineMinus className={style.inactiveDown} />
                           }
                           <span>{item.quantity}</span>
-                          <AiOutlinePlus onClick={() => { addCopy(item.bookId) }} className={style.up} />
+                          <AiOutlinePlus onClick={() => { addCopy(item.bookId, item.stock, item.quantity) }} className={style.up} />
                         </div>
                         <div >
                           <h5>${item.subtotal}</h5>
