@@ -18,6 +18,8 @@ function Cards({books, favorites}) {
                             price={book.price}
                             isFav={favorites.includes(book.title)}
                             stock={book.stock}
+                     
+                       
                         />
                     </div>
                 )

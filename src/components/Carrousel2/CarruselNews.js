@@ -46,6 +46,7 @@ export default function Carrusel1() {
                       src={img || img_default}
                       alt={bookTitle[index]}
                       key={index}
+                      title={bookTitle[index]}
                     />
                   </Link>
                 ))}
