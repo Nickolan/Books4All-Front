@@ -45,17 +45,18 @@ export default function Navbar() {
             <Toolbar style={{ justifyContent: 'space-between' }}>
                 <div>
                     <Link to='/'>
-                        <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="100" height="40" alt="logo"/>
-                    </Link>
+                        <img title="Books4All" src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="100" height="40" alt="logo"/>
+                        
+                      </Link>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                {theme==='dark' &&  <IconButton color="inherit" onClick={onHandlerClick} data-theme={'light'}><DarkModeIcon/></IconButton>}
-                {theme==='light' &&    <IconButton color="inherit" onClick={onHandlerClick} data-theme={'dark'}><LightModeIcon/></IconButton>}
-                        <Button component={Link} to ={'/'} color="inherit">Home </Button>
-                        <Button component={Link} to ={'/about'} color="inherit">About</Button>
-                        <Button component={Link} to ={'/books'} color="inherit">Books</Button>
+                {theme==='dark' &&  <IconButton title="Switch to light" color="inherit" onClick={onHandlerClick} data-theme={'light'}><DarkModeIcon/></IconButton>}
+                {theme==='light' &&    <IconButton title="Switch to dark" color="inherit" onClick={onHandlerClick} data-theme={'dark'}><LightModeIcon/></IconButton>}
+                        <Button component={Link} to ={'/'}  title="Home" color="inherit">Home </Button>
+                        <Button component={Link} to ={'/about'} title="About" color="inherit">About</Button>
+                        <Button component={Link} to ={'/books'} title="Books" color="inherit">Books</Button>
                         {isAuthenticated && role.name==='admin' ?  <Button component={Link} to ={'/dashboard'} color="inherit">Dashboard</Button>: null}
-                        {!isAuthenticated ? <LoginButton /> : <div>
+                        {!isAuthenticated ? <LoginButton /> : <div >
                             <Button
                                 id="fade-button"
                                 aria-controls={open ? 'fade-menu' : undefined}
@@ -63,6 +64,7 @@ export default function Navbar() {
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleClick}
                                 color="inherit"
+                               
                             >
                                 myProfile
                             </Button>
@@ -75,8 +77,10 @@ export default function Navbar() {
                                 open={open}
                                 onClose={handleClose}
                                 TransitionComponent={Fade}
+                                
+                                
                             >
-                                <MenuItem onClick={handleClose} component={Link} to={'/profile'} color="black">Profile</MenuItem>
+                                <MenuItem onClick={handleClose}  component={Link} to={'/profile'} title="Profile" color="black">Profile</MenuItem>
                                 <MenuItem onClick={handleClose}><LogoutButton/></MenuItem>
                             </Menu> </div>}                    
                     <CartWidget/>
