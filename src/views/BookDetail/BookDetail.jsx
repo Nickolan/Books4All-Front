@@ -162,7 +162,7 @@ const BookDetail = (props) => {
                                 <hr />
                                     <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
                                         return (
-                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} />
+                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} picture={dbUser.picture} />
                                         )
                                     }) : ""}</div>
                             </div>

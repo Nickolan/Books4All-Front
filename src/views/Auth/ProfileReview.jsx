@@ -13,10 +13,7 @@ export default function ProfileReview({dbUser}){
     useEffect(()=>{
         dispatch(getUserReview(dbUser.name))
     }, []);
-
-
-
-
+    
     return(
         <>
         {userReviews?.map(userReview=>{

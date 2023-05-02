@@ -6,7 +6,6 @@ import { Button, Container, Divider, Grid, Avatar, Tab, Tabs, createMuiTheme, Th
 import Grow from '@mui/material/Grow';
 import EditProfile from "../../components/EditProfile/EditProfile";
 import ProfileBoughts from "./profileBoughts";
-import { Loader } from "../../components/Loader/Loader";
 import ProfileReview from "./ProfileReview";
 
 
