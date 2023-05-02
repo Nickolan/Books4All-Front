@@ -69,7 +69,6 @@ const CheckoutSuccess = () => {
     useEffect(() => {
         showSuccess()
         dispatch(deleteCart())
-      
         setTimeout(() => {
             setConfetti(false)
         }, 5000)
@@ -87,7 +86,7 @@ const CheckoutSuccess = () => {
 
     return (
         <div className=''>
-            <Navbar />
+            {confetti && <Confetti />}
             <Container sx={{ marginTop: '30px', }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <CheckCircleRoundedIcon color="primary" fontSize="large" />
@@ -213,7 +212,7 @@ const CheckoutSuccess = () => {
                 </Box>
 
             </Container>
-            <Footer />
+
         </div>
     )
 }

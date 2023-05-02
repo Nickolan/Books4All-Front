@@ -7,6 +7,9 @@ import Grow from '@mui/material/Grow';
 import EditProfile from "../../components/EditProfile/EditProfile";
 import ProfileBoughts from "./profileBoughts";
 import ProfileReview from "./ProfileReview";
+import { Loader } from "../../components/Loader/Loader";
+import FavouritesBooks from "./FavouritesBooks";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -18,9 +21,6 @@ const theme = createMuiTheme({
     },
   },
 });
-import LogoutButton from "../../components/LogoutButton/LogoutButton";
-import { Loader } from "../../components/Loader/Loader";
-import FavouritesBooks from "./FavouritesBooks";
 
 
 
@@ -63,7 +63,7 @@ export default function Auth(){
             <div>
               {showEditForm && <EditProfile user={dbUser} handleClose={handleClose}/>}
             </div>
-            </Grow > 
+            </Grow> 
             <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
              <h4>{dbUser.alterName}</h4>
             <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
