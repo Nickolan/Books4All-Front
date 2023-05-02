@@ -42,10 +42,10 @@ const Filters = ({ setCurrentPage }) => {
 
     return (
         <div class='d-flex align-items-center '  >
-            <span class='fw-bold' style={{ marginRight: '10px' }}>FILTER BY:</span>
+            <span class='fw-bold' title="filter by" style={{ marginRight: '10px' }}>FILTER BY:</span>
             <div className={style.border}>
                 <select class='border-0 bg-light' style={{ textTransform: 'uppercase', width: '120px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', }} value={filter.category} onChange={handleOnChangeCategory}>
-                    <option value='all'>All Genres</option>
+                    <option value='all' title="All Genres">All Genres</option>
                     {categories_?.map((category, index) => {
                         return (
                             <option value={category} key={index}>{category}</option>
@@ -54,8 +54,8 @@ const Filters = ({ setCurrentPage }) => {
                 </select>
             </div>
             <div className={style.border}>
-                <select class='border-0 bg-light' style={{ marginRight: '10px', textTransform: 'uppercase', width: '130px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} value={filter.author} onChange={handleOnChangeAuthor}>
-                    <option value='all' className={style.option}>All Authors</option>
+                <select class='border-0 bg-light'  style={{ marginRight: '10px', textTransform: 'uppercase', width: '130px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} value={filter.author} onChange={handleOnChangeAuthor}>
+                    <option value='all' className={style.option} title="All Authors">All Authors</option>
                     {
                         authors_.map((author, index) => {
                             return (

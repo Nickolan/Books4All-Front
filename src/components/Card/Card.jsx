@@ -63,7 +63,7 @@ function Card({ name, author, image, categories, bookId, price, isFav, stock }) 
 
 
                     <div class="bg-light" style={{ width: "140px", height: "200px", margin: "0 auto" }}>
-                        {image ? <img style={{ width: "140px", height: "200px" }} src={image} alt="book" />
+                        {image ? <img style={{ width: "140px", height: "200px" }} title={name} src={image} alt="book" />
                             : <img style={{ width: "140px", height: "200px" }} src={noImage} alt="not found" />
                         }
                     </div>

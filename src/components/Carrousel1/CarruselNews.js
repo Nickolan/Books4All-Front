@@ -46,14 +46,15 @@ export default function Carrusel1() {
                       src={book.image || img_default}
                       alt={bookTitle[index]}
                       key={index}
-                      />
+                      title={bookTitle[index]}
+                    />
                   </Link>
                 ))}
               </div>
             );
           })}
         </div>
-          
+
         <FiChevronRight
           size={40}
           className="slider-icon right"
