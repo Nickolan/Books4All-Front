@@ -1,6 +1,3 @@
-import img from './images/Manufacturing-KPI-Dashboard-133807082'
-import Footer from '../../components/Footer/Footer'
-import Navbar from '../../components/NavBar/Navbar'
 import ControlPanel from '../../components/Control Panel/ControlPanel';
 import BooksBlock from '../../components/BooksBlock/BooksBlock.jsx';
 import UsersBlock from '../../components/UsersBlock/UsersBlock';
@@ -12,14 +9,17 @@ import BooksBlockBan from '../../components/BooksBlockBan/BooksBlockBan';
 import UsersBanBlock from '../../components/UsersBanBlock/UsersBanBlock';
 import AdminBlock from '../../components/AdminBlock/AdminBlock';
 import AdminsList from '../../components/AdminsList/AdminsList';
+import OffertsForm from '../../components/OffertsForm/OffertsForm'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Dashboard(){
     const [section, setSection] = useState('Dashboard')
 
     const navitgate = useNavigate()
+    const [showOffert, setShowOffert] = useState(false)
+    const [bookDiscount, setBookDiscount] = useState('')
     const { role, allUsers, allBooks, banBooks } = useSelector((state) => state)
     const activeUsers = allUsers.filter(user => user.active === true && user.Roles.at(-1).name === 'user')
     const inactiveUsers = allUsers.filter(user => user.active === false)
@@ -33,8 +33,9 @@ export default function Dashboard(){
 
     return(
         <div>
-
-            <Navbar/>
+            <div>
+                {showOffert && <OffertsForm bookDiscount={bookDiscount} setShowOffert={setShowOffert} />}
+            </div>
             <div>
             <ControlPanel setSection={setSection}/>
             {
@@ -56,13 +57,13 @@ export default function Dashboard(){
                 section === 'Inactive Users' ? <div><UsersBanList inactiveUsers={inactiveUsers}/></div> : null
             }
             {
-                section === 'Active Books' ? <div><BooksList books={allBooks}/></div> : null
+                section === 'Active Books' ? <div><BooksList setBookDiscount={setBookDiscount} setShowOffert={setShowOffert} books={allBooks}/></div> : null
             }
             {
                 section === 'Inactive Books' ? <div><BooksBanedList banBooks={banBooks}/></div> : null
             }
+            
             </div>
-            <Footer/>
         </div>
     )
 }

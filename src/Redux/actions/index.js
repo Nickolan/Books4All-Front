@@ -22,7 +22,9 @@ export const GET_USERS = "GET_USERS";
 export const GET_EVENT_TYPE = "GET_EVENT_TYPE";
 export const GET_DELETED_BOOKS = "GET_DELETED_BOOKS";
 export const CHANGE_THEME = "CHANGE_THEME";
-
+export const USER_REVIEW = "USER_REVIEW";
+export const USER_PROFILE = "USER_PROFILE";
+export const FORM_CREATE_BOOK = "FORM_CREATE_BOOK";
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
     const info = await axios.get(`/books/${bookId}`);
@@ -166,3 +168,29 @@ export const getDeletedBooks = () => {
 export const changeTheme = (theme) => {
   return { type: CHANGE_THEME, payload: theme };
 };
+
+export const getUserReview = (user) =>{
+  return async function (dispatch){
+    const uReview = await axios.get(`/reviews/user/${user}`);
+    return dispatch({ type: USER_REVIEW, payload: uReview.data });
+  };
+};
+
+export const getUserProfile = (user) =>{
+  return async function (dispatch){
+    const uProfile = await axios.get(`/users/${user}`);
+    return dispatch({ type: USER_PROFILE, payload: uProfile.data });
+     };
+};
+
+export const formCreateBook = (payload) => {
+  return async function () {
+    try {
+      var info = await axios.post(`/books/createBook`, payload);
+      return info;
+    } catch (error) {
+      throw new Error({ error: error.message });
+      }
+   }
+};
+ 

@@ -2,7 +2,6 @@ import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCart } from "../../Redux/actions";
 import axios from "axios";
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import { Box, Button, ButtonBase, Container, Divider, Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
@@ -12,6 +11,9 @@ import { CheckBox } from "@mui/icons-material";
 import { format } from 'date-fns';
 import { useNavigate } from "react-router-dom";
 
+
+import { deleteCart, getEventType } from "../../Redux/actions";
+import Confetti from 'react-confetti';
 
 const CheckoutSuccess = () => {
 
@@ -61,10 +63,16 @@ const CheckoutSuccess = () => {
         await setCustomer(customerData);
     }
 
+
+    const [confetti, setConfetti] = useState(true)
+
     useEffect(() => {
         showSuccess()
         dispatch(deleteCart())
-
+      
+        setTimeout(() => {
+            setConfetti(false)
+        }, 5000)
     }, [])
 
     const date = new Date(); // crea una instancia de Date con la fecha actual

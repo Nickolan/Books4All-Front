@@ -1,4 +1,3 @@
-import Navbar from "../../components/NavBar/Navbar";
 import {useSelector, useDispatch}from 'react-redux'
 import { deleteOneBook, getUserFromDb } from "../../Redux/actions";
 import { Link } from "react-router-dom";
@@ -19,6 +18,7 @@ export default function Cart(){
 
     const handleClose=(id)=>{
         dispatch(deleteOneBook(id))
+        
     }
     useEffect(() => {
       dispatch(getUserFromDb(user?.nickname))
@@ -28,7 +28,6 @@ export default function Cart(){
     return(
         <>
         <div className='container-xl '>
-        <Navbar/>
         <div className="mt-4 ">
         <Link to='/books' >
             <img class="BookDetail_backButton__i1i5t" src="https://res.cloudinary.com/dvldakcin/image/upload/v1681620387/Countries/back_lblp4n.png"/>

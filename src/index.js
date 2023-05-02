@@ -7,6 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider} from 'react-redux';
 import store from './Redux/store';
 import { Auth0Provider } from '@auth0/auth0-react';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const domain = 'dev-vcimk1mq442q83wq.us.auth0.com';
 const clientId = 'Jb0tkNGAsOvygZViD8G1VGhcM5T8FRe3';

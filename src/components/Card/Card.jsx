@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
 import style from '../Card/Card.module.css'
-
+import {toast}from 'react-toastify'
 import { BsCartPlus } from 'react-icons/bs';
 import { addToCart, sideBar } from "../../Redux/actions";
 import { FavButton } from "../FavButton/FavButton";
@@ -33,6 +33,21 @@ function Card({ name, author, image, categories, bookId, price, isFav, stock }) 
                 dispatch(sideBar())
             }
         }
+       
+        toast(`You have added ${name} to the cart !`, { //toast desde la vista de books, libro agregado
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 1000,
+            closeOnClick: true,
+          });
+
+
     }
 
     return (

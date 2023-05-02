@@ -46,7 +46,8 @@ export const ReviewFormPage = ({ id, setShowReview, showReview, reviews }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    let repeated = reviews.filter(rev => rev.user_name === dbUser.name)
+   
+    let repeated = reviews.filter(rev => rev.user_name === dbUser.name && rev.active === true)
     if (repeated.length > 0) {
       event.preventDefault()
       setShowReview(!showReview)

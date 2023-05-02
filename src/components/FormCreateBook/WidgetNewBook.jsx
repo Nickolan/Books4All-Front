@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { updateProfile } from "../services/updateProfile";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
-const Widget = ({ updatedUser, setUpdatedUser}) => {
+const WidgetNewBook = ({setInput, input, theme}) => {
 
-    const { user, isAuthenticated } = useAuth0();
+    const { bookDetail, role } = useSelector(state => state)
+    const navigate = useNavigate();
+
     
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
@@ -49,27 +52,34 @@ const Widget = ({ updatedUser, setUpdatedUser}) => {
                 toast.error('Something went wrong, try uploading a new image');
                 return 0;
             }
-            if (result.event === 'success' && isAuthenticated) {
+            if (result.event === 'success' && role.name === 'admin') {
                 if(result.info.format !== "png" && result.info.format !== "jpg"){
                     toast.error('Invalid image format');
                     return 0;
                 }
-                setUpdatedUser({
-                    ...updatedUser,
-                    picture: result.info.secure_url,
+
+                return setInput({
+                    title: input.title,
+                    description: input.description, 
+                    stock: input.stock, 
+                    authors: input.authors, 
+                    categories: input.categories,
+                    price: input.price,
+                    image: result.info.secure_url
                 })
+                
             }
         })
     } , [])
 
     return (
-        
         <div>
-        <Button variant="outlined" size="small" color="primary" onClick={()=>widgetRef.current.open()}> Upload</Button>
+            <div>
+                <span className="btn btn-success" onClick={() => widgetRef.current.open()}>Image</span> 
+            </div>
         </div>
-           
     )
 
 }
 
-export default Widget;
+export default WidgetNewBook;

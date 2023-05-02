@@ -12,6 +12,8 @@
     margin-bottom: 25%;
     border: 1px solid rgb(205, 205, 205);
     box-shadow: 0 5px 30px -10px rgb(88, 88, 88);
+    width: 300px;
+    height: 500px;
 }
 
 .title {

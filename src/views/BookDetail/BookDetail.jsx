@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetail, addToCart, getUserFromDb, sideBar } from '../../Redux/actions'
 import { useEffect, useMemo, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
-import Navbar from '../../components/NavBar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +13,8 @@ import { toast } from 'react-toastify';
 import { ArrowBack, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Box, Button, Container, Divider, IconButton, Rating, Tooltip, Typography } from '@mui/material';
 import { handleRating } from './getRatingAverage';
+import swal from 'sweetalert';
+
 
 
 const BookDetail = (props) => {
@@ -36,8 +36,14 @@ const BookDetail = (props) => {
     const [showReview, setShowReview] = useState(false);
     const [rating, setRating] = useState(0);
     const [updateReview, setUpdateReview] = useState(false);
-    const navigate = useNavigate()
+ 
 
+    const [showBook, setShowBook] = useState(false);
+    const[loader, setLoader]= useState(false)
+    let [counter, setCounter] = useState(0)
+    const navigate = useNavigate()
+    const theme= useSelector(state=>state.theme)
+    
 
     let bookIds = [];
 
@@ -52,7 +58,10 @@ const BookDetail = (props) => {
     }
     const handleShowReview = () => {
         if (!isAuthenticated) {
-            window.alert("please sign up for leave a review")
+            swal("please sign up for leave a review!", {
+                buttons: false,
+                timer: 1400,
+              }); 
             loginWithPopup()
         } else {
             let isBought = bookIds?.find(Id => Id === bookId)
@@ -88,6 +97,21 @@ const BookDetail = (props) => {
                 dispatch(sideBar())
             }
         }
+      
+        toast(`You have added ${bookName} to the cart !`, { //toastify desde la vista del detalle del libro
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 1000,
+            closeOnClick: true,
+          });
+
+
     }
 
     useEffect(() => {
@@ -102,6 +126,10 @@ const BookDetail = (props) => {
     }, [eachBook]);
 
     useEffect(() => {
+        setLoader(true)      
+        setTimeout(() => {
+           setLoader(false);
+         }, 300);
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
@@ -109,7 +137,7 @@ const BookDetail = (props) => {
 
     return (
         <div >
-            <Navbar />
+            
             <Container sx={{ marginTop: '80px', marginBottom: '80px' }}>
                 {eachBook?.map((el, i) => {
                     return (
@@ -120,6 +148,7 @@ const BookDetail = (props) => {
                                 </IconButton>
                                 <div className={style.allContentContainer}>
                                     <div className={style.imgContainer}>
+                                        
                                         <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>
@@ -135,14 +164,14 @@ const BookDetail = (props) => {
                                         <Rating name="read-only" value={rating} precision={0.5} readOnly />
                                         <div className='d-flex justify-content-start align-items-center'>
                                             <div className={style.container_price}>
-                                                <h3 className={style.price}>${el.price}</h3>
+                                                <h3 className={style.price}>${el?.price}</h3>
                                             </div>
                                             <button type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart}>Add to cart</button>
                                             <Typography sx={{ margin: '0 10px 0 10px', fontStyle: 'italic' }}>Avalaible units: {el.stock}</Typography>
                                         </div>
                                         <div>
                                             {
-                                                role.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
+                                                role?.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
                                             }
                                         </div>
 

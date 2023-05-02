@@ -1,5 +1,4 @@
 import style from '../ReviewCard/ReviewCard.module.css'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { Avatar, Box, Rating, Typography } from '@mui/material';
