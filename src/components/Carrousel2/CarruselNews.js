@@ -10,11 +10,11 @@ export default function Carrusel1() {
 
   const books = useSelector((state) => state.allBooks);
 
-  // const books = books.sort((a, b) => b.rating.localeCompare(a.rating)); es requerido un promedio del rating en el modelo de cada libro que se modifica con cada publicacion
+  const Orderedbooks = books.sort((a, b) => b.Reviews.length - a.Reviews.length); // es requerido un promedio del rating en el modelo de cada libro que se modifica con cada publicacion
 
-  const images = books.map((book) => book.image).slice(60, 70); //me devuelve un array de las primeras 10 imágenes
-  const bookTitle = books.map((book) => book.title).slice(60, 70);
-  const bookId = books.map((book) => book.id).slice(60, 70);
+  const images = Orderedbooks.map((book) => book.image).slice(0, 20); //me devuelve un array de las primeras 10 imágenes
+  const bookTitle = Orderedbooks.map((book) => book.title).slice(0, 20);
+  const bookId = Orderedbooks.map((book) => book.id).slice(0, 20);
 
   const slideLeft = () => {
     var slider3 = document.getElementById("slider2");
@@ -38,7 +38,7 @@ export default function Carrusel1() {
         <div id="slider2" className="h-100">
           {slides.map((slide, index) => {
             return (
-              <div className="slider w-25  ">
+              <div key={index} className="slider w-25  ">
                 {images.map((img, index) => (
                   <Link to={`/bookDetail/${bookId[index]}`}>
                     <img

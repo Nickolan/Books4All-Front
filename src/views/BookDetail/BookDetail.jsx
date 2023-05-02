@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBookDetail, addToCart, getUserFromDb } from '../../Redux/actions'
-import { useEffect, useState } from 'react';
+import { getBookDetail, addToCart, getUserFromDb, sideBar } from '../../Redux/actions'
+import { useEffect, useMemo, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
@@ -10,6 +10,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
 import { toast } from 'react-toastify';
+import { ArrowBack, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Box, Button, Container, Divider, IconButton, Rating, Tooltip, Typography } from '@mui/material';
+import { handleRating } from './getRatingAverage';
 import swal from 'sweetalert';
 
 
@@ -25,20 +28,22 @@ const BookDetail = (props) => {
     const eachBook = useSelector((state) => state.bookDetail)
     const role = useSelector((state) => state.role)
 
-    const bookName = eachBook?.map((book) => book.title)
     const cart = useSelector((state) => state.cart)
+    const dbUser = useSelector(state => state.dbUser);
     setCart('cart', cart)
-    const stock = eachBook?.map(book => book.stock)
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [showReview, setShowReview] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [updateReview, setUpdateReview] = useState(false);
+ 
+
     const [showBook, setShowBook] = useState(false);
     const[loader, setLoader]= useState(false)
     let [counter, setCounter] = useState(0)
-
     const navigate = useNavigate()
     const theme= useSelector(state=>state.theme)
-    const dbUser = useSelector(state => state.dbUser);
+    
 
     let bookIds = [];
 
@@ -47,8 +52,6 @@ const BookDetail = (props) => {
             bookIds.push(book.bookId);
         });
     });
-
-
 
     const clickHandler = () => {
         setShow(!show)
@@ -74,9 +77,9 @@ const BookDetail = (props) => {
         navigate(-1);
     }
 
-    let bookInCart = {}
-
     const handleClickAddCart = (event) => {
+        event.preventDefault()
+        const buy = cart.find(item => item.bookId === bookId);
         function generarIdUnico() {
             return Math.random().toString(36).substring(2) + Date.now().toString(36);
         }
@@ -86,8 +89,16 @@ const BookDetail = (props) => {
             bookId: bookId,
             quantity: 1,
         }
-        dispatch(addToCart(bookInCart))
-        toast(`You have added ${bookName} to the cart !`, { //toastify desde la vista del detalle del libro
+        if (buy) {
+            dispatch(sideBar())
+        } else {
+            if (eachBook.length > 0 && eachBook[0].stock > 0) {
+                dispatch(addToCart(bookInCart))
+                dispatch(sideBar())
+            }
+        }
+      
+        toast(`You have added ${eachBook.title} to the cart !`, { //toastify desde la vista del detalle del libro
             position: "bottom-right",
             style: {
                 background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
@@ -103,10 +114,16 @@ const BookDetail = (props) => {
 
     }
 
-    const handleRest = () => {
-        setCounter(--counter)
-    }
+    useEffect(() => {
+        let ratingAverage = 0;
 
+        if (eachBook.length > 0) {
+            ratingAverage = handleRating(eachBook[0].Reviews);
+        }
+
+        setRating(ratingAverage);
+
+    }, [eachBook]);
 
     useEffect(() => {
         setLoader(true)      
@@ -116,81 +133,126 @@ const BookDetail = (props) => {
         if (bookId) {
             dispatch(getBookDetail(bookId));
         }
-        dispatch(getUserFromDb(user?.nickname))
-},  [showReview, user]);
-
-
-
+    }, [bookId, dispatch]);
 
     return (
-        <div className={style.mainContainer}>
-            <div>
-
-
-                {eachBook?.map((el) => {
-
+        <div >
+            
+            <Container sx={{ marginTop: '80px', marginBottom: '80px' }}>
+                {eachBook?.map((el, i) => {
                     return (
-                        <div>
+                        <div key={i}>
                             <div>
-                                <img className={style.backButton} src="https://res.cloudinary.com/dvldakcin/image/upload/v1681620387/Countries/back_lblp4n.png" onClick={handleClick} />
+                                <IconButton onClick={handleClick} fontSize="large" sx={{ fontSize: 60, color: 'black', fontWeight: 'bold' }}>
+                                    <ArrowBack />
+                                </IconButton>
                                 <div className={style.allContentContainer}>
                                     <div className={style.imgContainer}>
                                         
                                         <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>
-                                        <h1 className={style.title}>{el?.title}</h1>
-                                        <h2 className={style.subtitle}>Authors: {el?.authors}</h2>
-                                        <h3 className={style.subtitleCategory}>{el?.categories}</h3>
-                                        <div className='d-flex justify-content-start'>
+                                        <h1 className={style.title}>{el.title}</h1>
+                                        <h2 className={style.subtitle}>Authors: {el.authors}</h2>
+                                        {
+                                            el.categories?.map((cat, i) => {
+                                                return (
+                                                    <h3 key={i} className={style.subtitleCategory}>{cat}</h3>
+                                                )
+                                            })
+                                        }
+                                        <Rating name="read-only" value={rating} precision={0.5} readOnly />
+                                        <div className='d-flex justify-content-start align-items-center'>
                                             <div className={style.container_price}>
                                                 <h3 className={style.price}>${el?.price}</h3>
                                             </div>
-                                            {counter > 0 && <button className="btn btn-secondary " onClick={handleRest}>-</button>}
-
-                                            {counter > 0 && <input disabled className='input_add bg-light ms-1 border border-0' style={{ width: '4%' }} value={counter} type='text' placeholder={0} ></input>}
-                                            {counter < stock && <button className="btn btn-secondary" onClick={handleClickAddCart}>+</button>
-                                            }
-
-
-                                            {!stock ? <p>"Lo sentimos no tenemos stock de este libro"</p> :
-                                                <button type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart}>Add to cart</button>
-
-                                            }
-
+                                            <button type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart}>Add to cart</button>
+                                            <Typography sx={{ margin: '0 10px 0 10px', fontStyle: 'italic' }}>Avalaible units: {el.stock}</Typography>
                                         </div>
-                                            <div>
+                                        <div>
                                             {
                                                 role?.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
                                             }
-                                            </div>
+                                        </div>
 
                                     </div>
+
                                 </div>
                                 <hr />
                                 <div className={style.buttonContainer}>
-                                    <img src='https://res.cloudinary.com/dvldakcin/image/upload/v1681705343/Countries/down-arrow_rlhmtn.png' className={style.description} onClick={clickHandler} />
+                                    {!show ?
+                                        <Tooltip title="Show more">
+                                            <IconButton onClick={clickHandler}>
+                                                <ExpandMore fontSize="large" sx={{ fontSize: 50 }}></ExpandMore>
+                                            </IconButton>
+                                        </Tooltip>
+                                        :
+                                        <Tooltip title="Show less">
+                                            <IconButton onClick={clickHandler}>
+                                                <ExpandLess fontSize="large" sx={{ fontSize: 50 }}></ExpandLess>
+                                            </IconButton>
+                                        </Tooltip>}
                                 </div>
                                 {show && <p className={style.descriptionContent}>{el.description}</p>}
                                 <hr />
-                                    <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
+                                <Box sx={{ marginTop: '80px' }}>
+                                    <Typography
+                                        variant='h6'
+                                        sx={{
+                                         
+                                            height: '40px',
+                                            padding: '5px',
+                                            marginBottom: '20px'
+                                        }}>
+                                        Book reviews
+                                    </Typography>
+                                    {el.Reviews.length > 0 ? <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
                                         return (
-                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} picture={dbUser.picture} />
+                                            <Box>
+                                                {el.active && <ReviewCard
+                                                    role={role}
+                                                    body={el.body}
+                                                    id={el.id}
+                                                    user_name={el.user_name}
+                                                    rating={el.rating}
+                                                    avatar={el.user_avatar}
+                                                />}
+                                                <Divider />
+                                            </Box>
                                         )
-                                    }) : ""}</div>
+                                    }) : ""}
+                                    </div>
+                                        :
+                                        <Box>
+                                            <Typography sx={{ color: 'gray' }}>This book doesn't have any reviews yet</Typography>
+                                            <Divider></Divider>
+                                        </Box>
+                                    }
+                                    <Box sx={{ marginTop: '30px' }}>
+                                        <Typography>
+                                            Did you buy this book? Share your opinion and
+                                            <Button sx={{}} onClick={handleShowReview}> leave a review!</Button>
+
+                                        </Typography>
+
+                                    </Box>
+
+                                </Box>
                             </div>
                         </div>
                     )
                 })}
-
-                <div className={style.buttonContainer}>
-                    <button onClick={handleShowReview} className={style.reviewButton}>Leave a review</button>
-                </div>
-                {showReview && <ReviewFormPage reviews={eachBook[0].Reviews} id={bookId} setShowReview={setShowReview} showReview={showReview} />}
-
-            </div>
+                {showReview && <ReviewFormPage
+                    reviews={eachBook[0].Reviews}
+                    id={bookId} setShowReview={setShowReview}
+                    showReview={showReview}
+                    updateDetail={setUpdateReview}
+                    updateReview={updateReview}
+                />}
+            </Container>
+          
         </div>
-
     );
 }
+
 export { BookDetail };

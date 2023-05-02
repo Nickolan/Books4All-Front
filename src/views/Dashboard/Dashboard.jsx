@@ -20,7 +20,7 @@ export default function Dashboard(){
     const navitgate = useNavigate()
     const [showOffert, setShowOffert] = useState(false)
     const [bookDiscount, setBookDiscount] = useState('')
-    const { role, allUsers, allBooks, banBooks } = useSelector((state) => state)
+    const { role, allUsers, allBooks, banBooks, bookDetail } = useSelector((state) => state)
     const activeUsers = allUsers.filter(user => user.active === true && user.Roles.at(-1).name === 'user')
     const inactiveUsers = allUsers.filter(user => user.active === false)
     const admins = allUsers.filter(user => user.Roles.at(-1).name === 'admin')
@@ -34,7 +34,7 @@ export default function Dashboard(){
     return(
         <div>
             <div>
-                {showOffert && <OffertsForm bookDiscount={bookDiscount} setShowOffert={setShowOffert} />}
+                {showOffert && <OffertsForm bookDetail={bookDetail} bookDiscount={bookDiscount} setShowOffert={setShowOffert} />}
             </div>
             <div>
             <ControlPanel setSection={setSection}/>
