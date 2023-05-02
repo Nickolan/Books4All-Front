@@ -8,6 +8,7 @@ import EditProfile from "../../components/EditProfile/EditProfile";
 import ProfileBoughts from "./profileBoughts";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
 import { Loader } from "../../components/Loader/Loader";
+import FavouritesBooks from "./FavouritesBooks";
 
 
 
@@ -53,7 +54,7 @@ export default function Auth(){
             <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
              <h4>{dbUser.alterName}</h4>
             <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
-             <h4>{dbUser.email}</h4>
+             <h4 style={{overflow: "hidden",textOverflow: "ellipsis"}}>{dbUser.email}</h4>
            <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
              <h4>About</h4>
              <h6>{dbUser.about}</h6>
@@ -70,7 +71,7 @@ export default function Auth(){
               <ProfileBoughts/>
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              Aqui va la Wishlist
+              <FavouritesBooks />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
               Aqui van las Reviews
