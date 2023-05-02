@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { resultDiscount } from "../BooksList/Discount";
 
 function OffertsForm ({bookDiscount, setShowOffert}){
 
@@ -16,6 +17,11 @@ function OffertsForm ({bookDiscount, setShowOffert}){
             discount: event.target.value
         })
         console.log(offertForm);
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const total = resultDiscount(offertForm.discount, )
     }
 
     return(
