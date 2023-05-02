@@ -7,53 +7,83 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../LoginButton/LoginButton";
 import { changeTheme } from "../../Redux/actions";
 import { setTheme } from "../../Redux/actions/localStorage";
+import { AppBar, Toolbar, Button, IconButton, Fade, Menu, MenuItem } from "@mui/material";
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
     const role= useSelector(state=> state.role)
     const theme = useSelector((state) => state.theme);
-    
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+
+
     const dispatch= useDispatch()
    
     setTheme('theme',theme)
-    const onHandlerClick=(event)=>{
-        dispatch( changeTheme(event.target.value))   
-    }
+
+    // const onHandlerClick=(event)=>{
+    //     dispatch( changeTheme(event.target.value))   
+    // }
+    const onHandlerClick = (event) => {
+        const theme = event.currentTarget.getAttribute('data-theme');
+        dispatch(changeTheme(theme));
+      };
 
 
     return (
-
-        <nav className='navbar navbar-expand-md navbar-dark bg-dark sticky-top ' >
-            <div className="container-fluid ">
-                <div className="px-4 ">
+        <AppBar position="static" color="primary" style={{ backgroundColor: '#000000'}} >
+            <Toolbar style={{ justifyContent: 'space-between' }}>
+                <div>
                     <Link to='/'>
-                        <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="100" height="40" />
+                        <img src="https://cdn.discordapp.com/attachments/1091730813529374777/1097178558457184286/books4all-low-resolution-logo-white-on-transparent-background.png" width="100" height="40" alt="logo"/>
                     </Link>
                 </div>
-                <button
-                    type="button" data-toggle="collapse" data-target="#navbarNav" className="navbar-toggler">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNav">
-                    <ul className="navbar-nav me-5" style={{ width: '350px', alignItems: 'center', justifyContent: 'space-around', fontFamily: 'Montserrat, sans-serif' }}>
-                        {theme==='dark'&&  <li className="position-relative nav-item"> <button className='btn btn-light' onClick={onHandlerClick} value={'light'}>light</button></li>}
-                  {theme==='light' &&    <li className="position-relative nav-item"> <button className='btn btn-dark' onClick={onHandlerClick} value={'dark'}>dark</button></li>}
-                        <li className="position-relative nav-item active"><Link to="/" className="nav-link" >Home</Link></li>
-                        <li className="position-relative nav-item"><Link to="/about" className="nav-link" >About</Link></li>
-                        <li className="position-relative nav-item"><Link to="/books" className="nav-link">Books</Link></li>
-                     
-                        {isAuthenticated && role?.name==='admin' ?  <li className="position-relative nav-item"><Link to="/dashboard" className="nav-link">Dashboard</Link></li>: null}
-                        {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>*/}
-                        {/*             <li className="nav-item "><Link to="/events" className="nav-link">Events</Link></li>
-                        <li className="nav-item "><Link to="/cart" className="nav-link">Cart</Link></li> */}
-                        {/* <li className="nav-item "><Link to="/profile" className="nav-link">Profile</Link></li> */}
-                        <li className="position-relative">{!isAuthenticated ? <LoginButton /> : <Link to="/profile" className="nav-link">{"myProfile"}</Link>}</li>
-                        
-                        <CartWidget/>
-                    </ul>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                {theme==='dark' &&  <IconButton color="inherit" onClick={onHandlerClick} data-theme={'light'}><DarkModeIcon/></IconButton>}
+                {theme==='light' &&    <IconButton color="inherit" onClick={onHandlerClick} data-theme={'dark'}><LightModeIcon/></IconButton>}
+                        <Button component={Link} to ={'/'} color="inherit">Home </Button>
+                        <Button component={Link} to ={'/about'} color="inherit">About</Button>
+                        <Button component={Link} to ={'/books'} color="inherit">Books</Button>
+                        {isAuthenticated && role.name==='admin' ?  <Button component={Link} to ={'/dashboard'} color="inherit">Dashboard</Button>: null}
+                        {!isAuthenticated ? <LoginButton /> : <div>
+                            <Button
+                                id="fade-button"
+                                aria-controls={open ? 'fade-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleClick}
+                                color="inherit"
+                            >
+                                myProfile
+                            </Button>
+                            <Menu
+                                id="fade-menu"
+                                MenuListProps={{
+                                'aria-labelledby': 'fade-button',
+                                }}
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                TransitionComponent={Fade}
+                            >
+                                <MenuItem onClick={handleClose} component={Link} to={'/profile'} color="black">Profile</MenuItem>
+                                <MenuItem onClick={handleClose}><LogoutButton/></MenuItem>
+                            </Menu> </div>}                    
+                    <CartWidget/>
                 </div>
-            </div>
-        </nav>  
-
+            </Toolbar>
+        </AppBar>  
     );
 }
+
+// {!isAuthenticated ? <LoginButton /> : <Button component={Link} to ={'/profile'} color="inherit">{"myProfile"}</Button>}

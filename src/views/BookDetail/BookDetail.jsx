@@ -33,7 +33,7 @@ const BookDetail = (props) => {
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
     const [showBook, setShowBook] = useState(false);
-const[loader, setLoader]= useState(false)
+    const[loader, setLoader]= useState(false)
     let [counter, setCounter] = useState(0)
 
     const navigate = useNavigate()
@@ -175,7 +175,7 @@ const[loader, setLoader]= useState(false)
                                 <hr />
                                     <div className={style.subtitleReview}>{el?.Reviews?.length !== 0 ? el?.Reviews?.map(el => {
                                         return (
-                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} />
+                                           el.active && <ReviewCard role={role} body={el.body} id={el.id} user_name={el.user_name} rating={el.rating} picture={dbUser.picture} />
                                         )
                                     }) : ""}</div>
                             </div>

@@ -1,6 +1,7 @@
 .mainContainer{
     margin-left: 300px;
     margin-right: 300px;
+    min-height: 86.3vh;
     border: 0px solid black;
 }
 .bookImg{
