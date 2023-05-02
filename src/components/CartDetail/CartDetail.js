@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
 import { setCart } from "../../Redux/actions/localStorage";
 import { BsTrash } from "react-icons/bs";
+import { toast } from "react-toastify";
 // import { removeBookFromCart } from "../actions/cartActions";
 
 export default function CartDetail(props) {
@@ -26,9 +27,14 @@ export default function CartDetail(props) {
     0
   );
 
-  const addCopy = (id) => {
-    dispatch(addOneCopy(id));
-  };
+  const addCopy = (id, stock, quantity) => {
+    if (stock > quantity) {
+      dispatch(addOneCopy(id))
+    }
+    else {
+      toast.info('You have reached the limit of available units')
+    }
+  }
 
   const deleteCopy = (id) => {
     dispatch(deleteOneCopy(id));
@@ -87,7 +93,7 @@ export default function CartDetail(props) {
                         <span class="mx-3">{book.quantity}</span>
                         <AiOutlinePlus
                           onClick={() => {
-                            addCopy(book.bookId);
+                            addCopy(book.bookId, book.stock, book.quantity);
                           }}
                           className="up"
                         />

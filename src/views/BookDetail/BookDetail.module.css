@@ -1,9 +1,9 @@
-.mainContainer{
-    margin-left: 300px;
-    margin-right: 300px;
-    border: 0px solid black;
+.mainContainer {
+    
+  
 }
-.bookImg{
+
+.bookImg {
     height: auto;
     width: auto;
     margin-top: 25%;
@@ -14,42 +14,50 @@
     box-shadow: 0 5px 30px -10px rgb(88, 88, 88);
 }
 
-.title{
+.title {
     font-size: 30px;
     font-weight: 600;
     margin-top: 50px;
 }
-.titleReview{
+
+.titleReview {
     text-align: center;
     font-size: 30px;
     font-weight: 600;
     margin-top: 20px;
 }
-.subtitleReview{
-    text-align: center;
+
+.subtitleReview {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: baseline;
     font-size: 20px;
-    font-weight: 400;
 }
-.cotentContainer{
+
+.cotentContainer {
     margin-top: 25px;
 }
 
-.allContentContainer{
+.allContentContainer {
     display: flex;
-    flex-direction:row;
-    justify-content:space-around ;
+    flex-direction: row;
+    justify-content: space-around;
 }
-.subtitle{
+
+.subtitle {
     font-size: 20px;
     font-weight: 400;
 }
-.price{
+
+.price {
     font-size: 20px;
     font-weight: 500;
-   
-    
+
+
 }
-.descriptionContent{
+
+.descriptionContent {
     font-size: small;
     font-weight: lighter;
     word-break: break-word;
@@ -58,25 +66,30 @@
     animation: slideDown 1s ease-out;
     margin-top: 10px;
 }
-.description{
-   width: 30px;
-   height: 30px;
-   background-color: white;
-   border: 0px;
+
+.description {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 0px;
 }
-.description:hover{
+
+.description:hover {
     cursor: pointer;
 }
-.buttonContainer{
+
+.buttonContainer {
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
 }
-.subtitleCategory{
+
+.subtitleCategory {
     font-size: 15px;
     font-weight: 400;
 }
-.reviewButton{
+
+.reviewButton {
     background-color: white;
     border: 0px;
     border-radius: 5px;
@@ -86,29 +99,34 @@
     border-bottom: 1px solid black;
     margin-top: 20px;
 }
-.reviewButton:hover{
+
+.reviewButton:hover {
     transform: translateY(-5px);
     border: 1px solid black;
 }
-.backButton{
+
+.backButton {
     width: 20px;
-   height: 20px;
-   margin-top: 10px;
-   transition: .2s;
-}
-.backButton:hover{
-    cursor: pointer;
-}
-@keyframes slideDown {
-  from {
-    transform: translateY(-20%);
-  }
-  to {
-    transform: translateY(0);
-  }
+    height: 20px;
+    margin-top: 10px;
+    transition: .2s;
 }
 
-.container_price{
+.backButton:hover {
+    cursor: pointer;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.container_price {
     margin-top: 10px;
     margin-right: 15px;
 }

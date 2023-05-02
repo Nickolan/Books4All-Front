@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, getUserFromDb } from "../../Redux/actions";
+import { createReview, getBookDetail, getUserFromDb } from "../../Redux/actions";
 import style from '../ReviewForm/ReviewFormPage.module.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from 'react-toastify';
@@ -17,6 +17,7 @@ export const ReviewFormPage = ({ id, setShowReview, showReview, reviews }) => {
 
   const [form, setForm] = useState({
     user_name: dbUser?.name,
+    user_avatar: dbUser?.picture,
     body: '',
     book_id: id,
     rating: '',
@@ -44,6 +45,7 @@ export const ReviewFormPage = ({ id, setShowReview, showReview, reviews }) => {
   };
 
   const submitHandler = (event) => {
+    event.preventDefault();
     let repeated = reviews.filter(rev => rev.user_name === dbUser.name)
     if (repeated.length > 0) {
       event.preventDefault()
@@ -52,13 +54,17 @@ export const ReviewFormPage = ({ id, setShowReview, showReview, reviews }) => {
       return
     }
     else if (Object.keys(errors).length) {
-      event.preventDefault()
-      toast.warning('fill in the missing fields to continue')
+      toast.warning('fill in the missing fields to continue');
+      return
     }
-    else {
-      event.preventDefault();
-      dispatch(createReview(form)).then(result => setShowReview(!showReview)).then(result => toast.success('Review succesfully posted'));
-    }
+
+    dispatch(createReview(form))
+      .then(() => setShowReview(!showReview))
+      .then(() => toast.success('Review succesfully posted'))
+      .then(() => {
+        dispatch(getBookDetail(id))
+      })
+
   }
 
   useEffect(() => {

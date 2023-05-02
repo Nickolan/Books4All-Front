@@ -149,6 +149,7 @@ const rootReducer = (state = initialState, action) => {
           author: bookById.authors,
           image: bookById.image,
           price: bookById.price,
+          stock: bookById.stock,
           subtotal: (bookById.price * action.payload.quantity).toFixed(2),
           quantity: action.payload.quantity,
         };
