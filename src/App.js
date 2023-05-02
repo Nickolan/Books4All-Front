@@ -13,6 +13,7 @@ import Auth from "./views/Auth/Auth";
 import Error from "./views/Error/Error";
 import Dashboard from "./views/Dashboard/Dashboard";
 import UpdateBookForm from "./components/UpdateBookForm/UpdateBookForm";
+import Profile from "./views/Profiles/Profiles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { instance } from "./components/services/api";
@@ -77,6 +78,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/editProfile" element={<EditProfile/>}/>
+        <Route path='/users/:user_name' element={<Profile/>}/>
         <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />
         <Route path="/UserBlocked" element={<UserBanView/>} />
       </Routes>

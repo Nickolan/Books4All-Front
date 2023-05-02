@@ -21,6 +21,8 @@ import {
   GET_EVENT_TYPE,
   GET_DELETED_BOOKS,
   CHANGE_THEME,
+  USER_REVIEW,
+  USER_PROFILE,
 } from "../actions";
 import { getCart, getTheme } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
@@ -31,6 +33,7 @@ const initialState = {
   allBooks: [],
   banBooks: [],
   reviews: [],
+  userReviews: [],
   images: [],
   bookDetail: [],
   cart: getCart("cart") || [],
@@ -40,6 +43,7 @@ const initialState = {
   },
   order: "",
   profile: {},
+  userProfile:{},
   dbUser: {},
   role: {},
   sidebarState: false,
@@ -249,6 +253,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case USER_REVIEW:
+      return{
+        ...state,
+        userReviews: action.payload,
+      }
+    case USER_PROFILE:
+      return{
+        ...state,
+        userProfile: action.payload,
+      }
   }
 };
 

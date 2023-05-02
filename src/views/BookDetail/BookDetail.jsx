@@ -33,7 +33,7 @@ const BookDetail = (props) => {
     const [show, setShow] = useState(false);
     const [showReview, setShowReview] = useState(false);
     const [showBook, setShowBook] = useState(false);
-const[loader, setLoader]= useState(false)
+    const[loader, setLoader]= useState(false)
     let [counter, setCounter] = useState(0)
 
     const navigate = useNavigate()
