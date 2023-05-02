@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import noImage from '../../images/icon-image-not-found.webp'
-import style from '../Card/Card.module.css'
 import {toast}from 'react-toastify'
 import { BsCartPlus } from 'react-icons/bs';
 import { addToCart, sideBar } from "../../Redux/actions";
@@ -10,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function Card({ name, author, image, categories, bookId, price, isFav, stock }) {
     const dispatch = useDispatch();
-    const { user, isAuthenticated } = useAuth0();
+    const { isAuthenticated } = useAuth0();
     const cart = useSelector((state) => state.cart)
 
     const handleClickAddCart = (event) => {

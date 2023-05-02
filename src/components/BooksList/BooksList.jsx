@@ -26,11 +26,12 @@ function BooksList({books, setShowOffert, setBookDiscount}) {
         .then(() => dispatch(getDeletedBooks()))
     }
 
-    const showBookOfferts = (title) => {
-        setShowOffert(true)
-        setBookDiscount(title)
-        console.log(title);
-    }
+    // const showBookOfferts = (title, id) => {
+    //     dispatch(getBookDetail(id))
+    //     setShowOffert(true)
+    //     setBookDiscount(title)
+    //     console.log(title);
+    // }
 
     return (
         <div>
@@ -116,9 +117,6 @@ function BooksList({books, setShowOffert, setBookDiscount}) {
                                         <Link to={`/bookDetail/${book.id}`}>
                                             <button class=' btn btn-info'>Details</button>
                                         </Link>
-                                    </div>
-                                    <div>
-                                        <button onClick={() => showBookOfferts(book.title)} class='btn btn-secondary'>Add Discount</button>
                                     </div>
                                 </div>
                             </div>
