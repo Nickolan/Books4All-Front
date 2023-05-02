@@ -16,7 +16,7 @@ const StarsRating = (props) => {
 
 
     return(
-        <div value={props.value}>
+        <div className={style.starsContainer} value={props.value}>
             {
                 [...Array(5)].map((star, i)=>{
 

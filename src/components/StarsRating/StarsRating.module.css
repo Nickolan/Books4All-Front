@@ -6,3 +6,9 @@
     cursor: pointer;
     transition: color 200ms;
 }
+.starsContainer{
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   margin-left: 10px;
+}

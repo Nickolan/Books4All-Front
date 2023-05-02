@@ -8,7 +8,6 @@ import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
-import { PostUser } from '../../components/PostUser/PostUser';
 import { toast } from 'react-toastify';
 import { ArrowBack, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Box, Button, Container, Divider, IconButton, Rating, Tooltip, Typography } from '@mui/material';
@@ -23,7 +22,6 @@ const BookDetail = () => {
     const { bookId } = useParams();
     const { loginWithPopup, isAuthenticated, user } = useAuth0();
 
-    PostUser(user, isAuthenticated)
 
     const eachBook = useSelector((state) => state.bookDetail)
     const role = useSelector((state) => state.role)
@@ -211,6 +209,8 @@ const BookDetail = () => {
                                                     user_name={el.user_name}
                                                     rating={el.rating}
                                                     avatar={el.user_avatar}
+                                                    user_nickname={dbUser.name}
+                                                    bookId={bookId}
                                                 />}
                                                 <Divider />
                                             </Box>
