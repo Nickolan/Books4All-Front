@@ -51,11 +51,6 @@ function BooksList({ books, setShowOffert, setBookDiscount }) {
             .then(() => dispatch(getDeletedBooks()))
     }
 
-    const showBookOfferts = (title) => {
-        setShowOffert(true)
-        setBookDiscount(title)
-        console.log(title);
-    }
 
     return (
         <div>
@@ -86,70 +81,7 @@ function BooksList({ books, setShowOffert, setBookDiscount }) {
                     </div>
                 </div>
             </div>
-            {/* <div class="border border-2 border-dark d-flex flex-row justify-content-around">
-                <div>
-                    <h3>Title</h3>
-                </div>
-                <div>
-                    <h3>ID</h3>
-                </div>
-                <div>
-                    <h3>Author</h3>
-                </div>
-                <div>
-                    <h3>Price</h3>
-                </div>
-                <div>
-                    <h3>Stock</h3>
-                </div>
-                <div>
-                    <h3>Picture</h3>
-                </div>
-                <div>
-                    <h3>State</h3>
-                </div>
-            </div>
-            <div >
-                {currentBooks.map((book) => {
-                    return (
-                        <div className="border border-2 border-dark d-flex flex-row justify-content-around">
-                            <div>
-                                <h4>{book.title}</h4>
-                            </div>
-                            <div>
-                                <h4>{book.id}</h4>
-                            </div>
-                            <div>
-                                <h4>{book.authors}</h4>
-                            </div>
-                            <div>
-                                <h4>${book.price}</h4>
-                            </div>
-                            <div>
-                                <h4>{book.stock}</h4>
-                            </div>
-                            <div>
-                                <img src={book.image} alt="" />
-                            </div>
 
-                            <div class='d-flex justify-content-around flex-column'>
-                                <div>
-                                    {book.active === false ? <button class="btn btn-danger" onClick={handleStateChange} value={book.title} >Inactive</button>
-                                        : <button class="btn btn-success" onClick={handleStateChange} value={book.title} >Active</button>}
-                                </div>
-                                <div>
-                                    <Link to={`/bookDetail/${book.id}`}>
-                                        <button class=' btn btn-info'>Details</button>
-                                    </Link>
-                                </div>
-                                <div>
-                                    <button onClick={() => showBookOfferts(book.title)} class='btn btn-secondary'>Add Discount</button>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div> */}
 
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -186,9 +118,6 @@ function BooksList({ books, setShowOffert, setBookDiscount }) {
                                                 <button class=' btn btn-info'>Details</button>
                                             </Link>
                                         </div>
-                                        {/* <div>
-                                            <button onClick={() => showBookOfferts(row.title)} class='btn btn-secondary'>Add Discount</button>
-                                        </div> */}
                                     </div>
                                 </StyledTableCell>
                             </StyledTableRow>

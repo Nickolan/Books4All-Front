@@ -33,6 +33,7 @@ return(
                   <div key={index} className="col">
                     <AboutCard
                       name={integrante.name}
+                      
                       img={integrante.img}
                       countryImage={integrante.countryImage}
                     />

@@ -69,7 +69,7 @@ export default function Books() {
             </div>
             <div class="mx-auto" style={{ width: "80%", marginBottom: '40px' }}>
             {currentBooks.length >0  ? 
-             <Cards books={currentBooks} favorites={arrayFavorites} />
+             <Cards books={currentBooks}  favorites={arrayFavorites} />
              :
              loader && <p style={{fontWeight: 'bold', border: 'none', fontFamily: 'Work Sans, sans-serif', fontSize:'30px', margin:'50px auto'}}>Sorry, we could not find any books matching your criteria</p>
             }

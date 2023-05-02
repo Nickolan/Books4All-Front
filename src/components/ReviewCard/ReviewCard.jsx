@@ -2,10 +2,8 @@ import style from '../ReviewCard/ReviewCard.module.css'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { Avatar, Box, Rating, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
 
 const ReviewCard = ({ role, body, rating, user_name, id, avatar }) => {
-    const dispatch = useDispatch();
     const handleDeleteReview = () => {
         axios.delete(`/admin/review/${id}`)
             .then(() => toast.success('Review deleted successfully'))

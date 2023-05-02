@@ -5,7 +5,6 @@ import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -74,11 +73,11 @@ function DashboardContent() {
     //funcion dashboard de Nico
 
     const [section, setSection] = useState('Dashboard')
-
     const navitgate = useNavigate()
     const [showOffert, setShowOffert] = useState(false)
     const [bookDiscount, setBookDiscount] = useState('')
-    const { role, allUsers, allBooks, banBooks } = useSelector((state) => state)
+    const { role, allUsers, allBooks, banBooks, bookDetail } = useSelector((state) => state)
+    
     const activeUsers = allUsers.filter(user => user.active === true && user.Roles.at(-1).name === 'user')
     const inactiveUsers = allUsers.filter(user => user.active === false)
     const admins = allUsers.filter(user => user.Roles.at(-1).name === 'admin')

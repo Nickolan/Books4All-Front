@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./CartDetail.css";
 import { useSelector, useDispatch } from "react-redux";
-import Navbar from "../NavBar/Navbar";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import {
   addOneCopy,
@@ -9,7 +8,6 @@ import {
   deleteOneCopy,
   getBookDetail,
 } from "../../Redux/actions";
-import Footer from "../Footer/Footer";
 import { PayButton } from "../PayButton/PayButton";
 import { setCart } from "../../Redux/actions/localStorage";
 import { BsTrash } from "react-icons/bs";
@@ -17,7 +15,7 @@ import { toast } from "react-toastify";
 // import { removeBookFromCart } from "../actions/cartActions";
 
 
-export default function CartDetail(props) {
+export default function CartDetail() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   setCart("cart", cart);

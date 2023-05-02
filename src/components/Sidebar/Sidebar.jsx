@@ -1,6 +1,5 @@
-
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar,getBookDetail } from "../../Redux/actions"
+import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar } from "../../Redux/actions"
 import { useNavigate } from "react-router-dom"
 import style from '../Sidebar/Sidebar.module.css'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
@@ -119,7 +118,7 @@ export const Sidebar = () => {
                       <div class='d-flex' className={style.title}>
                         <h4><strong>{item.title}</strong></h4>
                         <div className={style.deleteButton}>
-                          <BsTrash onClick={() => { deleteThisBook(item.id) }} />
+                          <BsTrash title="delete this book" onClick={() => { deleteThisBook(item.id) }} />
                         </div>
                       </div>
                       <div className={style.priceContainer}>
@@ -147,8 +146,8 @@ export const Sidebar = () => {
               <span>${totalAmount}</span>
             </div>
             <div className={style.cartButtons}>
-              <button onClick={goToBuy} type="button" class="btn btn-dark">Go to cart</button>
-              <button onClick={handleClose} type="button" class="btn btn-secondary">Clear cart</button>
+              <button onClick={goToBuy} title="Go to cart" type="button" class="btn btn-dark">Go to cart</button>
+              <button onClick={handleClose} title='Clear cart' type="button" class="btn btn-secondary">Clear cart</button>
             </div>
             <p>You will see the promotions and shipping cost applied at checkout</p>
           </div>

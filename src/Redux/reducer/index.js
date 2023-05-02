@@ -15,7 +15,6 @@ import {
   DELETE_ONE_COPY,
   CURRENT_USER,
   SIDE_BAR,
-  sideBar,
   CLOSE_SIDEBAR,
   GET_USERS,
   GET_EVENT_TYPE,

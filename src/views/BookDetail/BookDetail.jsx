@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBookDetail, addToCart, getUserFromDb, sideBar } from '../../Redux/actions'
-import { useEffect, useMemo, useState } from 'react';
+import { getBookDetail, addToCart, sideBar } from '../../Redux/actions'
+import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
@@ -17,7 +17,7 @@ import swal from 'sweetalert';
 
 
 
-const BookDetail = (props) => {
+const BookDetail = () => {
 
     const dispatch = useDispatch();
     const { bookId } = useParams();
@@ -36,13 +36,8 @@ const BookDetail = (props) => {
     const [showReview, setShowReview] = useState(false);
     const [rating, setRating] = useState(0);
     const [updateReview, setUpdateReview] = useState(false);
- 
-
-    const [showBook, setShowBook] = useState(false);
     const[loader, setLoader]= useState(false)
-    let [counter, setCounter] = useState(0)
     const navigate = useNavigate()
-    const theme= useSelector(state=>state.theme)
     
 
     let bookIds = [];
@@ -149,7 +144,7 @@ const BookDetail = (props) => {
                                 <div className={style.allContentContainer}>
                                     <div className={style.imgContainer}>
                                         
-                                        <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
+                                        <img title={el.title} className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>
                                         <h1 className={style.title}>{el.title}</h1>
@@ -166,7 +161,7 @@ const BookDetail = (props) => {
                                             <div className={style.container_price}>
                                                 <h3 className={style.price}>${el?.price}</h3>
                                             </div>
-                                            <button type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart}>Add to cart</button>
+                                            <button type="button" className="btn btn-dark mt-1 ms-3" onClick={handleClickAddCart} title='Add to cart'>Add to cart</button>
                                             <Typography sx={{ margin: '0 10px 0 10px', fontStyle: 'italic' }}>Avalaible units: {el.stock}</Typography>
                                         </div>
                                         <div>
@@ -231,7 +226,7 @@ const BookDetail = (props) => {
                                     <Box sx={{ marginTop: '30px' }}>
                                         <Typography>
                                             Did you buy this book? Share your opinion and
-                                            <Button sx={{}} onClick={handleShowReview}> leave a review!</Button>
+                                            <Button sx={{}} onClick={handleShowReview} title='leave a review'> leave a review!</Button>
 
                                         </Typography>
 
@@ -248,6 +243,7 @@ const BookDetail = (props) => {
                     showReview={showReview}
                     updateDetail={setUpdateReview}
                     updateReview={updateReview}
+                    
                 />}
             </Container>
           
