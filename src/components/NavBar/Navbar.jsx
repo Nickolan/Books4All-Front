@@ -41,7 +41,7 @@ export default function Navbar() {
 
 
     return (
-        <AppBar position="static" color="primary" style={{ backgroundColor: '#000000'}} >
+        <AppBar position="static" color="primary" style={{ backgroundColor: '#000000', zIndex:'9999'}} >
             <Toolbar style={{ justifyContent: 'space-between' }}>
                 <div>
                     <Link to='/'>
