@@ -57,29 +57,29 @@ export default function Auth(){
 
             <Avatar src={dbUser.picture} style={{ margin: 'auto', width: 70, height: 70}} alt=""/>
 
-            <Button onClick={handleOpen} style={{ color: 'black' }}>Edit</Button>
+            <Button onClick={handleOpen} title="Edit">Edit</Button>
             
             <Grow in={showEditForm} style={{ position: 'absolute', top: '20%', left: '40%', maxWidth:'300px' }}>
             <div>
               {showEditForm && <EditProfile user={dbUser} handleClose={handleClose}/>}
             </div>
             </Grow> 
-            <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
+            <Divider variant="middle" />
              <h4>{dbUser.alterName}</h4>
-            <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
-             <h4 style={{overflow: "hidden",textOverflow: "ellipsis"}}>{dbUser.email}</h4>
-           <Divider variant="middle" style={{ backgroundColor: 'black' }}/>
+            <Divider variant="middle" />
+             <h4 style={{overflow: "hidden",textOverflow: "ellipsis"}} title={dbUser.email}>{dbUser.email}</h4>
+           <Divider variant="middle" />
              <h4>About</h4>
-             <h6>{dbUser.about}</h6>
+             <h6 >{dbUser.about}</h6>
             </Grid>
-            <Divider orientation="vertical" flexItem xs={1} style={{ backgroundColor: 'black' }}/>
+            <Divider orientation="vertical" flexItem xs={1} />
             <Grid item xs={8} sx={{ pl: 1, justifyContent: 'center' }}>
              <div style={{ display: 'flex', justifyContent: 'center' }}> 
             <Tabs value={tabValue} onChange={(event, newValue) => setTabValue(newValue)} sx={{
               backgroundColor: 'transparent'}} indicatorColor="secondary">
-            <Tab label="Purchases" />
-            <Tab label="Wishlist" />
-            <Tab label="Reviews" />
+            <Tab label="Purchases"  title="Purchases"/>
+            <Tab label="Wishlist" title="Wishlist"/>
+            <Tab label="Reviews"  title="Reviews"  />
             </Tabs>
             </div>
             <TabPanel value={tabValue} index={0}>
