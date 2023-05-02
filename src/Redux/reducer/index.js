@@ -44,6 +44,7 @@ const initialState = {
   role: {},
   sidebarState: false,
   event: [],
+  booksOfferts: [],
   theme: getTheme("theme") || "light",
 };
 

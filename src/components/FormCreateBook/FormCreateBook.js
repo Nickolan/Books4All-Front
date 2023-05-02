@@ -31,7 +31,7 @@ export default function CreateActivity () {
     authors:[], 
     categories:[],
     price :"",
-    image:"",
+    image:""
     });
 
 

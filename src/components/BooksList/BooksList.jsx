@@ -3,7 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { getBooks, getDeletedBooks } from "../../Redux/actions";
-function BooksList({books}) {
+
+
+function BooksList({books, setShowOffert, setBookDiscount}) {
     const dispatch = useDispatch()
     const theme = useSelector(state => state.theme);
     const [currentPage, setCurrentPage] = useState(1)
@@ -24,8 +26,10 @@ function BooksList({books}) {
         .then(() => dispatch(getDeletedBooks()))
     }
 
-    const handleChangeBookDet = (event) => {
-        alert(event.target.value)
+    const showBookOfferts = (title) => {
+        setShowOffert(true)
+        setBookDiscount(title)
+        console.log(title);
     }
 
     return (
@@ -102,14 +106,20 @@ function BooksList({books}) {
                                 <div>
                                     <img src={book.image} alt="" />
                                 </div>
-                                <div>
-                                {book.active === false ? <button class="btn btn-danger" onClick={handleStateChange} value={book.title} >Inactive</button> 
-                                : <button class="btn btn-success" onClick={handleStateChange} value={book.title} >Active</button>}
-                                </div>
-                                <div>
-                                    <Link to={`/bookDetail/${book.id}`}>
-                                    <button class='btn btn-info'>Details</button>
-                                    </Link>
+
+                                <div class='d-flex justify-content-around flex-column'>
+                                    <div>
+                                        {book.active === false ? <button class="btn btn-danger" onClick={handleStateChange} value={book.title} >Inactive</button> 
+                                        : <button class="btn btn-success" onClick={handleStateChange} value={book.title} >Active</button>}
+                                    </div>
+                                    <div>
+                                        <Link to={`/bookDetail/${book.id}`}>
+                                            <button class=' btn btn-info'>Details</button>
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => showBookOfferts(book.title)} class='btn btn-secondary'>Add Discount</button>
+                                    </div>
                                 </div>
                             </div>
                         )
