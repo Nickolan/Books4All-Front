@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
-//import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooks, getUserFromDb, getUsers } from "../../Redux/actions";
-//import { useNavigate } from "react-router-dom";
-//import { PostUser } from "../../components/PostUser/PostUser";
 import { Loader } from "../../components/Loader/Loader";
 
 export default function Home() {
     const dispatch = useDispatch()
-    //const navigate = useNavigate()
-    //const dbUser = useSelector((state) => state.dbUser);
     const books = useSelector((state) => state.books);
     const { user } = useAuth0();
     const[loader, setLoader]= useState(false)
