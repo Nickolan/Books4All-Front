@@ -10,10 +10,13 @@ export default function Carrusel1() {
 
   const books = useSelector((state) => state.allBooks);
 
+  let dateNotNull = books.filter((book) => book.date !== null);
+  const latestNews = dateNotNull.sort((a, b) => b.date.localeCompare(a.date));
 
-  const images = books.map((book) => book.image).slice(10, 30); //me devuelve un array de las primeras 10 imágenes
-  const bookTitle = books.map((book) => book.title).slice(10, 30);
-  const bookId = books.map((book) => book.id).slice(10, 30);
+  const images = dateNotNull.map((book) => book.image).slice(0, 15);
+  const bookTitle = latestNews.map((book) => book.title).slice(0, 15);
+
+  const bookId = latestNews.map((book) => book.id).slice(0, 15);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -37,9 +40,8 @@ export default function Carrusel1() {
         <div id="slider" className="h-100">
           {slides.map((slide, index) => {
             return (
-              <div className="slider-card ">
+              <div className="slider w-25 ">
                 {images.map((img, index) => (
-
                   <Link to={`/bookDetail/${bookId[index]}`}>
                     <img
                       className="slider-card w-50"
@@ -53,7 +55,7 @@ export default function Carrusel1() {
             );
           })}
         </div>
-
+          
         <FiChevronRight
           size={40}
           className="slider-icon right"

@@ -2,7 +2,7 @@
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { getUserFromDb } from "../../Redux/actions"
-
+import { toast } from 'react-toastify';
 
 
 export  const FavButton = ({name, book_id, isFav}) =>{
@@ -17,6 +17,18 @@ export  const FavButton = ({name, book_id, isFav}) =>{
         axios.post('/users/addfavorite', body).then(() => {
 
             dispatch(getUserFromDb(user.name))
+            toast(`❤️ You have added ${name}!`, {
+                position: "bottom-right",
+                style: {
+                    background:'linear-gradient(97deg, rgba(65,10,28,1) 4%, rgba(2,2,17,1) 32%)',
+                  color: "white",
+                },
+                progressBar: {
+                  backgroundColor: "red",
+                },
+                autoClose: 800,
+                closeOnClick: true,
+              });
         })
     }
     function handleremoveFavorites(e) {
@@ -28,6 +40,18 @@ export  const FavButton = ({name, book_id, isFav}) =>{
 
             dispatch(getUserFromDb(user.name))
         })
+        toast( `💔 You removed  ${name} from favorites `, {
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(2,2,17,1) 74%, rgba(65,10,28,1) 93%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 800,
+            closeOnClick: true,
+          });
     }
 
      return(

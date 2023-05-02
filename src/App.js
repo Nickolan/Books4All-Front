@@ -33,8 +33,13 @@ import {
 } from "./Redux/actions";
 import { PostUser } from "./components/PostUser/PostUser";
 import { useAuth0 } from "@auth0/auth0-react";
+import FormCreateBook from './components/FormCreateBook/FormCreateBook'
+
+
 // axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
+
 axios.defaults.baseURL = "http://localhost:3001/";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +85,7 @@ function App() {
         <Route path="/editProfile" element={<EditProfile/>}/>
         <Route path='/users/:user_name' element={<Profile/>}/>
         <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book}/>} />
+        <Route path="/formCreateBook" element={<FormCreateBook />} />
         <Route path="/UserBlocked" element={<UserBanView/>} />
       </Routes>
       <Footer/>

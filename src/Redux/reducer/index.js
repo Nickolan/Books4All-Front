@@ -48,6 +48,7 @@ const initialState = {
   role: {},
   sidebarState: false,
   event: [],
+  booksOfferts: [],
   theme: getTheme("theme") || "light",
 };
 
@@ -132,7 +133,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         dbUser: action.payload,
-        role: action.payload.Roles.at(-1),
+        role: action.payload.Roles?.at(-1),
       };
     }
     case ADD_CART: {
