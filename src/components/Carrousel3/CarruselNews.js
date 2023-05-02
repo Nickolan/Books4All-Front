@@ -9,11 +9,12 @@ export default function Carrusel3() {
   const slides = [1];
 
   const books = useSelector((state) => state.allBooks);
-
+//const books = useSelector((state) => state.booksOfferts);
+// en este array estaran los libros con ofertas agregadas por el admin
   const booksByPrice = books.sort((a, b) => Number(a.price) - Number(b.price));
-  const images = booksByPrice.map((book) => book.image).slice(1, 20); //me devuelve un array de las primeras 10 imágenes
-  const bookTitle = booksByPrice.map((book) => book.title).slice(1, 20);
-  const bookId = booksByPrice.map((book) => book.id).slice(1, 20);
+  const images = booksByPrice.map((book) => book.image).slice(0, 20); //me devuelve un array de las primeras 10 imágenes
+  const bookTitle = booksByPrice.map((book) => book.title).slice(0, 20);
+  const bookId = booksByPrice.map((book) => book.id).slice(0, 20);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider3");

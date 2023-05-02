@@ -1,9 +1,14 @@
 .createActivityGrid {
-    display: grid;
+    display: flex;
     place-items: center;
     height: 100vh;
     background-color: #F0F2F5;
+    justify-content: space-evenly;
     font-family: Arial, sans-serif;
+  }
+  .bookImg{
+    width: 450px;
+    height: 700px;
   }
   
   .contentCreate {

@@ -10,6 +10,8 @@ export default function Carrusel1() {
 
   const books = useSelector((state) => state.allBooks);
 
+  // const books = books.sort((a, b) => b.rating.localeCompare(a.rating)); es requerido un promedio del rating en el modelo de cada libro que se modifica con cada publicacion
+
   const images = books.map((book) => book.image).slice(60, 70); //me devuelve un array de las primeras 10 imágenes
   const bookTitle = books.map((book) => book.title).slice(60, 70);
   const bookId = books.map((book) => book.id).slice(60, 70);
@@ -25,7 +27,7 @@ export default function Carrusel1() {
 
   return (
     <>
-      <h4>Must Read - Our Favorites</h4>
+      <h4>Most Popular (se nesecita un promedio de puntaje por cada libro)</h4>
       <div id="main-slider-container">
         <FiChevronLeft
           size={40}

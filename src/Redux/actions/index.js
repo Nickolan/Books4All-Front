@@ -169,7 +169,7 @@ export const changeTheme = (theme) => {
 };
 
 export const formCreateBook = (payload) => {
-  return async function (dispatch) {
+  return async function () {
     try {
       var info = await axios.post(`/books/createBook`, payload);
       return info;
