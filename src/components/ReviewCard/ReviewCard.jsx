@@ -43,7 +43,7 @@ const ReviewCard = ({ role, body, rating, user_name, id, avatar, user_nickname, 
                         "{body}"
                     </Typography></p>}
                 </div>
-                {showEditForm && <ReviewEditForm setShowEditForm={setShowEditForm} showEditForm={showEditForm} id={id} rating={rating} body={body} bookId={bookId} />}
+                {showEditForm && <ReviewEditForm userName={user_nickname} setShowEditForm={setShowEditForm} showEditForm={showEditForm} id={id} rating={rating} body={body} bookId={bookId} />}
             </div>
             {
                 role.name === 'admin' && <div><button onClick={handleDeleteReview} class='btn btn-danger'>Delete Review</button></div>

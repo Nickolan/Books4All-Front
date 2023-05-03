@@ -31,6 +31,7 @@ export default function ProfileReview({dbUser}){
             userReviews.map((userReview) => (
               <UserReviewCard
                 key={userReview.id} 
+                id={userReview.id}
                 body={userReview.body}
                 rating={userReview.rating}
                 user_name={userReview.user_name}
