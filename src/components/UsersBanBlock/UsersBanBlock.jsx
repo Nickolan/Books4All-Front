@@ -51,7 +51,7 @@ const StyledBadge = styled(Badge)(
 export default function UsersBanBlock({ inactiveUsers }) {
     return (
         <div>
-            <Tooltip title={`Inactive books (${inactiveUsers.length})`}>
+            <Tooltip title={`Inactive Users (${inactiveUsers.length})`}>
             <StyledBadge badgeContent={inactiveUsers.length}>
                 <PeopleOutlineIcon sx={{
                     color: red[500], fontSize: 200,
