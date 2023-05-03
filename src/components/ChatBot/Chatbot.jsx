@@ -39,7 +39,7 @@ class Chatbot extends Component {
     };
 
     this.setState({ messages: [...this.state.messages, says] });
-    const res = await axios.post("bot/df_text_query", {
+    const res = await axios.post("api/df_text_query", {
       text,
       userID: cookies.get("userID"),
     });
@@ -54,7 +54,7 @@ class Chatbot extends Component {
   }
 
   async df_event_query(event) {
-    const res = await axios.post("bot/df_event_query", {
+    const res = await axios.post("api/df_event_query", {
       event,
       userID: cookies.get("userID"),
     });
