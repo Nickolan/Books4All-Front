@@ -21,9 +21,6 @@ const UserReviewCard = ({ body, rating, user_name, book}) => {
             image={book.image}
             title={book.title}
           />
-          <Typography variant="h6" component="p" style={{ textAlign: 'center', marginTop: 10 }}>
-            {user_name}
-          </Typography>
         </CardContent>
       </Card>
     )

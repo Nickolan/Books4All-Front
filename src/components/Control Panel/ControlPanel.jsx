@@ -1,3 +1,5 @@
+import { useNavigate, Link } from 'react-router-dom'
+
 export default function ControlPanel({setSection}) {
     return (
         <nav className='navbar navbar-dark bg-dark d-flex flex-column justify-content-start padding-left'>
@@ -20,6 +22,11 @@ export default function ControlPanel({setSection}) {
                 <div>
                     <button onClick={() => setSection('Inactive Books')} class='border-0 text-light bg-dark'>Inactive Books</button>
                 </div>
+                <div>
+                <Link to={`/formCreateBook`}>
+                    <button class='btn btn-success'>Create Book</button>
+                </Link>
+            </div>
             </div>
         </nav>
     )

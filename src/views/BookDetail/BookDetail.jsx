@@ -10,7 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
 import { PostUser } from '../../components/PostUser/PostUser';
 import { toast } from 'react-toastify';
-
+import swal from 'sweetalert';
 
 
 
@@ -55,7 +55,10 @@ const BookDetail = (props) => {
     }
     const handleShowReview = () => {
         if (!isAuthenticated) {
-            window.alert("please sign up for leave a review")
+            swal("please sign up for leave a review!", {
+                buttons: false,
+                timer: 1400,
+              }); 
             loginWithPopup()
         } else {
             let isBought = bookIds?.find(Id => Id === bookId)
@@ -84,7 +87,18 @@ const BookDetail = (props) => {
             quantity: 1,
         }
         dispatch(addToCart(bookInCart))
-
+        toast(`You have added ${bookName} to the cart !`, { //toastify desde la vista del detalle del libro
+            position: "bottom-right",
+            style: {
+                background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
+              color: "white",
+            },
+            progressBar: {
+              backgroundColor: "red",
+            },
+            autoClose: 1000,
+            closeOnClick: true,
+          });
 
 
     }
@@ -125,12 +139,12 @@ const BookDetail = (props) => {
                                         <img className={style.bookImg} alt='Not found' src={el.image} width='350px' height='200px'></img>
                                     </div>
                                     <div className={style.contentContainer}>
-                                        <h1 className={style.title}>{el.title}</h1>
-                                        <h2 className={style.subtitle}>Authors: {el.authors}</h2>
-                                        <h3 className={style.subtitleCategory}>{el.categories[0]}</h3>
+                                        <h1 className={style.title}>{el?.title}</h1>
+                                        <h2 className={style.subtitle}>Authors: {el?.authors}</h2>
+                                        <h3 className={style.subtitleCategory}>{el?.categories}</h3>
                                         <div className='d-flex justify-content-start'>
                                             <div className={style.container_price}>
-                                                <h3 className={style.price}>${el.price}</h3>
+                                                <h3 className={style.price}>${el?.price}</h3>
                                             </div>
                                             {counter > 0 && <button className="btn btn-secondary " onClick={handleRest}>-</button>}
 
@@ -147,8 +161,7 @@ const BookDetail = (props) => {
                                         </div>
                                             <div>
                                             {
-                                                role.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
-                                                
+                                                role?.name === 'admin' && <Link to={`/admin/modify/${el.id}`}><button class='btn btn-primary'>Edit</button></Link>
                                             }
                                             </div>
 

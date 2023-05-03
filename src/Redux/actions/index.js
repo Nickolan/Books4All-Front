@@ -25,6 +25,7 @@ export const CHANGE_THEME = "CHANGE_THEME";
 export const USER_REVIEW = "USER_REVIEW";
 export const USER_PROFILE = "USER_PROFILE";
 export const GLOBAL_SEARCH = 'GLOBAL_SEARCH';
+export const FORM_CREATE_BOOK = "FORM_CREATE_BOOK";
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -190,3 +191,15 @@ export const globalSearch = (searchTerm) => {
     return dispatch({ type: GLOBAL_SEARCH, payload: response.data });
   };
 }
+
+export const formCreateBook = (payload) => {
+  return async function () {
+    try {
+      var info = await axios.post(`/books/createBook`, payload);
+      return info;
+    } catch (error) {
+      throw new Error({ error: error.message });
+      }
+   }
+};
+ 
