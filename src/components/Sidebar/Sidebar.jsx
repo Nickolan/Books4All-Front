@@ -1,6 +1,5 @@
-
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar,getBookDetail } from "../../Redux/actions"
+import { deleteOneBook, deleteCart, addOneCopy, deleteOneCopy, sideBar } from "../../Redux/actions"
 import { useNavigate } from "react-router-dom"
 import style from '../Sidebar/Sidebar.module.css'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';

@@ -5,6 +5,8 @@
     background-color: #F0F2F5;
     justify-content: space-evenly;
     font-family: Arial, sans-serif;
+    margin-top: 60px;
+    margin-bottom: 60px;
   }
   .bookImg{
     width: 450px;

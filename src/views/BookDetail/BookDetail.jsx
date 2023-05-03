@@ -1,14 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBookDetail, addToCart, getUserFromDb, sideBar } from '../../Redux/actions'
-import { useEffect, useMemo, useState } from 'react';
+import { getBookDetail, addToCart, sideBar } from '../../Redux/actions'
+import { useEffect, useState } from 'react';
 import { ReviewFormPage } from '../../components/ReviewForm/ReviewFormPage';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import style from '../BookDetail/BookDetail.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setCart } from '../../Redux/actions/localStorage';
-import { PostUser } from '../../components/PostUser/PostUser';
 import { toast } from 'react-toastify';
 import { ArrowBack, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Box, Button, Container, Divider, IconButton, Rating, Tooltip, Typography } from '@mui/material';
@@ -17,13 +16,12 @@ import swal from 'sweetalert';
 
 
 
-const BookDetail = (props) => {
+const BookDetail = () => {
 
     const dispatch = useDispatch();
     const { bookId } = useParams();
     const { loginWithPopup, isAuthenticated, user } = useAuth0();
 
-    PostUser(user, isAuthenticated)
 
     const eachBook = useSelector((state) => state.bookDetail)
     const role = useSelector((state) => state.role)
@@ -36,13 +34,8 @@ const BookDetail = (props) => {
     const [showReview, setShowReview] = useState(false);
     const [rating, setRating] = useState(0);
     const [updateReview, setUpdateReview] = useState(false);
- 
-
-    const [showBook, setShowBook] = useState(false);
     const[loader, setLoader]= useState(false)
-    let [counter, setCounter] = useState(0)
     const navigate = useNavigate()
-    const theme= useSelector(state=>state.theme)
     
 
     let bookIds = [];
@@ -216,6 +209,8 @@ const BookDetail = (props) => {
                                                     user_name={el.user_name}
                                                     rating={el.rating}
                                                     avatar={el.user_avatar}
+                                                    user_nickname={dbUser.name}
+                                                    bookId={bookId}
                                                 />}
                                                 <Divider />
                                             </Box>

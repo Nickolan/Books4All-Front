@@ -2,9 +2,32 @@ import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { getUsers } from "../../Redux/actions"
 import { useState } from "react";
+import { styled } from '@mui/material/styles';
+import { Link } from "react-router-dom";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
 
 
-function UsersList({users}) {
+function UsersList({ users }) {
     const dispatch = useDispatch();
     const theme = useSelector(state => state.theme);
     const [currentPage, setCurrentPage] = useState(1)
@@ -13,7 +36,7 @@ function UsersList({users}) {
     const firstUser = lastUser - usersForPage;
     const currentUsers = users.slice(firstUser, lastUser);
     const pageNumber = [];
- 
+
     for (let i = 1; i <= Math.ceil(users.length / usersForPage); i++) {
         pageNumber.push(i)
     }
@@ -21,13 +44,13 @@ function UsersList({users}) {
     const handleStateChange = (event) => {
         let name = event.target.value
         axios.put(`/admin/state/${name}`)
-        .then(() => dispatch(getUsers()))
-        .catch((error) => alert(error));
+            .then(() => dispatch(getUsers()))
+            .catch((error) => alert(error));
     }
     const makeAdmin = (event) => {
-        axios.put('users/admin', {name: event.target.value})
-        .then(() => alert('new admin'))
-        .catch((error) => alert(error));
+        axios.put('users/admin', { name: event.target.value })
+            .then(() => alert('new admin'))
+            .catch((error) => alert(error));
     }
 
     return (
@@ -39,75 +62,58 @@ function UsersList({users}) {
                 <div class='border border-3 d-flex'>
                     <div>
                         <button
-                        key="previous"
-                        disabled={currentPage === 1}
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
+                            key="previous"
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage(currentPage - 1)}
+                            class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
                         >
-                        &lt;
+                            &lt;
                         </button>
                     </div>
                     <div>
                         <button
-                        key="next"
-                        disabled={currentPage === pageNumber.at(-1)}
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
+                            key="next"
+                            disabled={currentPage === pageNumber.at(-1)}
+                            onClick={() => setCurrentPage(currentPage + 1)}
+                            class={theme === 'light' ? 'btn btn-sm btn-outline-dark mx-1 fw-bold' : 'btn btn-sm btn-outline-light mx-1 fw-bold'}
                         >
-                        &gt;
+                            &gt;
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="border border-2 border-dark d-flex flex-row justify-content-around">
-                <div>
-                    <h3>Name</h3>
-                </div>
-                <div>
-                    <h3>ID</h3>
-                </div>
-                <div>
-                    <h3>Email</h3>
-                </div>
-                <div>
-                    <h3>Role</h3>
-                </div>
-                <div>
-                    <h3>State</h3>
-                </div>
-                <div>
-                    <h3>Picture</h3>
-                </div>
-            </div>
-            <div>
-                {currentUsers?.map((user) => {
-                    return(
-                        <div className="border border-2 border-dark d-flex flex-row justify-content-around">
-                            <div>
-                                <h4>{user.name}</h4>
-                            </div>
-                            <div>
-                                <h4>{user.id}</h4>
-                            </div>
-                            <div>
-                                <h4>{user.email}</h4>
-                            </div>
-                            <div>
-                                <h4>{user.Roles.at(-1).name}</h4>
-                                <button class='btn btn-info' value={user.name} onClick={makeAdmin}>Switch to admin</button>
-                            </div>
-                            <div>
-                                {user.active === false ? <button class="btn btn-danger" value={user.name} onClick={handleStateChange}>Inactive</button> 
-                                : <button class="btn btn-success" value={user.name} onClick={handleStateChange}>Active</button>}
-                                
-                            </div>
-                            <div class=''>
-                                <img src={user.picture} alt=""/>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Name</StyledTableCell>
+                            <StyledTableCell align="center">ID</StyledTableCell>
+                            <StyledTableCell align="center">Email</StyledTableCell>
+                            <StyledTableCell align="center">Role</StyledTableCell>
+                            <StyledTableCell align="center">State</StyledTableCell>
+                            <StyledTableCell align="center">Picture</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {currentUsers.map((row) => (
+                            <StyledTableRow key={row.id}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row.name}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">{row.id}</StyledTableCell>
+                                <StyledTableCell align="right">{row.email}</StyledTableCell>
+                                <StyledTableCell align="right">{row.Roles.at(-1).name}</StyledTableCell>
+                                <StyledTableCell align="right">
+                                    {row.active === false ? <button class="btn btn-danger" value={row.name} onClick={handleStateChange}>Inactive</button>
+                                        : <button class="btn btn-success" value={row.name} onClick={handleStateChange}>Active</button>}
+                                </StyledTableCell>
+                                <StyledTableCell align="right"><img src={row.picture} alt="" style={{ width: '50px', height: '80px' }} /></StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }

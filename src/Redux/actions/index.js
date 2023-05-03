@@ -25,6 +25,8 @@ export const CHANGE_THEME = "CHANGE_THEME";
 export const USER_REVIEW = "USER_REVIEW";
 export const USER_PROFILE = "USER_PROFILE";
 export const FORM_CREATE_BOOK = "FORM_CREATE_BOOK";
+
+
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
     const info = await axios.get(`/books/${bookId}`);
@@ -54,7 +56,6 @@ export const createReview = (payload) => {
 };
 
 export function getNameBooks(name) {
-  try {
     return async function (dispatch) {
       var json = await axios.get("/books/?queryBook=" + name);
       return dispatch({
@@ -62,9 +63,7 @@ export function getNameBooks(name) {
         payload: json.data,
       });
     };
-  } catch (error) {
-    console.log(error);
-  }
+  
 }
 
 export const filterByCategory = (category) => {
@@ -86,7 +85,6 @@ export const resetFilters = () => {
 };
 
 export const getImages = () => {
-  try {
     return async function (dispatch) {
       var json = await axios.get("/books");
       return dispatch({
@@ -94,9 +92,7 @@ export const getImages = () => {
         payload: json.data,
       });
     };
-  } catch (error) {
-    console.log(error);
-  }
+  
 };
 export const addUser = (user) => {
   return { type: ADD_USER, payload: user };
@@ -146,23 +142,17 @@ export const getUsers = () => {
   };
 };
 export const getEventType = () => {
-  try {
     return async function (dispatch) {
       const response = await axios.get(`/stripe/webhook`);
       return dispatch({ type: GET_EVENT_TYPE, payload: response.data });
     };
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 export const getDeletedBooks = () => {
-  try {
     return async function (dispatch) {
       const response = await axios.get("/books/blocked");
       return dispatch({ type: GET_DELETED_BOOKS, payload: response.data });
     };
-  } catch (error) {}
 };
 
 export const changeTheme = (theme) => {
