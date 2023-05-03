@@ -52,7 +52,7 @@ export default function UsersBlock({ users }) {
     return (
         <div>
 
-            <Tooltip title={`Inactive books (${users.length})`}>
+            <Tooltip title={`Active Users (${users.length})`}>
                 <StyledBadge badgeContent={users.length}>
                     <PeopleIcon sx={{
                         color: green[500], fontSize: 200,
