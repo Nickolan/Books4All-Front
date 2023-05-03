@@ -42,7 +42,7 @@ import CloseIcon from '@mui/icons-material/Close';
             toast.error('Please, verify errors')
             return;
         }
-        updateProfile(user.name, updatedUser).then(result => toast.success(result)).catch(error => toast.error(error.message))
+        updateProfile(user.name, updatedUser).then(result => toast.success(result)).then(result => handleClose()).catch(error => toast.error(error.message))
       }
 
 
