@@ -1,7 +1,8 @@
 import axios from "axios";
 
-// export const url = "https://books4all-back-production-bd65.up.railway.app/api/stripe";
-export const url = "htts:localhost:3001";
+export const url =
+  "https://books4all-back-production-bd65.up.railway.app/api/stripe";
+// export const url = "htts:localhost:3001";
 
 export const setHeaders = () => {
   const headers = {
