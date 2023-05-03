@@ -90,8 +90,9 @@ const BookDetail = () => {
                 dispatch(sideBar())
             }
         }
+
       
-        toast(`You have added ${eachBook.title} to the cart !`, { //toastify desde la vista del detalle del libro
+        toast(`You have added ${eachBook[0].title} to the cart !`, { //toastify desde la vista del detalle del libro
             position: "bottom-right",
             style: {
                 background:'linear-gradient(97deg, rgba(33,30,31,1) 0%, #5c5c5f 5%)',
@@ -108,6 +109,7 @@ const BookDetail = () => {
     }
 
     useEffect(() => {
+     
         let ratingAverage = 0;
 
         if (eachBook.length > 0) {
