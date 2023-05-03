@@ -4,11 +4,14 @@ import { updateProfile } from "../services/updateProfile";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from "@mui/material";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUserFromDb } from "../../Redux/actions";
 
-const Widget = ({ updatedUser, setUpdatedUser}) => {
+const Widget = ({ updatedUser, setUpdatedUser, userDB}) => {
 
     const { user, isAuthenticated } = useAuth0();
-    
+    const dispatch = useDispatch()
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
@@ -54,10 +57,13 @@ const Widget = ({ updatedUser, setUpdatedUser}) => {
                     toast.error('Invalid image format');
                     return 0;
                 }
-                setUpdatedUser({
-                    ...updatedUser,
-                    picture: result.info.secure_url,
-                })
+                axios.put(`users/updateProfilePic/${userDB.name}`, { picture: result.info.secure_url})
+                .then(() => toast.success('Change will take some time to complete'))
+                .then(() => dispatch(getUserFromDb(userDB.name)))
+                // setUpdatedUser({
+                //     ...updatedUser,
+                //     picture: result.info.secure_url,
+                // })
             }
         })
     } , [])
