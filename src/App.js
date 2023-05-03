@@ -33,14 +33,12 @@ import {
 } from "./Redux/actions";
 import { PostUser } from "./components/PostUser/PostUser";
 import { useAuth0 } from "@auth0/auth0-react";
-import FormCreateBook from './components/FormCreateBook/FormCreateBook'
-
-
+import FormCreateBook from "./components/FormCreateBook/FormCreateBook";
+import Chatbot from "./components/ChatBot/Chatbot";
 
 // axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
 
 axios.defaults.baseURL = "http://localhost:3001/";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -49,20 +47,20 @@ function App() {
   const dbUser = useSelector((state) => state.dbUser);
   const { user, logout, isAuthenticated } = useAuth0();
   const theme = useSelector((state) => state.theme);
-  const book = useSelector(state => state.bookDetail)
+  const book = useSelector((state) => state.bookDetail);
 
-  PostUser(user, isAuthenticated, logout)
+  PostUser(user, isAuthenticated, logout);
 
   if (dbUser.active === false) {
-    console.log('User blocked');
-    logout()
+    console.log("User blocked");
+    logout();
   }
 
   useEffect(() => {
     dispatch(getBooks())
       .then(() => dispatch(getUsers()))
       .then(() => user && dispatch(getUserFromDb(user?.nickname)))
-      .then(() => dispatch(getDeletedBooks()))
+      .then(() => dispatch(getDeletedBooks()));
     document.body.classList.toggle("dark", theme === "dark");
   }, [theme, user]);
 
@@ -84,11 +82,15 @@ function App() {
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/editProfile" element={<EditProfile />} />
-        <Route path='/users/:user_name' element={<Profile />} />
-        <Route path='/admin/modify/:idBook' element={<UpdateBookForm book={book} />} />
+        <Route path="/users/:user_name" element={<Profile />} />
+        <Route
+          path="/admin/modify/:idBook"
+          element={<UpdateBookForm book={book} />}
+        />
         <Route path="/formCreateBook" element={<FormCreateBook />} />
         <Route path="/UserBlocked" element={<UserBanView />} />
       </Routes>
+      <Chatbot />
       <Footer />
       <ToastContainer position="top-center" limit={2} />
     </div>

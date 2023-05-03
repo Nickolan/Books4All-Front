@@ -2,18 +2,20 @@ import { Avatar, Tab, Tabs} from "@mui/material";
 import { useState } from "react";
 import ProfileReview from "../Auth/ProfileReview";
 import { Container } from "react-bootstrap";
+import { Loader } from "../../components/Loader/Loader";
 
 
 const ProfileContent = ({userProfile}) => {
 
     console.log(userProfile)
 
+
     const [tabValue, setTabValue] = useState(0);
 
     return(
         <Container style={{display:'flex', flexDirection:'row', marginTop: '20px'}}>
 
-            <Container  style={{width: '15%', display: 'flex', flexDirection:'column'}}>
+      <Container  style={{width: '15%', display: 'flex', flexDirection:'column'}}>
                 <Avatar src={userProfile.picture} style={{ margin: 'auto', width: 70, height: 70}} alt=""/>
                 <h6>{userProfile.alterName}</h6>
                 <p>{userProfile.about}</p>
