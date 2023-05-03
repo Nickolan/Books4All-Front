@@ -1,45 +1,51 @@
 import React from "react";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const Message = (props) => {
   return (
-    <div className="col s12 m8 offset-m2 l6 offset-l3">
-      <div className="card-panel grey lighten-5 z-depth-1">
-        <div className="row valign-wrapper">
-          {props.speaks === "bot" && (
-            <div className="col s2">
-              <a
-                href="/"
-                className="btn-floating btn-large waves-effect waves-light light-green accent-3"
-              >
-                <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {props.speaks}
-                </span>
-              </a>
-            </div>
-          )}
-          <div className="col s10">
-            <span
-              style={{ fontSize: "1.2rem", fontWeight: "bold" }}
-              className="black-text"
-            >
-              {props.text}
-            </span>
-          </div>
-          {props.speaks === "me" && (
-            <div className="col s2">
-              <a
-                href="/"
-                className="btn-floating btn-large waves-effect waves-light light-green accent-3"
-              >
-                <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {props.speaks}
-                </span>
-              </a>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+    <Grid container justifyContent="center" spacing={2}>
+      <Grid item xs={12} md={8}>
+        <Paper sx={{ p: 2 }}>
+          <Grid container alignItems="center" spacing={2}>
+            {props.speaks === "bot" && (
+              <Grid item>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ backgroundColor: "#66BB6A" }}
+                >
+                  <Typography variant="body1" fontWeight="bold">
+                    {props.speaks}
+                  </Typography>
+                </Button>
+              </Grid>
+            )}
+            <Grid item xs>
+              <Typography variant="body1" fontWeight="bold">
+                {props.text}
+              </Typography>
+            </Grid>
+            {props.speaks === "me" && (
+              <Grid item>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ backgroundColor: "#66BB6A" }}
+                >
+                  <Typography variant="body1" fontWeight="bold">
+                    {props.speaks}
+                  </Typography>
+                </Button>
+              </Grid>
+            )}
+          </Grid>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 

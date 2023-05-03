@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { v4 as uuid } from "uuid";
+import {
+  AppBar,
+  Box,
+  TextField,
+  IconButton,
+  Grid,
+  Card,
+  CardContent,
+  Button,
+  Typography,
+  Toolbar,
+} from "@mui/material";
 import Message from "./Message";
 import ChatbotCard from "./ChatbotCard";
 import { MdAndroid } from "react-icons/md";
@@ -116,33 +128,31 @@ class Chatbot extends Component {
       message.msg.payload.fields.cards
     ) {
       return (
-        <div key={i}>
-          <div className="card-panel grey lighten-5 z-depth-1">
-            <div style={{ overflow: "hidden" }}></div>
-            <div className="col s2">
-              <a
-                href="/"
-                className="btn-floating btn-large waves-effect waves-light light-green accent-3"
-              >
-                {message.speaks}
-              </a>
-            </div>
-            <div style={{ overflow: "auto", overFlowY: "scroll" }}>
-              <div
-                style={{
-                  height: 500,
-                  // width:
-                  //   message.msg.payload.fields.cards.listValue.values.length *
-                  //   261,
-                }}
-              >
-                {this.renderCards(
-                  message.msg.payload.fields.cards.listValue.values
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Grid key={i} item xs={12}>
+          <Card variant="outlined">
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={2}>
+                  <Button
+                    href="/"
+                    variant="contained"
+                    color="success"
+                    size="large"
+                  >
+                    {message.speaks}
+                  </Button>
+                </Grid>
+                <Grid item xs={10}>
+                  <div style={{ height: 500, overflowY: "scroll" }}>
+                    {this.renderCards(
+                      message.msg.payload.fields.cards.listValue.values
+                    )}
+                  </div>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
       );
     }
   }
@@ -165,92 +175,126 @@ class Chatbot extends Component {
   render() {
     if (this.state.showBot) {
       return (
-        <div
+        <Box
           id="chatbot-container"
-          style={{
+          sx={{
             position: "fixed",
-            bottom: "64px",
+            bottom: "70px",
             right: "20px",
             height: "500px",
             width: "400px",
-            border: "1px solid lightgrey",
+            border: "1px solid transparent",
+            borderRadius: "16px",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+            backgroundColor: "#fff",
           }}
         >
-          <nav>
-            <div className="nav-wrapper black">
-              <a href="/" className="brand-logo white-text">
-                <MdAndroid size={32} color="#0aee15" /> ChatBot
-              </a>
-              <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <AppBar position="static">
+            <Toolbar sx={{ bgcolor: "black" }}>
+              <IconButton edge="start" color="inherit" aria-label="menu">
+                <MdAndroid size={32} color="#0aee15" />
+              </IconButton>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, color: "white" }}
+              >
+                ChatBot
+              </Typography>
+              <ul className="right hide-on-med-and-down">
                 <li>
                   <a href="/" onClick={this.hide} className="white-text">
                     Close
                   </a>
                 </li>
               </ul>
-            </div>
-          </nav>
+            </Toolbar>
+          </AppBar>
 
-          <div
+          <Box
             id="chatbot"
-            style={{ height: 388, width: "100%", overflow: "auto" }}
+            sx={{
+              height: 388,
+              width: "100%",
+              overflow: "auto",
+            }}
           >
             {this.renderMessages(this.state.messages)}
-            <div
+            <Box
               ref={(el) => {
                 this.messagesEnd = el;
               }}
-              style={{ float: "left", clear: "both" }}
-            ></div>
-          </div>
-          <div className="col s12">
-            <input
-              style={{ backgroundColor: "lightgrey" }} // added style here
+              sx={{
+                float: "left",
+                clear: "both",
+              }}
+            />
+          </Box>
+
+          <Box className="col s12" sx={{ width: "398px" }}>
+            <TextField
               type="text"
-              ref={(input) => {
+              inputRef={(input) => {
                 this.talkInput = input;
               }}
               placeholder="type a message"
               onKeyDown={this._handleInputKeyDown}
+              sx={{
+                backgroundColor: "white",
+                width: "398px",
+                border: "1px solid black",
+                "&:hover": {
+                  backgroundColor: "lightgrey",
+                },
+              }}
             />
-          </div>
-        </div>
+          </Box>
+        </Box>
       );
     } else {
       return (
-        <div
-          style={{
-            minHeight: 40,
-            maxHeight: 500,
-            width: 400,
-            position: "absolute",
-            bottom: 0,
-            right: 0,
-            border: "1px solid lightgray",
+        <Box
+          id="chatbot-container"
+          sx={{
+            position: "fixed",
+            bottom: "70px",
+            right: "20px",
+            height: "500px",
+            width: "400px",
+            border: "1px solid transparent",
+            borderRadius: "16px",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+            backgroundColor: "transparent",
           }}
         >
-          <nav>
-            <div className="nav-wrapper black">
-              <a href="/" className="brand-logo white-text">
-                <MdAndroid size={32} color="#0aee15" /> ChatBot
-              </a>
-              <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <AppBar position="static">
+            <Toolbar sx={{ bgcolor: "black" }}>
+              <IconButton edge="start" color="inherit" aria-label="menu">
+                <MdAndroid size={32} color="#0aee15" />
+              </IconButton>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, color: "white" }}
+              >
+                ChatBot
+              </Typography>
+              <ul className="right hide-on-med-and-down">
                 <li>
                   <a href="/" onClick={this.show} className="white-text">
                     Show
                   </a>
                 </li>
               </ul>
-            </div>
-          </nav>
-
-          <div
+            </Toolbar>
+          </AppBar>
+          <Box
             ref={(el) => {
               this.messagesEnd = el;
             }}
             style={{ float: "left", clear: "both" }}
-          ></div>
-        </div>
+          ></Box>
+        </Box>
       );
     }
   }
