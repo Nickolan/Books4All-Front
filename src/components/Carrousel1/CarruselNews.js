@@ -9,10 +9,12 @@ export default function Carrusel1() {
   const slides = [1];
   const books = useSelector((state) => state.allBooks);
   let dateNotNull = books.filter((book) => book.date !== null);
-  const latestNews = dateNotNull.sort((a, b) => b.date.localeCompare(a.date));
-  const bookTitle = latestNews.map((book) => book.title).slice(0, 20);
+  const latestNews = dateNotNull
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 20);
+  const bookTitle = latestNews.map((book) => book.title);
 
-  const bookId = latestNews.map((book) => book.id).slice(0, 20);
+  const bookId = latestNews.map((book) => book.id);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");

@@ -35,6 +35,8 @@ export default function Auth(){
     
     const [tabValue, setTabValue] = useState(0);
 
+    const [showButton, setShowButton] = useState(true)
+
     const dbUser = useSelector(state => state.dbUser)
 
     useEffect( ()=> {
@@ -43,10 +45,12 @@ export default function Auth(){
 
     const handleOpen = () => {
         setShowEditForm(true)
+        setShowButton(false)
     }
 
     const handleClose = () => {
       setShowEditForm(false);
+      setShowButton(true)
     };
 
         return(
@@ -80,13 +84,13 @@ export default function Auth(){
             </Tabs>
             </div>
             <TabPanel value={tabValue} index={0}>
-              <ProfileBoughts/>
+              <ProfileBoughts showButton={showButton} />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              <FavouritesBooks />
+              <FavouritesBooks showButton={showButton} />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
-              <ProfileReview dbUser={dbUser}/>
+              <ProfileReview dbUser={dbUser} showButton={showButton} />
             </TabPanel>
             </Grid>
         </Grid>

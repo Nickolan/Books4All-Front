@@ -5,7 +5,7 @@ import BoghtCards from './boghtCards';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Loader } from "../../components/Loader/Loader";
-const ProfileBoughts = () => {
+const ProfileBoughts = ({showButton}) => {
 
     const bought = useSelector((state) => state.dbUser.Boughts)
     const [loader, setLoader]= useState(false)  
@@ -37,7 +37,7 @@ const ProfileBoughts = () => {
           
             <div>
                 <h4>You haven't bought a book yet? It's time to explore and find your next adventure! </h4>
-                <Button variant='contained'><Link style={{ textDecoration: "none", color: 'white' }} to={`/books`}>Books</Link></Button>
+                {showButton? <Button variant='contained'><Link style={{ textDecoration: "none", color: 'white' }} to={`/books`}>Books</Link></Button> : null}
             </div>
           )}
         </>

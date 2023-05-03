@@ -1,7 +1,6 @@
 import axios from "axios";
 
-export const url =
-  "https://books4all-back-production-bd65.up.railway.app/api/stripe";
+export const url = "https://books4all-back-production-bd65.up.railway.app/api/stripe";
 // export const url = "htts:localhost:3001";
 
 export const setHeaders = () => {
@@ -14,8 +13,7 @@ export const setHeaders = () => {
   return headers;
 };
 
-const BASE_URL =
-  "https://books4all-back-production-bd65.up.railway.app/api/stripe";
+const BASE_URL = "https://books4all-back-production-bd65.up.railway.app";
 
 export const instance = axios.create({
   baseURL: BASE_URL,
