@@ -8,7 +8,7 @@ import { Loader } from "../../components/Loader/Loader";
 
 
 
-export default function ProfileReview({dbUser}){
+export default function ProfileReview({dbUser, showButton}){
 
     const dispatch = useDispatch();
     const userReviews = useSelector(state => state.userReviews);
@@ -41,7 +41,7 @@ export default function ProfileReview({dbUser}){
           ) : (
             <div>
                 <h4>You haven't write a review yet? It's time to share with everyone your excellent taste! </h4>
-                <Button variant='contained'><Link style={{ textDecoration: "none", color: 'white' }} to={`/books`}>Books</Link></Button>
+                {showButton? <Button variant='contained'><Link style={{ textDecoration: "none", color: 'white' }} to={`/books`}>Books</Link></Button> : null}
             </div>
           )}
         </>
