@@ -1,10 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { getBooks, getDeletedBooks } from "../../Redux/actions";
-import { Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material";
-import { Table } from "react-bootstrap";
+import { Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material";
 import { styled } from '@mui/material/styles';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -39,7 +38,7 @@ function BooksList({ books, setShowOffert, setBookDiscount }) {
     const firstBook = lastBook - booksForPage;
     const currentBooks = books.slice(firstBook, lastBook);
     const pageNumber = [];
-
+    const navigate = useNavigate();
     for (let i = 1; i <= Math.ceil(books.length / booksForPage); i++) {
         pageNumber.push(i)
     }
@@ -51,6 +50,9 @@ function BooksList({ books, setShowOffert, setBookDiscount }) {
             .then(() => dispatch(getDeletedBooks()))
     }
 
+    const goToDetail = (id) => {
+        navigate(`/bookDetail/${id}`)
+    }
 
     return (
         <div>
@@ -109,15 +111,17 @@ function BooksList({ books, setShowOffert, setBookDiscount }) {
                                 <StyledTableCell align="right"><img src={row.image} alt="" style={{ width: '50px', height: '80px' }} /></StyledTableCell>
                                 <StyledTableCell align="center">
                                     <div class='d-flex justify-content-around flex-column'>
-                                        <div>
-                                            {row.active === false ? <button class="btn btn-danger" onClick={handleStateChange} value={row.title} >Inactive</button>
-                                                : <button class="btn btn-success" onClick={handleStateChange} value={row.title} >Active</button>}
-                                        </div>
-                                        <div>
-                                            <Link to={`/bookDetail/${row.id}`}>
-                                                <button class=' btn btn-info'>Details</button>
-                                            </Link>
-                                        </div>
+                                        <ButtonGroup
+                                            orientation="vertical"
+                                            aria-label="vertical contained button group"
+                                            variant="contained"
+                                            sx={{color:'black',  }}
+                                        >
+                                            {row.active === false ? <Button onClick={handleStateChange} value={row.title} >Inactive</Button>
+                                                : <Button onClick={handleStateChange} value={row.title} color='success' sx={{height:'25px'}}>Active</Button>}
+                                            <Button onClick={() => { goToDetail(row.id) }} sx={{height:'25px'}}>Details</Button>
+                                        </ButtonGroup>
+
                                     </div>
                                 </StyledTableCell>
                             </StyledTableRow>
