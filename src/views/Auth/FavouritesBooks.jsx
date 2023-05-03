@@ -12,7 +12,7 @@ const FavouritesBooks = () => {
     const booksForPage = 8;
     const lastBook = currentPage * booksForPage;
     const firstBook = lastBook - booksForPage;
-    const currentBooks = favourites.slice(firstBook, lastBook);
+    const currentBooks = favourites?.slice(firstBook, lastBook);
     const pageNumber = [];
 
     for (let i = 1; i <= Math.ceil(favourites.length / booksForPage); i++) {
