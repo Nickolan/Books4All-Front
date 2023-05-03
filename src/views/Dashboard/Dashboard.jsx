@@ -33,6 +33,7 @@ import BooksBlock from '../../components/BooksBlock/BooksBlock';
 import BooksBlockBan from '../../components/BooksBlockBan/BooksBlockBan';
 
 
+
 const drawerWidth = 240;
 
 
@@ -77,7 +78,7 @@ function DashboardContent() {
     const [showOffert, setShowOffert] = useState(false)
     const [bookDiscount, setBookDiscount] = useState('')
     const { role, allUsers, allBooks, banBooks, bookDetail } = useSelector((state) => state)
-    
+
     const activeUsers = allUsers.filter(user => user.active === true && user.Roles.at(-1).name === 'user')
     const inactiveUsers = allUsers.filter(user => user.active === false)
     const admins = allUsers.filter(user => user.Roles.at(-1).name === 'admin')
@@ -108,9 +109,9 @@ function DashboardContent() {
                         </Toolbar>
                         <Divider />
                         <List component="nav">
-                                                       {<ControlPanel2 setSection={setSection} />}
+                            {<ControlPanel2 setSection={setSection} />}
                             <Divider sx={{ my: 1 }} />
-                                                   </List>
+                        </List>
                     </Drawer>
                     <Box
                         component="main"
@@ -126,14 +127,33 @@ function DashboardContent() {
                     >
                         <Toolbar />
                         <Container sx={{ borderTop: '50px' }}>
-                            <Box>
+                            <Box sx={{margin:'0 auto'}}>
                                 {
                                     section === 'Dashboard' ? <div className='container d-flex flex-column justify-content-around'>
-                                        <AdminBlock Admins={admins} />
-                                        <UsersBlock users={activeUsers} />
-                                        <UsersBanBlock inactiveUsers={inactiveUsers} />
-                                        <BooksBlock books={allBooks} />
-                                        <BooksBlockBan banBooks={banBooks} />
+                                        <Container >
+                                           
+                                                <Grid container spacing={3}>
+                                                    <Grid item xs={12}>
+                                                        <Typography variant="h5">Dashboard</Typography>
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={4}>
+                                                        <AdminBlock Admins={admins} />
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={4}>
+                                                        <UsersBlock users={activeUsers} />
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={4}>
+                                                        <UsersBanBlock inactiveUsers={inactiveUsers} />
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={6}>
+                                                        <BooksBlock books={allBooks} />
+                                                    </Grid>
+                                                    <Grid item xs={12} sm={6}>
+                                                        <BooksBlockBan banBooks={banBooks} />
+                                                    </Grid>
+                                                </Grid>
+                                          
+                                        </Container>
                                     </div> : null
                                 }
 
