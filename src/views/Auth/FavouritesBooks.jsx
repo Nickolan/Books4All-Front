@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { Loader } from "../../components/Loader/Loader";
 
-const FavouritesBooks = () => {
+const FavouritesBooks = ({showButton}) => {
     const  favourites = useSelector(state => state.dbUser.Books)
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -63,7 +63,7 @@ const FavouritesBooks = () => {
                 indexFirstBook={firstBook}
                 />:<div>
                 <h4>Not having any favorite books added yet? It's time to explore and find your next favorite reads! </h4>
-                <Button variant='contained'><Link style={{ textDecoration: "none", color: 'white' }} to={`/books`}>Books</Link></Button>
+                {showButton? <Button variant='contained'><Link style={{ textDecoration: "none", color: 'white' }} to={`/books`}>Books</Link></Button> : null}
                 </div>
                 }
             </div>
