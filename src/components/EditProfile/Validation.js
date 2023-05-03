@@ -1,10 +1,8 @@
-
-const emailRegex =/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export const validation = (updatedUser) => {
+  let errors = {};
 
-    let errors = {};
-  
     if (updatedUser.alterName?.length > 20) {
       errors.alterNme = "Name cannot exceed 20 characters";
     }
@@ -17,6 +15,7 @@ export const validation = (updatedUser) => {
       errors.about = "about cannot exceed 110 chracters";
     }
 
-    return errors;
 
-}
+
+  return errors;
+};

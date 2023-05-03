@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import FavouritesCards from "./FavouriteCards";
 import Paginado from "../../components/Paginado/Paginado";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { Loader } from "../../components/Loader/Loader";
 
 const FavouritesBooks = () => {
     const  favourites = useSelector(state => state.dbUser.Books)
@@ -12,7 +13,7 @@ const FavouritesBooks = () => {
     const booksForPage = 8;
     const lastBook = currentPage * booksForPage;
     const firstBook = lastBook - booksForPage;
-    const currentBooks = favourites.slice(firstBook, lastBook);
+    const currentBooks = favourites?.slice(firstBook, lastBook);
     const pageNumber = [];
 
     for (let i = 1; i <= Math.ceil(favourites.length / booksForPage); i++) {
@@ -21,9 +22,22 @@ const FavouritesBooks = () => {
     }
     if (currentBooks.length < 1 && currentPage > 1) setCurrentPage(currentPage - 1)
 
+    const [loader, setLoader]= useState(false)  
+
+    useEffect(()=>{
+      setLoader(true)
+      setTimeout(()=>{
+        if(currentBooks){
+          setLoader(false)
+        }
+      },200)
+    },[])
+
     return(
         <>
         <h3>My Favourites</h3>
+        {loader && <Loader/>}
+
         {
             currentBooks && currentBooks.map( (book, index) => {
                 return(
