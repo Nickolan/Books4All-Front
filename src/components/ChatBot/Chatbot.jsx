@@ -257,13 +257,13 @@ class Chatbot extends Component {
           id="chatbot-container"
           sx={{
             position: "fixed",
-            bottom: "70px",
+            bottom: "10px",
             right: "20px",
-            height: "500px",
-            width: "400px",
+            height: "100px",
+            width: "350px",
             border: "1px solid transparent",
             borderRadius: "16px",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+            /* boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)" */
             backgroundColor: "transparent",
           }}
         >
