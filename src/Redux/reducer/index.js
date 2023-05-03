@@ -23,6 +23,7 @@ import {
   CHANGE_THEME,
   USER_REVIEW,
   USER_PROFILE,
+  GLOBAL_SEARCH
 } from "../actions";
 import { getCart, getTheme } from "../actions/localStorage";
 import combinatedFilters from "./combinatedFilters";
@@ -48,6 +49,7 @@ const initialState = {
   role: {},
   sidebarState: false,
   event: [],
+  globalSearch:{},
   theme: getTheme("theme") || "light",
 };
 
@@ -262,6 +264,11 @@ const rootReducer = (state = initialState, action) => {
       return{
         ...state,
         userProfile: action.payload,
+      }
+    case GLOBAL_SEARCH:
+      return{
+        ...state,
+        globalSearch: action.payload,
       }
   }
 };

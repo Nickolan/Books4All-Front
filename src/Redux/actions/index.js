@@ -24,6 +24,7 @@ export const GET_DELETED_BOOKS = "GET_DELETED_BOOKS";
 export const CHANGE_THEME = "CHANGE_THEME";
 export const USER_REVIEW = "USER_REVIEW";
 export const USER_PROFILE = "USER_PROFILE";
+export const GLOBAL_SEARCH = 'GLOBAL_SEARCH';
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -182,3 +183,10 @@ export const getUserProfile = (user) =>{
     return dispatch({ type: USER_PROFILE, payload: uProfile.data });
   };
 };
+
+export const globalSearch = (searchTerm) => {
+  return async function (dispatch){
+    const response = await axios.get(`/search/?searchValue=${searchTerm}`);
+    return dispatch({ type: GLOBAL_SEARCH, payload: response.data });
+  };
+}

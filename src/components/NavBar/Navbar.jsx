@@ -11,6 +11,7 @@ import { AppBar, Toolbar, Button, IconButton, Fade, Menu, MenuItem } from "@mui/
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LogoutButton from "../LogoutButton/LogoutButton";
+import GlobalSearchbar from "../GlobalSearchBar/GlobalSearchBar";
 
 export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
@@ -49,6 +50,7 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                <GlobalSearchbar/>
                 {theme==='dark' &&  <IconButton color="inherit" onClick={onHandlerClick} data-theme={'light'}><DarkModeIcon/></IconButton>}
                 {theme==='light' &&    <IconButton color="inherit" onClick={onHandlerClick} data-theme={'dark'}><LightModeIcon/></IconButton>}
                         <Button component={Link} to ={'/'} color="inherit">Home </Button>

@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByAuthor, filterByCategory, getBooks, getNameBooks } from '../../Redux/actions/index';
-import { Link } from "react-router-dom";
 import './Searchbar.css';
 import { FiSearch } from 'react-icons/fi';
 

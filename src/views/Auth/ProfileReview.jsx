@@ -18,7 +18,7 @@ export default function ProfileReview({dbUser}){
         <>
         {userReviews?.map(userReview=>{
             return(
-                <UserReviewCard body={userReview.body} rating={userReview.rating} user_name={userReview.user_name} book={userReview.Book}/>
+                <UserReviewCard body={userReview.body} rating={userReview.rating} book={userReview.Book}/>
             )
         })}
         </>
