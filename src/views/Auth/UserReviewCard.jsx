@@ -2,9 +2,6 @@ import { AiFillStar } from 'react-icons/ai';
 import { Card, CardHeader, CardContent, Typography, CardMedia } from "@mui/material";
 
 const UserReviewCard = ({ body, rating, user_name, book}) => {
-
-
-
     return (
         <Card>
         <CardHeader title={book.title} />
