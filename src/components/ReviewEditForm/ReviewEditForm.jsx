@@ -4,7 +4,7 @@ import StarsRating from "../StarsRating/StarsRating";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { getBookDetail } from "../../Redux/actions";
+import { getBookDetail, getUserFromDb, getUserReview } from "../../Redux/actions";
 
 export const ReviewEditForm = ({
   id,
@@ -13,6 +13,7 @@ export const ReviewEditForm = ({
   setShowEditForm,
   showEditForm,
   bookId,
+  userName
 }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -42,7 +43,10 @@ export const ReviewEditForm = ({
       .then(() => setShowEditForm(!showEditForm))
       .then(() => toast.success("Review succesfully Updated"))
       .then(() => {
-        dispatch(getBookDetail(bookId));
+        dispatch(getBookDetail(bookId))
+      })
+      .then(() => {
+        dispatch(getUserReview(userName))
       });
   };
   return (

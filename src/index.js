@@ -11,7 +11,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import "materialize-css/dist/css/materialize.min.css";
+//import "materialize-css/dist/css/materialize.min.css";
 
 const domain = "dev-vcimk1mq442q83wq.us.auth0.com";
 const clientId = "Jb0tkNGAsOvygZViD8G1VGhcM5T8FRe3";
