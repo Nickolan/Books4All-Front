@@ -1,23 +1,28 @@
 import React from "react";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const ChatbotCard = (props) => {
   return (
     <div style={{ height: 500, width: 261 }}>
-      <div className="card">
-        <div className="card-image" style={{ width: 261 }}>
-          <img src={props.payload.fields.image.stringValue} alt="" />
-          <span className="card-title">
+      <Card>
+        <CardMedia
+          component="img"
+          height="350"
+          image={props.payload.fields.image.stringValue}
+          alt=""
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
             {props.payload.fields.title.stringValue}
-          </span>
-          <div className="card-content">
-            <p>Author: {props.payload.fields.author.stringValue}</p>
-            <p>Year: {props.payload.fields.year.stringValue}</p>
-          </div>
-          {/* <div className="card-action">
-          <a href="#">This is a link</a>
-        </div> */}
-        </div>
-      </div>
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Author: {props.payload.fields.author.stringValue}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Year: {props.payload.fields.year.stringValue}
+          </Typography>
+        </CardContent>
+      </Card>
     </div>
   );
 };
