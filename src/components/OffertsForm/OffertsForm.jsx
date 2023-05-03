@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { resultDiscount } from "../BooksList/Discount";
 
-function OffertsForm ({bookDiscount, setShowOffert}){
+function OffertsForm ({bookDiscount, setShowOffert, bookDetail}){
 
     const [offertForm, setOffertForm] = useState({
         book: bookDiscount,
@@ -18,12 +19,19 @@ function OffertsForm ({bookDiscount, setShowOffert}){
         console.log(offertForm);
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const total = resultDiscount(offertForm.discount, bookDetail[0].price)
+        console.log(total);
+    }
+
     return(
         <div>
             <h1>Block de offertas</h1>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <input type="text" disabled value={bookDiscount} />
                 <input type="number" name="discount" onChange={handleChange} value={offertForm.discount}/>
+                <button type="submit">Apply Discount</button>
             </form>
             <h2 onClick={hideOffertForm}>x</h2>
         </div>
