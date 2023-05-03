@@ -9,22 +9,31 @@ const Message = (props) => {
             <div className="col s2">
               <a
                 href="/"
-                className="btn-floating btn-large waves-effect waves-light red"
+                className="btn-floating btn-large waves-effect waves-light light-green accent-3"
               >
-                {props.speaks}
+                <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  {props.speaks}
+                </span>
               </a>
             </div>
           )}
           <div className="col s10">
-            <span className="black-text">{props.text}</span>
+            <span
+              style={{ fontSize: "1.2rem", fontWeight: "bold" }}
+              className="black-text"
+            >
+              {props.text}
+            </span>
           </div>
           {props.speaks === "me" && (
             <div className="col s2">
               <a
                 href="/"
-                className="btn-floating btn-large waves-effect waves-light red"
+                className="btn-floating btn-large waves-effect waves-light light-green accent-3"
               >
-                {props.speaks}
+                <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  {props.speaks}
+                </span>
               </a>
             </div>
           )}

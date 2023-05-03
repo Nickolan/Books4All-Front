@@ -4,12 +4,14 @@ import Cookies from "universal-cookie";
 import { v4 as uuid } from "uuid";
 import Message from "./Message";
 import ChatbotCard from "./ChatbotCard";
+import { MdAndroid } from "react-icons/md";
 
 const cookies = new Cookies();
 
 class Chatbot extends Component {
   messagesEnd;
   talkInput;
+
   constructor(props) {
     super(props);
 
@@ -19,7 +21,7 @@ class Chatbot extends Component {
     this.state = {
       messages: [],
       isOpen: true,
-      showBot: true,
+      showBot: false,
     };
 
     if (cookies.get("userID") === undefined) {
@@ -61,7 +63,7 @@ class Chatbot extends Component {
 
     for (let msg of res.data.fulfillmentMessages) {
       let says = {
-        speaks: "me",
+        speaks: "bot",
         msg: msg,
       };
       this.setState({ messages: [...this.state.messages, says] });
@@ -73,6 +75,11 @@ class Chatbot extends Component {
   }
 
   componentDidUpdate() {
+    if (!this.state.showBot) {
+      // If the chatbot is closed, do nothing
+      return;
+    }
+
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     if (this.talkInput) {
       this.talkInput.focus();
@@ -115,7 +122,7 @@ class Chatbot extends Component {
             <div className="col s2">
               <a
                 href="/"
-                className="btn-floating btn-large waves-effect waves-light red"
+                className="btn-floating btn-large waves-effect waves-light light-green accent-3"
               >
                 {message.speaks}
               </a>
@@ -159,27 +166,31 @@ class Chatbot extends Component {
     if (this.state.showBot) {
       return (
         <div
+          id="chatbot-container"
           style={{
-            height: 500,
-            width: 400,
-            position: "absolute",
-            bottom: 0,
-            right: 0,
+            position: "fixed",
+            bottom: "64px",
+            right: "20px",
+            height: "500px",
+            width: "400px",
             border: "1px solid lightgrey",
           }}
         >
           <nav>
-            <div className="nav-wrapper">
-              <a className="brand-logo">ChatBot</a>
+            <div className="nav-wrapper black">
+              <a href="/" className="brand-logo white-text">
+                <MdAndroid size={32} color="#0aee15" /> ChatBot
+              </a>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <li>
-                  <a href="/" onClick={this.hide}>
+                  <a href="/" onClick={this.hide} className="white-text">
                     Close
                   </a>
                 </li>
               </ul>
             </div>
           </nav>
+
           <div
             id="chatbot"
             style={{ height: 388, width: "100%", overflow: "auto" }}
@@ -194,17 +205,12 @@ class Chatbot extends Component {
           </div>
           <div className="col s12">
             <input
-              style={{
-                margin: 0,
-                paddingLeft: "1%",
-                paddingRight: "1%",
-                width: "98%",
-              }}
-              placeholder="type a message"
+              style={{ backgroundColor: "lightgrey" }} // added style here
               type="text"
               ref={(input) => {
                 this.talkInput = input;
               }}
+              placeholder="type a message"
               onKeyDown={this._handleInputKeyDown}
             />
           </div>
@@ -224,19 +230,20 @@ class Chatbot extends Component {
           }}
         >
           <nav>
-            <div className="nav-wrapper">
-              <a href="/" className="brand-logo">
-                ChatBot
+            <div className="nav-wrapper black">
+              <a href="/" className="brand-logo white-text">
+                <MdAndroid size={32} color="#0aee15" /> ChatBot
               </a>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <li>
-                  <a href="/" onClick={this.show}>
+                  <a href="/" onClick={this.show} className="white-text">
                     Show
                   </a>
                 </li>
               </ul>
             </div>
           </nav>
+
           <div
             ref={(el) => {
               this.messagesEnd = el;
