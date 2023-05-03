@@ -14,7 +14,8 @@ export const setHeaders = () => {
   return headers;
 };
 
-const BASE_URL = "http:localhost:3001";
+const BASE_URL =
+  "https://books4all-back-production-bd65.up.railway.app/api/stripe";
 
 export const instance = axios.create({
   baseURL: BASE_URL,
