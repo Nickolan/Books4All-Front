@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { getUsers } from "../../Redux/actions"
 import { useState } from "react";
 import { styled } from '@mui/material/styles';
-import { Link } from "react-router-dom";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -107,6 +106,7 @@ function UsersList({ users }) {
                                 <StyledTableCell align="right">
                                     {row.active === false ? <button class="btn btn-danger" value={row.name} onClick={handleStateChange}>Inactive</button>
                                         : <button class="btn btn-success" value={row.name} onClick={handleStateChange}>Active</button>}
+                                    {<button value={row.name} onClick={makeAdmin} class='btn btn-primary'>To Admin</button>}
                                 </StyledTableCell>
                                 <StyledTableCell align="right"><img src={row.picture} alt="" style={{ width: '50px', height: '80px' }} /></StyledTableCell>
                             </StyledTableRow>

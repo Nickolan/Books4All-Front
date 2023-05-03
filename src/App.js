@@ -16,7 +16,6 @@ import UpdateBookForm from "./components/UpdateBookForm/UpdateBookForm";
 import Profile from "./views/Profiles/Profiles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { instance } from "./components/services/api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,7 +23,6 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 import Navbar from "./components/NavBar/Navbar";
 import Footer from "./components/Footer/Footer";
 import EditProfile from "./components/EditProfile/EditProfile";
-import { useNavigate } from "react-router-dom";
 import {
   getBooks,
   getUserFromDb,
@@ -36,9 +34,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import FormCreateBook from "./components/FormCreateBook/FormCreateBook";
 import Chatbot from "./components/ChatBot/Chatbot";
 
-// axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
+axios.defaults.baseURL ="https://books4all-back-production-bd65.up.railway.app/";
 
-axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const dispatch = useDispatch();
