@@ -180,9 +180,9 @@ class Chatbot extends Component {
           sx={{
             position: "fixed",
             bottom: "70px",
-            right: "20px",
+            right: "10px",
             height: "500px",
-            width: "400px",
+            width: "350px",
             border: "1px solid transparent",
             borderRadius: "16px",
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
@@ -231,7 +231,7 @@ class Chatbot extends Component {
             />
           </Box>
 
-          <Box className="col s12" sx={{ width: "398px" }}>
+          <Box className="col s12" sx={{ width: "350px" }}>
             <TextField
               type="text"
               inputRef={(input) => {
@@ -241,7 +241,7 @@ class Chatbot extends Component {
               onKeyDown={this._handleInputKeyDown}
               sx={{
                 backgroundColor: "white",
-                width: "398px",
+                width: "350px",
                 border: "1px solid black",
                 "&:hover": {
                   backgroundColor: "lightgrey",
@@ -258,9 +258,9 @@ class Chatbot extends Component {
           sx={{
             position: "fixed",
             bottom: "70px",
-            right: "20px",
+            right: "10px",
             height: "500px",
-            width: "400px",
+            width: "350px",
             border: "1px solid transparent",
             borderRadius: "16px",
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
