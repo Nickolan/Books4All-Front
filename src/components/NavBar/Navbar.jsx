@@ -55,7 +55,7 @@ export default function Navbar() {
                         <Button component={Link} to ={'/'}  title="Home" color="inherit">Home </Button>
                         <Button component={Link} to ={'/about'} title="About" color="inherit">About</Button>
                         <Button component={Link} to ={'/books'} title="Books" color="inherit">Books</Button>
-                        {isAuthenticated && role.name==='admin' ?  <Button component={Link} to ={'/dashboard'} color="inherit">Dashboard</Button>: null}
+                        {isAuthenticated && role?.name==='admin' ?  <Button component={Link} to ={'/dashboard'} color="inherit">Dashboard</Button>: null}
                         {!isAuthenticated ? <LoginButton /> : <div >
                             <Button
                                 id="fade-button"
