@@ -22,6 +22,10 @@ export const GET_USERS = "GET_USERS";
 export const GET_EVENT_TYPE = "GET_EVENT_TYPE";
 export const GET_DELETED_BOOKS = "GET_DELETED_BOOKS";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const USER_REVIEW = "USER_REVIEW";
+export const USER_PROFILE = "USER_PROFILE";
+export const FORM_CREATE_BOOK = "FORM_CREATE_BOOK";
+
 
 export const getBookDetail = (bookId) => {
   return async function (dispatch) {
@@ -52,7 +56,6 @@ export const createReview = (payload) => {
 };
 
 export function getNameBooks(name) {
-  try {
     return async function (dispatch) {
       var json = await axios.get("/books/?queryBook=" + name);
       return dispatch({
@@ -60,9 +63,7 @@ export function getNameBooks(name) {
         payload: json.data,
       });
     };
-  } catch (error) {
-    console.log(error);
-  }
+  
 }
 
 export const filterByCategory = (category) => {
@@ -84,7 +85,6 @@ export const resetFilters = () => {
 };
 
 export const getImages = () => {
-  try {
     return async function (dispatch) {
       var json = await axios.get("/books");
       return dispatch({
@@ -92,9 +92,7 @@ export const getImages = () => {
         payload: json.data,
       });
     };
-  } catch (error) {
-    console.log(error);
-  }
+  
 };
 export const addUser = (user) => {
   return { type: ADD_USER, payload: user };
@@ -144,25 +142,45 @@ export const getUsers = () => {
   };
 };
 export const getEventType = () => {
-  try {
     return async function (dispatch) {
       const response = await axios.get(`/stripe/webhook`);
       return dispatch({ type: GET_EVENT_TYPE, payload: response.data });
     };
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 export const getDeletedBooks = () => {
-  try {
     return async function (dispatch) {
       const response = await axios.get("/books/blocked");
       return dispatch({ type: GET_DELETED_BOOKS, payload: response.data });
     };
-  } catch (error) {}
 };
 
 export const changeTheme = (theme) => {
   return { type: CHANGE_THEME, payload: theme };
 };
+
+export const getUserReview = (user) =>{
+  return async function (dispatch){
+    const uReview = await axios.get(`/reviews/user/${user}`);
+    return dispatch({ type: USER_REVIEW, payload: uReview.data });
+  };
+};
+
+export const getUserProfile = (user) =>{
+  return async function (dispatch){
+    const uProfile = await axios.get(`/users/${user}`);
+    return dispatch({ type: USER_PROFILE, payload: uProfile.data });
+     };
+};
+
+export const formCreateBook = (payload) => {
+  return async function () {
+    try {
+      var info = await axios.post(`/books/createBook`, payload);
+      return info;
+    } catch (error) {
+      throw new Error({ error: error.message });
+      }
+   }
+};
+ 

@@ -1,19 +1,18 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Typography } from "@mui/material";
 
-export default function Footer(){
+export default function Footer() {
     return(
-        <footer className="bg-dark">
-            <div className="container-fluid">
-                <div className="row border-top justify-content-between p-3">
-                    <div className="col-sm p-0">
-                    <Link to="/about" className="text-light text-decoration-none">About us</Link>
-                    </div>
-                    <div className="col-sm d-flex flex-row-reverse">
-                     <span className="text-light alig-items-end">©Books4all</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    );
+        <AppBar position="fixed-bottom" color="primary" style={{ backgroundColor: '#000000'}}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
+        <Typography variant="body1" color="inherit">
+        <Link to="/about" className="text-light text-decoration-none">About us</Link>
+        </Typography>
+        <Typography variant="body1" color="inherit">
+            ©Books4All
+        </Typography>
+      </Toolbar>
+    </AppBar>
+    )
 }

@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { postPicture } from "../services/postPicture";
+import { updateProfile } from "../services/updateProfile";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Button } from "@mui/material";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUserFromDb } from "../../Redux/actions";
 
-const Widget = ({setUrl, url}) => {
+const Widget = ({ updatedUser, setUpdatedUser, userDB}) => {
 
     const { user, isAuthenticated } = useAuth0();
-    
+    const dispatch = useDispatch()
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
@@ -53,8 +57,14 @@ const Widget = ({setUrl, url}) => {
                     toast.error('Invalid image format');
                     return 0;
                 }
-                 postPicture (user.nickname, result.info.secure_url).then(response => setUrl(result.info.secure_url)).then(response => toast.success('Profile pic successfully updated'))
-                 return 0;
+                axios.put(`users/updateProfilePic/${userDB.name}`, { picture: result.info.secure_url})
+                .then(() => toast.success('Change will take some time to complete'))
+                .then(() => dispatch(getUserFromDb(userDB.name))).then(()=>{
+                    setUpdatedUser({
+                        ...updatedUser,
+                        picture: result.info.secure_url,
+                    })
+                })
             }
         })
     } , [])
@@ -62,7 +72,7 @@ const Widget = ({setUrl, url}) => {
     return (
         
         <div>
-            <button  type="button" class="btn btn-primary btn-dark" onClick={()=>widgetRef.current.open()}>Update Profile Pic</button>
+        <Button variant="outlined" size="small" color="primary" onClick={()=>widgetRef.current.open()}> Upload</Button>
         </div>
            
     )

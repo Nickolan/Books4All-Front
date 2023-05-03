@@ -1,52 +1,55 @@
-import React, { useEffect } from "react";
-import Navbar from "../../components/NavBar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import React, { useState, useEffect } from "react";
 import Carrusel1 from "../../components/Carrousel1/CarruselNews";
 import Carrusel2 from "../../components/Carrousel2/CarruselNews";
-import Carrusel3 from "../../components/Carrousel3/CarruselNews";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooks, getUserFromDb, getUsers } from "../../Redux/actions";
-import { PostUser } from "../../components/PostUser/PostUser";
+import { Loader } from "../../components/Loader/Loader";
 
 export default function Home() {
-    const dispatch = useDispatch()
-    const dbUser = useSelector((state) => state.dbUser);
-    const { user, logout, isAuthenticated, } = useAuth0();
+  const dispatch = useDispatch();
+  const books = useSelector((state) => state.books);
+  const { user } = useAuth0();
+  const [loader, setLoader] = useState(false);
 
-   
-
-    PostUser(user, isAuthenticated)
-
-
-    if (dbUser.active === false) {
-        window.alert("This user is blocked")
-        .then(() => logout())
+  useEffect(() => {
+    setLoader(true);
+    dispatch(getUsers());
+    if (user) {
+      dispatch(getUserFromDb(user?.nickname));
     }
-    useEffect(() => {
-        dispatch(getUsers())
-        if (user) {
-            dispatch(getUserFromDb(user?.nickname))
-        }
-        dispatch(getBooks())
-    }, [dispatch, user])
+    dispatch(getBooks());
+    if (books) {
+      setTimeout(() => {
+        setLoader(false);
+      }, 100);
+    }
+  }, [dispatch, user]);
 
-    return (
-        <div >
-            <div className='container'>
-                <Navbar />
-                <img className='img-fluid' src="https://cdn.discordapp.com/attachments/1091730813529374777/1096446376533033052/books-1281581_1920.jpg" alt="Hero" />
-                <div className="p-3">
-                    <Carrusel1 />
-                </div>
-                <div className="p-3">
-                    <Carrusel2 />
-                </div>
-                <div className="p-3">
-                    <Carrusel3 />
-                </div>
-                <Footer />
+  return (
+    <div>
+      <div className="container">
+        {loader ? (
+          <Loader />
+        ) : (
+          <>
+            <img
+              className="img-fluid"
+              src="https://cdn.discordapp.com/attachments/1091730813529374777/1096446376533033052/books-1281581_1920.jpg"
+              alt="Hero"
+            />
+            <div className="p-3">
+              <Carrusel1 />
             </div>
-        </div>
-    );
+            <div className="p-3">
+              <Carrusel2 />
+            </div>
+            {/* <div className="p-3">
+                    <Carrusel3 />
+                </div> */}
+          </>
+        )}
+      </div>
+    </div>
+  );
 }
