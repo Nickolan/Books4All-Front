@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BoghtCards = ({ id, date, books, total }) => {
+const BoghtCards = ({ id, date, books }) => {
+  let totalAmount = books.reduce(
+    (accumulator, book1) => accumulator + Number(book1.subtotal),
+    0
+  );
+  console.log(books);
   return (
     <div class="mt-4 mb-4 p-4">
       <div>
@@ -10,6 +15,7 @@ const BoghtCards = ({ id, date, books, total }) => {
       </div>
       <div>
         {books?.map((book, index) => {
+        
           return (
             <div key={index} class="d-flex border-bottom mw-75 mt-2">
               <Link
@@ -59,7 +65,7 @@ const BoghtCards = ({ id, date, books, total }) => {
         })}
       </div>
       <div>
-        <p>Total: ${total}</p>
+        <p>Total: ${totalAmount }</p>
       </div>
     </div>
   );
