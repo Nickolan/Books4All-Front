@@ -54,23 +54,20 @@ export default function Auth(){
             <Container sx={{ display: 'flex', minHeight: '87.9vh'  }}>
             <Grid container sx={{ pt: 2}}>
             <Grid item xs={true} style={{ textAlign: 'center'}}>
-
-            <Avatar src={dbUser.picture} style={{ margin: 'auto', width: 70, height: 70}} alt=""/>
-
-            <Button onClick={handleOpen} title="Edit">Edit</Button>
-            
-            <Grow in={showEditForm} style={{ position: 'absolute', top: '20%', left: '40%', maxWidth:'300px' }}>
-            <div>
-              {showEditForm && <EditProfile user={dbUser} handleClose={handleClose}/>}
-            </div>
-            </Grow> 
-            <Divider variant="middle" />
-             <h4>{dbUser.alterName}</h4>
-            <Divider variant="middle" />
-             <h4 style={{overflow: "hidden",textOverflow: "ellipsis"}} title={dbUser.email}>{dbUser.email}</h4>
-           <Divider variant="middle" />
-             <h4>About</h4>
-             <h6 >{dbUser.about}</h6>
+              <Avatar src={dbUser.picture} style={{ margin: 'auto', width: 70, height: 70}} alt=""/>
+              <Button onClick={handleOpen} title="Edit" style={{ marginTop: 20, marginBottom: 10 }}>Edit</Button>
+              <Grow in={showEditForm} style={{ position: 'absolute', top: '20%', left: '40%', maxWidth:'300px' }}>
+                <div>
+                  {showEditForm && <EditProfile user={dbUser} handleClose={handleClose}/>}
+                </div>
+              </Grow> 
+              <Divider variant="middle" style={{ marginTop: 20, marginBottom: 20 }} />
+              <h4 style={{ marginTop: 20, marginBottom: 10 }}>{dbUser.alterName ? dbUser.alterName : dbUser.name}</h4>
+              <Divider variant="middle" style={{ marginTop: 20, marginBottom: 20 }} />
+              <h4 style={{ overflow: "hidden", textOverflow: "ellipsis", marginTop: 20, marginBottom: 10 }} title={dbUser.email}>{dbUser.email}</h4>
+              <Divider variant="middle" style={{ marginTop: 20, marginBottom: 20 }} />
+              <h4 style={{ marginTop: 20, marginBottom: 10 }}>About</h4>
+              <h6 style={{ marginTop: 20, marginBottom: 20 }}>{dbUser.about ? dbUser.about : "You don't have an about :(  Tell us something about you!"}</h6>
             </Grid>
             <Divider orientation="vertical" flexItem xs={1} />
             <Grid item xs={8} sx={{ pl: 1, justifyContent: 'center' }}>

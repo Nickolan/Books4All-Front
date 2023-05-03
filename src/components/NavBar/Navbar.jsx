@@ -5,16 +5,17 @@ import {useSelector} from 'react-redux';
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../LoginButton/LoginButton";
-import { changeTheme } from "../../Redux/actions";
+import { changeTheme, getUserFromDb } from "../../Redux/actions";
 import { setTheme } from "../../Redux/actions/localStorage";
-import { AppBar, Toolbar, Button, IconButton, Fade, Menu, MenuItem } from "@mui/material";
+import { AppBar, Toolbar, Button, IconButton, Fade, Menu, MenuItem, Avatar } from "@mui/material";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LogoutButton from "../LogoutButton/LogoutButton";
 
 export default function Navbar() {
     const { user, isAuthenticated } = useAuth0();
-    const role= useSelector(state=> state.role)
+    const role= useSelector(state=> state.role);
+    const dbUser = useSelector(state => state.dbUser);
     const theme = useSelector((state) => state.theme);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -55,7 +56,7 @@ export default function Navbar() {
                         <Button component={Link} to ={'/'}  title="Home" color="inherit">Home </Button>
                         <Button component={Link} to ={'/about'} title="About" color="inherit">About</Button>
                         <Button component={Link} to ={'/books'} title="Books" color="inherit">Books</Button>
-                        {isAuthenticated && role.name==='admin' ?  <Button component={Link} to ={'/dashboard'} color="inherit">Dashboard</Button>: null}
+                        {isAuthenticated && role?.name==='admin' ?  <Button component={Link} to ={'/dashboard'} color="inherit">Dashboard</Button>: null}
                         {!isAuthenticated ? <LoginButton /> : <div >
                             <Button
                                 id="fade-button"
@@ -67,7 +68,8 @@ export default function Navbar() {
                                 title="My Profile"
                                
                             >
-                                myProfile
+                                <Avatar src={dbUser.picture} sx={{ width: 25, height: 25, marginRight: 1}}></Avatar>
+                                {dbUser.alterName ? dbUser.alterName : dbUser.name}
                             </Button>
                             <Menu
                                 id="fade-menu"
