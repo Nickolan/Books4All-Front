@@ -9,12 +9,12 @@ export default function Carrusel1() {
   const slides = [1];
   const books = useSelector((state) => state.allBooks);
 
-  const Orderedbooks = books.sort(
-    (a, b) => b.Reviews?.length - a.Reviews?.length
-  ); // es requerido un promedio del rating en el modelo de cada libro que se modifica con cada publicacion
+  const Orderedbooks = books
+    .sort((a, b) => b.Reviews?.length - a.Reviews?.length)
+    .slice(0, 20); // es requerido un promedio del rating en el modelo de cada libro que se modifica con cada publicacion
 
-  const bookTitle = Orderedbooks.map((book) => book.title).slice(0, 20);
-  const bookId = Orderedbooks.map((book) => book.id).slice(0, 20);
+  const bookTitle = Orderedbooks.map((book) => book.title);
+  const bookId = Orderedbooks.map((book) => book.id);
 
   const slideLeft = () => {
     var slider3 = document.getElementById("slider2");
