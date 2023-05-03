@@ -1,5 +1,5 @@
 import { TextField, Box, Button, IconButton, Avatar } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { updateProfile } from "../services/updateProfile";
 import { validation } from "./Validation";
 import Widget from "../Widget/Widget";
@@ -42,8 +42,13 @@ import CloseIcon from '@mui/icons-material/Close';
             toast.error('Please, verify errors')
             return;
         }
-        updateProfile(user.name, updatedUser).then(result => toast.success(result)).catch(error => toast.error(error.message))
+        updateProfile(user.name, updatedUser).then(result => toast.success(result)).then(result => handleClose()).catch(error => toast.error(error.message))
       }
+      
+      useEffect(()=>{
+        console.log(errors)
+        setErrors(validation({...updatedUser}));
+      },[])
 
 
     return(

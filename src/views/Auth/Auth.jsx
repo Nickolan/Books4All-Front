@@ -39,7 +39,7 @@ export default function Auth(){
 
     useEffect( ()=> {
             dispatch(getUserFromDb(user?.nickname))
-    },[])
+    },[showEditForm])
 
     const handleOpen = () => {
         setShowEditForm(true)

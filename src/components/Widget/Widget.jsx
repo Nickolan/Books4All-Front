@@ -59,11 +59,12 @@ const Widget = ({ updatedUser, setUpdatedUser, userDB}) => {
                 }
                 axios.put(`users/updateProfilePic/${userDB.name}`, { picture: result.info.secure_url})
                 .then(() => toast.success('Change will take some time to complete'))
-                .then(() => dispatch(getUserFromDb(userDB.name)))
-                // setUpdatedUser({
-                //     ...updatedUser,
-                //     picture: result.info.secure_url,
-                // })
+                .then(() => dispatch(getUserFromDb(userDB.name))).then(()=>{
+                    setUpdatedUser({
+                        ...updatedUser,
+                        picture: result.info.secure_url,
+                    })
+                })
             }
         })
     } , [])
