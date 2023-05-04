@@ -11,14 +11,12 @@ import CloseIcon from '@mui/icons-material/Close';
 
     const [updatedUser, setUpdatedUser] = useState({
         alterName: user.alterName,
-        email: user.email,
         picture:user.picture,
         about: user.about,
       });
 
     const [errors, setErrors] = useState({
         alterName: '',
-        email:'',
         about: '',
     })
 
@@ -62,7 +60,6 @@ import CloseIcon from '@mui/icons-material/Close';
         <Avatar src={user.picture} style={{ margin: 'auto', width: 70, height: 70}} alt="user picture"/>
         <Widget userDB={user} updatedUser={updatedUser} setUpdatedUser={setUpdatedUser}/>
         <TextField  margin="normal" variant='outlined' label='alterName' name="alterName" value={updatedUser.alterName} onChange={handleOnChange}/>
-        <TextField  margin="normal" variant='outlined' label='email' name="email" value={updatedUser.email} onChange={handleOnChange}/>
         <TextField margin="normal" multiline maxRows={4} minRows={4} variant='outlined' label='about' name="about" value={updatedUser.about} onChange={handleOnChange}/>
         <Button variant="outlined" type='submit'>Edit profile</Button>
       </form>
